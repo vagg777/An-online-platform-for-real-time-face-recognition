@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Live Feed</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .container {
+            border-radius: 20px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .black {
+            color: black;
+         }
+
+        .required {
+            color: red;
+            font-weight: bold;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .column {
+          float: left;
+          width: 33.33%;
+          padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        .button {
+          display: block;
+          max-width: 300px;
+          margin: auto;
+        }
+    </style>
+    <script>
+        function startTime() {
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = today.getFullYear();
+          today_mdy = yyyy + '-' + mm + '-' + dd;
+          var today = new Date();
+          var h = today.getHours();
+          var m = today.getMinutes();
+          var s = today.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('running_time').innerHTML =
+          today_mdy + " " + h + ":" + m + ":" + s;
+          var t = setTimeout(startTime, 500);
+        }
+
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+          return i;
+        }
+     </script>
+</head>
+
+<body onload="startTime()" style="background-image: url('/static/images/background.jpg')">
+
+    <div class="header">
+      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+      <div class="header-right">
+        <a href="home">Home</a>
+        <a href="manage">Manage</a>
+        <a href="live_feed" class="active">Live Feed</a>
+        <a href="contact">Contact</a>
+        <a href="welcome" class="btn btn-danger" style="color: white;">
+              <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+      </div>
+    </div>
+
+    <br><br><br>
+
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>Error:</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
+
+<div class="container">
+    <h1 align="center" style="color: black;">Criminal's Information</h1>
+    <hr style="border-color: black; background-color: black; color: black;">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="black">
+                    <th scope="col">Id</th>
+                    <th scope="col">Portrait</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Height (in cm)</th>
+                    <th scope="col">Weight (in kg)</th>
+                    <th scope="col">Eye Color</th>
+                    <th scope="col">Biography</th>
+                    <th scope="col">Last location</th>
+                </tr>
+            </thead>
+            <tbody class="black">
+                {% for row in result %}
+                    <tr>
+                        <th class="criminal_id" scope="row">{{row.0}}</th>
+                        <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
+                        <td class="criminal_full_name">{{row.1}}</td>
+                        <td class="criminal_age">{{row.2}}</td>
+                        <td class="criminal_height">{{row.3}}</td>
+                        <td class="criminal_weight">{{row.4}}</td>
+                        <td class="criminal_eye_color">{{row.5}}</td>
+                        <td class="criminal_bio">{{row.6}}</td>
+                        <td class="criminal_last_location">{{row.8}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div><br>
+<!--
+<div class="container" style="text-align: center;">
+    <button class="btn btn-lg btn-warning" onClick="window.location.reload();">Refresh Page Content</button>
+</div><br>
+-->
+<div class="container">
+    <div class="row">
+        <div class="column"><h1 align="center" style="color: black;">Livestream Feed</h1></div>
+        <div class="column"></div>
+        <div class="column"><h1 align="center" style="color: black;">Last known location</h1></div>
+    </div>
+    <hr style="border-color: black; background-color: black; color: black;">
+    <div class="row">
+      <div class="column">
+        <img src="{{ url_for('video_feed') }}" style="width:100%">
+        <h3 id="running_time" style="color: black; text-align: center;"></h3>
+        <h3 style="color: black; text-align: center;">Location: {{camera_feed_1_location}}</h3>
+      </div>
+      <div class="column"></div>
+      <div class="column">
+        <img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:100%">
+        <h3 style="color: black; text-align: center;">{{localtime}}</h3>
+        <h3 style="color: black; text-align: center;">Location: {{camera_feed_1_location}}</h3>
+      </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+

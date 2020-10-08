@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage Users</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .container {
+            border-radius: 20px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .black {
+            color: black;
+         }
+
+        .required {
+            color: red;
+            font-weight: bold;
+        }
+
+        .hidetext {
+            -webkit-text-security: disc; /* Default */
+        }
+    </style>
+    <script>
+    $(document).ready(function() {
+            $('#updateModal').on('show.bs.modal', function (e) {
+            var _button = $(e.relatedTarget);
+            var _row = _button.parents("tr");
+            var _id = _row.find(".user_id").text();
+            var _username = _row.find(".user_username").text();
+            var _password = _row.find(".user_password").text();
+            var _email = _row.find(".user_email").text();
+            var _fullname = _row.find(".user_full_name").text();
+            var _role = _row.find(".user_role").text();
+            var _avatar = _row.find('img').attr("src");
+            $(this).find(".user_id").val(_id);
+            $(this).find(".user_username").val(_username);
+            $(this).find(".user_password").val(_password);
+            $(this).find(".user_email").val(_email);
+            $(this).find(".user_full_name").val(_fullname);
+            $(this).find(".user_role").val(_role);
+            $(this).find(".user_avatar").val(_avatar);
+        });
+     });
+
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+    </script>
+</head>
+
+<body style="background-image: url('/static/images/background.jpg')">
+
+    <div class="header">
+      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+      <div class="header-right">
+        <a href="home">Home</a>
+        <a href="manage" class="active">Manage</a>
+        <a href="live_feed">Live Feed</a>
+        <a href="contact">Contact</a>
+        <a href="welcome" class="btn btn-danger" style="color: white;">
+              <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+      </div>
+    </div>
+
+    <br><br><br>
+
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>Error:</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
+
+    <div class="container">
+        <h1 align="center" style="color: black;">Manage Users</h1>
+        <hr style="border-color: black; background-color: black; color: black;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr class="black">
+                        <th scope="col">Id</th>
+                        <th scope="col">Avatar</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="black">
+                    {% for row in result %}
+                        <tr>
+                            <th class="user_id" scope="row">{{row.0}}</th>
+                            <td class="user_avatar"><img src="{{row.6}}" style="width: 100px; height: 100px;"></td>
+                            <td class="user_username">{{row.1}}</td>
+                            <td class="user_password hidetext">{{row.2}}</td>
+                            <td class="user_email">{{row.3}}</td>
+                            <td class="user_full_name">{{row.4}}</td>
+                            <td class="user_role">{{row.5}}</td>
+                            <td>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">Update</button>
+                            </td>
+                            <td>
+                                <form action="remove_users" method="post">
+                                    <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
+                                    <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
+                                    <button class="btn btn-danger confirmation">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="updateModal" role="dialog">
+        <form action="" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header black">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update User</h4>
+                    </div>
+                    <div class="modal-body black">
+                        <div class="form-group">
+                            <label class="contactlabel" for="id">User Id</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_id" placeholder="Enter Id" name="id" id = "id" value="{{request.form.id}}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="username">Username</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_username" placeholder="Enter username" name="username" id="username" value="{{request.form.username}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="password">Password</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <input type="password" autocomplete="off" class="form-control user_password" placeholder="Enter password" name="password" id="password" value="{{request.form.password}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="full_name">Full Name</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="Enter full name" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="email">Email</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_email" placeholder="Enter email" name="email" id="email" value="{{request.form.email}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="role">Role</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="USER">USER</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="avatar">Avatar</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="Enter image URL" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-warning" value="Update">
+                    </div>
+              </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+
