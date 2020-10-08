@@ -12,6 +12,8 @@ import urllib.request
 from camera import *
 from scipy.spatial import distance
 import math
+from EnglishLanguage import *
+from GreekLanguage import *
 
 # create the application object and connect to db
 app = Flask(__name__)
@@ -31,7 +33,7 @@ def start():
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html')
+    return render_template('welcome.html', name = EnglishLanguageMyName)
 
 @app.route('/home')
 def home():

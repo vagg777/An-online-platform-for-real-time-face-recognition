@@ -8,6 +8,8 @@ from time import gmtime, strftime
 from camera import *
 import numpy as np
 import time
+from EnglishLanguage import *
+from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_alt2.xml")
 ds_factor = 0.6
