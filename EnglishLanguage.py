@@ -36,6 +36,15 @@ class ContactEN:
 contact = ContactEN()
 
 
+# Login.html
+class LoginEN:
+    platformlogin = "Login to the platform"
+    enterusername = "Enter username"
+    enterpassword = "Enter password"
+    login = "Login"
+    rememberme = "Remember me"
+login = LoginEN()
+
 
 # Home.html
 
@@ -47,9 +56,6 @@ contact = ContactEN()
 
 # Insert Users.html
 
-
-
-# Login.html
 
 
 

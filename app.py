@@ -23,7 +23,7 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "Greek"
+site_language = "English"
 
 
 
@@ -110,6 +110,10 @@ def contact():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global site_language
+    if site_language == "Greek":
+        login = LoginGR()
+    else:
+        login = LoginEN()
     error = None
     if request.method == 'POST':
         username = request.form['username']
@@ -122,7 +126,7 @@ def login():
                 return render_template('home.html')
         else:
             error = 'Invalid Credentials! Please try again.'
-    return render_template('login.html', error=error)
+    return render_template('login.html', error=error, login=login)
 
 
 

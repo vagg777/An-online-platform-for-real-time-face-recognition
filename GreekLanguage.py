@@ -40,6 +40,16 @@ contact = ContactGR()
 
 
 
+# Login.html
+class LoginGR:
+    platformlogin = "Συνδεθείτε στη πλατφόρμα"
+    enterusername = "Εισάγετε όνομα χρήστη"
+    enterpassword = "Εισάγετε κωδικό"
+    login = "Σύνδεση"
+    rememberme = "Να με θυμάσαι"
+login = LoginGR()
+
+
 # Home.html
 
 
@@ -50,9 +60,6 @@ contact = ContactGR()
 
 # Insert Users.html
 
-
-
-# Login.html
 
 
 
