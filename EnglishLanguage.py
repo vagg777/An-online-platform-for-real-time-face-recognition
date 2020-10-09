@@ -7,6 +7,11 @@ class HeaderEN:
     logout = "Log out"
 header = HeaderEN()
 
+# Welcome.html
+class WelcomeEN:
+    title = "Livestream Police Surveillance Application"
+    login = "Login to the platform"
+welcome = WelcomeEN()
 
 # Messages
 class MessagesEN:
@@ -73,4 +78,3 @@ contact = ContactEN()
 
 
 
-# Welcome.html

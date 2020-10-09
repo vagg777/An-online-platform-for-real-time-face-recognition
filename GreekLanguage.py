@@ -7,6 +7,8 @@ class HeaderGR:
     logout = "Έξοδος"
 header = HeaderGR()
 
+
+
 # Welcome.html
 class WelcomeGR:
     title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"

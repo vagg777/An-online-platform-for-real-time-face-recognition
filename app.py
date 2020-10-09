@@ -23,31 +23,56 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "English"
+site_language = "Greek"
+
+
+
 
 def nothing(x):
     pass
 
+
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/')
 def start():
    global site_language
-   return render_template('welcome.html')
+   if site_language == "Greek":
+       welcome = WelcomeGR()
+   else:
+       welcome = WelcomeEN()
+   return render_template('welcome.html', welcome=welcome)
 
+
+
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/welcome')
 def welcome():
     global site_language
-    return render_template('welcome.html')
+    if site_language == "Greek":
+        welcome = WelcomeGR()
+    else:
+        welcome = WelcomeEN()
+    return render_template('welcome.html', welcome=welcome)
+
+
 
 @app.route('/home')
 def home():
     global site_language
     return render_template('home.html')
 
+
+
+
 @app.route('/manage')
 def manage():
     global site_language
     return render_template('manage.html')
 
+
+
+
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     global site_language
@@ -79,6 +104,9 @@ def contact():
         finally:
             pass
 
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global site_language
@@ -95,6 +123,9 @@ def login():
         else:
             error = 'Invalid Credentials! Please try again.'
     return render_template('login.html', error=error)
+
+
+
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -122,6 +153,8 @@ def signup():
             return render_template('contact.html', error=message)
         finally:
             pass
+
+
 
 
 @app.route('/insert_criminals', methods=['GET', 'POST'])
@@ -155,6 +188,8 @@ def insert_criminals():
         finally:
            pass
 
+
+
 @app.route('/insert_users', methods=['GET', 'POST'])
 def insert_users():
     if request.method == 'GET':
@@ -182,6 +217,9 @@ def insert_users():
             return render_template('insert_users.html', error=message)
         finally:
             pass
+
+
+
 
 @app.route('/remove_criminals', methods=['GET', 'POST'])
 def remove_criminals():
@@ -220,6 +258,9 @@ def remove_criminals():
         finally:
             pass
 
+
+
+
 @app.route('/remove_users', methods=['GET', 'POST'])
 def remove_users():
     global site_language
@@ -256,6 +297,9 @@ def remove_users():
             return render_template('manage_users.html', error=message, result=result)
         finally:
             pass
+
+
+
 
 @app.route('/manage_criminals', methods=['GET', 'POST'])
 def manage_criminals():
@@ -300,6 +344,9 @@ def manage_criminals():
         finally:
             pass
 
+
+
+
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
     global site_language
@@ -341,6 +388,9 @@ def manage_users():
         finally:
             pass
 
+
+
+
 @app.route('/live_feed', methods=['GET', 'POST'])
 def live_feed():
     global site_language
@@ -353,6 +403,9 @@ def live_feed():
         else:
             error = 'No records found in the database!'
             return render_template('manage_livefeed.html', error=error)
+
+
+
 
 @app.route('/search_livefeed', methods=['GET', 'POST'])
 def search_live_feed():
@@ -399,6 +452,9 @@ def search_live_feed():
         if result:
             return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location = camera_feed_1_location)
 
+
+
+
 def gen(camera):
     global site_language
     global global_full_name
@@ -416,6 +472,9 @@ def gen(camera):
         amplitude = distance.euclidean(real_part, imagin_part)                  # Equation 2 in paper
         phase = math.atan(imagin_part[0]/real_part[0])                          # Equation 3 in paper
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+
 
 def record_video():
     global site_language
@@ -440,11 +499,17 @@ def record_video():
     videoWriter.release()
     cv2.destroyAllWindows()
 
+
+
+
 @app.route('/video_feed')
 def video_feed():
     global site_language
     record_video()
     return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
