@@ -23,7 +23,7 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "Greek"
+site_language = "English"
 
 
 def nothing(x):
@@ -61,11 +61,19 @@ def home():
 
 
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/manage')
 def manage():
     global site_language
-    return render_template('manage.html')
+    if site_language == "Greek":
+        header = HeaderGR()
+        manage = ManageGR()
+        messages = MessagesGR()
+    else:
+        header = HeaderEN()
+        manage = ManageEN()
+        messages = MessagesEN()
+    return render_template('manage.html', header=header, manage=manage, messages=messages)
 
 
 

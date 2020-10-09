@@ -50,9 +50,20 @@ class SignupEN:
     reset = "Reset form"
     returnlogin = "Return to the Login page"
 
+class ManageEN:
+    panel = "Management Panel"
+    insert = "Insert"
+    edit = "Edit"
+    message1 = "To add new criminals to the database, click the Insert button"
+    message2 = "To edit existing criminals on the database, click the Edit button"
+    message3 = "To add new users to the database, click the Insert button"
+    message4 = "To edit existing users on the database, click the Edit button"
+
+
 header = HeaderEN()
 welcome = WelcomeEN()
 messages = MessagesEN()
 contact = ContactEN()
 login = LoginEN()
 signup = SignupEN()
+manage = ManageEN()

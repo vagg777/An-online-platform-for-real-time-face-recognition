@@ -1,5 +1,5 @@
 class HeaderGR:
-    home = "Σπίτι"
+    home = "Κεντρική Σελίδα"
     manage = "Διαχείριση"
     livefeed = "Ζωντανή Μετάδοση"
     contact = "Επικοινωνια"
@@ -47,8 +47,17 @@ class SignupGR:
     user = "Χρήστης"
     avatar = "Εικονίδιο"
     enterimage = "Εισάγετε URL εικόνας"
-    reset = "Μηδενίστε τη φόρμα"
+    reset = "Καθαρισμός Φόρμας"
     returnlogin = "Επιστροφή στη Πλατφόρμα"
+
+class ManageGR:
+    panel = "Διαχείριση Ιστοσελίδας"
+    insert = "Εισαγωγή"
+    edit = "Επεξεργασία"
+    message1 = "Για προσθήκη νέων κακοποιών στη πλατφόρμα, πατήστε Εισαγωγή"
+    message2 = "Για επεξεργασία κακοποιών στη πλατφόρμα, πατήστε Επεξεργασία"
+    message3 = "Για εισαγωγή νέων χρηστών στη πλατφόρμα, πατήστε Εισαγωγή"
+    message4 = "Για επεξεργασία χρηστών στη πλατφόρμα, πατήστε Επεξεργασία"
 
 header = HeaderGR()
 welcome = WelcomeGR()
@@ -56,3 +65,4 @@ messages = MessagesGR()
 contact = ContactGR()
 login = LoginGR()
 signup = SignupGR()
+manage = ManageGR()
