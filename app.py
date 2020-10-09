@@ -23,30 +23,40 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
+site_language = "English"
 
 def nothing(x):
     pass
 
 @app.route('/')
 def start():
+   global site_language
    return render_template('welcome.html')
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html', name = EnglishLanguageMyName)
+    global site_language
+    return render_template('welcome.html')
 
 @app.route('/home')
 def home():
+    global site_language
     return render_template('home.html')
 
 @app.route('/manage')
 def manage():
+    global site_language
     return render_template('manage.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    global site_language
+    if site_language == "Greek":
+        header = HeaderGR()
+    else:
+        header = HeaderEN()
     if request.method == 'GET':
-        return render_template('contact.html')
+        return render_template('contact.html', header=header)
     elif request.method == 'POST':
         try:
             firstname = request.form['firstname']
@@ -54,20 +64,20 @@ def contact():
             email = request.form['email']
             subject = request.form['subject']
             sql = mydb.cursor()
-            sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)",
-                        (firstname, lastname, email, subject))
+            sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)",(firstname, lastname, email, subject))
             mydb.commit()
             sql.close()
             message = "You have successfully submitted your contact form!"
-            return render_template('contact.html', success=message)
+            return render_template('contact.html', success=message, header=header)
         except MySQLdb.Error as error:
             message = str(error)
-            return render_template('contact.html', error=message)
+            return render_template('contact.html', error=message, header=header)
         finally:
             pass
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global site_language
     error = None
     if request.method == 'POST':
         username = request.form['username']
@@ -84,6 +94,7 @@ def login():
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
+    global site_language
     if request.method == 'GET':
         return render_template('signup.html')
     elif request.method == 'POST':
@@ -111,6 +122,7 @@ def signup():
 
 @app.route('/insert_criminals', methods=['GET', 'POST'])
 def insert_criminals():
+    global site_language
     if request.method == 'GET':
         return render_template('insert_criminals.html')
     elif request.method == 'POST':
@@ -169,6 +181,7 @@ def insert_users():
 
 @app.route('/remove_criminals', methods=['GET', 'POST'])
 def remove_criminals():
+    global site_language
     if request.method == 'POST':
         try:
             criminal_id = str(request.form["row.0"])
@@ -205,6 +218,7 @@ def remove_criminals():
 
 @app.route('/remove_users', methods=['GET', 'POST'])
 def remove_users():
+    global site_language
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -241,6 +255,7 @@ def remove_users():
 
 @app.route('/manage_criminals', methods=['GET', 'POST'])
 def manage_criminals():
+    global site_language
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
@@ -283,6 +298,7 @@ def manage_criminals():
 
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
+    global site_language
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
@@ -323,6 +339,7 @@ def manage_users():
 
 @app.route('/live_feed', methods=['GET', 'POST'])
 def live_feed():
+    global site_language
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
@@ -335,6 +352,7 @@ def live_feed():
 
 @app.route('/search_livefeed', methods=['GET', 'POST'])
 def search_live_feed():
+    global site_language
     global video_filter
     global global_full_name
     if request.method == 'GET':
@@ -378,6 +396,7 @@ def search_live_feed():
             return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location = camera_feed_1_location)
 
 def gen(camera):
+    global site_language
     global global_full_name
     while True:
         global average_detection_time
@@ -395,6 +414,7 @@ def gen(camera):
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 def record_video():
+    global site_language
     path1 = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Videos'
     path = os.path.join(path1, global_full_name, "Camera Feed 1/")
     if not os.path.exists(path):
@@ -418,6 +438,7 @@ def record_video():
 
 @app.route('/video_feed')
 def video_feed():
+    global site_language
     record_video()
     return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
