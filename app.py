@@ -23,9 +23,7 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "English"
-
-
+site_language = "Greek"
 
 
 def nothing(x):
@@ -106,7 +104,7 @@ def contact():
 
 
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global site_language
@@ -130,12 +128,16 @@ def login():
 
 
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     global site_language
+    if site_language == "Greek":
+        signup = SignupGR()
+    else:
+        signup = SignupEN()
     if request.method == 'GET':
-        return render_template('signup.html')
+        return render_template('signup.html', signup = signup)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -151,10 +153,10 @@ def signup():
             mydb.commit()
             sql.close()
             success = 'User ' + username + "successfully added to the database"
-            return render_template('contact.html', success=success)
+            return render_template('contact.html', success=success, signup = signup)
         except MySQLdb.Error as error:
             message = str(error)
-            return render_template('contact.html', error=message)
+            return render_template('contact.html', error=message, signup = signup)
         finally:
             pass
 
