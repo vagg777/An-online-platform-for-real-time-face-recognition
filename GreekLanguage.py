@@ -7,6 +7,12 @@ class HeaderGR:
     logout = "Έξοδος"
 header = HeaderGR()
 
+# Welcome.html
+class WelcomeGR:
+    title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"
+    login = "Συνδεθείτε στη πλατφόρμα"
+welcome = WelcomeGR()
+
 
 # Messages
 class MessagesGR:
@@ -70,7 +76,3 @@ contact = ContactGR()
 
 
 # Signup.html
-
-
-
-# Welcome.html
