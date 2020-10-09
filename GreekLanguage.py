@@ -1,10 +1,10 @@
 # Header
 class HeaderGR:
-    home = "Σπιτι"
-    manage = "Διαχειριση"
-    livefeed = "Live Feed"
+    home = "Σπίτι"
+    manage = "Διαχείριση"
+    livefeed = "Ζωντανή Μετάδοση"
     contact = "Επικοινωνια"
-    logout = "Βγες"
+    logout = "Έξοδος"
 header = HeaderGR()
 
 
@@ -18,12 +18,16 @@ messages = MessagesGR()
 
 # Contact.html
 class ContactGR:
-    reportissue = "Report an issue..."
-    yourname = "Your name..."
-    yourlastname = "Your last name..."
-    youremail = "Your email..."
-    sendissue = "Send us your issue..."
-    submitissue = "Submit Issue"
+    reportissue = "Ανέφερε ένα πρόβλημα"
+    name = "Όνομα"
+    yourname = "Το όνομά σου..."
+    lastname = "Επώνυμο"
+    yourlastname = "Το επωνυμό σου..."
+    email = "Email"
+    youremail = "Το email σου..."
+    issue = "Πρόβλημα"
+    sendissue = "Αναφέρετε το πρόβλημα..."
+    submitissue = "Υποβολή Προβλήματος"
 contact = ContactGR()
 
 

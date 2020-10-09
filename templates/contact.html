@@ -63,29 +63,29 @@
 {% endif %}
 
 <div class="container">
-    <h2 class = "contactlabel" align="center">Report an issue...</h2><br>
+    <h2 class = "contactlabel" align="center">{{ contact.reportissue }}</h2><br>
     <form action="" method="post">
           <div class="form-group">
-              <label class="contactlabel" for="fname">First Name</label>
+              <label class="contactlabel" for="fname">{{ contact.name }}</label>
               <span class="required">*</span>
-              <input class="form-control" type="text" id="fname" name="firstname" placeholder="Your name.." value="{{request.form.firstname}}" required>
+              <input class="form-control" type="text" id="fname" name="firstname" placeholder="{{ contact.yourname }}" value="{{request.form.firstname}}" required>
           </div>
           <div class="form-group">
-              <label class="contactlabel" for="lname">Last Name</label>
+              <label class="contactlabel" for="lname">{{ contact.lastname }}</label>
               <span class="required">*</span>
-              <input class="form-control" type="text" id="lname" name="lastname" placeholder="Your last name.." value="{{request.form.lastname}}" required>
+              <input class="form-control" type="text" id="lname" name="lastname" placeholder="{{ contact.yourlastname }}" value="{{request.form.lastname}}" required>
           </div>
           <div class="form-group">
-              <label class="contactlabel" for="email">Email</label>
+              <label class="contactlabel" for="email">{{ contact.email }}</label>
               <span class="required">*</span>
-              <input class="form-control" type="text" id="email" name="email" placeholder="Your email.." value="{{request.form.email}}" required>
+              <input class="form-control" type="text" id="email" name="email" placeholder="{{ contact.youremail }}" value="{{request.form.email}}" required>
           </div>
           <div class="form-group">
-              <label class="contactlabel" for="subject">Subject</label>
+              <label class="contactlabel" for="subject">{{ contact.issue }}</label>
               <span class="required">*</span>
-              <textarea class="form-control" id="subject" name="subject" placeholder="Send us your issue.." value="{{request.form.subject}}" style="height:200px" required></textarea>
+              <textarea class="form-control" id="subject" name="subject" placeholder="{{ contact.submitissue }}" value="{{request.form.subject}}" style="height:200px" required></textarea>
           </div>
-          <input type="submit" class="btn btn-primary" value="Submit Issue">
+          <input type="submit" class="btn btn-primary" value="{{ contact.submitissue }}">
     </form>
 </div>
 

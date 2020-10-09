@@ -19,9 +19,13 @@ messages = MessagesEN()
 # Contact.html
 class ContactEN:
     reportissue = "Report an issue..."
+    name = "Name"
     yourname = "Your name..."
+    lastname = "Last name"
     yourlastname = "Your last name..."
+    email = "Email"
     youremail = "Your email..."
+    issue = "Issue"
     sendissue = "Send us your issue..."
     submitissue = "Submit Issue"
 contact = ContactEN()

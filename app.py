@@ -53,10 +53,14 @@ def contact():
     global site_language
     if site_language == "Greek":
         header = HeaderGR()
+        contact = ContactGR()
+        messages = MessagesGR()
     else:
         header = HeaderEN()
+        contact = ContactEN()
+        messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('contact.html', header=header)
+        return render_template('contact.html', header=header, contact=contact)
     elif request.method == 'POST':
         try:
             firstname = request.form['firstname']
@@ -68,10 +72,10 @@ def contact():
             mydb.commit()
             sql.close()
             message = "You have successfully submitted your contact form!"
-            return render_template('contact.html', success=message, header=header)
+            return render_template('contact.html', success=message, header=header, contact=contact)
         except MySQLdb.Error as error:
             message = str(error)
-            return render_template('contact.html', error=message, header=header)
+            return render_template('contact.html', error=message, header=header, contact=contact)
         finally:
             pass
 
