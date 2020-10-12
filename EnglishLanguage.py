@@ -4,6 +4,7 @@ class HeaderEN:
     livefeed = "Live Feed"
     contact = "Contact"
     logout = "Log out"
+    settings = "Settings"
 
 class WelcomeEN:
     title = "Livestream Police Surveillance Application"

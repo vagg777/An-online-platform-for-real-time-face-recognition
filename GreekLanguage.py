@@ -3,7 +3,8 @@ class HeaderGR:
     manage = "Διαχείριση"
     livefeed = "Ζωντανή Μετάδοση"
     contact = "Επικοινωνια"
-    logout = "Έξοδος"
+    logout = "Εξοδος"
+    settings = "Ρυθμίσεις"
 
 class WelcomeGR:
     title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"

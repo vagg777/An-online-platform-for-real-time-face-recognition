@@ -18,39 +18,57 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         .container {
-          border-radius: 20px;
-          background-color: #f2f2f2;
-          padding: 20px;
+              border-radius: 20px;
+              background-color: #f2f2f2;
+              padding: 20px;
+        }
+
+         .country-container {
+              border-radius: 20px;
+              background-color: #f2f2f2;
+              width: 10%;
+              text-align: center;
         }
     </style>
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
-<div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
-      <div class="header-right">
-        <a href="home">{{ header.home }}</a>
-        <a href="manage" class="active">{{ header.manage }}</a>
-        <a href="live_feed">{{ header.livefeed }}</a>
-        <a href="contact">{{ header.contact }}</a>
-         <a href="welcome" class="btn btn-danger" style="color: white;">
-              <span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}
-        </a>
-      </div>
-</div>
 
-<br><br><br>
+    <div class="header">
+          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <div class="header-right">
+              <a href="home">{{ header.home }}</a>
+              <a href="manage" class="active">{{ header.manage }}</a>
+              <a href="live_feed">{{ header.livefeed }}</a>
+              <a href="contact">{{ header.contact }}</a>
+              <a href="settings">{{ header.settings }}</a>
+              <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+          </div>
+    </div>
 
-<div class="container" style="color: black;">
-    <h1 align="center">{{ manage.panel }}</h1>
-    <hr style="border-color: black; background-color: black; color: black;">
-    <p>{{ manage.message1 }} <button class="btn btn-success" onclick="window.location.href = 'insert_criminals';">{{ manage.insert }}</button></p>
-    <p>{{ manage.message2 }} <button class="btn btn-success" onclick="window.location.href = 'manage_criminals';">{{ manage.edit }}</button></p>
-    <hr style="border-color: black; background-color: black; color: black;">
-    <p>{{ manage.message3 }} <button class="btn btn-warning" onclick="window.location.href = 'insert_users';">{{ manage.insert }}</button></p>
-    <p>{{ manage.message4 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_users';">{{ manage.edit }}</button></p>
+    <br><br><br>
 
-</div>
+    <div class="country-container container" style="color: black;">
+        <div class="dropdown">
+            <button class="btn btn-successdropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Change Language</button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="dropdown-item"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132503/iflag.jpg" width="20" height="15"> Greek</li>
+                <li class="dropdown-item"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" width="20" height="15"> USA</li>
+            </ul>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    <div class="container" style="color: black;">
+        <h1 align="center">{{ manage.panel }}</h1>
+        <hr style="border-color: black; background-color: black; color: black;">
+        <p>{{ manage.message1 }} <button class="btn btn-success" onclick="window.location.href = 'insert_criminals';">{{ manage.insert }}</button></p>
+        <p>{{ manage.message2 }} <button class="btn btn-success" onclick="window.location.href = 'manage_criminals';">{{ manage.edit }}</button></p>
+        <hr style="border-color: black; background-color: black; color: black;">
+        <p>{{ manage.message3 }} <button class="btn btn-warning" onclick="window.location.href = 'insert_users';">{{ manage.insert }}</button></p>
+        <p>{{ manage.message4 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_users';">{{ manage.edit }}</button></p>
+    </div>
 </body>
 
 </html>
