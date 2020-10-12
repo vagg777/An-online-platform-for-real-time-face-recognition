@@ -157,3 +157,12 @@ class ManageUserGR:
     update = "Ανανέωση"
     delete = "Διαγραφή"
 
+class ManageLivefeedGR:
+    search = "Ψάξε"
+    select = "Αναζήτηση κακοποιών"
+    nofilter = "Χωρίς Φίλτρο"
+    grayfilter = "Γκρίζο Φίλτρο"
+    redishfilter = "Κόκκινο Φίλτρο"
+    invertfilter = "Φίλτρο Αναστροφής"
+    blurfilter = "Φίλτρο Θόλωσης"
+    sepiafilter = "Φίλτρο Σέπια"
