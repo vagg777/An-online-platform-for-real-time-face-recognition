@@ -377,15 +377,23 @@ def manage_criminals():
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
     global site_language
+    if site_language == "Greek":
+        manageUser = ManageUserGR()
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        manageUser = ManageUserEN()
+        header = HeaderEN()
+        messages = MessagesEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
         result = sql.fetchall()
         if result:
-            return render_template('manage_users.html', result=result)
+            return render_template('manage_users.html', result=result, header = header, messages = messages, manageUser = manageUser)
         else:
             error = 'No records found in the database!'
-            return render_template('manage_users.html', error=error)
+            return render_template('manage_users.html', error=error, header = header, messages = messages, manageUser = manageUser)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -405,13 +413,13 @@ def manage_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', success=message, result=result)
+            return render_template('manage_users.html', success=message, result=result, header = header, messages = messages, manageUser = manageUser)
         except MySQLdb.Error as error:
             message = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=message, result=result)
+            return render_template('manage_users.html', error=message, result=result, header = header, messages = messages, manageUser = manageUser)
         finally:
             pass
 
