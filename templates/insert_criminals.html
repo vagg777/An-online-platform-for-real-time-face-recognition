@@ -39,12 +39,12 @@
 <div class="header">
       <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
       <div class="header-right">
-        <a href="home">Home</a>
-        <a href="manage" class="active">Manage</a>
-        <a href="live_feed">Live Feed</a>
-        <a href="contact">Contact</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;">
-              <span class="glyphicon glyphicon-log-out"></span> Log out
+        <a href="home">{{ header.home }}</a>
+        <a href="manage" class="active">{{ header.manage }}</a>
+        <a href="live_feed">{{ header.livefeed }}</a>
+        <a href="contact">{{ header.contact }}</a>
+         <a href="welcome" class="btn btn-danger" style="color: white;">
+              <span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}
         </a>
       </div>
 </div>
@@ -63,81 +63,81 @@
 {% endif %}
 
 <div class="container">
-    <h2 class = "contactlabel" align="center">Insert new Criminals</h2><br>
+    <h2 class="contactlabel" align="center">{{ insertCriminal.insert }}</h2><br>
     <form action="" method="post">
             <div class="form-group">
-                <label class="contactlabel" for="fullname">Full Name</label>
+                <label class="contactlabel" for="fullname">{{ insertCriminal.fullname }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="fullname" name="fullname" placeholder="Criminal's Full Name.." value="{{request.form.fullname}}" required>
+                     <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label class="contactlabel" for="portrait">Portrait</label>
+                <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="portrait" name="portrait" placeholder="Criminal's Portrait URL.." value="{{request.form.portrait}}" required>
+                     <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label class="contactlabel" for="age">Age</label>
+                <label class="contactlabel" for="age">{{ insertCriminal.age }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="age" name="age" placeholder="Criminal's Age.." value="{{request.form.age}}" required>
+                     <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label class="contactlabel" for="height">Height (in cm)</label>
+                <label class="contactlabel" for="height">{{ insertCriminal.height }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="height" name="height" placeholder="Criminal's Height.." value="{{request.form.height}}" required>
+                     <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label class="contactlabel" for="weight">Weight (in kg)</label>
+                <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="weight" name="weight" placeholder="Criminal's Weight.." value="{{request.form.weight}}" required>
+                     <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label class="contactlabel" for="eye_color">Eye Color</label>
+                <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                     <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
-                        <option value="Black">Black</option>
-                        <option value="Brown">Brown</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Green">Green</option>
-                        <option value="Dark Brown">Dark Brown</option>
-                        <option value="Amber">Amber</option>
-                        <option value="Gray">Gray</option>
+                        <option value="Black">{{ insertCriminal.black }}</option>
+                        <option value="Brown">{{ insertCriminal.brown }}</option>
+                        <option value="Blue">{{ insertCriminal.blue }}</option>
+                        <option value="Green">{{ insertCriminal.green }}</option>
+                        <option value="Dark Brown">{{ insertCriminal.darkbrown }}</option>
+                        <option value="Amber">{{ insertCriminal.amber }}</option>
+                        <option value="Gray">{{ insertCriminal.gray }}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                  <label class="contactlabel" for="biography">Crime Record</label>
+                  <label class="contactlabel" for="biography">{{ insertCriminal.crimerecord }}</label>
                   <span class="required">*</span>
                   <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-                     <textarea class="form-control" id="biography" name="biography" placeholder="Criminal's Crime History.." value="{{request.form.biography}}" style="height:200px" required></textarea>
+                     <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
                   </div>
             </div>
             <div class="form-group">
-                  <label class="contactlabel" for="last_location">Last known location (optional)</label>
+                  <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
                    <div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="last_location" name="last_location" placeholder="Criminal's Last Known Location.." value="{{request.form.last_location}}">
+                     <input class="form-control" type="text" id="last_location" name="last_location" placeholder="{{ insertCriminal.enterlastlocation }}" value="{{request.form.last_location}}">
                    </div>
             </div>
-            <input type="reset" class="btn btn-danger" value="Reset Form">
-            <input type="submit" class="btn btn-primary" value="Insert Criminal">
+            <input type="reset" class="btn btn-danger" value="{{ insertCriminal.reset }}">
+            <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit}}">
     </form>
 </div>
 

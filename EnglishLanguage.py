@@ -59,6 +59,32 @@ class ManageEN:
     message3 = "To add new users to the database, click the Insert button"
     message4 = "To edit existing users on the database, click the Edit button"
 
+class InsertCriminalsEN:
+    insert = "Insert new Criminals"
+    fullname = "Full Name"
+    enterfullname = "Criminal's Full Name..."
+    portrait = "Portrait"
+    enterimage = "Criminal's Portrait URL..."
+    age = "Age"
+    enterage = "Criminal's Age..."
+    height = "Height (in cm)"
+    enterheight = "Criminal's Height..."
+    weight = "Weight (in kg)"
+    enterweight = "Criminal's Weight..."
+    eyecolor = "Eye Color"
+    black = "Black"
+    brown = "Brown"
+    blue = "Blue"
+    green = "Green"
+    darkbrown = "Dark Brown"
+    amber = "Amber"
+    gray = "Gray"
+    crimerecord = "Crime Record"
+    entercrimerecord = "Criminal's Crime History..."
+    lastlocation = "Last known location (optional)"
+    enterlastlocation = "Criminal's Last Known Location..."
+    reset = "Reset Form"
+    submit = "Insert Criminal"
 
 header = HeaderEN()
 welcome = WelcomeEN()
@@ -67,3 +93,4 @@ contact = ContactEN()
 login = LoginEN()
 signup = SignupEN()
 manage = ManageEN()
+insertCriminal = InsertCriminalsEN()

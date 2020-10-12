@@ -59,6 +59,33 @@ class ManageGR:
     message3 = "Για εισαγωγή νέων χρηστών στη πλατφόρμα, πατήστε Εισαγωγή"
     message4 = "Για επεξεργασία χρηστών στη πλατφόρμα, πατήστε Επεξεργασία"
 
+class InsertCriminalsGR:
+    insert = "Προσθήκη κακοποιών"
+    fullname = "Ονοματεπώνυμο"
+    enterfullname = "Ονοματεπώνυμο κακοποιού..."
+    portrait = "Φωτογραφία"
+    enterimage = "URL φωτογραφίας κακοποιού..."
+    age = "Ηλικία"
+    enterage = "Ηλικία κακοποιού..."
+    height = "Υψος (σε cm)"
+    enterheight = "Υψος κακοποιού..."
+    weight = "Βαρος (in kg)"
+    enterweight = "Βάρος κακοποιού..."
+    eyecolor = "Χρώμα ματιών"
+    black = "Μαύρο"
+    brown = "Καφέ"
+    blue = "Γαλάζιο"
+    green = "Πράσινο"
+    darkbrown = "Σκούρο Καφέ"
+    amber = "Κεχριμπαρί"
+    gray = "Γκρι"
+    crimerecord = "Ποινικό Μητρώο"
+    entercrimerecord = "Ποινικό μητρώο κακοποιού..."
+    lastlocation = "Τελευταία γνωστή θέση (προεραιτικό)"
+    enterlastlocation = "Τελευταία γνωστή θέση κακοποιού..."
+    reset = "Μηδενισμός"
+    submit = "Εισαγωγή κακοποιού"
+
 header = HeaderGR()
 welcome = WelcomeGR()
 messages = MessagesGR()
@@ -66,3 +93,4 @@ contact = ContactGR()
 login = LoginGR()
 signup = SignupGR()
 manage = ManageGR()
+insertCriminal = InsertCriminalsGR()
