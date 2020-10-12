@@ -23,7 +23,7 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "English"
+site_language = "Greek"
 
 
 def nothing(x):
@@ -285,7 +285,6 @@ def remove_criminals():
 
 @app.route('/remove_users', methods=['GET', 'POST'])
 def remove_users():
-    global site_language
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -320,19 +319,27 @@ def remove_users():
         finally:
             pass
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/manage_criminals', methods=['GET', 'POST'])
 def manage_criminals():
     global site_language
+    if site_language == "Greek":
+        manageCriminal = ManageCriminalGR()
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        manageCriminal = ManageCriminalEN()
+        header = HeaderEN()
+        messages = MessagesEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
         if result:
-            return render_template('manage_criminals.html', result=result)
+            return render_template('manage_criminals.html', result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         else:
             error = 'No records found in the database!'
-            return render_template('manage_criminals.html', error=error)
+            return render_template('manage_criminals.html', error=error, header = header, messages = messages, manageCriminal = manageCriminal)
     elif request.method == 'POST':
         try:
             criminal_id = str(request.form["criminal_id"])
@@ -356,13 +363,13 @@ def manage_criminals():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', success=message, result=result)
+            return render_template('manage_criminals.html', success=message, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         except MySQLdb.Error as error:
             message = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', error=message, result=result)
+            return render_template('manage_criminals.html', error=message, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         finally:
             pass
 

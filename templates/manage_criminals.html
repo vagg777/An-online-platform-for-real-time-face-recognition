@@ -68,12 +68,12 @@
     <div class="header">
       <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
       <div class="header-right">
-        <a href="home">Home</a>
-        <a href="manage" class="active">Manage</a>
-        <a href="live_feed">Live Feed</a>
-        <a href="contact">Contact</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;">
-              <span class="glyphicon glyphicon-log-out"></span> Log out
+        <a href="home">{{ header.home }}</a>
+        <a href="manage" class="active">{{ header.manage }}</a>
+        <a href="live_feed">{{ header.livefeed }}</a>
+        <a href="contact">{{ header.contact }}</a>
+         <a href="welcome" class="btn btn-danger" style="color: white;">
+              <span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}
         </a>
       </div>
     </div>
@@ -92,22 +92,22 @@
     {% endif %}
 
     <div class="container">
-        <h1 align="center" style="color: black;">Manage Criminals</h1>
+        <h1 align="center" style="color: black;">{{ manageCriminal.manage }}</h1>
         <hr style="border-color: black; background-color: black; color: black;">
             <table class="table">
                 <thead class="thead-dark">
                     <tr class="black">
-                        <th scope="col">Id</th>
-                        <th scope="col">Portrait</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Height (in cm)</th>
-                        <th scope="col">Weight (in kg)</th>
-                        <th scope="col">Eye Color</th>
-                        <th scope="col">Biography</th>
-                        <th scope="col">Last location</th>
-                        <th scope="col">Update</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col">{{ manageCriminal.id }}</th>
+                        <th scope="col">{{ manageCriminal.portrait }}</th>
+                        <th scope="col">{{ manageCriminal.fullname }}</th>
+                        <th scope="col">{{ manageCriminal.age }}</th>
+                        <th scope="col">{{ manageCriminal.weight }}</th>
+                        <th scope="col">{{ manageCriminal.height }}</th>
+                        <th scope="col">{{ manageCriminal.eyecolor }}</th>
+                        <th scope="col">{{ manageCriminal.biography }}</th>
+                        <th scope="col">{{ manageCriminal.lastlocation }}</th>
+                        <th scope="col">{{ manageCriminal.update }}</th>
+                        <th scope="col">{{ manageCriminal.delete }}</th>
                     </tr>
                 </thead>
                 <tbody class="black">
@@ -123,13 +123,13 @@
                             <td class="criminal_bio">{{row.6}}</td>
                             <td class="criminal_last_location">{{row.8}}</td>
                             <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">Update</button>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
                             </td>
                             <td>
                                 <form action="remove_criminals" method="post">
                                     <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
                                     <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                    <button class="btn btn-danger confirmation">Delete</button>
+                                    <button class="btn btn-danger confirmation">{{ manageCriminal.delete }}</button>
                                 </form>
                             </td>
                         </tr>
@@ -144,92 +144,92 @@
               <div class="modal-content">
                     <div class="modal-header black">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Update Criminal</h4>
+                        <h4 class="modal-title">{{ manageCriminal.updatecriminal}}</h4>
                     </div>
                     <div class="modal-body black">
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_id">Id</label>
+                                <label class="contactlabel" for="criminal_id">{{ manageCriminal.id }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_id" type="text" id="criminal_id" name="criminal_id" placeholder="Criminal's Full Name.." readonly>
+                                     <input class="form-control criminal_id" type="text" id="criminal_id" name="criminal_id" placeholder="{{ manageCriminal.enterid }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_full_name">Full Name</label>
+                                <label class="contactlabel" for="criminal_full_name">{{ manageCriminal.fullname}}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_full_name" type="text" id="criminal_full_name" name="criminal_full_name" placeholder="Criminal's Full Name.." required>
+                                     <input class="form-control criminal_full_name" type="text" id="criminal_full_name" name="criminal_full_name" placeholder="{{ manageCriminal.enterfullname }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_portrait">Portrait</label>
+                                <label class="contactlabel" for="criminal_portrait">{{ manageCriminal.portrait }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_portrait" type="text" id="criminal_portrait" name="criminal_portrait" placeholder="Criminal's Portrait URL.." required>
+                                     <input class="form-control criminal_portrait" type="text" id="criminal_portrait" name="criminal_portrait" placeholder="{{ manageCriminal.enterimage }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_age">Age</label>
+                                <label class="contactlabel" for="criminal_age">{{ manageCriminal.age }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="Criminal's Age.." required>
+                                     <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_height">Height (in cm)</label>
+                                <label class="contactlabel" for="criminal_height">{{ manageCriminal.height}}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="Criminal's Height.." required>
+                                     <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="{{ manageCriminal.enterheight }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_weight">Weight (in kg)</label>
+                                <label class="contactlabel" for="criminal_weight">{{ manageCriminal.weight }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="Criminal's Weight.." required>
+                                     <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="{{ manageCriminal.enterweight }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_eye_color">Eye Color</label>
+                                <label class="contactlabel" for="criminal_eye_color">{{ manageCriminal.eyecolor}}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     <select required class="form-control criminal_eye_color" name="criminal_eye_color" id="criminal_eye_color">
-                                        <option value="Black">Black</option>
-                                        <option value="Brown">Brown</option>
-                                        <option value="Blue">Blue</option>
-                                        <option value="Green">Green</option>
-                                        <option value="Dark Brown">Dark Brown</option>
-                                        <option value="Amber">Amber</option>
-                                        <option value="Gray">Gray</option>
+                                        <option value="Black">{{ manageCriminal.black }}</option>
+                                        <option value="Brown">{{ manageCriminal.brown }}</option>
+                                        <option value="Blue">{{ manageCriminal.blue }}</option>
+                                        <option value="Green">{{ manageCriminal.green }}</option>
+                                        <option value="Dark Brown">{{ manageCriminal.darkbrown }}</option>
+                                        <option value="Amber">{{ manageCriminal.amber }}</option>
+                                        <option value="Gray">{{ manageCriminal.gray }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                  <label class="contactlabel" for="criminal_bio">Crime Record</label>
+                                  <label class="contactlabel" for="criminal_bio">{{ manageCriminal.crimerecord}}</label>
                                   <span class="required">*</span>
                                   <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-                                     <textarea class="form-control criminal_bio" id="criminal_bio" name="criminal_bio" placeholder="Criminal's Biography.." style="height:200px" required></textarea>
+                                     <textarea class="form-control criminal_bio" id="criminal_bio" name="criminal_bio" placeholder="{{ manageCriminal.entercrimerecord }}" style="height:200px" required></textarea>
                                   </div>
                             </div>
                             <div class="form-group">
-                                  <label class="contactlabel" for="criminal_last_location">Last known location (optional)</label>
+                                  <label class="contactlabel" for="criminal_last_location">{{ manageCriminal.lastlocation }}</label>
                                    <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_last_location" type="text" id="criminal_last_location" name="criminal_last_location" placeholder="Criminal's Last Known Location..">
+                                     <input class="form-control criminal_last_location" type="text" id="criminal_last_location" name="criminal_last_location" placeholder="{{ manageCriminal.enterlastlocation }}">
                                    </div>
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <input type="submit" class="btn btn-warning" value="Update">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageCriminal.cancel }}</button>
+                        <input type="submit" class="btn btn-warning" value="{{ manageCriminal.update }}">
                     </div>
               </div>
             </div>
