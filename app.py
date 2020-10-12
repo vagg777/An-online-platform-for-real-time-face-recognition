@@ -545,6 +545,16 @@ def video_feed():
     record_video()
     return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/settings')
+def settings():
+    global site_language
+    if site_language == "Greek":
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        header = HeaderEN()
+        messages = MessagesEN()
+    return render_template('settings.html', header = header, messages = messages)
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
