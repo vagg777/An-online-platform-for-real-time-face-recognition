@@ -83,14 +83,23 @@ class InsertCriminalsGR:
     entercrimerecord = "Ποινικό μητρώο κακοποιού..."
     lastlocation = "Τελευταία γνωστή θέση (προεραιτικό)"
     enterlastlocation = "Τελευταία γνωστή θέση κακοποιού..."
-    reset = "Μηδενισμός"
+    reset = "Εκκαθάριση Φόρμας"
     submit = "Εισαγωγή κακοποιού"
 
-header = HeaderGR()
-welcome = WelcomeGR()
-messages = MessagesGR()
-contact = ContactGR()
-login = LoginGR()
-signup = SignupGR()
-manage = ManageGR()
-insertCriminal = InsertCriminalsGR()
+class InsertUserGR:
+    insert = "Εισαγωγή χρηστών"
+    username = "Όνομα χρήστη"
+    enterusername = "Εισάγετε όνομα χρήστη"
+    password = "Κωδικός"
+    enterpassword = "Εισάγετε κωδικό"
+    fullname = "Ονοματεπώνυμο"
+    enterfullname = "Εισάγετε ονοματεπώνυμο"
+    email = "Email"
+    enteremail = "Εισάγετε email"
+    role = "Ρόλος"
+    admin = "Διαχειριστής"
+    user = "Χρήστης"
+    avatar = "Εικονίδιο"
+    enterimage = "Εισάγετε URL εικόνας"
+    reset = "Εκκαθάριση Φόρμας"
+    submit = "Εισαγωγή χρήστη"

@@ -32,24 +32,6 @@ class LoginEN:
     login = "Login"
     rememberme = "Remember me"
 
-class SignupEN:
-    signup = "Sign Up"
-    username = "Username"
-    enterusername = "Enter username"
-    password = "Password"
-    enterpassword = "Enter Password"
-    fullname = "Full Name"
-    enterfullname = "Enter Full Name"
-    email = "Email"
-    enteremail = "Enter email"
-    role = "Role"
-    admin = "Admin"
-    user = "User"
-    avatar = "Avatar"
-    enterimage = "Enter image URL"
-    reset = "Reset form"
-    returnlogin = "Return to the Login page"
-
 class ManageEN:
     panel = "Management Panel"
     insert = "Insert"
@@ -86,11 +68,38 @@ class InsertCriminalsEN:
     reset = "Reset Form"
     submit = "Insert Criminal"
 
-header = HeaderEN()
-welcome = WelcomeEN()
-messages = MessagesEN()
-contact = ContactEN()
-login = LoginEN()
-signup = SignupEN()
-manage = ManageEN()
-insertCriminal = InsertCriminalsEN()
+class SignupEN:
+    signup = "Sign Up"
+    username = "Username"
+    enterusername = "Enter username"
+    password = "Password"
+    enterpassword = "Enter Password"
+    fullname = "Full Name"
+    enterfullname = "Enter Full Name"
+    email = "Email"
+    enteremail = "Enter email"
+    role = "Role"
+    admin = "Admin"
+    user = "User"
+    avatar = "Avatar"
+    enterimage = "Enter image URL"
+    reset = "Reset form"
+    returnlogin = "Return to the Login page"
+
+class InsertUserEN:
+    insert = "Insert new Users"
+    username = "Username"
+    enterusername = "Enter username"
+    password = "Password"
+    enterpassword = "Enter Password"
+    fullname = "Full Name"
+    enterfullname = "Enter Full Name"
+    email = "Email"
+    enteremail = "Enter email"
+    role = "Role"
+    admin = "Admin"
+    user = "User"
+    avatar = "Avatar"
+    enterimage = "Enter image URL"
+    reset = "Reset form"
+    submit = "Insert User"

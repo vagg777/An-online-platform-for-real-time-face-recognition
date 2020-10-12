@@ -23,7 +23,7 @@ global_full_name = ""
 detection_time = 0.0
 average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
-site_language = "Greek"
+site_language = "English"
 
 
 def nothing(x):
@@ -205,11 +205,20 @@ def insert_criminals():
         finally:
             pass
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/insert_users', methods=['GET', 'POST'])
 def insert_users():
+    global site_language
+    if site_language == "Greek":
+        insertUser= InsertUserGR()
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        insertUser = InsertUserEN()
+        header = HeaderEN()
+        messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('insert_users.html')
+        return render_template('insert_users.html', header = header, messages = messages, insertUser = insertUser)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -228,10 +237,10 @@ def insert_users():
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
             message = username + " successfully added from the database!"
-            return render_template('manage_users.html', success=message, result=result)
+            return render_template('manage_users.html', success=message, result=result,  header = header, messages = messages, insertUser = insertUser)
         except MySQLdb.Error as error:
             message = str(error)
-            return render_template('insert_users.html', error=message)
+            return render_template('insert_users.html', error=message,  header = header, messages = messages, insertUser = insertUser)
         finally:
             pass
 

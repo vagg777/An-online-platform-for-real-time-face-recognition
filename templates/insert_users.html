@@ -39,12 +39,12 @@
 <div class="header">
       <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
       <div class="header-right">
-        <a href="home">Home</a>
-        <a href="manage" class="active">Manage</a>
-        <a href="live_feed">Live Feed</a>
-        <a href="contact">Contact</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;">
-              <span class="glyphicon glyphicon-log-out"></span> Log out
+        <a href="home">{{ header.home }}</a>
+        <a href="manage" class="active">{{ header.manage }}</a>
+        <a href="live_feed">{{ header.livefeed }}</a>
+        <a href="contact">{{ header.contact }}</a>
+         <a href="welcome" class="btn btn-danger" style="color: white;">
+              <span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}
         </a>
       </div>
 </div>
@@ -64,61 +64,61 @@
 
 
 <div class="container">
-    <h2 class = "contactlabel" align="center">Insert new Users</h2><br>
+    <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2><br>
     <form action="" method="post">
         <div class="form-group">
-            <label class="contactlabel" for="username">Username</label>
+            <label class="contactlabel" for="username">{{ insertUser.username }}</label>
             <span class="required">*</span>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="Enter username" name="username" id = "username" value="{{request.form.username}}" required>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="password">Password</label>
+            <label class="contactlabel" for="password">{{ insertUser.password }}</label>
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                <input type="password" autocomplete="off" class="form-control" placeholder="Enter password" name="password" id="password" value="{{request.form.password}}" required>
+                <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword}}" name="password" id="password" value="{{request.form.password}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="full_name">Full Name</label>
+            <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="Enter full name" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="email">Email</label>
+            <label class="contactlabel" for="email">{{ insertUser.email}}</label>
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="Enter email" name="email" id="email" value="{{request.form.email}}" required>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.email }}" name="email" id="email" value="{{request.form.email}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="role">Role</label>
+            <label class="contactlabel" for="role">{{ insertUser.role }}</label>
             <span class="required">*</span>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
                 <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="USER">USER</option>
+                    <option value="ADMIN">{{ insertUser.admin }}</option>
+                    <option value="USER">{{ insertUser.user }}</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="avatar">Avatar</label>
+            <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="Enter image URL" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
             </div>
         </div>
-        <input type="reset" class="btn btn-danger" value="Reset Form">
-        <input type="submit" class="btn btn-primary" value="Insert User">
+        <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}">
+        <input type="submit" class="btn btn-primary" value="{{ insertUser.submit }}">
     </form>
 </div>
 
