@@ -158,3 +158,13 @@ class ManageUserEN:
     enterimage = "Enter image URL"
     cancel = "Cancel"
     updateuser = "Update User"
+
+class ManageLivefeedEN:
+    search = "Search"
+    select = "Select a criminal"
+    nofilter = "No Filter"
+    grayfilter = "Gray Filter"
+    redishfilter = "Redish Filter"
+    invertfilter = "Invert Filter"
+    blurfilter = "Blur Filter"
+    sepiafilter = "Sepia Filter"

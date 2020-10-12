@@ -373,7 +373,7 @@ def manage_criminals():
         finally:
             pass
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
     global site_language
@@ -423,19 +423,29 @@ def manage_users():
         finally:
             pass
 
-
+''' ==============GN/EN Ready [100%]=============='''
 @app.route('/live_feed', methods=['GET', 'POST'])
 def live_feed():
     global site_language
+    if site_language == "Greek":
+        manageCriminal = ManageCriminalGR()
+        header = HeaderGR()
+        messages = MessagesGR()
+        manageLivefeed = ManageLivefeedGR()
+    else:
+        manageCriminal = ManageCriminalEN()
+        header = HeaderEN()
+        messages = MessagesEN()
+        manageLivefeed = ManageLivefeedEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
         if result:
-            return render_template('manage_livefeed.html', result=result)
+            return render_template('manage_livefeed.html', result=result, header = header, messages = messages, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
         else:
             error = 'No records found in the database!'
-            return render_template('manage_livefeed.html', error=error)
+            return render_template('manage_livefeed.html', error=error, header = header, messages = messages, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
 
 
 @app.route('/search_livefeed', methods=['GET', 'POST'])
