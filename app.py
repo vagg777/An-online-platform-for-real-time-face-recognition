@@ -167,15 +167,17 @@ def signup():
 def insert_criminals():
     global site_language
     if site_language == "Greek":
+        manageCriminal = ManageCriminalGR()
         insertCriminal = InsertCriminalsGR()
         header = HeaderGR()
         messages = MessagesGR()
     else:
+        manageCriminal = ManageCriminalEN()
         insertCriminal = InsertCriminalsEN()
         header = HeaderEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('insert_criminals.html', messages = messages, insertCriminal = insertCriminal, header = header)
+        return render_template('insert_criminals.html', messages = messages, insertCriminal = insertCriminal, manageCriminal = manageCriminal, header = header)
     elif request.method == 'POST':
         try:
             criminal_full_name = str(request.form["fullname"])
@@ -193,10 +195,10 @@ def insert_criminals():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal = insertCriminal, header = header)
+            return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal = insertCriminal, manageCriminal = manageCriminal, header = header)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('insert_criminals.html', error=messages.sqlerror, messages = messages, insertCriminal = insertCriminal, header = header)
+            return render_template('insert_criminals.html', error=messages.sqlerror, messages = messages, insertCriminal = insertCriminal, manageCriminal = manageCriminal, header = header)
         finally:
             pass
 
@@ -205,15 +207,17 @@ def insert_criminals():
 def insert_users():
     global site_language
     if site_language == "Greek":
+        manageUser = ManageUserGR()
         insertUser= InsertUserGR()
         header = HeaderGR()
         messages = MessagesGR()
     else:
+        manageUser = ManageUserEN()
         insertUser = InsertUserEN()
         header = HeaderEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('insert_users.html', header = header, messages = messages, insertUser = insertUser)
+        return render_template('insert_users.html', header = header, messages = messages, insertUser = insertUser, manageUser = manageUser)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -230,10 +234,10 @@ def insert_users():
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
             message = username + " successfully added from the database!"
-            return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser)
+            return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser, manageUser = manageUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser)
+            return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser, manageUser = manageUser)
         finally:
             pass
 
@@ -244,9 +248,11 @@ def remove_criminals():
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
+        manageCriminal = ManageCriminalGR()
     else:
         header = HeaderEN()
         messages = MessagesEN()
+        manageCriminal = ManageCriminalEN()
     if request.method == 'POST':
         try:
             criminal_id = str(request.form["row.0"])
@@ -258,26 +264,26 @@ def remove_criminals():
                 sql.execute("DELETE FROM criminals WHERE criminal_id ='" + criminal_id + "'")
                 mydb.commit()
                 sql.close()
-                message = criminal_full_name + messages.deletedcriminal
+                message = messages.deletedcriminalleft + criminal_full_name + messages.deletedcriminalright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
-                return render_template('manage_criminals.html', success=message, result=result)
+                return render_template('manage_criminals.html', success=message, result=result, header = header, manageCriminal = manageCriminal)
             else:
                 message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
-                return render_template('manage_criminals.html', error=message, result=result)
+                return render_template('manage_criminals.html', error=message, result=result, header = header, manageCriminal = manageCriminal)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', error=messages.sqlerror, result=result)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header = header, manageCriminal = manageCriminal)
         finally:
             pass
 
@@ -288,9 +294,11 @@ def remove_users():
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
+        manageUser = ManageUserGR()
     else:
         header = HeaderEN()
         messages = MessagesEN()
+        manageUser = ManageUserEN()
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -302,26 +310,26 @@ def remove_users():
                 sql.execute("DELETE FROM users WHERE user_id ='" + user_id + "'")
                 mydb.commit()
                 sql.close()
-                message = user_username + messages.deleteduser
+                message = messages.deleteduserleft + user_username + messages.deleteduserright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', success=message, result=result)
+                return render_template('manage_users.html', success=message, result=result, header = header, manageUser = manageUser)
             else:
                 message = messages.nouserleft + user_username + messages.nouserright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', error=message, result=result)
+                return render_template('manage_users.html', error=message, result=result, header = header, manageUser = manageUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header = header, manageUser = manageUser)
         finally:
             pass
 
