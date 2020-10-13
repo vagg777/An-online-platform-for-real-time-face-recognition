@@ -17,7 +17,7 @@ from GreekLanguage import *
 
 # create the application object and connect to db
 app = Flask(__name__)
-mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="")
+mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 video_filter = ""
 global_full_name = ""
 detection_time = 0.0

@@ -13,7 +13,7 @@ from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_alt2.xml")
 ds_factor = 0.6
-mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="")
+mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
 
 def live_statistics(frame, pos, video_width, video_height, milliseconds):
