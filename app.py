@@ -55,7 +55,11 @@ def welcome():
 @app.route('/home')
 def home():
     global site_language
-    return render_template('home.html')
+    if site_language == "Greek":
+        header = HeaderGR()
+    else:
+        header = HeaderEN()
+    return render_template('home.html', header = header)
 
 
 ''' ==============GN/EN Ready [100%]=============='''
