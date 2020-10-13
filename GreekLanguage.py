@@ -11,8 +11,19 @@ class WelcomeGR:
     login = "Συνδεθείτε στη πλατφόρμα"
 
 class MessagesGR:
-    error = ""
-    success = ""
+    sqlerror = ""
+    successcontactform = "Υποβάλλατε τη φόρμα με επιτυχία"
+    successsignup = "Έγινε εγγραφή του χρήστη με επιτυχία στη βάση!"
+    successinsertcriminal = "Έγινε προσθήκη του κακοποιού με επιτυχία στη βάση!"
+    successinseruser = "Έγινε προσθήκη του χρήστη με επιτυχία στη βάση!"
+    deletedcriminal = " διεγράφη με επιτυχία από τη βάση!"
+    nocriminalleft = "Δεν υπάρχει κακοποιός με όνομα "
+    nocriminalright = " στη βάση δεδομένων!"
+    deleteduser = " διεγράφη με επιτυχία από τη βάση!"
+    nouserleft = "Δεν υπάρχει χρήστης με όνομα "
+    nouserright = " στη βάση δεδομένων!"
+    norecordfound = "Δεν βρέθηκαν εγγραφές στη βάση!"
+    recordupdated = "Οι αλλαγές αποθηκεύτηκαν επιτυχώς στη βάση!"
 
 class ContactGR:
     reportissue = "Ανέφερε ένα πρόβλημα"

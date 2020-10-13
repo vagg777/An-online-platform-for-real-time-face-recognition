@@ -65,12 +65,10 @@ def manage():
     if site_language == "Greek":
         header = HeaderGR()
         manage = ManageGR()
-        messages = MessagesGR()
     else:
         header = HeaderEN()
         manage = ManageEN()
-        messages = MessagesEN()
-    return render_template('manage.html', header=header, manage=manage, messages=messages)
+    return render_template('manage.html', header=header, manage=manage)
 
 
 ''' ==============GN/EN Ready [100%]=============='''
@@ -86,7 +84,7 @@ def contact():
         contact = ContactEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('contact.html', header=header, contact=contact)
+        return render_template('contact.html', header=header, contact=contact, messages = messages)
     elif request.method == 'POST':
         try:
             firstname = request.form['firstname']
@@ -94,15 +92,13 @@ def contact():
             email = request.form['email']
             subject = request.form['subject']
             sql = mydb.cursor()
-            sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)",
-                        (firstname, lastname, email, subject))
+            sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)", (firstname, lastname, email, subject))
             mydb.commit()
             sql.close()
-            message = "You have successfully submitted your contact form!"
-            return render_template('contact.html', success=message, header=header, contact=contact)
+            return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact)
         except MySQLdb.Error as error:
-            message = str(error)
-            return render_template('contact.html', error=message, header=header, contact=contact)
+            messages.sqlerror = str(error)
+            return render_template('contact.html', error=messages.sqlerror, header=header, contact=contact)
         finally:
             pass
 
@@ -113,8 +109,10 @@ def login():
     global site_language
     if site_language == "Greek":
         login = LoginGR()
+        messages = MessagesGR()
     else:
         login = LoginEN()
+        messages = MessagesEN()
     error = None
     if request.method == 'POST':
         username = request.form['username']
@@ -126,8 +124,8 @@ def login():
             if len(user) is 1:
                 return render_template('home.html')
         else:
-            error = 'Invalid Credentials! Please try again.'
-    return render_template('login.html', error=error, login=login)
+            messages.sqlerror = 'Invalid Credentials! Please try again.'
+    return render_template('login.html', error=messages.sqlerror, login=login)
 
 
 ''' ==============GN/EN Ready [100%]=============='''
@@ -136,10 +134,12 @@ def signup():
     global site_language
     if site_language == "Greek":
         signup = SignupGR()
+        messages = MessagesGR()
     else:
         signup = SignupEN()
+        messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup)
+        return render_template('signup.html', signup=signup, messages = messages)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -154,11 +154,10 @@ def signup():
                 (username, password, email, fullname, role, avatar))
             mydb.commit()
             sql.close()
-            success = 'User ' + username + "successfully added to the database"
-            return render_template('contact.html', success=success, signup=signup)
+            return render_template('contact.html', success=messages.successsignup, signup=signup)
         except MySQLdb.Error as error:
-            message = str(error)
-            return render_template('contact.html', error=message, signup=signup)
+            messages.sqlerror = str(error)
+            return render_template('contact.html', error=messages.sqlerror, signup=signup)
         finally:
             pass
 
@@ -188,20 +187,16 @@ def insert_criminals():
             criminal_portrait = str(request.form["portrait"])
             criminal_last_location = str(request.form["last_location"])
             sql = mydb.cursor()
-            sql.execute(
-                "INSERT INTO criminals (full_name, age, height, weight, eye_color, biography, portrait, last_location) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                (criminal_full_name, criminal_age, criminal_height, criminal_weight, criminal_eye_color,
-                 criminal_biography, criminal_portrait, criminal_last_location))
+            sql.execute("INSERT INTO criminals (full_name, age, height, weight, eye_color, biography, portrait, last_location) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (criminal_full_name, criminal_age, criminal_height, criminal_weight, criminal_eye_color,criminal_biography, criminal_portrait, criminal_last_location))
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            message = criminal_full_name + " successfully added to the database!"
-            return render_template('manage_criminals.html', success=message, result=result, messages = messages, insertCriminal = insertCriminal, header = header)
+            return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal = insertCriminal, header = header)
         except MySQLdb.Error as error:
-            message = str(error)
-            return render_template('insert_criminals.html', error=message, messages = messages, insertCriminal = insertCriminal, header = header)
+            messages.sqlerror = str(error)
+            return render_template('insert_criminals.html', error=messages.sqlerror, messages = messages, insertCriminal = insertCriminal, header = header)
         finally:
             pass
 
@@ -228,19 +223,17 @@ def insert_users():
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
             sql = mydb.cursor()
-            sql.execute(
-                "INSERT INTO users (username, password, email, full_name, role, avatar) VALUES (%s,%s,%s,%s,%s,%s)",
-                (username, password, email, full_name, role, avatar))
+            sql.execute("INSERT INTO users (username, password, email, full_name, role, avatar) VALUES (%s,%s,%s,%s,%s,%s)", (username, password, email, full_name, role, avatar))
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
             message = username + " successfully added from the database!"
-            return render_template('manage_users.html', success=message, result=result,  header = header, messages = messages, insertUser = insertUser)
+            return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser)
         except MySQLdb.Error as error:
-            message = str(error)
-            return render_template('insert_users.html', error=message,  header = header, messages = messages, insertUser = insertUser)
+            messages.sqlerror = str(error)
+            return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser)
         finally:
             pass
 
@@ -248,6 +241,12 @@ def insert_users():
 @app.route('/remove_criminals', methods=['GET', 'POST'])
 def remove_criminals():
     global site_language
+    if site_language == "Greek":
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        header = HeaderEN()
+        messages = MessagesEN()
     if request.method == 'POST':
         try:
             criminal_id = str(request.form["row.0"])
@@ -259,32 +258,39 @@ def remove_criminals():
                 sql.execute("DELETE FROM criminals WHERE criminal_id ='" + criminal_id + "'")
                 mydb.commit()
                 sql.close()
-                message = criminal_full_name + " successfully deleted from the database!"
+                message = criminal_full_name + messages.deletedcriminal
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
                 return render_template('manage_criminals.html', success=message, result=result)
             else:
-                message = "No criminal named " + criminal_full_name + " exists in the database!"
+                message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
                 return render_template('manage_criminals.html', error=message, result=result)
         except MySQLdb.Error as error:
-            message = str(error)
+            messages.sqlerror = str(error)
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', error=message, result=result)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result)
         finally:
             pass
 
 
 @app.route('/remove_users', methods=['GET', 'POST'])
 def remove_users():
+    global site_language
+    if site_language == "Greek":
+        header = HeaderGR()
+        messages = MessagesGR()
+    else:
+        header = HeaderEN()
+        messages = MessagesEN()
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -296,26 +302,26 @@ def remove_users():
                 sql.execute("DELETE FROM users WHERE user_id ='" + user_id + "'")
                 mydb.commit()
                 sql.close()
-                message = user_username + " successfully deleted from the database!"
+                message = user_username + messages.deleteduser
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
                 return render_template('manage_users.html', success=message, result=result)
             else:
-                message = "No username " + user_username + " exists in the database!"
+                message = messages.nouserleft + user_username + messages.nouserright
                 sql.close()
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
                 return render_template('manage_users.html', error=message, result=result)
         except MySQLdb.Error as error:
-            message = str(error)
+            messages.sqlerror = str(error)
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=message, result=result)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result)
         finally:
             pass
 
@@ -338,8 +344,7 @@ def manage_criminals():
         if result:
             return render_template('manage_criminals.html', result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         else:
-            error = 'No records found in the database!'
-            return render_template('manage_criminals.html', error=error, header = header, messages = messages, manageCriminal = manageCriminal)
+            return render_template('manage_criminals.html', error=messages.norecordfound, header = header, messages = messages, manageCriminal = manageCriminal)
     elif request.method == 'POST':
         try:
             criminal_id = str(request.form["criminal_id"])
@@ -358,18 +363,17 @@ def manage_criminals():
             criminal_portrait, criminal_last_location, criminal_id)
             sql.execute(query, query_input)
             mydb.commit()
-            message = "Record successfully updated in the database!"
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', success=message, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
+            return render_template('manage_criminals.html', success=messages.recordupdated, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         except MySQLdb.Error as error:
-            message = str(error)
+            messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', error=message, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header = header, messages = messages, manageCriminal = manageCriminal)
         finally:
             pass
 
@@ -392,8 +396,7 @@ def manage_users():
         if result:
             return render_template('manage_users.html', result=result, header = header, messages = messages, manageUser = manageUser)
         else:
-            error = 'No records found in the database!'
-            return render_template('manage_users.html', error=error, header = header, messages = messages, manageUser = manageUser)
+            return render_template('manage_users.html', error=messages.norecordfound, header = header, messages = messages, manageUser = manageUser)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -408,18 +411,17 @@ def manage_users():
             query_input = (user_username, user_password, user_email, user_fullname, user_role, user_avatar, user_id)
             sql.execute(query, query_input)
             mydb.commit()
-            message = "Record successfully updated in the database!"
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', success=message, result=result, header = header, messages = messages, manageUser = manageUser)
+            return render_template('manage_users.html', success=messages.recordupdated, result=result, header = header, messages = messages, manageUser = manageUser)
         except MySQLdb.Error as error:
-            message = str(error)
+            messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=message, result=result, header = header, messages = messages, manageUser = manageUser)
+            return render_template('manage_users.html', error= messages.sqlerror, result=result, header = header, messages = messages, manageUser = manageUser)
         finally:
             pass
 
@@ -444,8 +446,7 @@ def live_feed():
         if result:
             return render_template('manage_livefeed.html', result=result, header = header, messages = messages, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
         else:
-            error = 'No records found in the database!'
-            return render_template('manage_livefeed.html', error=error, header = header, messages = messages, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
+            return render_template('manage_livefeed.html', error=messages.norecordfound, header = header, messages = messages, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
 
 
 @app.route('/search_livefeed', methods=['GET', 'POST'])
@@ -492,8 +493,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path,
-                                   localtime=localtime, camera_feed_1_location=camera_feed_1_location)
+            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location=camera_feed_1_location)
 
 
 def gen(camera):

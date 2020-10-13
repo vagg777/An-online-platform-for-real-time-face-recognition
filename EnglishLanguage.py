@@ -11,8 +11,19 @@ class WelcomeEN:
     login = "Login to the platform"
 
 class MessagesEN:
-    error = ""
-    success = ""
+    sqlerror = ""
+    successcontactform = "You have successfully submitted your contact form!"
+    successsignup = "User successfully registered to the database!"
+    successinsertcriminal = "Criminal successfully added to the database!"
+    successinseruser = "User successfully added to the database!"
+    deletedcriminal = " successfully deleted from the database!"
+    nocriminalleft = "No criminal named "
+    nocriminalright = " exists in the database!"
+    deleteduser = " successfully deleted from the database!"
+    nouserleft = "No username "
+    nouserright = " exists in the database!"
+    norecordfound = "No records found in the database!"
+    recordupdated = "Record successfully updated in the database!"
 
 class ContactEN:
     reportissue = "Report an issue..."
