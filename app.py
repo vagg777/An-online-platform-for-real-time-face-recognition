@@ -242,9 +242,8 @@ def insert_users():
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
-            sql.execute("SELECT * FROM criminals")
+            sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            message = username + " successfully added from the database!"
             return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser, manageUser = manageUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -333,7 +332,7 @@ def remove_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', error=message, result=result, header = header, manageUser = manageUser)
+                return render_template('manage_users.html', error=message, result=result, header = header, manageUser = manageUser, messages = messages)  #TODO: refresh page after insert/delete user
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
