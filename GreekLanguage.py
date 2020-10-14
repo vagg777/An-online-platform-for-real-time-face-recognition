@@ -49,6 +49,8 @@ class MessagesGR:
     nouserright = " στη βάση δεδομένων!"
     norecordfound = "Δεν βρέθηκαν εγγραφές στη βάση!"
     recordupdated = "Οι αλλαγές αποθηκεύτηκαν επιτυχώς στη βάση!"
+    invalidcredentials = "Λάθος στοιχεία εισόδου. Προσπαθήστε ξανά!"
+    error = "Πρόβλημα: "
 
 class ContactGR:
     reportissue = "Ανέφερε ένα πρόβλημα"

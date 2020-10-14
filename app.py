@@ -124,6 +124,8 @@ def login():
         header = HeaderEN()
         home = HomeEN()
     error = None
+    if request.method == 'GET':
+        return render_template('login.html', login=login)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -132,10 +134,9 @@ def login():
         user = sql.fetchone()
         if user:
             if len(user) is 1:
-                return render_template('home.html', header = header, home = home)
+                return render_template('home.html', header = header, messages = messages, home = home)
         else:
-            messages.sqlerror = 'Invalid Credentials! Please try again.'
-    return render_template('login.html', error=messages.sqlerror, login=login)
+            return render_template('login.html', login=login, messages = messages, error = messages.invalidcredentials)
 
 
 ''' ==============GN/EN Ready [100%]=============='''
@@ -247,7 +248,7 @@ def insert_users():
             return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser, manageUser = manageUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser, manageUser = manageUser)
+            return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser, manageUser = manageUser, messages = messages)
         finally:
             pass
 
@@ -286,14 +287,14 @@ def remove_criminals():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
-                return render_template('manage_criminals.html', error=message, result=result, header = header, manageCriminal = manageCriminal)
+                return render_template('manage_criminals.html', error=message, result=result, header = header, manageCriminal = manageCriminal, messages = messages)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
-            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header = header, manageCriminal = manageCriminal)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header = header, manageCriminal = manageCriminal, messages = messages)
         finally:
             pass
 
@@ -339,7 +340,7 @@ def remove_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header = header, manageUser = manageUser)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header = header, manageUser = manageUser, messages = messages)
         finally:
             pass
 
@@ -439,7 +440,7 @@ def manage_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error= messages.sqlerror, result=result, header = header, messages = messages, manageUser = manageUser)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header = header, messages = messages, manageUser = manageUser)
         finally:
             pass
 
@@ -501,8 +502,7 @@ def search_live_feed():
         else:
             modification_time = os.path.getmtime(path)
             localtime = datetime.datetime.fromtimestamp(modification_time)
-        urllib.request.urlretrieve(criminal_portrait_URL,
-                                   "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
+        urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
         query_input = criminal_id

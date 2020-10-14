@@ -26,6 +26,8 @@ class MessagesEN:
     nouserright = " exists in the database!"
     norecordfound = "No records found in the database!"
     recordupdated = "Record successfully updated in the database!"
+    invalidcredentials = "Invalid Credentials! Please try again."
+    error = "Error: "
 
 class HomeEN:
     title = "Livestream Police Surveillance Application"
