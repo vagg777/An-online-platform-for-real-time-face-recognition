@@ -57,9 +57,11 @@ def home():
     global site_language
     if site_language == "Greek":
         header = HeaderGR()
+        home = HomeGR()
     else:
         header = HeaderEN()
-    return render_template('home.html', header = header)
+        home = HomeEN()
+    return render_template('home.html', header = header, home = home)
 
 
 ''' ==============GN/EN Ready [100%]=============='''
@@ -114,9 +116,13 @@ def login():
     if site_language == "Greek":
         login = LoginGR()
         messages = MessagesGR()
+        header = HeaderGR()
+        home = HomeGR()
     else:
         login = LoginEN()
         messages = MessagesEN()
+        header = HeaderEN()
+        home = HomeEN()
     error = None
     if request.method == 'POST':
         username = request.form['username']
@@ -126,7 +132,7 @@ def login():
         user = sql.fetchone()
         if user:
             if len(user) is 1:
-                return render_template('home.html')
+                return render_template('home.html', header = header, home = home)
         else:
             messages.sqlerror = 'Invalid Credentials! Please try again.'
     return render_template('login.html', error=messages.sqlerror, login=login)

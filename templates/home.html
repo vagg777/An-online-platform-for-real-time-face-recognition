@@ -53,23 +53,24 @@
 {% endif %}
 
 <div class="container" style="color: black;">
-        <h1 align="center">Livestream Police Surveillance Application</h1><br>
-        <h2>Introduction</h2>
-        <p>Face recognition is currently being used to instantly identify when known shoplifters, organized retail criminals or people with a history of fraud enter retail establishments. Photographs of individuals can be matched against large databases of criminals so that loss prevention and retail security professionals can be instantly notified when a shopper enters a store that prevents a threat. Face recognition systems are already radically reducing crime. The technology greatly improves the power of surveillance. At the simple end, a facial recognition system connected to a network of cameras can automatically track an individual as they move in and out of coverage, even if no other information is known about them. At the more complex end, a facial recognition system fuelled by a large database of labelled data can enable police to pinpoint a person of interest across a city of networked cameras.</p>
-        <h2>System</h2>
-        <p>This website platform can be used from the police forces, either departments or local precincts to reduce crime detection through real-time face recognition of criminals. The main features of the platform include a) inserting, editing and deleting user and criminal information and b) searching for criminals based on their picture through a livestream camera feed and identify them. The platform supports two different types of users:</p>
+        <h1 align="center">{{ home.title }}</h1><br>
+        <h2>{{ home.intro }}</h2>
+        <p>{{ home.introtext }}</p>
+        <h2>{{ home.system }}</h2>
+        <p>{{ home.systemtext }}</p>
         <ul>
-          <li>Police employees in the headquarters/precincts</li>
-          <li>Police Administrators, with a higher level of access and also responsible for database maintenance</li>
+          <li>{{ home.systemtext1 }}</li>
+          <li>{{ home.systemtext2 }}</li>
         </ul>
-        <p>As for the criminal identification, it is made possible through image pattern recognition between the provided criminal’s image and snapshots of identified faces from the livestream feed. Up to 5 different camera filters are supported, for better face recognition, depending on the circumstances.</p>
-        <h2>Features</h2>
+        <p>{{ home.systemtext3 }}</p>
+        <h2>{{ home.features }}</h2>
          <ul>
-             <li>Manage (Create/Edit/Delete) Criminals from the database - See the <u><a href="manage">Manage</a></u> tab</li>
-          <li>Manage (Create/Edit/Delete) Users from the database - See the <u><a href="manage">Manage</a></u> tab</li>
-          <li>Search for criminals in livestream feeds - See the <u><a href="live_feed">Live Feed</a></u> tab</li>
-          <li>Select different filters per livestream, depending on current needs -See the <u><a href="live_feed">Live Feed</a></u> tab</li>
-          <li>Report an issue - see the <u><a href="contact">Contact</a></u> Tab</li>
+            <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.searchcriminals }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.selectfilters }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.reportissue }}<u><a href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.settingstext }}<u><a href="settings">{{ home.settings }}</a></u> {{ home.tab }}</li>
         </ul>
 </div>
 </body>
