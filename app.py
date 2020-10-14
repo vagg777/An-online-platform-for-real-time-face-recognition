@@ -228,6 +228,7 @@ def insert_users():
         header = HeaderEN()
         messages = MessagesEN()
     if request.method == 'GET':
+        print("111111111111111111111111111111111111111111")
         return render_template('insert_users.html', header = header, messages = messages, insertUser = insertUser, manageUser = manageUser)
     elif request.method == 'POST':
         try:
@@ -244,9 +245,11 @@ def insert_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
+            print("2222222222222222222222222222222222222222222222")
             return render_template('manage_users.html', success=messages.successinseruser, result=result, header = header, insertUser = insertUser, manageUser = manageUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
+            print("3333333333333333333333333333333333333333333333")
             return render_template('insert_users.html', error=messages.sqlerror,  header = header,  insertUser = insertUser, manageUser = manageUser, messages = messages)
         finally:
             pass
@@ -309,6 +312,11 @@ def remove_users():
         header = HeaderEN()
         messages = MessagesEN()
         manageUser = ManageUserEN()
+    if request.method == 'GET':
+        sql = mydb.cursor()
+        sql.execute("SELECT * FROM users")
+        result = sql.fetchall()
+        return render_template('manage_users.html', result=result, header=header, manageUser=manageUser)
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -332,7 +340,7 @@ def remove_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', error=message, result=result, header = header, manageUser = manageUser, messages = messages)  #TODO: refresh page after insert/delete user
+                return render_template('manage_users.html', error=message, result=result, header = header, manageUser = manageUser, messages = messages)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
