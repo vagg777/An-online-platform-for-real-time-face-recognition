@@ -26,7 +26,7 @@
 
 {% if error %}
     <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.invalidcredentials }}</strong> {{ error }}</p>
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.invalidcredentials }}</p>
     </div><br><br>
 {% endif %}
 {% if success %}

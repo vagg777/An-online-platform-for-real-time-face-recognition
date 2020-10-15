@@ -175,7 +175,7 @@ class ManageCriminalGR:
     updatecriminal = "Ανανέωση Κακοποιού"
 
 class ManageUserGR:
-    manage = "Επεξεργασία χρήστη"
+    manage = "Επεξεργασία χρηστών"
     username = "Όνομα χρήστη"
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
