@@ -26,6 +26,7 @@ camera_feed_1_location = "RU6 Lab"
 site_language = "Greek"
 
 
+
 def nothing(x):
     pass
 
@@ -42,6 +43,7 @@ def start():
 
 
 
+
 @app.route('/welcome')
 def welcome():
     global site_language
@@ -51,6 +53,68 @@ def welcome():
         welcome = WelcomeEN()
     return render_template('welcome.html', welcome=welcome)
 
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    global site_language
+    if site_language == "Greek":
+        login = LoginGR()
+        messages = MessagesGR()
+        header = HeaderGR()
+        home = HomeGR()
+    else:
+        login = LoginEN()
+        messages = MessagesEN()
+        header = HeaderEN()
+        home = HomeEN()
+    if request.method == 'GET':
+        return render_template('login.html', login=login)
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        sql = mydb.cursor()
+        sql.execute("SELECT username FROM users WHERE username ='" + username + "' AND password = +'" + password + "'")
+        user = sql.fetchone()
+        if user:
+            if len(user) is 1:
+                return render_template('home.html', header = header, messages = messages, home = home)
+        else:
+            return render_template('login.html', login=login, messages = messages, error = messages.invalidcredentials)
+
+
+
+
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    global site_language
+    if site_language == "Greek":
+        signup = SignupGR()
+        messages = MessagesGR()
+    else:
+        signup = SignupEN()
+        messages = MessagesEN()
+    if request.method == 'GET':
+        return render_template('signup.html', signup=signup, messages = messages)
+    elif request.method == 'POST':
+        try:
+            username = str(request.form["username"])
+            password = str(request.form["password"])
+            email = str(request.form["email"])
+            fullname = str(request.form["full_name"])
+            role = str(request.form["role"])
+            avatar = str(request.form["avatar"])
+            sql = mydb.cursor()
+            sql.execute("INSERT INTO users (username, password, email, full_name, role, avatar) VALUES(%s,%s,%s,%s,%s,%s)",(username, password, email, fullname, role, avatar))
+            mydb.commit()
+            sql.close()
+            return render_template('contact.html', success=messages.successsignup, signup=signup)
+        except MySQLdb.Error as error:
+            messages.sqlerror = str(error)
+            return render_template('contact.html', error=messages.sqlerror, signup=signup)
+        finally:
+            pass
 
 
 @app.route('/home')
@@ -109,68 +173,6 @@ def contact():
         finally:
             pass
 
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    global site_language
-    if site_language == "Greek":
-        login = LoginGR()
-        messages = MessagesGR()
-        header = HeaderGR()
-        home = HomeGR()
-    else:
-        login = LoginEN()
-        messages = MessagesEN()
-        header = HeaderEN()
-        home = HomeEN()
-    error = None
-    if request.method == 'GET':
-        return render_template('login.html', login=login)
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        sql = mydb.cursor()
-        sql.execute("SELECT username FROM users WHERE username ='" + username + "' AND password = +'" + password + "'")
-        user = sql.fetchone()
-        if user:
-            if len(user) is 1:
-                return render_template('home.html', header = header, messages = messages, home = home)
-        else:
-            return render_template('login.html', login=login, messages = messages, error = messages.invalidcredentials)
-
-
-
-@app.route("/signup", methods=['GET', 'POST'])
-def signup():
-    global site_language
-    if site_language == "Greek":
-        signup = SignupGR()
-        messages = MessagesGR()
-    else:
-        signup = SignupEN()
-        messages = MessagesEN()
-    if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages = messages)
-    elif request.method == 'POST':
-        try:
-            username = str(request.form["username"])
-            password = str(request.form["password"])
-            email = str(request.form["email"])
-            fullname = str(request.form["full_name"])
-            role = str(request.form["role"])
-            avatar = str(request.form["avatar"])
-            sql = mydb.cursor()
-            sql.execute(
-                "INSERT INTO users (username, password, email, full_name, role, avatar) VALUES(%s,%s,%s,%s,%s,%s)",
-                (username, password, email, fullname, role, avatar))
-            mydb.commit()
-            sql.close()
-            return render_template('contact.html', success=messages.successsignup, signup=signup)
-        except MySQLdb.Error as error:
-            messages.sqlerror = str(error)
-            return render_template('contact.html', error=messages.sqlerror, signup=signup)
-        finally:
-            pass
 
 
 

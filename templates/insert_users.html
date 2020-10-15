@@ -32,15 +32,6 @@
             font-weight: bold;
         }
     </style>
-    <!-- This script disables submitting new users in DB, allows no POST  -->
-    <!--<script>
-    window.onbeforeunload = function() {
-        window.setTimeout(function () {
-            window.location = 'manage_users';
-        }, 0);
-        window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
-    }
-    </script>-->
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -87,7 +78,7 @@
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword}}" name="password" id="password" value="{{request.form.password}}" required>
+                <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
             </div>
         </div>
         <div class="form-group">
@@ -99,7 +90,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="contactlabel" for="email">{{ insertUser.email}}</label>
+            <label class="contactlabel" for="email">{{ insertUser.email }}</label>
             <span class="required">*</span>
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>

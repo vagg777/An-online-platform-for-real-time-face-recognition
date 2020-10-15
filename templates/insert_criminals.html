@@ -32,14 +32,6 @@
             font-weight: bold;
         }
     </style>
-    <!--<script>
-    window.onbeforeunload = function() {
-        window.setTimeout(function () {
-            window.location = 'manage_criminals';
-        }, 0);
-        window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
-    }
-    </script>-->
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -144,7 +136,7 @@
                    </div>
             </div>
             <input type="reset" class="btn btn-danger" value="{{ insertCriminal.reset }}">
-            <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit}}">
+            <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit }}">
     </form>
 </div>
 

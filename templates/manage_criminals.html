@@ -60,6 +60,23 @@
     $('.confirmation').on('click', function () {
         return confirm('Are you sure?');
     });
+
+    document.onkeydown = fkey;
+    document.onkeypress = fkey
+    document.onkeyup = fkey;
+    var wasPressed = false;
+    function fkey(e){
+       e = e || window.event;
+       if( wasPressed ) return;
+        if (e.keyCode == 116) {
+             window.location = 'manage_criminals';
+             wasPressed = true;
+        }
+     }
+
+     if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, 'manage_criminals' );
+     }
     </script>
 </head>
 
