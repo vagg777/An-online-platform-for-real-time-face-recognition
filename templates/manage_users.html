@@ -36,6 +36,10 @@
         }
     </style>
     <script>
+    function validateDelete() {
+        confirm("Are you sure?");
+    }
+
     $(document).ready(function() {
             $('#updateModal').on('show.bs.modal', function (e) {
             var _button = $(e.relatedTarget);
@@ -57,6 +61,11 @@
         });
      });
 
+     if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, 'manage_users' );
+     }
+
+
     $('.confirmation').on('click', function () {
         return confirm('Are you sure?');
     });
@@ -74,9 +83,7 @@
         }
      }
 
-     if ( window.history.replaceState ) {
-          window.history.replaceState( null, null, 'manage_users' );
-     }
+
     </script>
 </head>
 
@@ -141,7 +148,7 @@
                                 <form action="remove_users" method="post">
                                     <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
                                     <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                    <button class="btn btn-danger confirmation">{{ manageUser.delete }}</button>
+                                    <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageUser.delete }}</button>
                                 </form>
                             </td>
                         </tr>

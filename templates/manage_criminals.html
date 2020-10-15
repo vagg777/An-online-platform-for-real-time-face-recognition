@@ -32,6 +32,10 @@
         }
     </style>
     <script>
+    function validateDelete() {
+        confirm("Are you sure?");
+    }
+
     $(document).ready(function() {
             $('#updateModal').on('show.bs.modal', function (e) {
             var _button = $(e.relatedTarget);
@@ -57,10 +61,6 @@
         });
      });
 
-    $('.confirmation').on('click', function () {
-        return confirm('Are you sure?');
-    });
-
     document.onkeydown = fkey;
     document.onkeypress = fkey
     document.onkeyup = fkey;
@@ -74,9 +74,13 @@
         }
      }
 
-     if ( window.history.replaceState ) {
+    if ( window.history.replaceState ) {
           window.history.replaceState( null, null, 'manage_criminals' );
-     }
+    }
+
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
     </script>
 </head>
 
@@ -145,7 +149,7 @@
                                 <form action="remove_criminals" method="post">
                                     <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
                                     <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                    <button class="btn btn-danger confirmation">{{ manageCriminal.delete }}</button>
+                                    <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageCriminal.delete }}</button>
                                 </form>
                             </td>
                         </tr>
