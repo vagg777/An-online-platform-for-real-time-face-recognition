@@ -33,16 +33,18 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
-
+{% if login_role == 'ADMIN' %}
     <div class="header">
           <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
           <div class="header-right">
               <a href="home">{{ header.home }}</a>
-              <a href="manage" class="active">{{ header.manage }}</a>
+              {% if login_role == 'ADMIN' %}
+                 <a href="manage" class="active">{{ header.manage }}</a>
+              {% endif %}
               <a href="live_feed">{{ header.livefeed }}</a>
               <a href="contact">{{ header.contact }}</a>
               <a href="settings">{{ header.settings }}</a>
-              <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+              <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
           </div>
     </div>
 
@@ -69,6 +71,19 @@
         <p>{{ manage.message3 }} <button class="btn btn-warning" onclick="window.location.href = 'insert_users';">{{ manage.insert }}</button></p>
         <p>{{ manage.message4 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_users';">{{ manage.edit }}</button></p>
     </div>
+{% endif %}
+{% if login_role == 'USER' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
+    </div><br><br>
+{% endif %}
+{% if login_role == '' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
+    </div><br><br>
+{% endif %}
 </body>
 
 </html>

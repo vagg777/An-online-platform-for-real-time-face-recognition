@@ -31,114 +31,129 @@
             color: red;
             font-weight: bold;
         }
+
+        .button {
+          display: block;
+          max-width: 300px;
+          margin: auto;
+        }
     </style>
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
 
-<div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
-      <div class="header-right">
-        <a href="home">{{ header.home }}</a>
-        <a href="manage" class="active">{{ header.manage }}</a>
-        <a href="live_feed">{{ header.livefeed }}</a>
-        <a href="contact">{{ header.contact }}</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-        <a href="settings">{{ header.settings }}</a>
-      </div>
-</div>
+{% if login_role == 'ADMIN' %}
+    <div class="header">
+          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <div class="header-right">
+            <a href="home">{{ header.home }}</a>
+            {% if login_role == 'ADMIN' %}
+                <a href="manage" class="active">{{ header.manage }}</a>
+            {% endif %}
+            <a href="live_feed">{{ header.livefeed }}</a>
+            <a href="contact">{{ header.contact }}</a>
+            <a href="settings">{{ header.settings }}</a>
+            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+          </div>
+    </div>
 
-<br><br><br>
+    <br><br><br>
 
-{% if error %}
-    <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
+
+    <div class="container">
+        <h2 class="contactlabel" align="center">{{ insertCriminal.insert }}</h2><br>
+        <form action="" method="post">
+                <div class="form-group">
+                    <label class="contactlabel" for="fullname">{{ insertCriminal.fullname }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="contactlabel" for="age">{{ insertCriminal.age }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="contactlabel" for="height">{{ insertCriminal.height }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                        <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
+                            <option value="Black">{{ insertCriminal.black }}</option>
+                            <option value="Brown">{{ insertCriminal.brown }}</option>
+                            <option value="Blue">{{ insertCriminal.blue }}</option>
+                            <option value="Green">{{ insertCriminal.green }}</option>
+                            <option value="Dark Brown">{{ insertCriminal.darkbrown }}</option>
+                            <option value="Amber">{{ insertCriminal.amber }}</option>
+                            <option value="Gray">{{ insertCriminal.gray }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                      <label class="contactlabel" for="biography">{{ insertCriminal.crimerecord }}</label>
+                      <span class="required">*</span>
+                      <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                         <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
+                      </div>
+                </div>
+                <div class="form-group">
+                      <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
+                       <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                         <input class="form-control" type="text" id="last_location" name="last_location" placeholder="{{ insertCriminal.enterlastlocation }}" value="{{request.form.last_location}}">
+                       </div>
+                </div>
+                <input type="reset" class="btn btn-danger" value="{{ insertCriminal.reset }}">
+                <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit }}">
+        </form>
+    </div>
+{% endif %}
+{% if login_role == 'USER' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
-{% if success %}
-    <div class="container" style="width: 35%; background-color: green;">
-        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
-    </div><br><br>
-{% endif %}
-
-<div class="container">
-    <h2 class="contactlabel" align="center">{{ insertCriminal.insert }}</h2><br>
-    <form action="" method="post">
-            <div class="form-group">
-                <label class="contactlabel" for="fullname">{{ insertCriminal.fullname }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="age">{{ insertCriminal.age }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="height">{{ insertCriminal.height }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                    <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
-                        <option value="Black">{{ insertCriminal.black }}</option>
-                        <option value="Brown">{{ insertCriminal.brown }}</option>
-                        <option value="Blue">{{ insertCriminal.blue }}</option>
-                        <option value="Green">{{ insertCriminal.green }}</option>
-                        <option value="Dark Brown">{{ insertCriminal.darkbrown }}</option>
-                        <option value="Amber">{{ insertCriminal.amber }}</option>
-                        <option value="Gray">{{ insertCriminal.gray }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                  <label class="contactlabel" for="biography">{{ insertCriminal.crimerecord }}</label>
-                  <span class="required">*</span>
-                  <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-                     <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
-                  </div>
-            </div>
-            <div class="form-group">
-                  <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
-                   <div class="input-group">
-                     <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                     <input class="form-control" type="text" id="last_location" name="last_location" placeholder="{{ insertCriminal.enterlastlocation }}" value="{{request.form.last_location}}">
-                   </div>
-            </div>
-            <input type="reset" class="btn btn-danger" value="{{ insertCriminal.reset }}">
-            <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit }}">
-    </form>
-</div>
-
 </body>
 </html>

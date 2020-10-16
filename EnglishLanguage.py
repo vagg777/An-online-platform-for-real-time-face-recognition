@@ -5,6 +5,7 @@ class HeaderEN:
     contact = "Contact"
     logout = "Log out"
     settings = "Settings"
+    login = "Log in"
 
 class WelcomeEN:
     title = "Livestream Police Surveillance Application"
@@ -28,6 +29,9 @@ class MessagesEN:
     recordupdated = "Record successfully updated in the database!"
     invalidcredentials = "Invalid Credentials! Please try again."
     error = "Error: "
+    norightsadmin = "Only system administrators can access this page!"
+    notloggedin = "You must be logged in to access the webpages.\n\n"
+    login = "Login to the platform"
 
 class HomeEN:
     title = "Livestream Police Surveillance Application"
@@ -178,7 +182,7 @@ class ManageCriminalEN:
     lastknownlocation = "Last known location"
     livefeed = "Live Feed"
     location = "Location: "
-    information = "Criminal's Information"
+    information = "Criminal's Information-"
 
 class ManageUserEN:
     manage = "Manage User"

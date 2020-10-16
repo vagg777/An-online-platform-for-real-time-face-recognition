@@ -35,91 +35,105 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
+{% if login_role == 'ADMIN' %}
+    <div class="header">
+          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <div class="header-right">
+            <a href="home">{{ header.home }}</a>
+            {% if login_role == 'ADMIN' %}
+                <a href="manage" class="active">{{ header.manage }}</a>
+            {% endif %}
+            <a href="live_feed">{{ header.livefeed }}</a>
+            <a href="contact">{{ header.contact }}</a>
+            <a href="settings">{{ header.settings }}</a>
+            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+          </div>
+    </div>
 
-<div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
-      <div class="header-right">
-        <a href="home">{{ header.home }}</a>
-        <a href="manage" class="active">{{ header.manage }}</a>
-        <a href="live_feed">{{ header.livefeed }}</a>
-        <a href="contact">{{ header.contact }}</a>
-        <a href="settings">{{ header.settings }}</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-      </div>
-</div>
+    <br><br><br>
 
-<br><br><br>
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
 
-{% if error %}
-    <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+
+    <div class="container">
+        <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2><br>
+        <form action="" method="post">
+            <div class="form-group">
+                <label class="contactlabel" for="username">{{ insertUser.username }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="contactlabel" for="password">{{ insertUser.password }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                    <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="contactlabel" for="email">{{ insertUser.email }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.email }}" name="email" id="email" value="{{request.form.email}}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="contactlabel" for="role">{{ insertUser.role }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
+                        <option value="ADMIN">{{ insertUser.admin }}</option>
+                        <option value="USER">{{ insertUser.user }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                </div>
+            </div>
+            <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}">
+            <input type="submit" class="btn btn-primary" value="{{ insertUser.submit }}">
+        </form>
+    </div>
+{% endif %}
+{% if login_role == 'USER' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
-{% if success %}
-    <div class="container" style="width: 35%; background-color: green;">
-        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+{% if login_role == '' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
-
-
-<div class="container">
-    <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2><br>
-    <form action="" method="post">
-        <div class="form-group">
-            <label class="contactlabel" for="username">{{ insertUser.username }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="password">{{ insertUser.password }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="email">{{ insertUser.email }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.email }}" name="email" id="email" value="{{request.form.email}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="role">{{ insertUser.role }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
-                    <option value="ADMIN">{{ insertUser.admin }}</option>
-                    <option value="USER">{{ insertUser.user }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
-            </div>
-        </div>
-        <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}">
-        <input type="submit" class="btn btn-primary" value="{{ insertUser.submit }}">
-    </form>
-</div>
-
 </body>
 </html>

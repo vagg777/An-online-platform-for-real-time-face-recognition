@@ -35,58 +35,65 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
+{% if login_role %}
+    <div class="header">
+          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <div class="header-right">
+            <a href="home">{{ header.home }}</a>
+            {% if login_role == 'ADMIN' %}
+                <a href="manage">{{ header.manage }}</a>
+            {% endif %}
+            <a href="live_feed">{{ header.livefeed }}</a>
+            <a href="contact" class="active">{{ header.contact }}</a>
+            <a href="settings">{{ header.settings}}</a>
+            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+          </div>
+    </div>
 
-<div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
-      <div class="header-right">
-        <a href="home">{{ header.home }}</a>
-        <a href="manage">{{ header.manage }}</a>
-        <a href="live_feed">{{ header.livefeed }}</a>
-        <a href="contact" class="active">{{ header.contact }}</a>
-        <a href="settings">{{ header.settings}}</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-      </div>
-</div>
+    <br><br><br>
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>Error:</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
 
-<br><br><br>
-
-{% if error %}
-    <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>Error:</strong> {{ error }}</p>
+    <div class="container">
+        <h2 class = "contactlabel" align="center">{{ contact.reportissue }}</h2><br>
+        <form action="" method="post">
+              <div class="form-group">
+                  <label class="contactlabel" for="fname">{{ contact.name }}</label>
+                  <span class="required">*</span>
+                  <input class="form-control" type="text" id="fname" name="firstname" placeholder="{{ contact.yourname }}" value="{{request.form.firstname}}" required>
+              </div>
+              <div class="form-group">
+                  <label class="contactlabel" for="lname">{{ contact.lastname }}</label>
+                  <span class="required">*</span>
+                  <input class="form-control" type="text" id="lname" name="lastname" placeholder="{{ contact.yourlastname }}" value="{{request.form.lastname}}" required>
+              </div>
+              <div class="form-group">
+                  <label class="contactlabel" for="email">{{ contact.email }}</label>
+                  <span class="required">*</span>
+                  <input class="form-control" type="text" id="email" name="email" placeholder="{{ contact.youremail }}" value="{{request.form.email}}" required>
+              </div>
+              <div class="form-group">
+                  <label class="contactlabel" for="subject">{{ contact.issue }}</label>
+                  <span class="required">*</span>
+                  <textarea class="form-control" id="subject" name="subject" placeholder="{{ contact.submitissue }}" value="{{request.form.subject}}" style="height:200px" required></textarea>
+              </div>
+              <input type="submit" class="btn btn-primary" value="{{ contact.submitissue }}">
+        </form>
+    </div>
+{% endif %}
+{% if login_role == '' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
-{% if success %}
-    <div class="container" style="width: 35%; background-color: green;">
-        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
-    </div><br><br>
-{% endif %}
-
-<div class="container">
-    <h2 class = "contactlabel" align="center">{{ contact.reportissue }}</h2><br>
-    <form action="" method="post">
-          <div class="form-group">
-              <label class="contactlabel" for="fname">{{ contact.name }}</label>
-              <span class="required">*</span>
-              <input class="form-control" type="text" id="fname" name="firstname" placeholder="{{ contact.yourname }}" value="{{request.form.firstname}}" required>
-          </div>
-          <div class="form-group">
-              <label class="contactlabel" for="lname">{{ contact.lastname }}</label>
-              <span class="required">*</span>
-              <input class="form-control" type="text" id="lname" name="lastname" placeholder="{{ contact.yourlastname }}" value="{{request.form.lastname}}" required>
-          </div>
-          <div class="form-group">
-              <label class="contactlabel" for="email">{{ contact.email }}</label>
-              <span class="required">*</span>
-              <input class="form-control" type="text" id="email" name="email" placeholder="{{ contact.youremail }}" value="{{request.form.email}}" required>
-          </div>
-          <div class="form-group">
-              <label class="contactlabel" for="subject">{{ contact.issue }}</label>
-              <span class="required">*</span>
-              <textarea class="form-control" id="subject" name="subject" placeholder="{{ contact.submitissue }}" value="{{request.form.subject}}" style="height:200px" required></textarea>
-          </div>
-          <input type="submit" class="btn btn-primary" value="{{ contact.submitissue }}">
-    </form>
-</div>
-
 </body>
 </html>

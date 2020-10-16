@@ -35,31 +35,39 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
+{% if login_role %}
+    <div class="header">
+          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <div class="header-right">
+            <a href="home">{{ header.home }}</a>
+            {% if login_role == 'ADMIN' %}
+                <a href="manage">{{ header.manage }}</a>
+            {% endif %}
+            <a href="live_feed">{{ header.livefeed }}</a>
+            <a href="contact">{{ header.contact }}</a>
+            <a href="settings" class="active">{{ header.settings }}</a>
+            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+          </div>
+    </div>
 
-<div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
-      <div class="header-right">
-        <a href="home">{{ header.home }}</a>
-        <a href="manage">{{ header.manage }}</a>
-        <a href="live_feed">{{ header.livefeed }}</a>
-        <a href="contact">{{ header.contact }}</a>
-        <a href="settings" class="active">{{ header.settings }}</a>
-        <a href="welcome" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-      </div>
-</div>
+    <br><br><br>
 
-<br><br><br>
-
-{% if error %}
-    <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+    {% if error %}
+        <div class="container" style="width:35%; background-color: red;">
+            <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+        </div><br><br>
+    {% endif %}
+    {% if success %}
+        <div class="container" style="width: 35%; background-color: green;">
+            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        </div><br><br>
+    {% endif %}
+{% endif %}
+{% if login_role == '' %}
+    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
-{% if success %}
-    <div class="container" style="width: 35%; background-color: green;">
-        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
-    </div><br><br>
-{% endif %}
-
 </body>
 </html>
