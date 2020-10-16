@@ -498,13 +498,23 @@ def live_feed():
 @app.route('/search_livefeed', methods=['GET', 'POST'])
 def search_live_feed():
     global site_language
+    if site_language == "Greek":
+        header = HeaderGR()
+        messages = MessagesGR()
+        manageCriminal = ManageCriminalGR()
+        manageLivefeed = ManageLivefeedGR()
+    else:
+        header = HeaderEN()
+        messages = MessagesEN()
+        manageCriminal = ManageCriminalEN()
+        manageLivefeed = ManageLivefeedEN()
     global video_filter
     global global_full_name
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
-        return render_template('manage_livefeed.html', result=result)
+        return render_template('manage_livefeed.html', result=result, header=header, manageCriminal = manageCriminal, manageLivefeed = manageLivefeed)
     elif request.method == 'POST':
         global detection_time
         global average_detection_time
@@ -538,7 +548,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location=camera_feed_1_location)
+            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal = manageCriminal)
 
 
 

@@ -175,6 +175,10 @@ class ManageCriminalEN:
     enterlastlocation = "Criminal's Last Known Location..."
     cancel = "Cancel"
     updatecriminal = "Update Criminal"
+    lastknownlocation = "Last known location"
+    livefeed = "Live Feed"
+    location = "Location: "
+    information = "Criminal's Information"
 
 class ManageUserEN:
     manage = "Manage User"
