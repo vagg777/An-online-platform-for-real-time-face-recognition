@@ -32,6 +32,7 @@ class MessagesEN:
     norightsadmin = "Only system administrators can access this page!"
     notloggedin = "You must be logged in to access the webpages.\n\n"
     login = "Login to the platform"
+    returntohome = "Return to Home Page"
 
 class HomeEN:
     title = "Livestream Police Surveillance Application"
