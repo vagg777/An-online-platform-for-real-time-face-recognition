@@ -66,9 +66,11 @@
             </ul>
             <p>{{ home.systemtext3 }}</p>
             <h2>{{ home.features }}</h2>
-             <ul>
-                <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
-                <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
+            <ul>
+                {% if login_role == 'ADMIN' %}
+                    <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
+                    <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
+                {% endif %}
                 <li>{{ home.searchcriminals }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
                 <li>{{ home.selectfilters }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
                 <li>{{ home.reportissue }}<u><a href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
