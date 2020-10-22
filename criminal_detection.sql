@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2020 at 08:58 AM
+-- Generation Time: Oct 22, 2020 at 01:40 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -82,6 +82,10 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `biography` varchar(255) DEFAULT NULL,
+  `work_phone` varchar(255) DEFAULT NULL,
+  `mobile_phone` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -90,10 +94,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `role`, `avatar`) VALUES
-(1, 'nikos25', 'nikos25', 'None', 'Nikos Athanasiou', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg'),
-(2, 'makisKar', 'makismakis', 'None', 'Makis Karapialis', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg'),
-(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'None', 'Giannis Papathanasiou', 'USER', 'https://i.ibb.co/TbT8Q3r/meLd3mN.jpg');
+INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `gender`, `biography`, `work_phone`, `mobile_phone`, `role`, `avatar`) VALUES
+(1, 'nikos25', 'nikos25', 'email@email.com', 'Nikos Athanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg'),
+(2, 'makisKar', 'makismakis', 'email@email.com', 'Makis Karapialis', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg'),
+(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'email@email.com', 'Giannis Papathanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'USER', 'https://i.ibb.co/TbT8Q3r/meLd3mN.jpg'),
+(4, 'MariaGiannak', 'MariaGiannak', 'email@email.com', 'Maria Giannakopoulou', 'Female', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg'),
+(5, 'baggM', 'baggm', 'email@email.com', 'Baggelis Antoniou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/Tbmk05B/pexels-photo-220453.jpg');
 
 --
 -- Indexes for dumped tables

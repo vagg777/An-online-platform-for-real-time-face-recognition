@@ -49,6 +49,10 @@
             var _password = _row.find(".user_password").text();
             var _email = _row.find(".user_email").text();
             var _fullname = _row.find(".user_full_name").text();
+            var _gender = _row.find(".user_gender").text();
+            var _biography = _row.find(".user_biography").text();
+            var _work_phone = _row.find(".user_work_phone").text();
+            var _mobile_phone = _row.find(".user_mobile_phone").text();
             var _role = _row.find(".user_role").text();
             var _avatar = _row.find('img').attr("src");
             $(this).find(".user_id").val(_id);
@@ -56,6 +60,10 @@
             $(this).find(".user_password").val(_password);
             $(this).find(".user_email").val(_email);
             $(this).find(".user_full_name").val(_fullname);
+            $(this).find(".user_gender").val(_gender);
+            $(this).find(".user_biography").val(_biography);
+            $(this).find(".user_work_phone").val(_work_phone);
+            $(this).find(".user_mobile_phone").val(_mobile_phone);
             $(this).find(".user_role").val(_role);
             $(this).find(".user_avatar").val(_avatar);
         });
@@ -116,7 +124,7 @@
         </div><br><br>
     {% endif %}
 
-    <div class="container">
+    <div class="container" style="width: 100%">
         <h1 align="center" style="color: black;">{{ manageUser.manage }}</h1>
         <hr style="border-color: black; background-color: black; color: black;">
             <table class="table">
@@ -128,6 +136,10 @@
                         <th scope="col">{{ manageUser.password }}</th>
                         <th scope="col">{{ manageUser.email}}</th>
                         <th scope="col">{{ manageUser.fullname }}</th>
+                        <th scope="col">{{ manageUser.gender }}</th>
+                        <th scope="col">{{ manageUser.biography }}</th>
+                        <th scope="col">{{ manageUser.work_phone }}</th>
+                        <th scope="col">{{ manageUser.mobile_phone }}</th>
                         <th scope="col">{{ manageUser.role }}</th>
                         <th scope="col">{{ manageUser.update }}</th>
                         <th scope="col">{{ manageUser.delete }}</th>
@@ -137,12 +149,16 @@
                     {% for row in result %}
                         <tr>
                             <th class="user_id" scope="row">{{row.0}}</th>
-                            <td class="user_avatar"><img src="{{row.6}}" style="width: 100px; height: 100px;"></td>
+                            <td class="user_avatar"><img src="{{row.10}}" style="width: 100px; height: 100px;"></td>
                             <td class="user_username">{{row.1}}</td>
                             <td class="user_password hidetext">{{row.2}}</td>
                             <td class="user_email">{{row.3}}</td>
                             <td class="user_full_name">{{row.4}}</td>
-                            <td class="user_role">{{row.5}}</td>
+                            <td class="user_gender">{{row.5}}</td>
+                            <td class="user_biography">{{row.6}}</td>
+                            <td class="user_work_phone">{{row.7}}</td>
+                            <td class="user_mobile_phone">{{row.8}}</td>
+                            <td class="user_role">{{row.9}}</td>
                             <td>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
                             </td>
@@ -201,11 +217,47 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
+                                    <option value="Male">{{ manageUser.male }}</option>
+                                    <option value="Female">{{ manageUser.female }}</option>
+                                    <option value="Other">{{ manageUser.other }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="contactlabel" for="email">{{ manageUser.email }}</label>
                             <span class="required">*</span>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                 <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
                             </div>
                         </div>
                         <div class="form-group">
