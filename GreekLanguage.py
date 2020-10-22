@@ -237,3 +237,9 @@ class ManageLivefeedGR:
     invertfilter = "Φίλτρο Αναστροφής"
     blurfilter = "Φίλτρο Θόλωσης"
     sepiafilter = "Φίλτρο Σέπια"
+
+class SettingsGR:
+    settings = "Ρυθμίσεις (γκρι)"
+    my_information = "Πληροφορίες για εμένα (άσπρο)"
+    my_photo = "Η φωτογραφία μου"
+    my_biography = "Το βιογραφικό μου"

@@ -210,10 +210,12 @@ def settings():
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
+        manageUser = ManageUserGR()
     else:
         header = HeaderEN()
         messages = MessagesEN()
-    return render_template('settings.html', header = header, messages = messages, login_role = login_role)
+        manageUser = ManageUserEN()
+    return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser)
 
 
 
