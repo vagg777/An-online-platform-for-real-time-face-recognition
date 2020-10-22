@@ -144,10 +144,12 @@ def home():
     if site_language == "Greek":
         header = HeaderGR()
         home = HomeGR()
+        messages = MessagesGR()
     else:
         header = HeaderEN()
         home = HomeEN()
-    return render_template('home.html', header = header, home = home, login_role = login_role)
+        messages = MessagesEN()
+    return render_template('home.html', header = header, home = home, login_role = login_role, messages = messages)
 
 
 
