@@ -73,6 +73,7 @@ class LoginGR:
     platformlogin = "Συνδεθείτε στη πλατφόρμα"
     enterusername = "Εισάγετε όνομα χρήστη"
     enterpassword = "Εισάγετε κωδικό"
+    enteremail = "Εισάγετε το mail σας"
     login = "Σύνδεση"
     rememberme = "Να με θυμάσαι"
 

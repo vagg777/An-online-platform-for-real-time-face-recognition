@@ -73,6 +73,7 @@ class LoginEN:
     platformlogin = "Login to the platform"
     enterusername = "Enter username"
     enterpassword = "Enter password"
+    enteremail = "Enter email"
     login = "Login"
     rememberme = "Remember me"
 

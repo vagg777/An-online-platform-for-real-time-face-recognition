@@ -1,4 +1,4 @@
-* {
+    * {
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ body {
 
 /* Header/logo Title */
 .header {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   background: #1a53ff;
   color: white;
@@ -92,7 +92,7 @@ body {
 
 /* Footer */
 .footer {
-  padding: 20px;
+  padding: 5px;
   text-align: center;
   background: #ddd;
 }

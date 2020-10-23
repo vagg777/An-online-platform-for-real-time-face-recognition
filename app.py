@@ -2,7 +2,6 @@ import os
 import urllib
 import cv2  # pip install opencv-python
 from flask import Flask, render_template, redirect, url_for, request, Response  # pip install Flask
-from flask_login import current_user, LoginManager  # pip install flask-login
 import MySQLdb  # pip install mysqlclient
 from time import gmtime, strftime
 import time
@@ -25,6 +24,7 @@ average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
 site_language = "Greek"
 login_role = ""
+loggedin_user_email = ""
 
 
 
@@ -63,6 +63,7 @@ def welcome():
 def login():
     global site_language
     global login_role
+    global loggedin_user_email
     if site_language == "Greek":
         login = LoginGR()
         messages = MessagesGR()
@@ -76,14 +77,15 @@ def login():
     if request.method == 'GET':
         return render_template('login.html', login=login)
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         sql = mydb.cursor()
-        sql.execute("SELECT username, role FROM users WHERE username ='" + username + "' AND password = +'" + password + "'")
+        sql.execute("SELECT username, role, email FROM users WHERE email ='" + email + "' AND password = +'" + password + "'")
         user = sql.fetchall()
         if user:
             if len(user) is 1:
                 login_role = user[0][1]
+                loggedin_user_email = user[0][2]
                 return render_template('home.html', header = header, login_role= login_role, messages = messages, home = home)
         else:
             return render_template('login.html', login=login, messages = messages, error = messages.invalidcredentials)
@@ -202,11 +204,11 @@ def contact():
 
 
 
-
 @app.route('/settings')
 def settings():
     global site_language
     global login_role
+    global loggedin_user_email
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
@@ -215,7 +217,17 @@ def settings():
         header = HeaderEN()
         messages = MessagesEN()
         manageUser = ManageUserEN()
+    if request.method == 'GET':
+        sql = mydb.cursor()
+        sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+        user = sql.fetchall()
+        if user:
+            if len(user) is 1:
+                return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user)
+        else:
+            pass #TODO: add some error control here
     return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser)
+
 
 
 

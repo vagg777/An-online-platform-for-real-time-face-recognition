@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 01:40 PM
+-- Generation Time: Oct 23, 2020 at 08:53 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -95,11 +95,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `gender`, `biography`, `work_phone`, `mobile_phone`, `role`, `avatar`) VALUES
-(1, 'nikos25', 'nikos25', 'email@email.com', 'Nikos Athanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg'),
-(2, 'makisKar', 'makismakis', 'email@email.com', 'Makis Karapialis', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg'),
-(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'email@email.com', 'Giannis Papathanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'USER', 'https://i.ibb.co/TbT8Q3r/meLd3mN.jpg'),
-(4, 'MariaGiannak', 'MariaGiannak', 'email@email.com', 'Maria Giannakopoulou', 'Female', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg'),
-(5, 'baggM', 'baggm', 'email@email.com', 'Baggelis Antoniou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/Tbmk05B/pexels-photo-220453.jpg');
+(1, 'nikos25', 'nikos25', 'email@email1.com', 'Nikos Athanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg'),
+(2, 'makisKar', 'makismakis', 'email@email2.com', 'Makis Karapialis', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg'),
+(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'email@email3.com', 'Giannis Papathanasiou', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'USER', 'https://i.ibb.co/TbT8Q3r/meLd3mN.jpg'),
+(4, 'MariaGiannak', 'MariaGiannak', 'email@email4.com', 'Maria Giannakopoulou', 'Female', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg'),
+(5, 'baggM1', 'baggm1', 'email@email5.com', 'Baggelis Antoniou1', 'Male', '1This is my bio bla bla bla bla', '6999999999', '6999999999', 'ADMIN', 'https://i.ibb.co/Tbmk05B/pexels-photo-220453.jpg');
 
 --
 -- Indexes for dumped tables
@@ -121,7 +121,8 @@ ALTER TABLE `criminals`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -143,7 +144,7 @@ ALTER TABLE `criminals`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
