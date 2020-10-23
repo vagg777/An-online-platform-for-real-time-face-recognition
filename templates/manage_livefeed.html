@@ -94,7 +94,27 @@
                             <td class="criminal_age">{{row.2}}</td>
                             <td class="criminal_height">{{row.3}}</td>
                             <td class="criminal_weight">{{row.4}}</td>
-                            <td class="criminal_eye_color">{{row.5}}</td>
+                            {% if row.5 == "Black" %}
+                                <td class="criminal_eye_color">{{manageCriminal.black}}</td>
+                            {% endif %}
+                            {% if row.5 == "Brown" %}
+                                <td class="criminal_eye_color">{{manageCriminal.brown}}</td>
+                            {% endif %}
+                            {% if row.5 == "Blue" %}
+                                <td class="criminal_eye_color">{{manageCriminal.bue}}</td>
+                            {% endif %}
+                            {% if row.5 == "Green" %}
+                                <td class="criminal_eye_color">{{manageCriminal.green}}</td>
+                            {% endif %}
+                            {% if row.5 == "Dark Brown" %}
+                                <td class="criminal_eye_color">{{manageCriminal.darkbrown}}</td>
+                            {% endif %}
+                            {% if row.5 == "Amber" %}
+                                <td class="criminal_eye_color">{{manageCriminal.amber}}</td>
+                            {% endif %}
+                            {% if row.5 == "Gray" %}
+                                <td class="criminal_eye_color">{{manageCriminal.gray}}</td>
+                            {% endif %}
                             <td class="criminal_bio">{{row.6}}</td>
                             <td class="criminal_last_location">{{row.8}}</td>
                             <td>
