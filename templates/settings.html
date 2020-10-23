@@ -394,10 +394,18 @@
                             <span class="required">*</span>
                             <div class="input-group div_role">
                                 <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
-                                    <option value="ADMIN">{{ manageUser.admin }}</option>
-                                    <option value="USER">{{ manageUser.user }}</option>
-                                </select>
+                                {% if login_role == 'ADMIN' %}
+                                    <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
+                                        <option value="ADMIN">{{ manageUser.admin }}</option>
+                                        <option value="USER">{{ manageUser.user }}</option>
+                                    </select>
+                                {% endif %}
+                                {% if login_role == 'USER' %}
+                                    <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}" disabled>
+                                        <option value="ADMIN">{{ manageUser.admin }}</option>
+                                        <option value="USER">{{ manageUser.user }}</option>
+                                    </select>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="form-group">
