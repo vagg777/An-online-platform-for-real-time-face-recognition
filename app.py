@@ -495,6 +495,28 @@ def manage_criminals():
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
         if result:
+            if site_language == "Greek":
+                result_list = list(result)
+                counter = 0
+                for row in result_list:
+                    criminal_list = list(row)
+                    if criminal_list[5] == "Black":
+                        criminal_list[5] = manageCriminal.black
+                    elif criminal_list[5] == "Brown":
+                        criminal_list[5] = manageCriminal.brown
+                    elif criminal_list[5] == "Green":
+                        criminal_list[5] = manageCriminal.green
+                    elif criminal_list[5] == "Blue":
+                        criminal_list[5] = manageCriminal.blue
+                    elif criminal_list[5] == "Dark Brown":
+                        criminal_list[5] = manageCriminal.darkbrown
+                    elif criminal_list[5] == "Amber":
+                        criminal_list[5] = manageCriminal.amber
+                    elif criminal_list[5] == "Gray":
+                        criminal_list[5] = manageCriminal.gray
+                    result_list[counter] = tuple(criminal_list)
+                    counter = counter + 1
+                result = tuple(result_list)
             return render_template('manage_criminals.html', result=result, header = header, messages = messages, manageCriminal = manageCriminal, login_role = login_role)
         else:
             return render_template('manage_criminals.html', error=messages.norecordfound, header = header, messages = messages, manageCriminal = manageCriminal, login_role = login_role)
@@ -520,6 +542,29 @@ def manage_criminals():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
+            if result:
+                if site_language == "Greek":
+                    result_list = list(result)
+                    counter = 0
+                    for row in result_list:
+                        criminal_list = list(row)
+                        if criminal_list[5] == "Black":
+                            criminal_list[5] = manageCriminal.black
+                        elif criminal_list[5] == "Brown":
+                            criminal_list[5] = manageCriminal.brown
+                        elif criminal_list[5] == "Green":
+                            criminal_list[5] = manageCriminal.green
+                        elif criminal_list[5] == "Blue":
+                            criminal_list[5] = manageCriminal.blue
+                        elif criminal_list[5] == "Dark Brown":
+                            criminal_list[5] = manageCriminal.darkbrown
+                        elif criminal_list[5] == "Amber":
+                            criminal_list[5] = manageCriminal.amber
+                        elif criminal_list[5] == "Gray":
+                            criminal_list[5] = manageCriminal.gray
+                        result_list[counter] = tuple(criminal_list)
+                        counter = counter + 1
+                    result = tuple(result_list)
             return render_template('manage_criminals.html', success=messages.recordupdated, result=result, header = header, messages = messages, manageCriminal = manageCriminal, login_role = login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)

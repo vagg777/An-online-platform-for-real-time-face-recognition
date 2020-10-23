@@ -46,7 +46,14 @@
             var _age = _row.find(".criminal_age").text();
             var _height = _row.find(".criminal_height").text();
             var _weight = _row.find(".criminal_weight").text();
-            var _eye_color = _row.find(".criminal_eye_color").text();
+            var _eye_color = _row.find("#eyecolor0").text();
+            if (_eye_color == "Μαύρο") {_eye_color= "Black"};
+            if (_eye_color == "Καφέ") {_eye_color= "Brown"};
+            if (_eye_color == "Σκούρο Καφέ") {_eye_color= "Dark Brown"};
+            if (_eye_color == "Πράσινο") {_eye_color= "Green"};
+            if (_eye_color == "Γαλάζιο") {_eye_color= "Blue"};
+            if (_eye_color == "Κεχριμπαρί") {_eye_color= "Amber"};
+            if (_eye_color == "Γκρί") {_eye_color= "Gray"};
             var _biography = _row.find(".criminal_bio").text();
             var _last_location = _row.find(".criminal_last_location").text();
             $(this).find(".criminal_id").val(_id);
@@ -55,7 +62,7 @@
             $(this).find(".criminal_age").val(_age);
             $(this).find(".criminal_height").val(_height);
             $(this).find(".criminal_weight").val(_weight);
-            $(this).find(".criminal_eye_color").val(_eye_color);
+            $("#criminal_eye_color").val(_eye_color).change();
             $(this).find(".criminal_bio").val(_biography);
             $(this).find(".criminal_last_location").val(_last_location);
         });
@@ -141,27 +148,7 @@
                             <td class="criminal_age">{{row.2}}</td>
                             <td class="criminal_height">{{row.3}}</td>
                             <td class="criminal_weight">{{row.4}}</td>
-                            {% if row.5 == "Black" %}
-                                <td class="criminal_eye_color">{{manageCriminal.black}}</td>
-                            {% endif %}
-                            {% if row.5 == "Brown" %}
-                                <td class="criminal_eye_color">{{manageCriminal.brown}}</td>
-                            {% endif %}
-                            {% if row.5 == "Blue" %}
-                                <td class="criminal_eye_color">{{manageCriminal.bue}}</td>
-                            {% endif %}
-                            {% if row.5 == "Green" %}
-                                <td class="criminal_eye_color">{{manageCriminal.green}}</td>
-                            {% endif %}
-                            {% if row.5 == "Dark Brown" %}
-                                <td class="criminal_eye_color">{{manageCriminal.darkbrown}}</td>
-                            {% endif %}
-                            {% if row.5 == "Amber" %}
-                                <td class="criminal_eye_color">{{manageCriminal.amber}}</td>
-                            {% endif %}
-                            {% if row.5 == "Gray" %}
-                                <td class="criminal_eye_color">{{manageCriminal.gray}}</td>
-                            {% endif %}
+                            <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
                             <td class="criminal_bio">{{row.6}}</td>
                             <td class="criminal_last_location">{{row.8}}</td>
                             <td>
@@ -184,7 +171,7 @@
         <form action="" method="post">
             <div class="modal-dialog">
               <div class="modal-content">
-                    <div class="modal-header black">
+                    <div class="modal-header" style="background-color: #f0ad4e; color:white;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{ manageCriminal.updatecriminal}}</h4>
                     </div>
