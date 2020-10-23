@@ -350,6 +350,25 @@ def manage_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
+            if result:
+                if site_language == "Greek":
+                    result_list = list(result)
+                    counter = 0
+                    for row in result_list:
+                        user_list = list(row)
+                        if user_list[5] == "Male":
+                            user_list[5] = manageUser.male
+                        elif user_list[5] == "Female":
+                            user_list[5] = manageUser.female
+                        elif user_list[5] == "Other":
+                            user_list[5] = manageUser.other
+                        if user_list[9] == "ADMIN":
+                            user_list[9] = manageUser.admin
+                        elif user_list[9] == "USER":
+                            user_list[9] = manageUser.user
+                        result_list[counter] = tuple(user_list)
+                        counter = counter + 1
+                    result = tuple(result_list)
             return render_template('manage_users.html', success=messages.recordupdated, result=result, header = header, messages = messages, manageUser = manageUser, login_role = login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
