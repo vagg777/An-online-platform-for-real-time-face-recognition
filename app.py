@@ -204,7 +204,7 @@ def contact():
 
 
 
-@app.route('/settings')
+@app.route('/settings', methods = ['GET', 'POST'])
 def settings():
     global site_language
     global login_role
@@ -224,11 +224,68 @@ def settings():
         sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
         user = sql.fetchall()
         if user:
-            if len(user) is 1:
-                return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user, settings = settings)
+            if site_language == "Greek":
+                user_list = list(user[0])
+                if user_list[5] == "Male":
+                    user_list[5] = manageUser.male
+                elif user_list[5] == "Female":
+                    user_list[5] = manageUser.female
+                elif user_list[5] == "Other":
+                    user_list[5] = manageUser.other
+                if user_list[9] == "ADMIN":
+                    user_list[9] = manageUser.admin
+                elif user_list[9] == "USER":
+                    user_list[9] = manageUser.user
+                user = tuple(user_list)
+            return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user, settings = settings)
         else:
             pass #TODO: add some error control here
-    return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, settings = settings)
+    elif request.method == 'POST':
+        try:
+            user_id = str(request.form["id"])
+            user_username = str(request.form["username"])
+            user_password = str(request.form["password"])
+            user_email = str(request.form["email"])
+            user_fullname = str(request.form["full_name"])
+            user_gender = str(request.form["gender"])
+            user_biography = str(request.form["biography"])
+            user_work_phone = str(request.form["work_phone"])
+            user_mobile_phone = str(request.form["mobile_phone"])
+            user_role = str(request.form["role"])
+            user_avatar = str(request.form["avatar"])
+            sql = mydb.cursor()
+            query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
+            query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
+            sql.execute(query, query_input)
+            mydb.commit()
+            sql.close()
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+            user = sql.fetchall()
+            if user:
+                if site_language == "Greek":
+                    user_list = list(user[0])
+                    if user_list[5] == "Male":
+                        user_list[5] = manageUser.male
+                    elif user_list[5] == "Female":
+                        user_list[5] = manageUser.female
+                    elif user_list[5] == "Other":
+                        user_list[5] = manageUser.other
+                    if user_list[9] == "ADMIN":
+                        user_list[9] = manageUser.admin
+                    elif user_list[9] == "USER":
+                        user_list[9] = manageUser.user
+                    user = tuple(user_list)
+                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges)
+        except MySQLdb.Error as error:
+            messages.sqlerror = str(error)
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+            user = sql.fetchall()
+            if user:
+                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
+        finally:
+            pass
 
 
 

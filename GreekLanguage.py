@@ -56,6 +56,7 @@ class MessagesGR:
     notloggedin = "Πρέπει να συνδεθείτε για να έχετε πρόσβαση στις ιστοσελίδες.\n\n"
     login = "Συνδεθείτε στη πλατφόρμα"
     returntohome = "Επιστροφή στη κεντρική σελίδα"
+    yourchanges = "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς!"
 
 class ContactGR:
     reportissue = "Ανέφερε ένα πρόβλημα"
