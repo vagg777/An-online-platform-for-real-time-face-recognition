@@ -49,22 +49,27 @@
             var _password = _row.find(".user_password").text();
             var _email = _row.find(".user_email").text();
             var _fullname = _row.find(".user_full_name").text();
-            var _gender = _row.find(".user_gender").text();
+            var _gender = _row.find("#gender0").text();
+            if (_gender == "Άντρας") {_gender = "Male"}
+            if (_gender == "Γυναίκα") {_gender = "Female"}
+            if (_gender == "Άλλο") {_gender = "Other"}
             var _biography = _row.find(".user_biography").text();
             var _work_phone = _row.find(".user_work_phone").text();
             var _mobile_phone = _row.find(".user_mobile_phone").text();
-            var _role = _row.find(".user_role").text();
+            var _role = _row.find("#role0").text();
+            if (_role == "Διαχειριστής") {_role = "ADMIN"}
+            if (_role == "Χρήστης") {_role = "USER"}
             var _avatar = _row.find('img').attr("src");
             $(this).find(".user_id").val(_id);
             $(this).find(".user_username").val(_username);
             $(this).find(".user_password").val(_password);
             $(this).find(".user_email").val(_email);
             $(this).find(".user_full_name").val(_fullname);
-            $(this).find(".user_gender").val(_gender);
+            $("#gender").val(_gender).change();
             $(this).find(".user_biography").val(_biography);
             $(this).find(".user_work_phone").val(_work_phone);
             $(this).find(".user_mobile_phone").val(_mobile_phone);
-            $(this).find(".user_role").val(_role);
+            $("#role").val(_role).change();
             $(this).find(".user_avatar").val(_avatar);
         });
      });
@@ -154,24 +159,11 @@
                             <td class="user_password hidetext">{{row.2}}</td>
                             <td class="user_email">{{row.3}}</td>
                             <td class="user_full_name">{{row.4}}</td>
-                            {% if row.5 == "Male" %}
-                                <td class="user_gender">{{manageUser.male}}</td>
-                            {% endif %}
-                            {% if row.5 == "Female" %}
-                                <td class="user_gender">{{manageUser.female}}</td>
-                            {% endif %}
-                            {% if row.5 == "Other" %}
-                                <td class="user_gender">{{manageUser.other}}</td>
-                            {% endif %}
+                            <td class="user_gender" id="gender0">{{row.5}}</td>
                             <td class="user_biography">{{row.6}}</td>
                             <td class="user_work_phone">{{row.7}}</td>
                             <td class="user_mobile_phone">{{row.8}}</td>
-                            {% if row.9 == "ADMIN" %}
-                                <td class="user_role">{{manageUser.admin}}</td>
-                            {% endif %}
-                            {% if row.9 == "USER" %}
-                                <td class="user_role">{{manageUser.user}}</td>
-                            {% endif %}
+                            <td class="user_role" id="role0">{{row.9}}</td>
                             <td>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
                             </td>
@@ -192,7 +184,7 @@
         <form action="" method="post">
             <div class="modal-dialog">
               <div class="modal-content">
-                    <div class="modal-header black">
+                    <div class="modal-header" style="background-color: #0275d8; color:white;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
                     </div>
