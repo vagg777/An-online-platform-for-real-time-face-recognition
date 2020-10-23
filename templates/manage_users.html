@@ -154,11 +154,24 @@
                             <td class="user_password hidetext">{{row.2}}</td>
                             <td class="user_email">{{row.3}}</td>
                             <td class="user_full_name">{{row.4}}</td>
-                            <td class="user_gender">{{row.5}}</td>
+                            {% if row.5 == "Male" %}
+                                <td class="user_gender">{{manageUser.male}}</td>
+                            {% endif %}
+                            {% if row.5 == "Female" %}
+                                <td class="user_gender">{{manageUser.female}}</td>
+                            {% endif %}
+                            {% if row.5 == "Other" %}
+                                <td class="user_gender">{{manageUser.other}}</td>
+                            {% endif %}
                             <td class="user_biography">{{row.6}}</td>
                             <td class="user_work_phone">{{row.7}}</td>
                             <td class="user_mobile_phone">{{row.8}}</td>
-                            <td class="user_role">{{row.9}}</td>
+                            {% if row.9 == "ADMIN" %}
+                                <td class="user_role">{{manageUser.admin}}</td>
+                            {% endif %}
+                            {% if row.9 == "USER" %}
+                                <td class="user_role">{{manageUser.user}}</td>
+                            {% endif %}
                             <td>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
                             </td>

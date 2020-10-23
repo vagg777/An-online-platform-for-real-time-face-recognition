@@ -136,7 +136,7 @@
 
 <div class="header">
   <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 7%;">
-  <h2>Livestream Police Surveillance Application</h2>
+  <h2>{{ settings.title }}</h2>
 </div>
 
 <div class="navbar">
@@ -146,14 +146,30 @@
     {% endif %}
     <a href="live_feed">{{ header.livefeed }}</a>
     <a href="contact">{{ header.contact }}</a>
-    <a href="settings" class="active">{{ header.settings }}</a>
     <a href="logout" class="btn btn-danger" style="float:right;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-    <a href="#" style="float:right;">Το προφίλ μου</a>
+    <a href="settings" class="active" style="float:right;">{{ header.settings }}</a>
 </div>
+
+
+<!--
+<br><br><br>
+
+{% if error %}
+    <div class="container" style="width:35%; background-color: red;">
+        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+    </div><br><br>
+{% endif %}
+{% if success %}
+    <div class="container" style="width: 35%; background-color: green;">
+        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+    </div><br><br>
+{% endif %}
+-->
+
 
 <div class="row">
   <div class="side">
-        <h2 style="text-align:center">MY PROFILE</h2>
+        <h2 style="text-align:center">{{ settings.myprofile }}</h2>
         <div style="text-align:center">
             <img src="{{user[0][10]}}" style="width: 60%; height: auto; align: center;">
         </div><hr>
@@ -182,7 +198,15 @@
             <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ user[0][5] }}" name="gender" id="gender" disabled>
+                {% if user[0][5] == "Male" %}
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ manageUser.male }}" name="gender" id="gender" disabled>
+                {% endif %}
+                {% if user[0][5] == "Female" %}
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ manageUser.female }}" name="gender" id="gender" disabled>
+                {% endif %}
+                {% if user[0][5] == "Other" %}
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ manageUser.other }}" name="gender" id="gender" disabled>
+                {% endif %}
             </div>
         </div>
         <div class="form-group">
@@ -210,7 +234,12 @@
             <label class="contactlabel" for="role">{{ manageUser.role }}</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ user[0][9] }}" name="role" id="role" disabled>
+                {% if user[0][9] == "ADMIN" %}
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ manageUser.admin }}" name="role" id="role" disabled>
+                {% endif %}
+                {% if user[0][9] == "USER" %}
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ manageUser.user }}" name="role" id="role" disabled>
+                {% endif %}
             </div>
         </div>
         <div class="form-group" style="text-align:center">
@@ -219,7 +248,7 @@
   </div>
 
   <div class="main">
-    <h2>MY SETTINGS</h2>
+    <h2>{{ settings.mysettings }}</h2>
     <h5>Title description, Dec 7, 2017</h5>
     <div class="fakeimg" style="height:200px;">Image</div>
     <p>Some text..</p>

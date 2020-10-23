@@ -213,20 +213,22 @@ def settings():
         header = HeaderGR()
         messages = MessagesGR()
         manageUser = ManageUserGR()
+        settings = SettingsGR()
     else:
         header = HeaderEN()
         messages = MessagesEN()
         manageUser = ManageUserEN()
+        settings = SettingsEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
         user = sql.fetchall()
         if user:
             if len(user) is 1:
-                return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user)
+                return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user, settings = settings)
         else:
             pass #TODO: add some error control here
-    return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser)
+    return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, settings = settings)
 
 
 

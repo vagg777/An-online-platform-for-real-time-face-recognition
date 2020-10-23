@@ -239,3 +239,8 @@ class ManageLivefeedEN:
     invertfilter = "Invert Filter"
     blurfilter = "Blur Filter"
     sepiafilter = "Sepia Filter"
+
+class SettingsEN:
+    title = "Livestream Police Surveillance Application"
+    mysettings = "My Settings"
+    myprofile = "My Profile"

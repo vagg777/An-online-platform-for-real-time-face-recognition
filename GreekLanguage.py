@@ -240,7 +240,6 @@ class ManageLivefeedGR:
     sepiafilter = "Φίλτρο Σέπια"
 
 class SettingsGR:
-    settings = "Ρυθμίσεις (γκρι)"
-    my_information = "Πληροφορίες για εμένα (άσπρο)"
-    my_photo = "Η φωτογραφία μου"
-    my_biography = "Το βιογραφικό μου"
+    title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"
+    mysettings = "Οι ρυθμίσεις μου"
+    myprofile = "Το προφίλ μου"
