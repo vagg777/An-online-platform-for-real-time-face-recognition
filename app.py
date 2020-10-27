@@ -1,28 +1,28 @@
 import os
 import urllib
-import cv2  # pip install opencv-python
-from flask import Flask, render_template, redirect, url_for, request, Response  # pip install Flask
-import MySQLdb  # pip install mysqlclient
+import cv2                              # pip install opencv-python
+from flask import *                     # pip install Flask
+import MySQLdb                          # pip install mysqlclient
 from time import gmtime, strftime
 import time
 import numpy as np
 import datetime
 import urllib.request
 from camera import *
-from scipy.spatial import distance
+from scipy.spatial import distance      # pip install scipy
 import math
 from EnglishLanguage import *
 from GreekLanguage import *
 
-# create the application object and connect to db
+
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-video_filter = ""
-global_full_name = ""
-detection_time = 0.0
-average_detection_time = 0.0
 camera_feed_1_location = "RU6 Lab"
 site_language = "Greek"
+detection_time = 0.0
+average_detection_time = 0.0
+video_filter = ""
+global_full_name = ""
 login_role = ""
 loggedin_user_email = ""
 
@@ -86,9 +86,9 @@ def login():
             if len(user) is 1:
                 login_role = user[0][1]
                 loggedin_user_email = user[0][2]
-                return render_template('home.html', header = header, login_role= login_role, messages = messages, home = home)
+                return render_template('home.html', header=header, login_role=login_role, messages=messages, home=home)
         else:
-            return render_template('login.html', login=login, messages = messages, error = messages.invalidcredentials)
+            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials)
 
 
 
@@ -136,7 +136,7 @@ def logout():
         header = HeaderEN()
         welcome = WelcomeEN()
     login_role = ""
-    return render_template('welcome.html', header=header, welcome = welcome, login_role=login_role)
+    return render_template('welcome.html', header=header, welcome=welcome, login_role=login_role)
 
 
 @app.route('/home')
@@ -151,7 +151,7 @@ def home():
         header = HeaderEN()
         home = HomeEN()
         messages = MessagesEN()
-    return render_template('home.html', header = header, home = home, login_role = login_role, messages = messages)
+    return render_template('home.html', header=header, home=home, login_role=login_role, messages=messages)
 
 
 
@@ -167,7 +167,7 @@ def manage():
         header = HeaderEN()
         manage = ManageEN()
         messages = MessagesGR()
-    return render_template('manage.html', header=header, manage=manage, login_role = login_role, messages = messages)
+    return render_template('manage.html', header=header, manage=manage, login_role=login_role, messages=messages)
 
 
 
@@ -184,7 +184,7 @@ def contact():
         contact = ContactEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('contact.html', header=header, contact=contact, messages = messages, login_role = login_role)
+        return render_template('contact.html', header=header, contact=contact, messages = messages, login_role=login_role)
     elif request.method == 'POST':
         try:
             firstname = request.form['firstname']
@@ -195,7 +195,7 @@ def contact():
             sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)", (firstname, lastname, email, subject))
             mydb.commit()
             sql.close()
-            return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact, login_role = login_role)
+            return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             return render_template('contact.html', error=messages.sqlerror, header=header, contact=contact, login_role = login_role)
@@ -237,7 +237,7 @@ def settings():
                 elif user_list[9] == "USER":
                     user_list[9] = manageUser.user
                 user = tuple(user_list)
-            return render_template('settings.html', header = header, messages = messages, login_role = login_role, manageUser = manageUser, user = user, settings = settings)
+            return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings)
         else:
             pass #TODO: add some error control here
     elif request.method == 'POST':
@@ -325,9 +325,9 @@ def manage_users():
                     result_list[counter] = tuple(user_list)
                     counter = counter + 1
                 result = tuple(result_list)
-            return render_template('manage_users.html', result=result, header = header, messages = messages, manageUser = manageUser, login_role = login_role)
+            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
         else:
-            return render_template('manage_users.html', error=messages.norecordfound, header = header, messages = messages, manageUser = manageUser, login_role = login_role)
+            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -369,13 +369,13 @@ def manage_users():
                         result_list[counter] = tuple(user_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_users.html', success=messages.recordupdated, result=result, header = header, messages = messages, manageUser = manageUser, login_role = login_role)
+            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header = header, messages = messages, manageUser = manageUser, login_role = login_role)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
         finally:
             pass
 

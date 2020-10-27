@@ -1,9 +1,8 @@
 import os
 import urllib
-import cv2 #pip install opencv-python
-from flask import Flask, render_template, redirect, url_for, request, Response  # pip install Flask
-from flask_login import current_user, LoginManager  # pip install flask-login
-import MySQLdb  # pip install mysqlclient
+import cv2
+from flask import *
+import MySQLdb
 from time import gmtime, strftime
 from camera import *
 import numpy as np
