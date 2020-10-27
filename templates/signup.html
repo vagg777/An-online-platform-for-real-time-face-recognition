@@ -80,6 +80,42 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="contactlabel" for="gender">{{ signup.gender }}</label>
+            <span class="required">*</span>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
+                    <option value="Male">{{ signup.male }}</option>
+                    <option value="Female">{{ signup.female }}</option>
+                    <option value="Other">{{ signup.other }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="contactlabel" for="biography">{{ signup.biography }}</label>
+            <span class="required">*</span>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="contactlabel" for="work_phone">{{ signup.work_phone }}</label>
+            <span class="required">*</span>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="contactlabel" for="mobile_phone">{{ signup.mobile_phone }}</label>
+            <span class="required">*</span>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="contactlabel" for="role">{{ signup.role }}</label>
             <span class="required">*</span>
             <div class="input-group">

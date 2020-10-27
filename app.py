@@ -93,34 +93,48 @@ def login():
 
 
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/signup", methods=['GET', 'POST'])  #TODO: There is no option in login page that directs to signup page, to be entered again!
 def signup():
     global site_language
     global login_role
+    global loggedin_user_email
     if site_language == "Greek":
         signup = SignupGR()
         messages = MessagesGR()
+        header = HeaderGR()
+        home = HomeGR()
     else:
         signup = SignupEN()
         messages = MessagesEN()
+        header = HeaderEN()
+        home = HomeEN()
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages = messages)
+        return render_template('signup.html', signup=signup, messages=messages)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
             password = str(request.form["password"])
             email = str(request.form["email"])
             fullname = str(request.form["full_name"])
+            gender = str(request.form["gender"])
+            biography = str(request.form["biography"])
+            work_phone = str(request.form["work_phone"])
+            mobile_phone = str(request.form["mobile_phone"])
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
             sql = mydb.cursor()
-            sql.execute("INSERT INTO users (username, password, email, full_name, role, avatar) VALUES(%s,%s,%s,%s,%s,%s)",(username, password, email, fullname, role, avatar))
+            sql.execute("SELECT MAX(user_id) FROM users;")
+            id = sql.fetchone()
+            user_id = id[0]
+            user_id = user_id + 1
+            sql.execute("INSERT INTO users (user_id, username, password, email, full_name, gender, biography, work_phone, mobile_phone, role, avatar) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (user_id, username, password, email, fullname, gender, biography, work_phone, mobile_phone, role, avatar))
             mydb.commit()
             sql.close()
-            return render_template('contact.html', success=messages.successsignup, signup=signup)
+            login_role = role
+            return render_template('home.html', success=messages.successsignup, signup=signup, login_role=login_role, messages=messages, header=header, home=home)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('contact.html', error=messages.sqlerror, signup=signup)
+            return render_template('signup.html', error=messages.sqlerror, signup=signup, login_role=login_role, messages=messages, header=header)
         finally:
             pass
 
@@ -192,7 +206,11 @@ def contact():
             email = request.form['email']
             subject = request.form['subject']
             sql = mydb.cursor()
-            sql.execute("INSERT INTO contact (first_name, last_name, email, subject) VALUES (%s,%s,%s,%s)", (firstname, lastname, email, subject))
+            sql.execute("SELECT MAX(contact_id) FROM contact;")
+            id = sql.fetchone()
+            contact_id = id[0]
+            contact_id = contact_id + 1
+            sql.execute("INSERT INTO contact (contact_id, first_name, last_name, email, subject) VALUES (%s,%s,%s,%s,%s)", (contact_id, firstname, lastname, email, subject))
             mydb.commit()
             sql.close()
             return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact, login_role=login_role)
@@ -410,7 +428,11 @@ def insert_users():
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
             sql = mydb.cursor()
-            sql.execute("INSERT INTO users (username, password, email, full_name, gender, biography, work_phone, mobile_phone, role, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (username, password, email, full_name, gender, biography, work_phone, mobile_phone, role, avatar))
+            sql.execute("SELECT MAX(user_id) FROM users;")
+            id = sql.fetchone()
+            user_id = id[0]
+            user_id = user_id + 1
+            sql.execute("INSERT INTO users (user_id, username, password, email, full_name, gender, biography, work_phone, mobile_phone, role, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (user_id, username, password, email, full_name, gender, biography, work_phone, mobile_phone, role, avatar))
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
@@ -604,7 +626,11 @@ def insert_criminals():
             criminal_portrait = str(request.form["portrait"])
             criminal_last_location = str(request.form["last_location"])
             sql = mydb.cursor()
-            sql.execute("INSERT INTO criminals (full_name, age, height, weight, eye_color, biography, portrait, last_location) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)", (criminal_full_name, criminal_age, criminal_height, criminal_weight, criminal_eye_color,criminal_biography, criminal_portrait, criminal_last_location))
+            sql.execute("SELECT MAX(criminal_id) FROM criminals;")
+            id = sql.fetchone()
+            criminaL_id = id[0]
+            criminal_id = criminal_id + 1
+            sql.execute("INSERT INTO criminals (criminal_id, full_name, age, height, weight, eye_color, biography, portrait, last_location) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (criminal_id, criminal_full_name, criminal_age, criminal_height, criminal_weight, criminal_eye_color,criminal_biography, criminal_portrait, criminal_last_location))
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
