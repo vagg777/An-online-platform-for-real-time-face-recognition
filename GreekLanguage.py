@@ -79,6 +79,7 @@ class LoginGR:
     enteremail = "Εισάγετε το mail σας"
     login = "Σύνδεση"
     rememberme = "Να με θυμάσαι"
+    returnhome = "Επιστροφή στην Αρχική"
 
 class SignupGR:
     title = "Στοιχεία Φόρμας"

@@ -79,6 +79,7 @@ class LoginEN:
     enteremail = "Enter email"
     login = "Login"
     rememberme = "Remember me"
+    returnhome = "Return to the Home Page"
 
 class ManageEN:
     panel = "Management Panel"
