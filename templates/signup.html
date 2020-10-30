@@ -21,6 +21,11 @@
             color: red;
             font-weight: bold;
         }
+        .container {
+            border-radius: 20px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
     </style>
 </head>
 
@@ -41,11 +46,12 @@
     </div><br><br>
 {% endif %}
 
-<div class="login-form" style="float: inside !important">
-    <div style="width: 200%;">
+<br><br><br>
+
+<div class="container">
       <form action="signup" method="post">
           <div class="form-row">
-              <h2 class="text-center">{{ signup.title }}</h2>
+              <h2 class="text-center" style="text-align: center; color: black;">{{ signup.title }}</h2>
           </div>
           <hr style="border: 1px solid black; !important">
           <div class="form-row">
@@ -155,9 +161,9 @@
           </div>
           <hr style="border: 1px solid black; !important">
           <div class="form-row">
-                <button type="submit" class="btn btn-primary" value="Sign up" style="margin: auto; background-color: #0275d8; !important">{{ signup.signup }}</button>
-                <input type="reset" class="btn btn-danger" style="margin: auto; background-color: #d9534f; !important" value="{{ signup.reset }}">
-                <button class="btn btn-warning" onclick="window.location.href = 'login';" style="margin: auto; background-color: #f0ad4e; !important">{{ signup.returnlogin }}</button>
+              <button class="btn btn-warning btn-lg" onclick="window.location.href = 'login';" style="margin: auto; background-color: #f0ad4e; !important">{{ signup.returnlogin }}</button>
+              <input type="reset" class="btn btn-danger btn-lg" style="margin: auto; background-color: #d9534f; !important" value="{{ signup.reset }}">
+              <button type="submit" class="btn btn-primary btn-lg" value="Sign up" style="margin: auto; background-color: #0275d8; !important">{{ signup.signup }}</button>
           </div>
       </form>
     </div>
