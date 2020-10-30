@@ -10,6 +10,7 @@ class HeaderEN:
 class WelcomeEN:
     title = "Livestream Police Surveillance Application"
     login = "Login to the platform"
+    signup = "Register for the platform"
 
 class MessagesEN:
     sqlerror = ""
