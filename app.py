@@ -114,6 +114,7 @@ def signup():
         try:
             username = str(request.form["username"])
             password = str(request.form["password"])
+            retype_password = str(request.form["retype_password"])
             email = str(request.form["email"])
             fullname = str(request.form["full_name"])
             gender = str(request.form["gender"])
@@ -122,6 +123,8 @@ def signup():
             mobile_phone = str(request.form["mobile_phone"])
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
+            if password != retype_password:
+                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, login_role=login_role, messages=messages, header=header)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()

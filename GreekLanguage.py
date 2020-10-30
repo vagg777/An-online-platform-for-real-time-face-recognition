@@ -57,6 +57,7 @@ class MessagesGR:
     login = "Συνδεθείτε στη πλατφόρμα"
     returntohome = "Επιστροφή στη κεντρική σελίδα"
     yourchanges = "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς!"
+    passwordnomatch = "Οι κωδικοί δεν είναι ίδιοι μεταξύ τους! Παρακαλούμε προσπαθήστε ξανά."
 
 class ContactGR:
     reportissue = "Ανέφερε ένα πρόβλημα"
@@ -84,6 +85,8 @@ class SignupGR:
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
     enterpassword = "Εισάγετε κωδικό"
+    retype_password = "Κωδικός"
+    enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
     fullname = "Ονοματεπώνυμο"
     enterfullname = "Εισάγετε ονοματεπώνυμο"
     email = "Email"

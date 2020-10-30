@@ -34,6 +34,7 @@ class MessagesEN:
     login = "Login to the platform"
     returntohome = "Return to Home Page"
     yourchanges = "Your changes were successfully saved!"
+    passwordnomatch = "The passwords entered do not match! Please try again."
 
 class HomeEN:
     title = "Livestream Police Surveillance Application"
@@ -125,6 +126,8 @@ class SignupEN:
     enterusername = "Enter username"
     password = "Password"
     enterpassword = "Enter Password"
+    retype_password = "Password"
+    enterretype_password = "Re-type your Password"
     fullname = "Full Name"
     enterfullname = "Enter Full Name"
     email = "Email"
