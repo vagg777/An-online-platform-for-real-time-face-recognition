@@ -110,7 +110,7 @@ class SignupGR:
     avatar = "Εικονίδιο"
     enterimage = "Εισάγετε URL εικόνας"
     reset = "Καθαρισμός Φόρμας"
-    returnlogin = "Επιστροφή στη Πλατφόρμα"
+    returnhome = "Επιστροφή στην Αρχική"
 
 class ManageGR:
     panel = "Διαχείριση Ιστοσελίδας"

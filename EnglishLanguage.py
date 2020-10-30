@@ -151,7 +151,7 @@ class SignupEN:
     avatar = "Avatar"
     enterimage = "Enter image URL"
     reset = "Reset form"
-    returnlogin = "Return to the Login page"
+    returnhome = "Return to the Home Page"
 
 class InsertUserEN:
     insert = "Insert new Users"
