@@ -466,6 +466,25 @@ def remove_users():
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
         result = sql.fetchall()
+        if result:
+            if site_language == "Greek":
+                result_list = list(result)
+                counter = 0
+                for row in result_list:
+                    user_list = list(row)
+                    if user_list[5] == "Male":
+                        user_list[5] = manageUser.male
+                    elif user_list[5] == "Female":
+                        user_list[5] = manageUser.female
+                    elif user_list[5] == "Other":
+                        user_list[5] = manageUser.other
+                    if user_list[9] == "ADMIN":
+                        user_list[9] = manageUser.admin
+                    elif user_list[9] == "USER":
+                        user_list[9] = manageUser.user
+                    result_list[counter] = tuple(user_list)
+                    counter = counter + 1
+                result = tuple(result_list)
         return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, login_role=login_role)
     if request.method == 'POST':
         try:
@@ -483,6 +502,25 @@ def remove_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
+                if result:
+                    if site_language == "Greek":
+                        result_list = list(result)
+                        counter = 0
+                        for row in result_list:
+                            user_list = list(row)
+                            if user_list[5] == "Male":
+                                user_list[5] = manageUser.male
+                            elif user_list[5] == "Female":
+                                user_list[5] = manageUser.female
+                            elif user_list[5] == "Other":
+                                user_list[5] = manageUser.other
+                            if user_list[9] == "ADMIN":
+                                user_list[9] = manageUser.admin
+                            elif user_list[9] == "USER":
+                                user_list[9] = manageUser.user
+                            result_list[counter] = tuple(user_list)
+                            counter = counter + 1
+                        result = tuple(result_list)
                 return render_template('manage_users.html', success=message, result=result, header=header, manageUser=manageUser, login_role=login_role)
             else:
                 message = messages.nouserleft + user_username + messages.nouserright
@@ -490,6 +528,25 @@ def remove_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
+                if result:
+                    if site_language == "Greek":
+                        result_list = list(result)
+                        counter = 0
+                        for row in result_list:
+                            user_list = list(row)
+                            if user_list[5] == "Male":
+                                user_list[5] = manageUser.male
+                            elif user_list[5] == "Female":
+                                user_list[5] = manageUser.female
+                            elif user_list[5] == "Other":
+                                user_list[5] = manageUser.other
+                            if user_list[9] == "ADMIN":
+                                user_list[9] = manageUser.admin
+                            elif user_list[9] == "USER":
+                                user_list[9] = manageUser.user
+                            result_list[counter] = tuple(user_list)
+                            counter = counter + 1
+                        result = tuple(result_list)
                 return render_template('manage_users.html', error=message, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -497,6 +554,25 @@ def remove_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
+            if result:
+                if site_language == "Greek":
+                    result_list = list(result)
+                    counter = 0
+                    for row in result_list:
+                        user_list = list(row)
+                        if user_list[5] == "Male":
+                            user_list[5] = manageUser.male
+                        elif user_list[5] == "Female":
+                            user_list[5] = manageUser.female
+                        elif user_list[5] == "Other":
+                            user_list[5] = manageUser.other
+                        if user_list[9] == "ADMIN":
+                            user_list[9] = manageUser.admin
+                        elif user_list[9] == "USER":
+                            user_list[9] = manageUser.user
+                        result_list[counter] = tuple(user_list)
+                        counter = counter + 1
+                    result = tuple(result_list)
             return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
         finally:
             pass
@@ -747,6 +823,35 @@ def remove_criminals():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
+                if result:
+                    if site_language == "Greek":
+                        result_list = list(result)
+                        counter = 0
+                        for row in result_list:
+                            criminal_list = list(row)
+                            if criminal_list[5] == "Black":
+                                criminal_list[5] = manageCriminal.black
+                            elif criminal_list[5] == "Brown":
+                                criminal_list[5] = manageCriminal.brown
+                            elif criminal_list[5] == "Green":
+                                criminal_list[5] = manageCriminal.green
+                            elif criminal_list[5] == "Blue":
+                                criminal_list[5] = manageCriminal.blue
+                            elif criminal_list[5] == "Dark Brown":
+                                criminal_list[5] = manageCriminal.darkbrown
+                            elif criminal_list[5] == "Amber":
+                                criminal_list[5] = manageCriminal.amber
+                            elif criminal_list[5] == "Gray":
+                                criminal_list[5] = manageCriminal.gray
+                            if criminal_list[9] == "Male":
+                                criminal_list[9] = manageCriminal.male
+                            if criminal_list[9] == "Female":
+                                criminal_list[9] = manageCriminal.female
+                            if criminal_list[9] == "Other":
+                                criminal_list[9] = manageCriminal.other
+                            result_list[counter] = tuple(criminal_list)
+                            counter = counter + 1
+                        result = tuple(result_list)
                 return render_template('manage_criminals.html', success=message, result=result, header=header, manageCriminal=manageCriminal, login_role=login_role)
             else:
                 message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
@@ -754,6 +859,35 @@ def remove_criminals():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM criminals")
                 result = sql.fetchall()
+                if result:
+                    if site_language == "Greek":
+                        result_list = list(result)
+                        counter = 0
+                        for row in result_list:
+                            criminal_list = list(row)
+                            if criminal_list[5] == "Black":
+                                criminal_list[5] = manageCriminal.black
+                            elif criminal_list[5] == "Brown":
+                                criminal_list[5] = manageCriminal.brown
+                            elif criminal_list[5] == "Green":
+                                criminal_list[5] = manageCriminal.green
+                            elif criminal_list[5] == "Blue":
+                                criminal_list[5] = manageCriminal.blue
+                            elif criminal_list[5] == "Dark Brown":
+                                criminal_list[5] = manageCriminal.darkbrown
+                            elif criminal_list[5] == "Amber":
+                                criminal_list[5] = manageCriminal.amber
+                            elif criminal_list[5] == "Gray":
+                                criminal_list[5] = manageCriminal.gray
+                            if criminal_list[9] == "Male":
+                                criminal_list[9] = manageCriminal.male
+                            if criminal_list[9] == "Female":
+                                criminal_list[9] = manageCriminal.female
+                            if criminal_list[9] == "Other":
+                                criminal_list[9] = manageCriminal.other
+                            result_list[counter] = tuple(criminal_list)
+                            counter = counter + 1
+                        result = tuple(result_list)
                 return render_template('manage_criminals.html', error=message, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -761,6 +895,35 @@ def remove_criminals():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals")
             result = sql.fetchall()
+            if result:
+                if site_language == "Greek":
+                    result_list = list(result)
+                    counter = 0
+                    for row in result_list:
+                        criminal_list = list(row)
+                        if criminal_list[5] == "Black":
+                            criminal_list[5] = manageCriminal.black
+                        elif criminal_list[5] == "Brown":
+                            criminal_list[5] = manageCriminal.brown
+                        elif criminal_list[5] == "Green":
+                            criminal_list[5] = manageCriminal.green
+                        elif criminal_list[5] == "Blue":
+                            criminal_list[5] = manageCriminal.blue
+                        elif criminal_list[5] == "Dark Brown":
+                            criminal_list[5] = manageCriminal.darkbrown
+                        elif criminal_list[5] == "Amber":
+                            criminal_list[5] = manageCriminal.amber
+                        elif criminal_list[5] == "Gray":
+                            criminal_list[5] = manageCriminal.gray
+                        if criminal_list[9] == "Male":
+                            criminal_list[9] = manageCriminal.male
+                        if criminal_list[9] == "Female":
+                            criminal_list[9] = manageCriminal.female
+                        if criminal_list[9] == "Other":
+                            criminal_list[9] = manageCriminal.other
+                        result_list[counter] = tuple(criminal_list)
+                        counter = counter + 1
+                    result = tuple(result_list)
             return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
         finally:
             pass
