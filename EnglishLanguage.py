@@ -113,6 +113,11 @@ class InsertCriminalsEN:
     enterlastlocation = "Criminal's Last Known Location..."
     reset = "Reset Form"
     submit = "Insert Criminal"
+    gender = "Gender"
+    entergender = "Choose Gender"
+    male = "Male"
+    female = "Female"
+    other = "Other"
 
 class SignupEN:
     signup = "Sign Up"
@@ -202,6 +207,11 @@ class ManageCriminalEN:
     crimerecord = "Crime Record"
     entercrimerecord = "Criminal's Crime History..."
     enterlastlocation = "Criminal's Last Known Location..."
+    gender = "Gender"
+    entergender = "Choose Gender"
+    male = "Male"
+    female = "Female"
+    other = "Other"
     cancel = "Cancel"
     updatecriminal = "Update Criminal"
     lastknownlocation = "Last known location"

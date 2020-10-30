@@ -44,6 +44,10 @@
             var _portrait = _row.find('img').attr("src");
             var _full_name = _row.find(".criminal_full_name").text();
             var _age = _row.find(".criminal_age").text();
+            var _gender = _row.find("#gender0").text();
+            if (_gender == "Άντρας") {_gender = "Male"};
+            if (_gender == "Γυναίκα") {_gender = "Female"};
+            if (_gender == "Άλλο") {_gender = "Other"};
             var _height = _row.find(".criminal_height").text();
             var _weight = _row.find(".criminal_weight").text();
             var _eye_color = _row.find("#eyecolor0").text();
@@ -63,6 +67,7 @@
             $(this).find(".criminal_height").val(_height);
             $(this).find(".criminal_weight").val(_weight);
             $("#criminal_eye_color").val(_eye_color).change();
+            $("#criminal_gender").val(_gender).change();
             $(this).find(".criminal_bio").val(_biography);
             $(this).find(".criminal_last_location").val(_last_location);
         });
@@ -130,6 +135,7 @@
                         <th scope="col">{{ manageCriminal.portrait }}</th>
                         <th scope="col">{{ manageCriminal.fullname }}</th>
                         <th scope="col">{{ manageCriminal.age }}</th>
+                        <th scope="col">{{ manageCriminal.gender }}</th>
                         <th scope="col">{{ manageCriminal.weight }}</th>
                         <th scope="col">{{ manageCriminal.height }}</th>
                         <th scope="col">{{ manageCriminal.eyecolor }}</th>
@@ -146,6 +152,7 @@
                             <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
                             <td class="criminal_full_name">{{row.1}}</td>
                             <td class="criminal_age">{{row.2}}</td>
+                            <td class="criminal_gender" id="gender0">{{row.9}}</td>
                             <td class="criminal_height">{{row.3}}</td>
                             <td class="criminal_weight">{{row.4}}</td>
                             <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
@@ -185,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="contactlabel" for="criminal_full_name">{{ manageCriminal.fullname}}</label>
+                                <label class="contactlabel" for="criminal_full_name">{{ manageCriminal.fullname }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -206,6 +213,18 @@
                                 <div class="input-group">
                                      <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                      <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="contactlabel" for="criminal_gender">{{ manageCriminal.gender }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                    <select required class="form-control criminal_gender" name="criminal_gender" id="criminal_gender" value="{{request.form.gender}}">
+                                        <option value="Male">{{ manageCriminal.male }}</option>
+                                        <option value="Female">{{ manageCriminal.female }}</option>
+                                        <option value="Other">{{ manageCriminal.other }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

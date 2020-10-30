@@ -58,17 +58,18 @@ CREATE TABLE `criminals` (
   `eye_color` varchar(255) DEFAULT NULL,
   `biography` varchar(255) DEFAULT NULL,
   `portrait` varchar(255) DEFAULT NULL,
-  `last_location` varchar(255) DEFAULT NULL
+  `last_location` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `criminals`
 --
 
-INSERT INTO `criminals` (`criminal_id`, `full_name`, `age`, `height`, `weight`, `eye_color`, `biography`, `portrait`, `last_location`) VALUES
-(1, 'Jonathan Walters', 55, 1.78, 65, 'Black', 'We have literally no idea who this dude is', 'https://patch.com/img/cdn/users/546525/2013/01/raw/2f182fdc7ad6dbd044e7c2fb8cafca18.jpg', 'RU6 Lab'),
-(2, 'Stamatis Goumas', 24, 1.81, 96, 'Brown', 'This one is the shame of HCI Lab', 'https://i.ibb.co/3MjR6Wc/qLM5mEG.png', 'RU6 Lab'),
-(3, 'Baggelis Michos', 24, 1.76, 100, 'Brown', 'This dude is 5G \"massonos\" and works somewhere where no human being should ever work.', 'https://i.ibb.co/0cWDRb7/gYyN6Sd.png', 'RU6 Lab');
+INSERT INTO `criminals` (`criminal_id`, `full_name`, `age`, `height`, `weight`, `eye_color`, `biography`, `portrait`, `last_location`, `gender`) VALUES
+(1, 'Jonathan Walters', 25, 1.78, 65, 'Black', 'We have literally no idea who this dude is', 'https://patch.com/img/cdn/users/546525/2013/01/raw/2f182fdc7ad6dbd044e7c2fb8cafca18.jpg', 'RU6 Lab', 'Male'),
+(2, 'Stamatis Goumas', 32, 1.81, 96, 'Brown', 'This one is the shame of HCI Lab', 'https://i.ibb.co/3MjR6Wc/qLM5mEG.png', 'RU6 Lab', 'Male'),
+(3, 'Baggelis Michos', 24, 1.76, 100, 'Brown', 'This dude is 5G \"massonos\" and works somewhere where no human being should ever work.', 'https://i.ibb.co/0cWDRb7/gYyN6Sd.png', 'RU6 Lab', 'Male');
 
 -- --------------------------------------------------------
 

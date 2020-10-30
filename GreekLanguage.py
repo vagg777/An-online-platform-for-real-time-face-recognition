@@ -142,6 +142,11 @@ class InsertCriminalsGR:
     enterlastlocation = "Τελευταία γνωστή θέση κακοποιού..."
     reset = "Εκκαθάριση Φόρμας"
     submit = "Εισαγωγή κακοποιού"
+    gender = "Φύλο"
+    entergender = "Διαλέξτε Φύλο"
+    male = "Άντρας"
+    female = "Γυναίκα"
+    other = "Άλλο"
 
 class InsertUserGR:
     insert = "Εισαγωγή χρηστών"
@@ -206,6 +211,11 @@ class ManageCriminalGR:
     livefeed = "Ζωντανή Σύνδεση"
     location = "Θέση: "
     information = "Στοιχεία κακοποιού"
+    gender = "Φύλο"
+    entergender = "Διαλέξτε Φύλο"
+    male = "Άντρας"
+    female = "Γυναίκα"
+    other = "Άλλο"
 
 class ManageUserGR:
     manage = "Επεξεργασία χρηστών"
