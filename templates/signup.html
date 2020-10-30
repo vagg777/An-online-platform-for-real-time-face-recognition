@@ -41,113 +41,126 @@
     </div><br><br>
 {% endif %}
 
-<div class="login-form">
-    <form action="signup" method="post">
-		<div class="avatar" style="background-color: #0275d8; !important">
-			<img src="/static/images/avatar.png" alt="Avatar">
-		</div>
-        <h2 class="text-center">{{ signup.signup }}</h2>
-        <div class="form-group">
-            <label class="contactlabel" for="username">{{ signup.username }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-        	    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+<div class="login-form" style="float: inside !important">
+    <div style="width: 200%;">
+      <form action="signup" method="post">
+          <div class="form-row">
+              <h2 class="text-center">{{ signup.title }}</h2>
+          </div>
+          <hr style="border: 1px solid black; !important">
+          <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="username">{{ signup.username }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="email">{{ signup.email }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                    </div>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                    <label class="contactlabel" for="password">{{ signup.password }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                    </div>
+              </div>
+              <div class="form-group col-md-6">
+                    <label class="contactlabel" for="retype_password">{{ signup.retype_password }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                    </div>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="contactlabel" for="full_name">{{ signup.fullname }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="password">{{ signup.password }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+            <div class="form-group col-md-6">
+                <label class="contactlabel" for="gender">{{ signup.gender }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                    <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
+                        <option value="Male">{{ signup.male }}</option>
+                        <option value="Female">{{ signup.female }}</option>
+                        <option value="Other">{{ signup.other }}</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="retype_password">{{ signup.retype_password }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+          </div>
+          <div class = "form-row">
+              <div class="form-group col-md-6">
+                <label class="contactlabel" for="work_phone">{{ signup.work_phone }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="full_name">{{ signup.fullname }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+            <div class="form-group col-md-6">
+                <label class="contactlabel" for="mobile_phone">{{ signup.mobile_phone }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="email">{{ signup.email }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+          </div>
+          <div class="form-group">
+                <label class="contactlabel" for="biography">{{ signup.biography }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="contactlabel" for="role">{{ signup.role }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
+                        <option value="ADMIN">{{ signup.admin }}</option>
+                        <option value="USER">{{ signup.user }}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="contactlabel" for="avatar">{{ signup.avatar }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="gender">{{ signup.gender }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
-                    <option value="Male">{{ signup.male }}</option>
-                    <option value="Female">{{ signup.female }}</option>
-                    <option value="Other">{{ signup.other }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="biography">{{ signup.biography }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="work_phone">{{ signup.work_phone }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="mobile_phone">{{ signup.mobile_phone }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="role">{{ signup.role }}</label>
-            <span class="required">*</span>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
-                    <option value="ADMIN">{{ signup.admin }}</option>
-                    <option value="USER">{{ signup.user }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="avatar">{{ signup.avatar }}</label>
-            <span class="required">*</span>
-        	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Sign up" style="background-color: #0275d8; !important">{{ signup.signup }}</button>
-            <input type="reset" class="btn btn-danger btn-lg btn-block" style="background-color: #d9534f; !important" value="{{ signup.reset }}">
-            <button class="btn btn-warning btn-lg btn-block" onclick="window.location.href = 'login';" style="background-color: #f0ad4e; !important">{{ signup.returnlogin }}</button>
-        </div>
-    </form>
+          </div>
+          <hr style="border: 1px solid black; !important">
+          <div class="form-row">
+                <button type="submit" class="btn btn-primary" value="Sign up" style="margin: auto; background-color: #0275d8; !important">{{ signup.signup }}</button>
+                <input type="reset" class="btn btn-danger" style="margin: auto; background-color: #d9534f; !important" value="{{ signup.reset }}">
+                <button class="btn btn-warning" onclick="window.location.href = 'login';" style="margin: auto; background-color: #f0ad4e; !important">{{ signup.returnlogin }}</button>
+          </div>
+      </form>
+    </div>
 </div>
 
 </body>

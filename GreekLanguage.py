@@ -80,12 +80,13 @@ class LoginGR:
     rememberme = "Να με θυμάσαι"
 
 class SignupGR:
-    signup = "Εγγραφή"
+    title = "Στοιχεία Φόρμας"
+    signup = "Ολοκλήρωση Εγγραφής"
     username = "Όνομα χρήστη"
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
     enterpassword = "Εισάγετε κωδικό"
-    retype_password = "Κωδικός"
+    retype_password = "Κωδικός (επαλήθευση)"
     enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
     fullname = "Ονοματεπώνυμο"
     enterfullname = "Εισάγετε ονοματεπώνυμο"

@@ -121,12 +121,13 @@ class InsertCriminalsEN:
     other = "Other"
 
 class SignupEN:
-    signup = "Sign Up"
+    title = "Form Details"
+    signup = "Submit Form"
     username = "Username"
     enterusername = "Enter username"
     password = "Password"
     enterpassword = "Enter Password"
-    retype_password = "Password"
+    retype_password = "Password (validation)"
     enterretype_password = "Re-type your Password"
     fullname = "Full Name"
     enterfullname = "Enter Full Name"
