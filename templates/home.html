@@ -44,13 +44,13 @@
     <br><br><br>
 
     {% if error %}
-        <div class="container" style="width:35%; background-color: red;">
-            <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+        <div id="errorcontainer" class="container">
+            <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
     {% if success %}
-        <div class="container" style="width: 35%; background-color: green;">
-            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        <div id="successcontainer" class="container">
+            <p class="success"><strong> {{ success }}</strong></p>
         </div><br><br>
     {% endif %}
 
@@ -80,8 +80,8 @@
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+    <div class="errorcontainer" style="margin-top: 20%">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
