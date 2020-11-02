@@ -63,12 +63,13 @@
 
     <div class="container">
         <h2 class="contactlabel" align="center">{{ insertCriminal.insert }}</h2><br>
+        <hr>
         <form action="" method="post">
                 <div class="form-group">
                     <label class="contactlabel" for="fullname">{{ insertCriminal.fullname }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
                     <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                     <label class="contactlabel" for="age">{{ insertCriminal.age }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
                     <label class="contactlabel" for="gender">{{ manageCriminal.gender }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                        <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                         <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
                             <option value="Male">{{ manageCriminal.male }}</option>
                             <option value="Female">{{ manageCriminal.female }}</option>
@@ -104,7 +105,7 @@
                     <label class="contactlabel" for="height">{{ insertCriminal.height }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
                     <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
                     </div>
                 </div>
@@ -120,7 +121,7 @@
                     <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
                     <span class="required">*</span>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                        <span class="input-group-addon success"><i class="fa fa-eye" aria-hidden="true"></i></span>
                         <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
                             <option value="Black">{{ insertCriminal.black }}</option>
                             <option value="Brown">{{ insertCriminal.brown }}</option>
@@ -136,19 +137,19 @@
                       <label class="contactlabel" for="biography">{{ insertCriminal.crimerecord }}</label>
                       <span class="required">*</span>
                       <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
                          <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
                       </div>
                 </div>
                 <div class="form-group">
                       <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
                        <div class="input-group">
-                         <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                         <span class="input-group-addon success"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                          <input class="form-control" type="text" id="last_location" name="last_location" placeholder="{{ insertCriminal.enterlastlocation }}" value="{{request.form.last_location}}">
                        </div>
                 </div>
                 <input type="reset" class="btn btn-danger" value="{{ insertCriminal.reset }}">
-                <input type="submit" class="btn btn-primary" value="{{ insertCriminal.submit }}">
+                <input type="submit" class="btn btn-success" value="{{ insertCriminal.submit }}">
         </form>
     </div>
 {% endif %}

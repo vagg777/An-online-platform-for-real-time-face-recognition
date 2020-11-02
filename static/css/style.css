@@ -192,6 +192,28 @@ hr {
     margin:auto;
 }
 
+#errorcontainer{
+    width:35%;
+    background-color: red;
+}
+
+#successcontainer {
+    width: 35%;
+    background-color: green;
+}
+
+.error {
+    color: white;
+    text-align: center;
+    align: center;
+}
+
+.success {
+    color: white;
+    text-align:center;
+    align:center;
+}
+
 #welcomecontainer{
     border-radius: 20px;
     background-color: #f2f2f2;
