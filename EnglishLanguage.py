@@ -11,6 +11,8 @@ class WelcomeEN:
     title = "Livestream Police Surveillance Application"
     login = "Login to the platform"
     signup = "Register for the platform"
+    systemtext = "This website platform can be used from the police forces, either departments or local precincts to reduce crime detection through real-time face recognition of criminals. The main features of the platform include a) inserting, editing and deleting user and criminal information and b) searching for criminals based on their picture through a livestream camera feed and identify them."
+
 
 class MessagesEN:
     sqlerror = ""
@@ -149,7 +151,7 @@ class SignupEN:
     role = "Role"
     admin = "Admin"
     user = "User"
-    avatar = "Avatar"
+    avatar = "Profile Image"
     enterimage = "Enter image URL"
     reset = "Reset form"
     returnhome = "Return to the Home Page"

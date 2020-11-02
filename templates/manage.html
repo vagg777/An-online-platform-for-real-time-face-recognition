@@ -72,12 +72,14 @@
         <p>{{ manage.message4 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_users';">{{ manage.edit }}</button></p>
     </div>
 {% endif %}
+
 {% if login_role == 'USER' %}
     <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
         <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome }}</button>
     </div><br><br>
 {% endif %}
+
 {% if login_role == '' %}
     <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
         <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
@@ -85,6 +87,10 @@
     </div><br><br>
 {% endif %}
 </body>
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
 
 </html>
 

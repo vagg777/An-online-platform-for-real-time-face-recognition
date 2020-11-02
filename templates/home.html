@@ -78,12 +78,18 @@
             </ul>
     </div>
 {% endif %}
+
 {% if login_role == '' %}
     <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
         <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+
 </body>
 
 </html>

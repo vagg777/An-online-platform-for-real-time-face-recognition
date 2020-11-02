@@ -138,6 +138,51 @@ body {
     font-weight: bold;
 }
 
+.black {
+    color: black;
+ }
+
+.hidetext {
+    -webkit-text-security: disc;
+}
+
+.footer {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 4%;
+    text-align: center;
+}
+
+#welcomecontainer{
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-top: 8%;
+    color: black;
+    text-align: center;
+}
+.welcomefooter {
+    margin-top: 15%;
+    background-color: #f1f1f1;
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+p {
+     text-align: justify;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+#policeimage {
+    width: 3%;
+}
+
 @media screen and (max-width: 500px) {
     .header a {
     float: none;
