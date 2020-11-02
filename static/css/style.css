@@ -150,13 +150,18 @@ body {
 }
 
 .header a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: rgb(66,139,202);
+    color: white;
 }
 
 .header a.active {
     background-color: rgb(50, 118, 177);
     color: white;
+}
+
+a#logouttab:hover {
+    background-color: rgb(235,93,93);
+    color: black;
 }
 
 .header-right {
@@ -244,6 +249,13 @@ hr {
     text-align: center;
 }
 
+#managelivefeedcontainer {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 70%;
+}
+
 .footer {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -263,6 +275,14 @@ hr {
 
 .loginfooter {
     margin-top: 5%;
+    background-color: #f1f1f1;
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.managefooter {
+    margin-top: 11%;
     background-color: #f1f1f1;
     padding: 5px;
     color: black;

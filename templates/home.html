@@ -37,7 +37,7 @@
             <a href="live_feed">{{ header.livefeed }}</a>
             <a href="contact">{{ header.contact }}</a>
             <a href="settings">{{ header.settings }}</a>
-            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+            <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
           </div>
     </div>
 
@@ -55,27 +55,28 @@
     {% endif %}
 
     <div class="container" style="color: black;">
-            <h1 align="center">{{ home.title }}</h1><br>
-            <h2>{{ home.intro }}</h2>
-            <p>{{ home.introtext }}</p>
-            <h2>{{ home.system }}</h2>
-            <p>{{ home.systemtext }}</p>
-            <ul>
-              <li>{{ home.systemtext1 }}</li>
-              <li>{{ home.systemtext2 }}</li>
-            </ul>
-            <p>{{ home.systemtext3 }}</p>
-            <h2>{{ home.features }}</h2>
-            <ul>
-                {% if login_role == 'ADMIN' %}
-                    <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
-                    <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
-                {% endif %}
-                <li>{{ home.searchcriminals }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
-                <li>{{ home.selectfilters }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
-                <li>{{ home.reportissue }}<u><a href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
-                <li>{{ home.settingstext }}<u><a href="settings">{{ home.settings }}</a></u> {{ home.tab }}</li>
-            </ul>
+        <h1 align="center">{{ home.title }}</h1>
+        <hr>
+        <h2>{{ home.intro }}</h2>
+        <p>{{ home.introtext }}</p>
+        <h2>{{ home.system }}</h2>
+        <p>{{ home.systemtext }}</p>
+        <ul>
+          <li>{{ home.systemtext1 }}</li>
+          <li>{{ home.systemtext2 }}</li>
+        </ul>
+        <p>{{ home.systemtext3 }}</p>
+        <h2>{{ home.features }}</h2>
+        <ul>
+            {% if login_role == 'ADMIN' %}
+                <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
+                <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
+            {% endif %}
+            <li>{{ home.searchcriminals }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.selectfilters }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.reportissue }}<u><a href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.settingstext }}<u><a href="settings">{{ home.settings }}</a></u> {{ home.tab }}</li>
+        </ul>
     </div>
 {% endif %}
 

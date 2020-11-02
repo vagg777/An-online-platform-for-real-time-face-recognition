@@ -16,10 +16,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-        .container {
+        #managelivefeedcontainer {
             border-radius: 20px;
             background-color: #f2f2f2;
             padding: 20px;
+            width: 70%;
+        }
+
+        .header a:hover {
+            background-color: rgb(66,139,202);
+            color: white;
+        }
+
+        a#logouttab:hover {
+            background-color: rgb(235,93,93);
+            color: black;
         }
     </style>
 </head>
@@ -36,7 +47,7 @@
         <a href="live_feed" class="active">{{ header.livefeed }}</a>
         <a href="contact">{{ header.contact }}</a>
         <a href="settings">{{ header.settings }}</a>
-        <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+        <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
       </div>
     </div>
 
@@ -53,9 +64,9 @@
         </div><br><br>
     {% endif %}
 
-    <div class="container">
-        <h1 align="center" style="color: black;">{{ manageLivefeed.select}}</h1>
-        <hr style="border-color: black; background-color: black; color: black;">
+    <div class="container" id="managelivefeedcontainer">
+        <h1 align="center">{{ manageLivefeed.select}}</h1>
+        <hr>
             <table class="table">
                 <thead class="thead-dark">
                     <tr class="black">
@@ -63,6 +74,7 @@
                         <th scope="col">{{ manageCriminal.portrait }}</th>
                         <th scope="col">{{ manageCriminal.fullname }}</th>
                         <th scope="col">{{ manageCriminal.age }}</th>
+                        <th scope="col">{{ manageCriminal.gender }}</th>
                         <th scope="col">{{ manageCriminal.weight }}</th>
                         <th scope="col">{{ manageCriminal.height }}</th>
                         <th scope="col">{{ manageCriminal.eyecolor }}</th>
@@ -83,6 +95,15 @@
                             <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
                             <td class="criminal_full_name">{{row.1}}</td>
                             <td class="criminal_age">{{row.2}}</td>
+                            {% if row.9 == "Male" %}
+                                <td class="criminal_gender">{{manageCriminal.male}}</td>
+                            {% endif %}
+                            {% if row.9 == "Female" %}
+                                <td class="criminal_gender">{{manageCriminal.female}}</td>
+                            {% endif %}
+                            {% if row.9 == "Other" %}
+                                <td class="criminal_gender">{{manageCriminal.other}}</td>
+                            {% endif %}
                             <td class="criminal_height">{{row.3}}</td>
                             <td class="criminal_weight">{{row.4}}</td>
                             {% if row.5 == "Black" %}
