@@ -17,6 +17,7 @@ body {
     width: 350px;
     margin: 0 auto;
     padding: 100px 0 30px;
+    margin-top: 4%;
 }
 .login-form form {
     color: #7a7a7a;
@@ -129,6 +130,18 @@ body {
     float: right;
 }
 
+p {
+     text-align: justify;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+#policeimage {
+    width: 3%;
+}
+
 .contactlabel {
     color: black;
 }
@@ -146,13 +159,13 @@ body {
     -webkit-text-security: disc;
 }
 
-.footer {
-    overflow: hidden;
-    background-color: #f1f1f1;
-    padding: 20px 10px;
-    color: black;
-    margin-top: 4%;
-    text-align: center;
+#loginSubmit{
+    background-color: #0275d8;
+}
+
+#returnSubmit {
+    background-color: #f0ad4e;
+    margin:auto;
 }
 
 #welcomecontainer{
@@ -163,6 +176,16 @@ body {
     color: black;
     text-align: center;
 }
+
+.footer {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 4%;
+    text-align: center;
+}
+
 .welcomefooter {
     margin-top: 15%;
     background-color: #f1f1f1;
@@ -171,16 +194,12 @@ body {
     text-align: center;
 }
 
-p {
-     text-align: justify;
-}
-
-hr {
-    border: 1px solid black;
-}
-
-#policeimage {
-    width: 3%;
+.loginfooter {
+    margin-top: 7%;
+    background-color: #f1f1f1;
+    padding: 5px;
+    color: black;
+    text-align: center;
 }
 
 @media screen and (max-width: 500px) {
