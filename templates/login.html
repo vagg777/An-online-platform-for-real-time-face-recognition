@@ -18,27 +18,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         .loginfooter {
-            margin-top: 7%;
+            margin-top: 5%;
             background-color: #f1f1f1;
             padding: 5px;
             color: black;
             text-align: center;
         }
+
         #loginSubmit{
-            background-color: #0275d8;
+            background-color: rgb(50, 118, 177);
         }
+
         #returnSubmit {
             background-color: #f0ad4e;
             margin:auto;
         }
+
         .login-form{
-            margin-top: 4%;
+            margin-top: 3%;
         }
         #policeimage {
             width: 3%;
         }
+
         hr {
             border: 1px solid black;
+        }
+
+        .input-group-addon.primary {
+            color: rgb(255, 255, 255);
+            background-color: rgb(50, 118, 177);
+            border-color: rgb(40, 94, 142);
         }
     </style>
 </head>
@@ -65,20 +75,20 @@
 		<div class="avatar" style="background-color: #0275d8; !important">
 			<img src="/static/images/avatar.png" alt="Avatar">
 		</div>
-        <h2 class="text-center">{{ login.platformlogin }}</h2>
-        <hr>
+        <h2 class="text-center black">{{ login.platformlogin }}</h2>
+        <hr><br>
         <div class="form-group">
         	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
         	    <input type="text" class="form-control" placeholder="{{ login.enteremail }}" name="email" id = "email" value="{{request.form.email}}" required>
             </div>
         </div>
         <div class="form-group">
         	<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-lock fa-lg"></i></span>
                 <input type="password" class="form-control" placeholder="{{ login.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
             </div>
-        </div>
+        </div><br>
         <div class="form-group">
             <button type="submit" id="loginSubmit" class="btn btn-primary btn-lg btn-block" value="login">{{ login.login }}</button>
             <button id="returnSubmit" class="btn btn-warning btn-lg btn-block" value="welcome">{{ login.returnhome }}</button>
