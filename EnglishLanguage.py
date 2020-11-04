@@ -184,6 +184,8 @@ class InsertUserEN:
     enterimage = "Enter image URL"
     reset = "Reset form"
     submit = "Insert User"
+    retype_password = "Password (validation)"
+    enterretype_password = "Re-type your Password"
 
 class ManageCriminalEN:
     manage = "Manage Criminal"

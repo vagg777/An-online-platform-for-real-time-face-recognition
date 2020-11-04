@@ -184,6 +184,8 @@ class InsertUserGR:
     enterimage = "Εισάγετε URL εικόνας"
     reset = "Εκκαθάριση Φόρμας"
     submit = "Εισαγωγή χρήστη"
+    retype_password = "Κωδικός (επαλήθευση)"
+    enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
 
 class ManageCriminalGR:
     manage = "Επεξεργασία Κακοποιού"
