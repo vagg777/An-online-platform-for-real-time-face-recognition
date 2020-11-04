@@ -43,6 +43,22 @@
     border-radius: 2px;
 }
 
+#submitButton {
+    float: right;
+    background-color: rgb(40, 94, 142);
+    color:white;
+}
+#resetButton {
+    margin-right: 10px;
+    float: right;
+    background-color: #d9534f;
+}
+#warningButton {
+    background-color: #f0ad4e;
+    float: right;
+    margin-right: 10px;
+}
+
 .login-form {
     width: 350px;
     margin: 0 auto;

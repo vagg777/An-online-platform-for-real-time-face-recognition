@@ -22,13 +22,20 @@
             background-color: #f2f2f2;
             padding: 20px;
         }
-        .footer {
-            overflow: hidden;
-            background-color: #f1f1f1;
-            padding: 20px 10px;
-            color: black;
-            margin-top: 4%;
-            text-align: center;
+        #submitButton {
+            float: right;
+            background-color: rgb(40, 94, 142);
+            color:white;
+        }
+        #resetButton {
+            margin-right: 10px;
+            float: right;
+            background-color: #d9534f;
+        }
+        #warningButton {
+            background-color: #f0ad4e;
+            float: right;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -161,12 +168,10 @@
                 </div>
             </div>
           </div>
-          <hr style="border: 1px solid black; !important">
-          <div class="form-row">
-              <button class="btn btn-warning btn-lg" onclick="window.location.href = 'welcome';" style="margin: auto; background-color: #f0ad4e; !important">{{ signup.returnhome }}</button>
-              <input type="reset" class="btn btn-danger btn-lg" style="margin: auto; background-color: #d9534f; !important" value="{{ signup.reset }}">
-              <button type="submit" class="btn btn-primary btn-lg" value="Sign up" style="margin: auto; background-color: #0275d8; !important">{{ signup.signup }}</button>
-          </div>
+          <hr>
+          <input type="submit" id = "submitButton" class="btn" value="{{ signup.signup }}">
+          <input type="reset" id = "resetButton" class="btn btn-danger"value="{{ signup.reset }}">
+          <input type="button" id = "warningButton" class="btn btn-warning" value = "{{ signup.returnhome }}" onclick="window.location.href = 'welcome';">
       </form>
     </div>
 </div>
