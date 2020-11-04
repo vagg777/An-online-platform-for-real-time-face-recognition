@@ -22,15 +22,6 @@
           background-color: #f2f2f2;
           padding: 20px;
         }
-
-        .contactlabel {
-            color: black;
-        }
-
-        .required {
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
 
@@ -46,32 +37,33 @@
             <a href="live_feed">{{ header.livefeed }}</a>
             <a href="contact">{{ header.contact }}</a>
             <a href="settings">{{ header.settings }}</a>
-            <a href="logout" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+            <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
           </div>
     </div>
 
     <br><br><br>
 
     {% if error %}
-        <div class="container" style="width:35%; background-color: red;">
-            <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+        <div class="errorcontainer">
+            <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
     {% if success %}
-        <div class="container" style="width: 35%; background-color: green;">
-            <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+        <div class="successcontainer">
+            <p class="success"><strong> {{ success }}</strong></p>
         </div><br><br>
     {% endif %}
 
 
     <div class="container">
-        <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2><br>
+        <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2>
+        <hr>
         <form action="" method="post">
             <div class="form-group">
                 <label class="contactlabel" for="username">{{ insertUser.username }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
                 </div>
             </div>
@@ -79,7 +71,7 @@
                 <label class="contactlabel" for="password">{{ insertUser.password }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
                 </div>
             </div>
@@ -87,7 +79,7 @@
                 <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
                 </div>
             </div>
@@ -95,7 +87,7 @@
                 <label class="contactlabel" for="email">{{ insertUser.email }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.email }}" name="email" id="email" value="{{request.form.email}}" required>
                 </div>
             </div>
@@ -103,7 +95,7 @@
                 <label class="contactlabel" for="gender">{{ insertUser.gender }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                     <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
                         <option value="Male">{{ insertUser.male }}</option>
                         <option value="Female">{{ insertUser.female }}</option>
@@ -115,7 +107,7 @@
                 <label class="contactlabel" for="biography">{{ insertUser.biography }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-address-card" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
                 </div>
             </div>
@@ -123,7 +115,7 @@
                 <label class="contactlabel" for="work_phone">{{ insertUser.work_phone }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-phone" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
                 </div>
             </div>
@@ -131,7 +123,7 @@
                 <label class="contactlabel" for="mobile_phone">{{ insertUser.mobile_phone }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
                 </div>
             </div>
@@ -139,7 +131,7 @@
                 <label class="contactlabel" for="role">{{ insertUser.role }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-users" aria-hidden="true"></i></span>
                     <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
                         <option value="ADMIN">{{ insertUser.admin }}</option>
                         <option value="USER">{{ insertUser.user }}</option>
@@ -150,26 +142,33 @@
                 <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                    <span class="input-group-addon success"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
                 </div>
             </div>
             <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}">
-            <input type="submit" class="btn btn-primary" value="{{ insertUser.submit }}">
+            <input type="submit" class="btn btn-success" value="{{ insertUser.submit }}">
         </form>
     </div>
 {% endif %}
+
 {% if login_role == 'USER' %}
-    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
+    <div class="errorcontainer" style="margin-top: 20%">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome }}</button>
     </div><br><br>
 {% endif %}
+
 {% if login_role == '' %}
-    <div class="container" style="width:35%; background-color: red; text-align: center; margin-top: 20%">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+    <div class="errorcontainer" style="margin-top: 20%">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
 {% endif %}
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+
 </body>
 </html>

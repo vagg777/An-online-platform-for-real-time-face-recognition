@@ -56,62 +56,69 @@
 
 
     <div class="container">
-        <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2><br>
+        <h2 class = "contactlabel" align="center">{{ insertUser.insert }}</h2>
         <hr>
         <form action="" method="post">
-            <div class="form-group">
-                <label class="contactlabel" for="username">{{ insertUser.username }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="username">{{ insertUser.username }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="email">{{ insertUser.email }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="contactlabel" for="password">{{ insertUser.password }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
-                </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                    <label class="contactlabel" for="password">{{ insertUser.password }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                    </div>
+              </div>
+              <div class="form-group col-md-6">
+                    <label class="contactlabel" for="retype_password">{{ insertUser.retype_password }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                    </div>
+              </div>
             </div>
-            <div class="form-group">
-                <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
-                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="email">{{ insertUser.email }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.email }}" name="email" id="email" value="{{request.form.email}}" required>
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="gender">{{ insertUser.gender }}</label>
+                    <span class="required">*</span>
+                    <div class="input-group">
+                        <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                        <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
+                            <option value="Male">{{ insertUser.male }}</option>
+                            <option value="Female">{{ insertUser.female }}</option>
+                            <option value="Other">{{ insertUser.other }}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="gender">{{ insertUser.gender }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                    <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
-                        <option value="Male">{{ insertUser.male }}</option>
-                        <option value="Female">{{ insertUser.female }}</option>
-                        <option value="Other">{{ insertUser.other }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="contactlabel" for="biography">{{ insertUser.biography }}</label>
-                <span class="required">*</span>
-                <div class="input-group">
-                    <span class="input-group-addon success"><i class="fa fa-address-card" aria-hidden="true"></i></span>
-                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
-                </div>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class = "form-row">
+              <div class="form-group col-md-6">
                 <label class="contactlabel" for="work_phone">{{ insertUser.work_phone }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
@@ -119,7 +126,7 @@
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="contactlabel" for="mobile_phone">{{ insertUser.mobile_phone }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
@@ -127,7 +134,17 @@
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
                 </div>
             </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
+                <label class="contactlabel" for="biography">{{ insertUser.biography }}</label>
+                <span class="required">*</span>
+                <div class="input-group">
+                    <span class="input-group-addon success"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
                 <label class="contactlabel" for="role">{{ insertUser.role }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
@@ -137,8 +154,8 @@
                         <option value="USER">{{ insertUser.user }}</option>
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
+              </div>
+              <div class="form-group col-md-6">
                 <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
                 <span class="required">*</span>
                 <div class="input-group">
@@ -146,8 +163,10 @@
                     <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
                 </div>
             </div>
-            <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}">
-            <input type="submit" class="btn btn-success" value="{{ insertUser.submit }}">
+          </div>
+            <hr>
+            <input type="submit" class="btn btn-success" value="{{ insertUser.submit }}" style="float: right;">
+            <input type="reset" class="btn btn-danger" value="{{ insertUser.reset }}" style="float: right; margin-right: 10px;">
         </form>
     </div>
 {% endif %}
