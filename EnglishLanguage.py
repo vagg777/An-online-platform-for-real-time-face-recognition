@@ -261,6 +261,7 @@ class ManageUserEN:
     enterimage = "Enter image URL"
     cancel = "Cancel"
     updateuser = "Update User"
+    insert = "Insert"
 
 class ManageLivefeedEN:
     search = "Search"

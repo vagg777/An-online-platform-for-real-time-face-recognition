@@ -259,6 +259,7 @@ class ManageUserGR:
     updateuser = "Ανανέωση χρήστη"
     update = "Επεξεργασία"
     delete = "Διαγραφή"
+    insert = "Εισαγωγή"
 
 class ManageLivefeedGR:
     search = "Ψάξε"

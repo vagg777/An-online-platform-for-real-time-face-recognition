@@ -319,10 +319,14 @@ def manage_users():
         manageUser = ManageUserGR()
         header = HeaderGR()
         messages = MessagesGR()
+        manage = ManageGR()
+        insertUser = InsertUserGR()
     else:
         manageUser = ManageUserEN()
         header = HeaderEN()
         messages = MessagesEN()
+        manage = ManageEN()
+        insertUser = InsertUserEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
@@ -346,9 +350,9 @@ def manage_users():
                     result_list[counter] = tuple(user_list)
                     counter = counter + 1
                 result = tuple(result_list)
-            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
+            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
         else:
-            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
+            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -390,13 +394,13 @@ def manage_users():
                         result_list[counter] = tuple(user_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
+            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
         finally:
             pass
 

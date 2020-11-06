@@ -21,6 +21,15 @@
             background-color: #f2f2f2;
             padding: 20px;
         }
+
+        #manageInsertButton {
+            margin: 0;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -100%);
+            transform: translate(-50%, -20%);
+        }
     </style>
     <script>
     function validateDelete() {
@@ -82,8 +91,6 @@
              wasPressed = true;
         }
      }
-
-
     </script>
 </head>
 
@@ -117,53 +124,54 @@
     {% endif %}
 
     <div class="container" style="width: 100%">
-        <h1 align="center" style="color: black;">{{ manageUser.manage }}</h1>
-        <hr style="border-color: black; background-color: black; color: black;">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr class="black">
-                        <th scope="col">{{ manageUser.id }}</th>
-                        <th scope="col">{{ manageUser.avatar }}</th>
-                        <th scope="col">{{ manageUser.username }}</th>
-                        <th scope="col">{{ manageUser.password }}</th>
-                        <th scope="col">{{ manageUser.email}}</th>
-                        <th scope="col">{{ manageUser.fullname }}</th>
-                        <th scope="col">{{ manageUser.gender }}</th>
-                        <th scope="col">{{ manageUser.biography }}</th>
-                        <th scope="col">{{ manageUser.work_phone }}</th>
-                        <th scope="col">{{ manageUser.mobile_phone }}</th>
-                        <th scope="col">{{ manageUser.role }}</th>
-                        <th scope="col">{{ manageUser.update }}</th>
-                        <th scope="col">{{ manageUser.delete }}</th>
+        <h1 align="center">{{ manageUser.manage }}</h1>
+        <hr>
+        <button id = "manageInsertButton" class="btn btn-success" data-toggle="modal" data-target="#insertModal">{{ manage.insert }}</button>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="black">
+                    <th scope="col">{{ manageUser.id }}</th>
+                    <th scope="col">{{ manageUser.avatar }}</th>
+                    <th scope="col">{{ manageUser.username }}</th>
+                    <th scope="col">{{ manageUser.password }}</th>
+                    <th scope="col">{{ manageUser.email}}</th>
+                    <th scope="col">{{ manageUser.fullname }}</th>
+                    <th scope="col">{{ manageUser.gender }}</th>
+                    <th scope="col">{{ manageUser.biography }}</th>
+                    <th scope="col">{{ manageUser.work_phone }}</th>
+                    <th scope="col">{{ manageUser.mobile_phone }}</th>
+                    <th scope="col">{{ manageUser.role }}</th>
+                    <th scope="col">{{ manageUser.update }}</th>
+                    <th scope="col">{{ manageUser.delete }}</th>
+                </tr>
+            </thead>
+            <tbody class="black">
+                {% for row in result %}
+                    <tr>
+                        <th class="user_id" scope="row">{{row.0}}</th>
+                        <td class="user_avatar"><img src="{{row.10}}" style="width: 100px; height: 100px;"></td>
+                        <td class="user_username">{{row.1}}</td>
+                        <td class="user_password hidetext">{{row.2}}</td>
+                        <td class="user_email">{{row.3}}</td>
+                        <td class="user_full_name">{{row.4}}</td>
+                        <td class="user_gender" id="gender0">{{row.5}}</td>
+                        <td class="user_biography">{{row.6}}</td>
+                        <td class="user_work_phone">{{row.7}}</td>
+                        <td class="user_mobile_phone">{{row.8}}</td>
+                        <td class="user_role" id="role0">{{row.9}}</td>
+                        <td>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
+                        </td>
+                        <td>
+                            <form action="remove_users" method="post">
+                                <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
+                                <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
+                                <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageUser.delete }}</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody class="black">
-                    {% for row in result %}
-                        <tr>
-                            <th class="user_id" scope="row">{{row.0}}</th>
-                            <td class="user_avatar"><img src="{{row.10}}" style="width: 100px; height: 100px;"></td>
-                            <td class="user_username">{{row.1}}</td>
-                            <td class="user_password hidetext">{{row.2}}</td>
-                            <td class="user_email">{{row.3}}</td>
-                            <td class="user_full_name">{{row.4}}</td>
-                            <td class="user_gender" id="gender0">{{row.5}}</td>
-                            <td class="user_biography">{{row.6}}</td>
-                            <td class="user_work_phone">{{row.7}}</td>
-                            <td class="user_mobile_phone">{{row.8}}</td>
-                            <td class="user_role" id="role0">{{row.9}}</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
-                            </td>
-                            <td>
-                                <form action="remove_users" method="post">
-                                    <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
-                                    <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                    <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageUser.delete }}</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 
@@ -171,7 +179,7 @@
         <form action="" method="post">
             <div class="modal-dialog">
               <div class="modal-content">
-                    <div class="modal-header" style="background-color: #f0ad4e; color:white;">
+                    <div class="modal-header" style="background-color: rgb(240, 173, 78); color:white;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
                     </div>
@@ -179,7 +187,7 @@
                         <div class="form-group">
                             <label class="contactlabel" for="id">{{ manageUser.id }}</label>
                             <span class="required">*</span>
-                            <div class="input-group">
+                            <div class="input-group su">
                                 <span class="input-group-addon warning"><i class="fa fa-user" aria-hidden="true"></i></span>
                                 <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id" value="{{request.form.id}}" readonly>
                             </div>
@@ -275,6 +283,132 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageUser.cancel }}</button>
                         <input type="submit" class="btn btn-warning" value="{{ manageUser.update }}">
+                    </div>
+              </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="insertModal" role="dialog">
+        <form action="" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(76, 174, 76); color:white;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
+                    </div>
+                    <div class="modal-body black">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="username">{{ insertUser.username }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="email">{{ insertUser.email }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                              <div class="form-group col-md-6">
+                                    <label class="contactlabel" for="password">{{ insertUser.password }}</label>
+                                    <span class="required">*</span>
+                                    <div class="input-group">
+                                        <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                                    </div>
+                              </div>
+                              <div class="form-group col-md-6">
+                                    <label class="contactlabel" for="retype_password">{{ insertUser.retype_password }}</label>
+                                    <span class="required">*</span>
+                                    <div class="input-group">
+                                        <span class="input-group-addon success"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="full_name">{{ insertUser.fullname }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="gender">{{ insertUser.gender }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                    <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
+                                        <option value="Male">{{ insertUser.male }}</option>
+                                        <option value="Female">{{ insertUser.female }}</option>
+                                        <option value="Other">{{ insertUser.other }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                      </div>
+                      <div class = "form-row">
+                         <div class="form-group col-md-6">
+                            <label class="contactlabel" for="work_phone">{{ insertUser.work_phone }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon success"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="contactlabel" for="mobile_phone">{{ insertUser.mobile_phone }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon success"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                         <div class="form-group col-md-12">
+                            <label class="contactlabel" for="biography">{{ insertUser.biography }}</label>
+                            <span class="required">*</span>
+                            <div class="input-group">
+                                <span class="input-group-addon success"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                                <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                                <label class="contactlabel" for="role">{{ insertUser.role }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                        <span class="input-group-addon success"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                        <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
+                                            <option value="ADMIN">{{ insertUser.admin }}</option>
+                                            <option value="USER">{{ insertUser.user }}</option>
+                                        </select>
+                                </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                                <label class="contactlabel" for="avatar">{{ insertUser.avatar }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control" placeholder="{{ insertUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                                </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageUser.cancel }}</button>
+                        <input type="submit" class="btn btn-success" value="{{ manageUser.insert }}">
                     </div>
               </div>
             </div>
