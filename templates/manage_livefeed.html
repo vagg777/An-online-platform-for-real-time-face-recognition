@@ -15,30 +15,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        #managelivefeedcontainer {
-            border-radius: 20px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            width: 70%;
-        }
-
-        .header a:hover {
-            background-color: rgb(66,139,202);
-            color: white;
-        }
-
-        a#logouttab:hover {
-            background-color: rgb(235,93,93);
-            color: black;
-        }
-    </style>
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
 {% if login_role %}
     <div class="header">
-      <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+      <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
       <div class="header-right">
         <a href="home">{{ header.home }}</a>
         {% if login_role == 'ADMIN' %}

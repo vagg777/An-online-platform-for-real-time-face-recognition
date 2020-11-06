@@ -28,7 +28,7 @@
 <body style="background-image: url('/static/images/background.jpg')">
 {% if login_role %}
     <div class="header">
-          <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+          <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
           <div class="header-right">
             <a href="home" class="active"> {{ header.home }}</a>
             {% if login_role == 'ADMIN' %}

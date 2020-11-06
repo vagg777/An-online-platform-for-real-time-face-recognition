@@ -222,6 +222,12 @@ hr {
     margin:auto;
 }
 
+.container {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
 #errorcontainer{
     width:35%;
     background-color: red;
@@ -303,6 +309,10 @@ hr {
     padding: 5px;
     color: black;
     text-align: center;
+}
+
+#biography {
+    height: 200px;
 }
 
 @media screen and (max-width: 500px) {

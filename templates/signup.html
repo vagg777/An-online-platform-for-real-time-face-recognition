@@ -22,28 +22,13 @@
             background-color: #f2f2f2;
             padding: 20px;
         }
-        #submitButton {
-            float: right;
-            background-color: rgb(40, 94, 142);
-            color:white;
-        }
-        #resetButton {
-            margin-right: 10px;
-            float: right;
-            background-color: #d9534f;
-        }
-        #warningButton {
-            background-color: #f0ad4e;
-            float: right;
-            margin-right: 10px;
-        }
     </style>
 </head>
 
-<body style="background-image: url('/static/images/background.jpg')">
+<body style="background-image: url('/static/images/background.jpg')" onload="resetForm();">
 
 <div class="header">
-    <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
+    <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
 </div>
 
 {% if error %}
@@ -60,7 +45,7 @@
 <br><br><br>
 
 <div class="container">
-      <form action="signup" method="post">
+      <form action="signup" method="post" id="signupForm">
           <h2 class="text-center" style="text-align: center; color: black; !important;">{{ signup.title }}</h2>
           <hr>
           <div class="form-row">
@@ -77,7 +62,7 @@
                     <span class="required">*</span>
                     <div class="input-group">
                         <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                        <input type="text" id = "email" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
                     </div>
                 </div>
           </div>
@@ -87,7 +72,7 @@
                     <span class="required">*</span>
                     <div class="input-group">
                         <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                        <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                        <input type="password" id="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
                     </div>
               </div>
               <div class="form-group col-md-6">
