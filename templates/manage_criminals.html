@@ -21,6 +21,14 @@
             background-color: #f2f2f2;
             padding: 20px;
         }
+        #manageInsertButton {
+            margin: 0;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -100%);
+            transform: translate(-50%, -20%);
+        }
     </style>
     <script>
     function validateDelete() {
@@ -106,62 +114,63 @@
     <br><br><br>
 
     {% if error %}
-        <div class="errorcontainer">
+        <div class="container errorcontainer">
             <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
     {% if success %}
-        <div class="successcontainer">
+        <div class="container successcontainer">
             <p class="success"><strong> {{ success }}</strong></p>
         </div><br><br>
     {% endif %}
 
     <div class="container">
-        <h1 align="center" style="color: black;">{{ manageCriminal.manage }}</h1>
-        <hr style="border-color: black; background-color: black; color: black;">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr class="black">
-                        <th scope="col">{{ manageCriminal.id }}</th>
-                        <th scope="col">{{ manageCriminal.portrait }}</th>
-                        <th scope="col">{{ manageCriminal.fullname }}</th>
-                        <th scope="col">{{ manageCriminal.age }}</th>
-                        <th scope="col">{{ manageCriminal.gender }}</th>
-                        <th scope="col">{{ manageCriminal.weight }}</th>
-                        <th scope="col">{{ manageCriminal.height }}</th>
-                        <th scope="col">{{ manageCriminal.eyecolor }}</th>
-                        <th scope="col">{{ manageCriminal.biography }}</th>
-                        <th scope="col">{{ manageCriminal.lastlocation }}</th>
-                        <th scope="col">{{ manageCriminal.update }}</th>
-                        <th scope="col">{{ manageCriminal.delete }}</th>
+        <h1 align="center">{{ manageCriminal.manage }}</h1>
+        <hr>
+        <button id="manageInsertButton" class="btn btn-success" data-toggle="modal" data-target="#insertModal">{{ manage.insert }}</button>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="black">
+                    <th scope="col">{{ manageCriminal.id }}</th>
+                    <th scope="col">{{ manageCriminal.portrait }}</th>
+                    <th scope="col">{{ manageCriminal.fullname }}</th>
+                    <th scope="col">{{ manageCriminal.age }}</th>
+                    <th scope="col">{{ manageCriminal.gender }}</th>
+                    <th scope="col">{{ manageCriminal.weight }}</th>
+                    <th scope="col">{{ manageCriminal.height }}</th>
+                    <th scope="col">{{ manageCriminal.eyecolor }}</th>
+                    <th scope="col">{{ manageCriminal.biography }}</th>
+                    <th scope="col">{{ manageCriminal.lastlocation }}</th>
+                    <th scope="col">{{ manageCriminal.update }}</th>
+                    <th scope="col">{{ manageCriminal.delete }}</th>
+                </tr>
+            </thead>
+            <tbody class="black">
+                {% for row in result %}
+                    <tr>
+                        <th class="criminal_id" scope="row">{{row.0}}</th>
+                        <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
+                        <td class="criminal_full_name">{{row.1}}</td>
+                        <td class="criminal_age">{{row.2}}</td>
+                        <td class="criminal_gender" id="gender0">{{row.9}}</td>
+                        <td class="criminal_height">{{row.3}}</td>
+                        <td class="criminal_weight">{{row.4}}</td>
+                        <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
+                        <td class="criminal_bio">{{row.6}}</td>
+                        <td class="criminal_last_location">{{row.8}}</td>
+                        <td>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
+                        </td>
+                        <td>
+                            <form action="remove_criminals" method="post">
+                                <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
+                                <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
+                                <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageCriminal.delete }}</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody class="black">
-                    {% for row in result %}
-                        <tr>
-                            <th class="criminal_id" scope="row">{{row.0}}</th>
-                            <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
-                            <td class="criminal_full_name">{{row.1}}</td>
-                            <td class="criminal_age">{{row.2}}</td>
-                            <td class="criminal_gender" id="gender0">{{row.9}}</td>
-                            <td class="criminal_height">{{row.3}}</td>
-                            <td class="criminal_weight">{{row.4}}</td>
-                            <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
-                            <td class="criminal_bio">{{row.6}}</td>
-                            <td class="criminal_last_location">{{row.8}}</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
-                            </td>
-                            <td>
-                                <form action="remove_criminals" method="post">
-                                    <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
-                                    <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                    <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageCriminal.delete }}</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 
@@ -274,17 +283,127 @@
             </div>
         </form>
     </div>
+
+    <div class="modal fade" id="insertModal" role="dialog">
+        <form action="insert_criminals" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(76, 174, 76); color:white;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ manageCriminal.insertCriminal}}</h4>
+                    </div>
+                    <div class="modal-body black">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="fullname">{{ insertCriminal.fullname }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="gender">{{ manageCriminal.gender }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                    <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
+                                        <option value="Male">{{ manageCriminal.male }}</option>
+                                        <option value="Female">{{ manageCriminal.female }}</option>
+                                        <option value="Other">{{ manageCriminal.other }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon success"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                    <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
+                                        <option value="Black" style="background-image: url('/static/images/background.jpg'); !important;">{{ insertCriminal.black }}</option>
+                                        <option value="Brown">{{ insertCriminal.brown }}</option>
+                                        <option value="Blue">{{ insertCriminal.blue }}</option>
+                                        <option value="Green">{{ insertCriminal.green }}</option>
+                                        <option value="Dark Brown">{{ insertCriminal.darkbrown }}</option>
+                                        <option value="Amber">{{ insertCriminal.amber }}</option>
+                                        <option value="Gray">{{ insertCriminal.gray }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="height">{{ insertCriminal.height }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="age">{{ insertCriminal.age }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                  <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
+                                   <div class="input-group">
+                                     <span class="input-group-addon success"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                     <input class="form-control" type="text" id="last_location" name="last_location" placeholder="{{ insertCriminal.enterlastlocation }}" value="{{request.form.last_location}}">
+                                   </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                              <label class="contactlabel" for="biography">{{ insertCriminal.crimerecord }}</label>
+                              <span class="required">*</span>
+                              <div class="input-group">
+                                 <span class="input-group-addon success"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                                 <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageCriminal.cancel }}</button>
+                        <input type="submit" class="btn btn-success" value="{{ manageCriminal.insert }}">
+                    </div>
+              </div>
+            </div>
+        </form>
+    </div>
 {% endif %}
 
 {% if login_role == 'USER' %}
-    <div class="errorcontainer" style="margin-top: 20%">
+    <div class="container errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome }}</button>
     </div><br><br>
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="errorcontainer" style="margin-top: 20%">
+    <div class="container errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.returntohome}}</button>
     </div><br><br>

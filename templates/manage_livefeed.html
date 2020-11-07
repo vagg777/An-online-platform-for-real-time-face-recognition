@@ -36,12 +36,12 @@
     <br><br><br>
 
     {% if error %}
-        <div class="errorcontainer">
+        <div class="container errorcontainer">
             <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
     {% if success %}
-        <div class="successcontainer">
+        <div class="container successcontainer">
             <p class="success"><strong> {{ success }}</strong></p>
         </div><br><br>
     {% endif %}
@@ -173,7 +173,7 @@
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="errorcontainer" style="margin-top: 20%">
+    <div class="container errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>

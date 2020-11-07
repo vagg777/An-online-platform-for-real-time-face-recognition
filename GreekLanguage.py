@@ -47,7 +47,7 @@ class MessagesGR:
     deletedcriminalright = " διεγράφη με επιτυχία από τη βάση!"
     nocriminalleft = "Δεν υπάρχει κακοποιός με όνομα "
     nocriminalright = " στη βάση δεδομένων!"
-    deleteduserleft = "Ο χρήστης με όνομα "
+    deleteduserleft = "Ο χρήστης με email "
     deleteduserright = " διεγράφη με επιτυχία από τη βάση!"
     nouserleft = "Δεν υπάρχει χρήστης με όνομα "
     nouserright = " στη βάση δεδομένων!"
@@ -226,6 +226,8 @@ class ManageCriminalGR:
     male = "Άντρας"
     female = "Γυναίκα"
     other = "Άλλο"
+    insert = "Εισαγωγή"
+    insertCriminal = "Εισαγωγή Κακοποιού"
 
 class ManageUserGR:
     manage = "Επεξεργασία χρηστών"

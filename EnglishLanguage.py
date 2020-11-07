@@ -24,7 +24,7 @@ class MessagesEN:
     deletedcriminalright = " successfully deleted from the database!"
     nocriminalleft = "No criminal named "
     nocriminalright = " exists in the database!"
-    deleteduserleft = "User named "
+    deleteduserleft = "User with email "
     deleteduserright = " successfully deleted from the database!"
     nouserleft = "No username "
     nouserright = " exists in the database!"
@@ -227,7 +227,10 @@ class ManageCriminalEN:
     lastknownlocation = "Last known location"
     livefeed = "Live Feed"
     location = "Location: "
-    information = "Criminal's Information-"
+    information = "Criminal's Information:"
+    insert = "Insert"
+    insertCriminal = "Insert Criminal"
+
 
 class ManageUserEN:
     manage = "Manage User"

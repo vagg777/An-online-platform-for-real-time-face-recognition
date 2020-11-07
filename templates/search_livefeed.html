@@ -90,19 +90,18 @@
     <br><br><br>
 
     {% if error %}
-        <div class="errorcontainer">
+        <div class="econtainer rrorcontainer">
             <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
     {% if success %}
-        <div class="successcontainer">
+        <div class="container successcontainer">
             <p class="success"><strong> {{ success }}</strong></p>
         </div><br><br>
     {% endif %}
 
     <div class="container">
         <h1 align="center" style="color: black;">{{ manageCriminal.information }}</h1>
-        <hr style="border-color: black; background-color: black; color: black;">
             <table class="table">
                 <thead class="thead-dark">
                     <tr class="black">
@@ -183,7 +182,7 @@
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="errorcontainer" style="margin-top: 20%">
+    <div class="container errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
     </div><br><br>
