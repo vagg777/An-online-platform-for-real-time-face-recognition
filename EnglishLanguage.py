@@ -267,6 +267,7 @@ class ManageUserEN:
     insert = "Insert"
     retype_password = "Password (validation)"
     enterretype_password = "Re-type your Password"
+    insertuser = "Insert User"
 
 class ManageLivefeedEN:
     search = "Search"

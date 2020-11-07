@@ -258,12 +258,13 @@ class ManageUserGR:
     avatar = "Εικονίδιο"
     enterimage = "Εισάγετε URL εικόνας"
     cancel = "Ακύρωση"
-    updateuser = "Ανανέωση χρήστη"
+    updateuser = "Επεξεργασία χρήστη"
     update = "Επεξεργασία"
     delete = "Διαγραφή"
     insert = "Εισαγωγή"
     retype_password = "Κωδικός (επαλήθευση)"
     enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
+    insertuser = "Εισαγωγή Χρήστη"
 
 class ManageLivefeedGR:
     search = "Ψάξε"
