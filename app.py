@@ -306,12 +306,14 @@ def manage_users():
         messages = MessagesGR()
         manage = ManageGR()
         insertUser = InsertUserGR()
+        manage = ManageGR()
     else:
         manageUser = ManageUserEN()
         header = HeaderEN()
         messages = MessagesEN()
         manage = ManageEN()
         insertUser = InsertUserEN()
+        manage = ManageEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
@@ -328,6 +330,7 @@ def manage_users():
             user_id = str(request.form["id"])
             user_username = str(request.form["username"])
             user_password = str(request.form["password"])
+            user_retype_password = str(request.form["retype_password"])
             user_email = str(request.form["email"])
             user_fullname = str(request.form["full_name"])
             user_gender = str(request.form["gender"])
@@ -336,6 +339,11 @@ def manage_users():
             user_mobile_phone = str(request.form["mobile_phone"])
             user_role = str(request.form["role"])
             user_avatar = str(request.form["avatar"])
+            if user_password != user_retype_password:
+                sql = mydb.cursor()
+                sql.execute("SELECT * FROM users")
+                result = sql.fetchall()
+                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -349,13 +357,13 @@ def manage_users():
                 if site_language == "Greek":
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, manage=manage,  header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
         finally:
             pass
 

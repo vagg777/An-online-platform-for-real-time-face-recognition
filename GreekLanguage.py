@@ -262,6 +262,8 @@ class ManageUserGR:
     update = "Επεξεργασία"
     delete = "Διαγραφή"
     insert = "Εισαγωγή"
+    retype_password = "Κωδικός (επαλήθευση)"
+    enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
 
 class ManageLivefeedGR:
     search = "Ψάξε"

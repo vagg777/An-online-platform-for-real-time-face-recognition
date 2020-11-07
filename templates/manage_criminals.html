@@ -183,7 +183,8 @@
                         <h4 class="modal-title">{{ manageCriminal.updatecriminal}}</h4>
                     </div>
                     <div class="modal-body black">
-                            <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
                                 <label class="contactlabel" for="criminal_id">{{ manageCriminal.id }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
@@ -191,7 +192,9 @@
                                      <input class="form-control criminal_id" type="text" id="criminal_id" name="criminal_id" placeholder="{{ manageCriminal.enterid }}" readonly>
                                 </div>
                             </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_full_name">{{ manageCriminal.fullname }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
@@ -199,7 +202,7 @@
                                      <input class="form-control criminal_full_name" type="text" id="criminal_full_name" name="criminal_full_name" placeholder="{{ manageCriminal.enterfullname }}" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_portrait">{{ manageCriminal.portrait }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
@@ -207,15 +210,27 @@
                                      <input class="form-control criminal_portrait" type="text" id="criminal_portrait" name="criminal_portrait" placeholder="{{ manageCriminal.enterimage }}" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="contactlabel" for="criminal_age">{{ manageCriminal.age }}</label>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="criminal_height">{{ manageCriminal.height}}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
                                      <span class="input-group-addon warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" required>
+                                     <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="{{ manageCriminal.enterheight }}" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="criminal_weight">{{ manageCriminal.weight }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                     <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="{{ manageCriminal.enterweight }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_gender">{{ manageCriminal.gender }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
@@ -227,23 +242,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="contactlabel" for="criminal_height">{{ manageCriminal.height}}</label>
-                                <span class="required">*</span>
-                                <div class="input-group">
-                                     <span class="input-group-addon warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="{{ manageCriminal.enterheight }}" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="contactlabel" for="criminal_weight">{{ manageCriminal.weight }}</label>
-                                <span class="required">*</span>
-                                <div class="input-group">
-                                     <span class="input-group-addon warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="{{ manageCriminal.enterweight }}" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_eye_color">{{ manageCriminal.eyecolor}}</label>
                                 <span class="required">*</span>
                                 <div class="input-group">
@@ -259,7 +258,26 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="criminal_age">{{ manageCriminal.age }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                     <span class="input-group-addon warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                                     <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                  <label class="contactlabel" for="criminal_last_location">{{ manageCriminal.lastlocation }}</label>
+                                   <div class="input-group">
+                                     <span class="input-group-addon warning"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                     <input class="form-control criminal_last_location" type="text" id="criminal_last_location" name="criminal_last_location" placeholder="{{ manageCriminal.enterlastlocation }}">
+                                   </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
                                   <label class="contactlabel" for="criminal_bio">{{ manageCriminal.crimerecord}}</label>
                                   <span class="required">*</span>
                                   <div class="input-group">
@@ -267,13 +285,7 @@
                                      <textarea class="form-control criminal_bio" id="criminal_bio" name="criminal_bio" placeholder="{{ manageCriminal.entercrimerecord }}" style="height:200px" required></textarea>
                                   </div>
                             </div>
-                            <div class="form-group">
-                                  <label class="contactlabel" for="criminal_last_location">{{ manageCriminal.lastlocation }}</label>
-                                   <div class="input-group">
-                                     <span class="input-group-addon warning"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                     <input class="form-control criminal_last_location" type="text" id="criminal_last_location" name="criminal_last_location" placeholder="{{ manageCriminal.enterlastlocation }}">
-                                   </div>
-                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageCriminal.cancel }}</button>

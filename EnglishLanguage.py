@@ -265,6 +265,8 @@ class ManageUserEN:
     cancel = "Cancel"
     updateuser = "Update User"
     insert = "Insert"
+    retype_password = "Password (validation)"
+    enterretype_password = "Re-type your Password"
 
 class ManageLivefeedEN:
     search = "Search"
