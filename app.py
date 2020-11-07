@@ -8,11 +8,14 @@ import time
 import numpy as np
 import datetime
 import urllib.request
-from camera import *
 from scipy.spatial import distance      # pip install scipy
 import math
+from manageUsersController import *
+from manageCriminalsController import *
 from EnglishLanguage import *
 from GreekLanguage import *
+from cameraController import *
+
 
 
 app = Flask(__name__)
@@ -31,6 +34,72 @@ loggedin_user_email = ""
 def nothing(x):
     pass
 
+
+def users_translate_to_Greek(manageUser, result):
+    result_list = list(result)
+    counter = 0
+    for row in result_list:
+        user_list = list(row)
+        if user_list[5] == "Male":
+            user_list[5] = manageUser.male
+        elif user_list[5] == "Female":
+            user_list[5] = manageUser.female
+        elif user_list[5] == "Other":
+            user_list[5] = manageUser.other
+        if user_list[9] == "ADMIN":
+            user_list[9] = manageUser.admin
+        elif user_list[9] == "USER":
+            user_list[9] = manageUser.user
+        result_list[counter] = tuple(user_list)
+        counter = counter + 1
+    result = tuple(result_list)
+    return result
+
+
+
+def single_user_translate_to_Greek(manageUser, user_list):
+    if user_list[5] == "Male":
+        user_list[5] = manageUser.male
+    elif user_list[5] == "Female":
+        user_list[5] = manageUser.female
+    elif user_list[5] == "Other":
+        user_list[5] = manageUser.other
+    if user_list[9] == "ADMIN":
+        user_list[9] = manageUser.admin
+    elif user_list[9] == "USER":
+        user_list[9] = manageUser.user
+    user = tuple(user_list)
+    return user
+
+
+def criminals_translate_to_Greek(manageCriminal, result_list):
+    counter = 0
+    for row in result_list:
+        criminal_list = list(row)
+        if criminal_list[5] == "Black":
+            criminal_list[5] = manageCriminal.black
+        elif criminal_list[5] == "Brown":
+            criminal_list[5] = manageCriminal.brown
+        elif criminal_list[5] == "Green":
+            criminal_list[5] = manageCriminal.green
+        elif criminal_list[5] == "Blue":
+            criminal_list[5] = manageCriminal.blue
+        elif criminal_list[5] == "Dark Brown":
+            criminal_list[5] = manageCriminal.darkbrown
+        elif criminal_list[5] == "Amber":
+            criminal_list[5] = manageCriminal.amber
+        elif criminal_list[5] == "Gray":
+            criminal_list[5] = manageCriminal.gray
+        if criminal_list[9] == "Male":
+            criminal_list[9] = manageCriminal.male
+        if criminal_list[9] == "Female":
+            criminal_list[9] = manageCriminal.female
+        if criminal_list[9] == "Other":
+            criminal_list[9] = manageCriminal.other
+        result_list[counter] = tuple(criminal_list)
+        counter = counter + 1
+    result = tuple(result_list)
+    return result
 
 
 @app.route('/')
@@ -93,7 +162,7 @@ def login():
 
 
 
-@app.route("/signup", methods=['GET', 'POST'])  #TODO: There is no option in login page that directs to signup page, to be entered again!
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
     global site_language
     global login_role
@@ -224,93 +293,6 @@ def contact():
             pass
 
 
-
-@app.route('/settings', methods = ['GET', 'POST'])
-def settings():
-    global site_language
-    global login_role
-    global loggedin_user_email
-    if site_language == "Greek":
-        header = HeaderGR()
-        messages = MessagesGR()
-        manageUser = ManageUserGR()
-        settings = SettingsGR()
-    else:
-        header = HeaderEN()
-        messages = MessagesEN()
-        manageUser = ManageUserEN()
-        settings = SettingsEN()
-    if request.method == 'GET':
-        sql = mydb.cursor()
-        sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
-        user = sql.fetchall()
-        if user:
-            if site_language == "Greek":
-                user_list = list(user[0])
-                if user_list[5] == "Male":
-                    user_list[5] = manageUser.male
-                elif user_list[5] == "Female":
-                    user_list[5] = manageUser.female
-                elif user_list[5] == "Other":
-                    user_list[5] = manageUser.other
-                if user_list[9] == "ADMIN":
-                    user_list[9] = manageUser.admin
-                elif user_list[9] == "USER":
-                    user_list[9] = manageUser.user
-                user = tuple(user_list)
-            return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings)
-        else:
-            pass #TODO: add some error control here
-    elif request.method == 'POST':
-        try:
-            user_id = str(request.form["id"])
-            user_username = str(request.form["username"])
-            user_password = str(request.form["password"])
-            user_email = str(request.form["email"])
-            user_fullname = str(request.form["full_name"])
-            user_gender = str(request.form["gender"])
-            user_biography = str(request.form["biography"])
-            user_work_phone = str(request.form["work_phone"])
-            user_mobile_phone = str(request.form["mobile_phone"])
-            user_role = str(request.form["role"])
-            user_avatar = str(request.form["avatar"])
-            sql = mydb.cursor()
-            query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
-            query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
-            sql.execute(query, query_input)
-            mydb.commit()
-            sql.close()
-            sql = mydb.cursor()
-            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
-            user = sql.fetchall()
-            if user:
-                if site_language == "Greek":
-                    user_list = list(user[0])
-                    if user_list[5] == "Male":
-                        user_list[5] = manageUser.male
-                    elif user_list[5] == "Female":
-                        user_list[5] = manageUser.female
-                    elif user_list[5] == "Other":
-                        user_list[5] = manageUser.other
-                    if user_list[9] == "ADMIN":
-                        user_list[9] = manageUser.admin
-                    elif user_list[9] == "USER":
-                        user_list[9] = manageUser.user
-                    user = tuple(user_list)
-                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges)
-        except MySQLdb.Error as error:
-            messages.sqlerror = str(error)
-            sql = mydb.cursor()
-            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
-            user = sql.fetchall()
-            if user:
-                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
-        finally:
-            pass
-
-
-
-
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
     global site_language
@@ -333,23 +315,8 @@ def manage_users():
         result = sql.fetchall()
         if result:
             if site_language == "Greek":
-                result_list = list(result)
-                counter=0
-                for row in result_list:
-                    user_list = list(row)
-                    if user_list[5] == "Male":
-                        user_list[5] = manageUser.male
-                    elif user_list[5] == "Female":
-                        user_list[5] = manageUser.female
-                    elif user_list[5] == "Other":
-                        user_list[5] = manageUser.other
-                    if user_list[9] == "ADMIN":
-                        user_list[9] = manageUser.admin
-                    elif user_list[9] == "USER":
-                        user_list[9] = manageUser.user
-                    result_list[counter] = tuple(user_list)
-                    counter = counter + 1
-                result = tuple(result_list)
+                if site_language == "Greek":
+                    result = users_translate_to_Greek(manageUser, result)
             return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
         else:
             return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
@@ -377,23 +344,8 @@ def manage_users():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    result_list = list(result)
-                    counter = 0
-                    for row in result_list:
-                        user_list = list(row)
-                        if user_list[5] == "Male":
-                            user_list[5] = manageUser.male
-                        elif user_list[5] == "Female":
-                            user_list[5] = manageUser.female
-                        elif user_list[5] == "Other":
-                            user_list[5] = manageUser.other
-                        if user_list[9] == "ADMIN":
-                            user_list[9] = manageUser.admin
-                        elif user_list[9] == "USER":
-                            user_list[9] = manageUser.user
-                        result_list[counter] = tuple(user_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    if site_language == "Greek":
+                        result = users_translate_to_Greek(manageUser, result)
             return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -472,23 +424,8 @@ def remove_users():
         result = sql.fetchall()
         if result:
             if site_language == "Greek":
-                result_list = list(result)
-                counter = 0
-                for row in result_list:
-                    user_list = list(row)
-                    if user_list[5] == "Male":
-                        user_list[5] = manageUser.male
-                    elif user_list[5] == "Female":
-                        user_list[5] = manageUser.female
-                    elif user_list[5] == "Other":
-                        user_list[5] = manageUser.other
-                    if user_list[9] == "ADMIN":
-                        user_list[9] = manageUser.admin
-                    elif user_list[9] == "USER":
-                        user_list[9] = manageUser.user
-                    result_list[counter] = tuple(user_list)
-                    counter = counter + 1
-                result = tuple(result_list)
+                if site_language == "Greek":
+                    result = users_translate_to_Greek(manageUser, result)
         return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, login_role=login_role)
     if request.method == 'POST':
         try:
@@ -508,23 +445,8 @@ def remove_users():
                 result = sql.fetchall()
                 if result:
                     if site_language == "Greek":
-                        result_list = list(result)
-                        counter = 0
-                        for row in result_list:
-                            user_list = list(row)
-                            if user_list[5] == "Male":
-                                user_list[5] = manageUser.male
-                            elif user_list[5] == "Female":
-                                user_list[5] = manageUser.female
-                            elif user_list[5] == "Other":
-                                user_list[5] = manageUser.other
-                            if user_list[9] == "ADMIN":
-                                user_list[9] = manageUser.admin
-                            elif user_list[9] == "USER":
-                                user_list[9] = manageUser.user
-                            result_list[counter] = tuple(user_list)
-                            counter = counter + 1
-                        result = tuple(result_list)
+                        if site_language == "Greek":
+                            result = users_translate_to_Greek(manageUser, result)
                 return render_template('manage_users.html', success=message, result=result, header=header, manageUser=manageUser, login_role=login_role)
             else:
                 message = messages.nouserleft + user_username + messages.nouserright
@@ -534,23 +456,8 @@ def remove_users():
                 result = sql.fetchall()
                 if result:
                     if site_language == "Greek":
-                        result_list = list(result)
-                        counter = 0
-                        for row in result_list:
-                            user_list = list(row)
-                            if user_list[5] == "Male":
-                                user_list[5] = manageUser.male
-                            elif user_list[5] == "Female":
-                                user_list[5] = manageUser.female
-                            elif user_list[5] == "Other":
-                                user_list[5] = manageUser.other
-                            if user_list[9] == "ADMIN":
-                                user_list[9] = manageUser.admin
-                            elif user_list[9] == "USER":
-                                user_list[9] = manageUser.user
-                            result_list[counter] = tuple(user_list)
-                            counter = counter + 1
-                        result = tuple(result_list)
+                        if site_language == "Greek":
+                            result = users_translate_to_Greek(manageUser, result)
                 return render_template('manage_users.html', error=message, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -560,27 +467,10 @@ def remove_users():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    result_list = list(result)
-                    counter = 0
-                    for row in result_list:
-                        user_list = list(row)
-                        if user_list[5] == "Male":
-                            user_list[5] = manageUser.male
-                        elif user_list[5] == "Female":
-                            user_list[5] = manageUser.female
-                        elif user_list[5] == "Other":
-                            user_list[5] = manageUser.other
-                        if user_list[9] == "ADMIN":
-                            user_list[9] = manageUser.admin
-                        elif user_list[9] == "USER":
-                            user_list[9] = manageUser.user
-                        result_list[counter] = tuple(user_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    result = users_translate_to_Greek(manageUser, result)
             return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
         finally:
             pass
-
 
 
 @app.route('/manage_criminals', methods=['GET', 'POST'])
@@ -601,33 +491,7 @@ def manage_criminals():
         result = sql.fetchall()
         if result:
             if site_language == "Greek":
-                result_list = list(result)
-                counter = 0
-                for row in result_list:
-                    criminal_list = list(row)
-                    if criminal_list[5] == "Black":
-                        criminal_list[5] = manageCriminal.black
-                    elif criminal_list[5] == "Brown":
-                        criminal_list[5] = manageCriminal.brown
-                    elif criminal_list[5] == "Green":
-                        criminal_list[5] = manageCriminal.green
-                    elif criminal_list[5] == "Blue":
-                        criminal_list[5] = manageCriminal.blue
-                    elif criminal_list[5] == "Dark Brown":
-                        criminal_list[5] = manageCriminal.darkbrown
-                    elif criminal_list[5] == "Amber":
-                        criminal_list[5] = manageCriminal.amber
-                    elif criminal_list[5] == "Gray":
-                        criminal_list[5] = manageCriminal.gray
-                    if criminal_list[9] == "Male":
-                        criminal_list[9] = manageCriminal.male
-                    if criminal_list[9] == "Female":
-                        criminal_list[9] = manageCriminal.female
-                    if criminal_list[9] == "Other":
-                        criminal_list[9] = manageCriminal.other
-                    result_list[counter] = tuple(criminal_list)
-                    counter = counter + 1
-                result = tuple(result_list)
+                result = criminals_translate_to_Greek(manageCriminal, list(result))
             return render_template('manage_criminals.html', result=result, header = header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
         else:
             return render_template('manage_criminals.html', error=messages.norecordfound, header=header, messages = messages, manageCriminal=manageCriminal, login_role=login_role)
@@ -655,33 +519,7 @@ def manage_criminals():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    result_list = list(result)
-                    counter = 0
-                    for row in result_list:
-                        criminal_list = list(row)
-                        if criminal_list[5] == "Black":
-                            criminal_list[5] = manageCriminal.black
-                        elif criminal_list[5] == "Brown":
-                            criminal_list[5] = manageCriminal.brown
-                        elif criminal_list[5] == "Green":
-                            criminal_list[5] = manageCriminal.green
-                        elif criminal_list[5] == "Blue":
-                            criminal_list[5] = manageCriminal.blue
-                        elif criminal_list[5] == "Dark Brown":
-                            criminal_list[5] = manageCriminal.darkbrown
-                        elif criminal_list[5] == "Amber":
-                            criminal_list[5] = manageCriminal.amber
-                        elif criminal_list[5] == "Gray":
-                            criminal_list[5] = manageCriminal.gray
-                        if criminal_list[9] == "Male":
-                            criminal_list[9] = manageCriminal.male
-                        if criminal_list[9] == "Female":
-                            criminal_list[9] = manageCriminal.female
-                        if criminal_list[9] == "Other":
-                            criminal_list[9] = manageCriminal.other
-                        result_list[counter] = tuple(criminal_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    result = criminals_translate_to_Greek(manageCriminal, list(result))
             return render_template('manage_criminals.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -690,33 +528,7 @@ def manage_criminals():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    result_list = list(result)
-                    counter = 0
-                    for row in result_list:
-                        criminal_list = list(row)
-                        if criminal_list[5] == "Black":
-                            criminal_list[5] = manageCriminal.black
-                        elif criminal_list[5] == "Brown":
-                            criminal_list[5] = manageCriminal.brown
-                        elif criminal_list[5] == "Green":
-                            criminal_list[5] = manageCriminal.green
-                        elif criminal_list[5] == "Blue":
-                            criminal_list[5] = manageCriminal.blue
-                        elif criminal_list[5] == "Dark Brown":
-                            criminal_list[5] = manageCriminal.darkbrown
-                        elif criminal_list[5] == "Amber":
-                            criminal_list[5] = manageCriminal.amber
-                        elif criminal_list[5] == "Gray":
-                            criminal_list[5] = manageCriminal.gray
-                        if criminal_list[9] == "Male":
-                            criminal_list[9] = manageCriminal.male
-                        if criminal_list[9] == "Female":
-                            criminal_list[9] = manageCriminal.female
-                        if criminal_list[9] == "Other":
-                            criminal_list[9] = manageCriminal.other
-                        result_list[counter] = tuple(criminal_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    result = criminals_translate_to_Greek(manageCriminal, list(result))
             return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
         finally:
             pass
@@ -763,33 +575,7 @@ def insert_criminals():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    result_list = list(result)
-                    counter = 0
-                    for row in result_list:
-                        criminal_list = list(row)
-                        if criminal_list[5] == "Black":
-                            criminal_list[5] = manageCriminal.black
-                        elif criminal_list[5] == "Brown":
-                            criminal_list[5] = manageCriminal.brown
-                        elif criminal_list[5] == "Green":
-                            criminal_list[5] = manageCriminal.green
-                        elif criminal_list[5] == "Blue":
-                            criminal_list[5] = manageCriminal.blue
-                        elif criminal_list[5] == "Dark Brown":
-                            criminal_list[5] = manageCriminal.darkbrown
-                        elif criminal_list[5] == "Amber":
-                            criminal_list[5] = manageCriminal.amber
-                        elif criminal_list[5] == "Gray":
-                            criminal_list[5] = manageCriminal.gray
-                        if criminal_list[9] == "Male":
-                            criminal_list[9] = manageCriminal.male
-                        if criminal_list[9] == "Female":
-                            criminal_list[9] = manageCriminal.female
-                        if criminal_list[9] == "Other":
-                            criminal_list[9] = manageCriminal.other
-                        result_list[counter] = tuple(criminal_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    result = criminals_translate_to_Greek(manageCriminal, list(result))
             return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, login_role = login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -829,33 +615,7 @@ def remove_criminals():
                 result = sql.fetchall()
                 if result:
                     if site_language == "Greek":
-                        result_list = list(result)
-                        counter = 0
-                        for row in result_list:
-                            criminal_list = list(row)
-                            if criminal_list[5] == "Black":
-                                criminal_list[5] = manageCriminal.black
-                            elif criminal_list[5] == "Brown":
-                                criminal_list[5] = manageCriminal.brown
-                            elif criminal_list[5] == "Green":
-                                criminal_list[5] = manageCriminal.green
-                            elif criminal_list[5] == "Blue":
-                                criminal_list[5] = manageCriminal.blue
-                            elif criminal_list[5] == "Dark Brown":
-                                criminal_list[5] = manageCriminal.darkbrown
-                            elif criminal_list[5] == "Amber":
-                                criminal_list[5] = manageCriminal.amber
-                            elif criminal_list[5] == "Gray":
-                                criminal_list[5] = manageCriminal.gray
-                            if criminal_list[9] == "Male":
-                                criminal_list[9] = manageCriminal.male
-                            if criminal_list[9] == "Female":
-                                criminal_list[9] = manageCriminal.female
-                            if criminal_list[9] == "Other":
-                                criminal_list[9] = manageCriminal.other
-                            result_list[counter] = tuple(criminal_list)
-                            counter = counter + 1
-                        result = tuple(result_list)
+                        result = criminals_translate_to_Greek(manageCriminal, list(result))
                 return render_template('manage_criminals.html', success=message, result=result, header=header, manageCriminal=manageCriminal, login_role=login_role)
             else:
                 message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
@@ -865,33 +625,7 @@ def remove_criminals():
                 result = sql.fetchall()
                 if result:
                     if site_language == "Greek":
-                        result_list = list(result)
-                        counter = 0
-                        for row in result_list:
-                            criminal_list = list(row)
-                            if criminal_list[5] == "Black":
-                                criminal_list[5] = manageCriminal.black
-                            elif criminal_list[5] == "Brown":
-                                criminal_list[5] = manageCriminal.brown
-                            elif criminal_list[5] == "Green":
-                                criminal_list[5] = manageCriminal.green
-                            elif criminal_list[5] == "Blue":
-                                criminal_list[5] = manageCriminal.blue
-                            elif criminal_list[5] == "Dark Brown":
-                                criminal_list[5] = manageCriminal.darkbrown
-                            elif criminal_list[5] == "Amber":
-                                criminal_list[5] = manageCriminal.amber
-                            elif criminal_list[5] == "Gray":
-                                criminal_list[5] = manageCriminal.gray
-                            if criminal_list[9] == "Male":
-                                criminal_list[9] = manageCriminal.male
-                            if criminal_list[9] == "Female":
-                                criminal_list[9] = manageCriminal.female
-                            if criminal_list[9] == "Other":
-                                criminal_list[9] = manageCriminal.other
-                            result_list[counter] = tuple(criminal_list)
-                            counter = counter + 1
-                        result = tuple(result_list)
+                        result = criminals_translate_to_Greek(manageCriminal, list(result))
                 return render_template('manage_criminals.html', error=message, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -903,36 +637,71 @@ def remove_criminals():
                 if site_language == "Greek":
                     result_list = list(result)
                     counter = 0
-                    for row in result_list:
-                        criminal_list = list(row)
-                        if criminal_list[5] == "Black":
-                            criminal_list[5] = manageCriminal.black
-                        elif criminal_list[5] == "Brown":
-                            criminal_list[5] = manageCriminal.brown
-                        elif criminal_list[5] == "Green":
-                            criminal_list[5] = manageCriminal.green
-                        elif criminal_list[5] == "Blue":
-                            criminal_list[5] = manageCriminal.blue
-                        elif criminal_list[5] == "Dark Brown":
-                            criminal_list[5] = manageCriminal.darkbrown
-                        elif criminal_list[5] == "Amber":
-                            criminal_list[5] = manageCriminal.amber
-                        elif criminal_list[5] == "Gray":
-                            criminal_list[5] = manageCriminal.gray
-                        if criminal_list[9] == "Male":
-                            criminal_list[9] = manageCriminal.male
-                        if criminal_list[9] == "Female":
-                            criminal_list[9] = manageCriminal.female
-                        if criminal_list[9] == "Other":
-                            criminal_list[9] = manageCriminal.other
-                        result_list[counter] = tuple(criminal_list)
-                        counter = counter + 1
-                    result = tuple(result_list)
+                    result = criminals_translate_to_Greek(manageCriminal, list(result))
             return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
         finally:
             pass
 
-
+@app.route('/settings', methods = ['GET', 'POST'])
+def settings():
+    global site_language
+    global login_role
+    global loggedin_user_email
+    if site_language == "Greek":
+        header = HeaderGR()
+        messages = MessagesGR()
+        manageUser = ManageUserGR()
+        settings = SettingsGR()
+    else:
+        header = HeaderEN()
+        messages = MessagesEN()
+        manageUser = ManageUserEN()
+        settings = SettingsEN()
+    if request.method == 'GET':
+        sql = mydb.cursor()
+        sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+        user = sql.fetchall()
+        if user:
+            if site_language == "Greek":
+                user = single_user_translate_to_Greek(manageUser, list(user[0]))
+            return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings)
+        else:
+            pass #TODO: add some error control here
+    elif request.method == 'POST':
+        try:
+            user_id = str(request.form["id"])
+            user_username = str(request.form["username"])
+            user_password = str(request.form["password"])
+            user_email = str(request.form["email"])
+            user_fullname = str(request.form["full_name"])
+            user_gender = str(request.form["gender"])
+            user_biography = str(request.form["biography"])
+            user_work_phone = str(request.form["work_phone"])
+            user_mobile_phone = str(request.form["mobile_phone"])
+            user_role = str(request.form["role"])
+            user_avatar = str(request.form["avatar"])
+            sql = mydb.cursor()
+            query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
+            query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
+            sql.execute(query, query_input)
+            mydb.commit()
+            sql.close()
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+            user = sql.fetchall()
+            if user:
+                if site_language == "Greek":
+                    user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges)
+        except MySQLdb.Error as error:
+            messages.sqlerror = str(error)
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_user_email + "'")
+            user = sql.fetchall()
+            if user:
+                return render_template('settings.html', header=header, messages=messages, login_role=login_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
+        finally:
+            pass
 
 
 @app.route('/live_feed', methods=['GET', 'POST'])
@@ -980,7 +749,7 @@ def search_live_feed():
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
-        return render_template('manage_livefeed.html', result=result, header=header, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, login_role=login_role)
+        return render_template('manage_livefeed.html', result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, login_role=login_role)
     elif request.method == 'POST':
         global detection_time
         global average_detection_time
@@ -1014,7 +783,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal = manageCriminal, login_role = login_role)
+            return render_template('search_livefeed.html', result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal = manageCriminal, login_role = login_role)
 
 
 

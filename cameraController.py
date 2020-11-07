@@ -4,7 +4,7 @@ import cv2
 from flask import *
 import MySQLdb
 from time import gmtime, strftime
-from camera import *
+from cameraController import *
 import numpy as np
 import time
 from EnglishLanguage import *
