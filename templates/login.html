@@ -24,6 +24,24 @@
             color: black;
             text-align: center;
         }
+        .errorcontainerfillpage {
+            width: 35%;
+            margin-top: 15%;
+            background-color: red;
+        }
+        .errorloginfooter{
+            margin-top: 19%;
+            background-color: #f1f1f1;
+            padding: 5px;
+            color: black;
+            text-align: center;
+        }
+        .centererrorbutton {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -33,47 +51,56 @@
       <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
 </div>
 
-
-<div class="login-form">
-    <form action="" method="post">
-		<div class="avatar">
-			<img src="/static/images/avatar.png" alt="Avatar">
-		</div>
-        <h2 class="text-center black">{{ login.platformlogin }}</h2>
-        <hr>
-        {% if error %}
-            <div id="errorcontainerlogin">
-                <p class="error"><strong>{{ messages.error }}</strong>{{ messages.invalidcredentials }}</p>
-            </div><br><br>
-        {% endif %}
-        {% if success %}
-            <div id="successcontainerlogin">
-                <p class="success"><strong>{{ success }}</strong></p>
-            </div><br><br>
-        {% endif %}
-        <div class="form-group">
-        	<div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-        	    <input type="text" class="form-control" placeholder="{{ login.enteremail }}" name="email" id = "email" value="{{request.form.email}}" required>
+{% if login_role == "" %}
+    <div class="login-form">
+        <form action="" method="post">
+            <div class="avatar">
+                <img src="/static/images/avatar.png" alt="Avatar">
             </div>
-        </div>
-        <div class="form-group">
-        	<div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-lock fa-lg"></i></span>
-                <input type="password" class="form-control" placeholder="{{ login.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+            <h2 class="text-center black">{{ login.platformlogin }}</h2>
+            <hr>
+            {% if error %}
+                <div id="errorcontainerlogin">
+                    <p class="error"><strong>{{ messages.error }}</strong>{{ messages.invalidcredentials }}</p>
+                </div><br><br>
+            {% endif %}
+            {% if success %}
+                <div id="successcontainerlogin">
+                    <p class="success"><strong>{{ success }}</strong></p>
+                </div><br><br>
+            {% endif %}
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="{{ login.enteremail }}" name="email" id = "email" value="{{request.form.email}}" required>
+                </div>
             </div>
-        </div><br>
-        <div class="form-group">
-            <button type="submit" id="loginSubmit" class="btn btn-primary btn-lg btn-block" value="login">{{ login.login }}</button>
-            <button id="returnSubmit" class="btn btn-warning btn-lg btn-block" value="welcome" onclick="window.location.href = 'welcome';">{{ login.returnhome }}</button>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon primary"><i class="fa fa-lock fa-lg"></i></span>
+                    <input type="password" class="form-control" placeholder="{{ login.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                </div>
+            </div><br>
+            <div class="form-group">
+                <button type="submit" id="loginSubmit" class="btn btn-primary btn-lg btn-block" value="login">{{ login.login }}</button>
+                <button id="returnSubmit" class="btn btn-warning btn-lg btn-block" value="welcome" onclick="window.location.href = 'welcome';">{{ login.returnhome }}</button>
+            </div>
+        </form>
+    </div>
+    <div class="loginfooter">
+        <h2>Footer</h2>
+    </div>
+{% else %}
+    <div class="container errorcontainerfillpage">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ messages.alreadyloggedin }}</p>
+        <div class="centererrorbutton">
+            <button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome}}</button>
         </div>
-    </form>
-</div>
-</div>
-
-<div class="loginfooter">
-    <h2>Footer</h2>
-</div>
+    </div>
+    <div class="errorloginfooter">
+        <h2>Footer</h2>
+    </div>
+{% endif %}
 
 </body>
 

@@ -228,6 +228,13 @@ hr {
     margin:auto;
 }
 
+.centererrorbutton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .container {
     border-radius: 20px;
     background-color: #f2f2f2;
@@ -236,6 +243,12 @@ hr {
 
 .errorcontainer{
     width:35%;
+    background-color: red;
+}
+
+.errorcontainerfillpage {
+    width: 35%;
+    margin-top: 15%;
     background-color: red;
 }
 
@@ -301,8 +314,24 @@ hr {
     text-align: center;
 }
 
+ .country-container {
+      border-radius: 20px;
+      background-color: #f2f2f2;
+      width: 10%;
+      text-align: center;
+     color: black;
+}
+
 .loginfooter {
     margin-top: 7%;
+    background-color: #f1f1f1;
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.errorloginfooter{
+    margin-top: 19%;
     background-color: #f1f1f1;
     padding: 5px;
     color: black;

@@ -144,7 +144,7 @@ def login():
         header = HeaderEN()
         home = HomeEN()
     if request.method == 'GET':
-        return render_template('login.html', login=login)
+        return render_template('login.html', login=login, login_role=login_role, messages=messages)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
