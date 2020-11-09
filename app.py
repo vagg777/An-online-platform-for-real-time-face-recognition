@@ -789,7 +789,7 @@ def search_live_feed():
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
-        return render_template('manage_livefeed.html', result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, login_role=login_role)
+        return render_template('manage_livefeed.html', messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, login_role=login_role)
     elif request.method == 'POST':
         global detection_time
         global average_detection_time

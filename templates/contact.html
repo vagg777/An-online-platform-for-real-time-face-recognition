@@ -22,6 +22,24 @@
           background-color: #f2f2f2;
           padding: 20px;
         }
+        .centererrorbutton {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .errorcontainerfillpage {
+            width: 35%;
+            margin-top: 15%;
+            background-color: red;
+        }
+        .errorloginfooter{
+            margin-top: 19%;
+            background-color: #f1f1f1;
+            padding: 5px;
+            color: black;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -80,18 +98,30 @@
               <input type="submit" class="btn btn-primary" value="{{ contact.submitissue }}">
         </form>
     </div>
+
+    <div class="footer">
+        <h2>Footer</h2>
+    </div>
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="container errorcontainer" style="margin-top: 20%">
+    <div class="header">
+        <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
+    </div>
+
+    <div class="container errorcontainerfillpage">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
-        <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
-    </div><br><br>
+        <div class="centererrorbutton">
+            <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
+        </div>
+    </div>
+
+    <div class="errorloginfooter">
+        <h2>Footer</h2>
+    </div>
 {% endif %}
 
-<div class="footer">
-    <h2>Footer</h2>
-</div>
+
 
 </body>
 </html>
