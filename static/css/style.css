@@ -241,14 +241,14 @@ hr {
     padding: 20px;
 }
 
-.errorcontainer{
-    width:35%;
-    background-color: red;
-}
-
 .errorcontainerfillpage {
     width: 35%;
     margin-top: 15%;
+    background-color: red;
+}
+
+.errorcontainer{
+    width:35%;
     background-color: red;
 }
 
@@ -357,6 +357,24 @@ hr {
     left: 50%;
     -ms-transform: translate(-50%, -100%);
     transform: translate(-50%, -20%);
+}
+
+#wrap {
+    padding: 5%;
+    text-align: center;
+    width: 100%;
+    color: black;
+    border-style: solid;
+    border-color: black;
+}
+
+#left, #right {
+     display: inline-block;
+     padding: 2%;
+     border-style: solid;
+     border-color: black;
+     color: black;
+     text-align: justify;
 }
 
 @media screen and (max-width: 500px) {

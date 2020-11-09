@@ -24,23 +24,41 @@
               text-align: center;
               color: black;
         }
+
         .centererrorbutton {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .errorcontainerfillpage {
             width: 35%;
             margin-top: 15%;
             background-color: red;
         }
+
         .errorloginfooter{
             margin-top: 19%;
             background-color: #f1f1f1;
             padding: 5px;
             color: black;
             text-align: center;
+        }
+
+        #wrap {
+            padding: 2%;
+            text-align: center;
+            width: 100%;
+        }
+
+        #left, #right {
+             display: inline-block;
+             padding: 2%;
+             border-style: solid;
+             border-color: black;
+             color: black;
+             text-align: justify;
         }
     </style>
 </head>
@@ -75,12 +93,33 @@
 
     <br><br><br>
 
-    <div class="container">
+    <div id="wrap" class="container">
         <h1 align="center">{{ manage.panel }}</h1>
-        <hr>
-        <p>{{ manage.message2 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_criminals';">{{ manage.edit }}</button></p>
-        <hr>
-        <p>{{ manage.message4 }} <button class="btn btn-warning" onclick="window.location.href = 'manage_users';">{{ manage.edit }}</button></p>
+        <hr><br><br>
+        <div id="left">
+            <div class="centererrorbutton">
+                <button class="btn btn-warning btn-lg" onclick="window.location.href = 'manage_criminals';">{{ manage.editcriminals }}</button>
+            </div>
+            <br><br>
+            <p><i>{{ manage.editinfo }}</i></p>
+            <ul>
+                <li><i>{{ manage.insertcriminals }}</i></li>
+                <li><i>{{ manage.updatecriminals }}</i></li>
+                <li><i>{{ manage.removecriminals }}</i></li>
+            </ul>
+        </div>
+        <div id="right">
+            <div class="centererrorbutton">
+                <button class="btn btn-warning btn-lg" onclick="window.location.href = 'manage_users';">{{ manage.editusers }}</button>
+            </div>
+            <br><br>
+            <p><i>{{ manage.editinfo }}</i></p>
+            <ul>
+                <li><i>{{ manage.insertusers }}</i></li>
+                <li><i>{{ manage.updateusers }}</i></li>
+                <li><i>{{ manage.removeusers }}</i></li>
+            </ul>
+        </div><br><br>
     </div>
 
     <div class="managefooter">
