@@ -38,7 +38,8 @@ class MessagesEN:
     returntohome = "Return to Home Page"
     yourchanges = "Your changes were successfully saved!"
     passwordnomatch = "The passwords entered do not match! Please try again."
-    alreadyloggedin = "You are already logged in!"
+    alreadyloggedin = "You have already logged in!"
+    alreadysignedin = "You have already registered for the platform!"
 
 class HomeEN:
     title = "Livestream Police Surveillance Application"

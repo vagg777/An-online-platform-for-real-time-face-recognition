@@ -178,7 +178,7 @@ def signup():
         header = HeaderEN()
         home = HomeEN()
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages=messages)
+        return render_template('signup.html', signup=signup, messages=messages, login_role=login_role)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])

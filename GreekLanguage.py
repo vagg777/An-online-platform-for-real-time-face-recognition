@@ -61,7 +61,8 @@ class MessagesGR:
     returntohome = "Επιστροφή στη Κεντρική Σελίδα"
     yourchanges = "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς!"
     passwordnomatch = "Οι κωδικοί δεν είναι ίδιοι μεταξύ τους! Παρακαλούμε προσπαθήστε ξανά."
-    alreadyloggedin = "Έχετε ήδη συνδεθεί στη πλατφόρμα"
+    alreadyloggedin = "Έχετε ήδη συνδεθεί στη πλατφόρμα!"
+    alreadysignedin = "Έχετε ήδη εγγραφεί στη πλατφόρμα!"
 
 class ContactGR:
     reportissue = "Ανέφερε ένα πρόβλημα"
