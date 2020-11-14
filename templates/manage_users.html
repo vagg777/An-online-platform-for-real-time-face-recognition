@@ -21,6 +21,17 @@
     }
 
     $(document).ready(function() {
+         $('#deleteModal').on('show.bs.modal', function (e) {
+             var _button = $(e.relatedTarget);
+             var _row = _button.parents("tr");
+             var _id = _row.find(".user_id").text();
+             var _username = _row.find(".user_username").text();
+             $(this).find(".delete_user_id").val(_id);
+             $(this).find(".delete_user_username").val(_username);
+         });
+    });
+
+    $(document).ready(function() {
             $('#updateModal').on('show.bs.modal', function (e) {
             var _button = $(e.relatedTarget);
             var _row = _button.parents("tr");
@@ -58,11 +69,6 @@
         window.history.replaceState( null, null, 'manage_users' );
      }
 
-
-    $('.confirmation').on('click', function () {
-        return confirm('Are you sure re malaka?');
-    });
-
     document.onkeydown = fkey;
     document.onkeypress = fkey
     document.onkeyup = fkey;
@@ -90,7 +96,7 @@
         <a href="live_feed">{{ header.livefeed }}</a>
         <a href="contact">{{ header.contact }}</a>
         <a href="settings">{{ header.settings }}</a>
-        <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+        <a href="logout" id="logouttab" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
       </div>
     </div>
 
@@ -147,16 +153,34 @@
                             <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
                         </td>
                         <td>
-                            <form action="remove_users" method="post">
-                                <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
-                                <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageUser.delete }}</button>
-                            </form>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageUser.delete }}</button>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <form action="remove_users" method="post">
+            <div class="modal-dialog">
+                  <div class="modal-content">
+                        <div class="modal-header" style="background-color: #d9534f; color:white;">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">{{ manageUser.delete }}</h4>
+                        </div>
+                      <div class="modal-body black">
+                          <p>{{ manageUser.confirmDelete }} </p>
+                          <input class="form-control delete_user_id" type="hidden" id="delete_user_id" name="delete_user_id" placeholder="{{ manageUser.enteruser_id}}" value="{{ request.form.delete_user_id }}" readonly>
+                          <input class="form-control delete_user_username" type="hidden" id="delete_user_username" name="delete_user_username" placeholder="{{ manageUser.enteruser_username }}" value="{{ request.form.delete_user_username}}" readonly>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">{{ manageUser.cancel }}</button>
+                          <input type="submit" class="btn btn-danger" value="{{ manageUser.delete }}">
+                      </div>
+                  </div>
+            </div>
+        </form>
     </div>
 
     <div class="modal fade" id="updateModal" role="dialog">

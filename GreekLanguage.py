@@ -273,6 +273,7 @@ class ManageUserGR:
     retype_password = "Κωδικός (επαλήθευση)"
     enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
     insertuser = "Εισαγωγή Χρήστη"
+    confirmDelete = "Είστε σίγουροι ότι επιθυμείτε να διαγράψετε αυτόν τον χρήστη από τη βάση δεδομένων;"
 
 class ManageLivefeedGR:
     search = "Ψάξε"

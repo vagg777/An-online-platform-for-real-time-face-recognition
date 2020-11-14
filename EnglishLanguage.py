@@ -276,6 +276,7 @@ class ManageUserEN:
     retype_password = "Password (validation)"
     enterretype_password = "Re-type your Password"
     insertuser = "Insert User"
+    confirmDelete = "Are you sure you want to delete this user from the database?"
 
 class ManageLivefeedEN:
     search = "Search"

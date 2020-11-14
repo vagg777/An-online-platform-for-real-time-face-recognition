@@ -463,8 +463,8 @@ def remove_users():
         return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, insertUser=insertUser, manage=manage, login_role=login_role)
     if request.method == 'POST':
         try:
-            user_id = str(request.form["row.0"])
-            user_username = str(request.form["row.1"])
+            user_id = str(request.form["delete_user_id"])
+            user_username = str(request.form["delete_user_username"])
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users WHERE user_id ='" + user_id + "'")
             user = sql.fetchall()

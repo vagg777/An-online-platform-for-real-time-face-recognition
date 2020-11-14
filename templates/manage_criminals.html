@@ -84,10 +84,6 @@
     if ( window.history.replaceState ) {
           window.history.replaceState( null, null, 'manage_criminals' );
     }
-
-    $('.confirmation').on('click', function () {
-        return confirm('Are you sure?');
-    });
     </script>
 </head>
 
@@ -103,7 +99,7 @@
         <a href="live_feed">{{ header.livefeed }}</a>
         <a href="contact">{{ header.contact }}</a>
         <a href="settings">{{ header.settings}}</a>
-        <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+        <a href="logout" id="logouttab" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
       </div>
     </div>
 
@@ -177,7 +173,7 @@
                         </div>
                       <div class="modal-body black">
                           <p>{{ manageCriminal.confirmDelete }} </p>
-                          <input class="form-control delete_criminal_id" type="hidden" id="delete_criminalid" name="delete_criminal_id" placeholder="{{ manageCriminal.entercriminal_id}}" value="{{ request.form.delete_criminal_id }}" readonly>
+                          <input class="form-control delete_criminal_id" type="hidden" id="delete_criminal_id" name="delete_criminal_id" placeholder="{{ manageCriminal.entercriminal_id}}" value="{{ request.form.delete_criminal_id }}" readonly>
                           <input class="form-control delete_criminal_full_name" type="hidden" id="delete_criminal_full_name" name="delete_criminal_full_name" placeholder="{{ manageCriminal.enterfull_name }}" value="{{ request.form.delete_criminal_full_name }}" readonly>
                       </div>
                       <div class="modal-footer">
