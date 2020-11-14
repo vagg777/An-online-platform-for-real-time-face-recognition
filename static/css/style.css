@@ -307,7 +307,7 @@ hr {
 }
 
 .welcomefooter {
-    margin-top: 15%;
+    margin-top: 14%;
     background-color: #f1f1f1;
     padding: 5px;
     color: black;
@@ -315,11 +315,11 @@ hr {
 }
 
  .country-container {
-      border-radius: 20px;
-      background-color: #f2f2f2;
-      width: 10%;
-      text-align: center;
-     color: black;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    width: 10%;
+    text-align: center;
+    color: black;
 }
 
 .loginfooter {
@@ -339,7 +339,7 @@ hr {
 }
 
 .managefooter {
-    margin-top: 14%;
+    margin-top: 6%;
     background-color: #f1f1f1;
     padding: 5px;
     color: black;
@@ -376,6 +376,8 @@ hr {
      color: black;
      text-align: justify;
 }
+
+
 
 @media screen and (max-width: 500px) {
     .header a {

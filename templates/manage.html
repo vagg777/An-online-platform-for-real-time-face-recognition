@@ -16,51 +16,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-         .country-container {
-              border-radius: 20px;
-              background-color: #f2f2f2;
-              width: 10%;
-              text-align: center;
-              color: black;
-        }
-
-        .centererrorbutton {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .errorcontainerfillpage {
-            width: 35%;
-            margin-top: 15%;
-            background-color: red;
-        }
-
-        .errorloginfooter{
-            margin-top: 19%;
-            background-color: #f1f1f1;
-            padding: 5px;
-            color: black;
-            text-align: center;
-        }
-
-        #wrap {
-            padding: 2%;
-            text-align: center;
-            width: 100%;
-        }
-
-        #left, #right {
-             display: inline-block;
-             padding: 2%;
-             border-style: solid;
-             border-color: black;
-             color: black;
-             text-align: justify;
-        }
-    </style>
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -77,18 +32,6 @@
               <a href="settings">{{ header.settings }}</a>
               <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
           </div>
-    </div>
-
-    <br><br><br>
-
-    <div class="country-container container">
-        <div class="dropdown">
-            <button class="btn btn-successdropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Change Language</button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li class="dropdown-item"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132503/iflag.jpg" width="20" height="15"> Greek</li>
-                <li class="dropdown-item"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" width="20" height="15"> USA</li>
-            </ul>
-        </div>
     </div>
 
     <br><br><br>
