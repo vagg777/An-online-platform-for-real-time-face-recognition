@@ -641,8 +641,8 @@ def remove_criminals():
         insertCriminal = InsertCriminalsEN()
     if request.method == 'POST':
         try:
-            criminal_id = str(request.form["row.0"])
-            criminal_full_name = str(request.form["row.1"])
+            criminal_id = str(request.form["delete_criminal_id"])
+            criminal_full_name = str(request.form["delete_criminal_full_name"])
             sql = mydb.cursor()
             sql.execute("SELECT * FROM criminals WHERE criminal_id ='" + criminal_id + "'")
             user = sql.fetchall()

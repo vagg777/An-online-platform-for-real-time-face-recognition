@@ -235,6 +235,7 @@ class ManageCriminalGR:
     other = "Άλλο"
     insert = "Εισαγωγή"
     insertCriminal = "Εισαγωγή Κακοποιού"
+    confirmDelete = "Είστε σίγουροι ότι επιθυμείτε να διαγράψετε αυτόν τον κακοποιό από τη βάση δεδομένων;"
 
 class ManageUserGR:
     manage = "Επεξεργασία χρηστών"

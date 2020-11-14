@@ -99,7 +99,6 @@ class ManageEN:
     removeusers = "Remove unwanted Users"
 
 
-
 class InsertCriminalsEN:
     insert = "Insert new Criminals"
     fullname = "Full Name"
@@ -238,6 +237,7 @@ class ManageCriminalEN:
     information = "Criminal's Information:"
     insert = "Insert"
     insertCriminal = "Insert Criminal"
+    confirmDelete = "Are you sure you want to delete this criminal from the database?"
 
 
 class ManageUserEN:

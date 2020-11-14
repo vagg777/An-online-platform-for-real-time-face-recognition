@@ -21,6 +21,17 @@
     }
 
     $(document).ready(function() {
+         $('#deleteModal').on('show.bs.modal', function (e) {
+             var _button = $(e.relatedTarget);
+             var _row = _button.parents("tr");
+             var _id = _row.find(".criminal_id").text();
+             var _full_name = _row.find(".criminal_full_name").text();
+             $(this).find(".delete_criminal_id").val(_id);
+             $(this).find(".delete_criminal_full_name").val(_full_name);
+         });
+    });
+
+    $(document).ready(function() {
             $('#updateModal').on('show.bs.modal', function (e) {
             var _button = $(e.relatedTarget);
             var _row = _button.parents("tr");
@@ -147,16 +158,35 @@
                             <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
                         </td>
                         <td>
-                            <form action="remove_criminals" method="post">
-                                <input type="hidden" id="row.0" name="row.0" value="{{row.0}}">
-                                <input type="hidden" id="row.1" name="row.1" value="{{row.1}}">
-                                <button class="btn btn-danger confirmation" onclick="validateDelete()">{{ manageCriminal.delete }}</button>
-                            </form>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageCriminal.delete }}</button>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <form action="remove_criminals" method="post">
+            <div class="modal-dialog">
+                  <div class="modal-content">
+                        <div class="modal-header" style="background-color: #d9534f; color:white;">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">{{ manageCriminal.delete }}</h4>
+                        </div>
+                      <div class="modal-body black">
+                          <p>{{ manageCriminal.confirmDelete }} </p>
+                          <input class="form-control delete_criminal_id" type="hidden" id="delete_criminalid" name="delete_criminal_id" placeholder="{{ manageCriminal.entercriminal_id}}" value="{{ request.form.delete_criminal_id }}" readonly>
+                          <input class="form-control delete_criminal_full_name" type="hidden" id="delete_criminal_full_name" name="delete_criminal_full_name" placeholder="{{ manageCriminal.enterfull_name }}" value="{{ request.form.delete_criminal_full_name }}" readonly>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">{{ manageCriminal.cancel }}</button>
+                          <input type="submit" class="btn btn-danger" value="{{ manageCriminal.delete }}">
+                      </div>
+                  </div>
+            </div>
+        </form>
     </div>
 
     <div class="modal fade" id="updateModal" role="dialog">
