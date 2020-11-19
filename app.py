@@ -712,6 +712,7 @@ def settings():
             user_id = str(request.form["id"])
             user_username = str(request.form["username"])
             user_password = str(request.form["password"])
+            user_retype_password = str(request.form["retype_password"])
             user_email = str(request.form["email"])
             user_fullname = str(request.form["full_name"])
             user_gender = str(request.form["gender"])
@@ -720,6 +721,8 @@ def settings():
             user_mobile_phone = str(request.form["mobile_phone"])
             user_role = str(request.form["role"])
             user_avatar = str(request.form["avatar"])
+            if user_password != user_retype_password:
+                return render_template('settings.html', error=messages.passwordnomatch, signup=signup, login_role=login_role, manageUser=manageUser, user=user, messages=messages, header=header)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
