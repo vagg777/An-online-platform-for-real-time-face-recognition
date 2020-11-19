@@ -15,46 +15,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        .centererrorbutton {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .errorcontainerfillpage {
-            width: 35%;
-            margin-top: 15%;
-            background-color: red;
-        }
-        .errorloginfooter{
-            margin-top: 19%;
-            background-color: #f1f1f1;
-            padding: 5px;
-            color: black;
-            text-align: center;
-        }
-                .errorcontainer{
-            width:35%;
-            background-color: red;
-        }
-        .successcontainer {
-            width: 35%;
-            background-color: green;
-        }
-
-        .error {
-            color: white;
-            text-align: center;
-            align: center;
-        }
-
-        .success {
-            color: white;
-            text-align:center;
-            align:center;
-        }
-    </style>
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -69,7 +29,7 @@
         <a href="live_feed" class="active">{{ header.livefeed }}</a>
         <a href="contact">{{ header.contact }}</a>
         <a href="settings">{{ header.settings }}</a>
-        <a href="logout" id = "logouttab" class="btn btn-danger" style="color: white;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+        <a href="logout" id = "logouttab" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
       </div>
     </div>
 

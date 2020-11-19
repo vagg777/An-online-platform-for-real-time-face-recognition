@@ -16,12 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-        .container {
-            border-radius: 20px;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-
         * {
           box-sizing: border-box;
         }
@@ -32,55 +26,10 @@
           padding: 5px;
         }
 
-        /* Clearfix (clear floats) */
         .row::after {
           content: "";
           clear: both;
           display: table;
-        }
-
-        .button {
-          display: block;
-          max-width: 300px;
-          margin: auto;
-        }
-        .centererrorbutton {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .errorcontainerfillpage {
-            width: 35%;
-            margin-top: 15%;
-            background-color: red;
-        }
-        .errorloginfooter{
-            margin-top: 19%;
-            background-color: #f1f1f1;
-            padding: 5px;
-            color: black;
-            text-align: center;
-        }
-                .errorcontainer{
-            width:35%;
-            background-color: red;
-        }
-        .successcontainer {
-            width: 35%;
-            background-color: green;
-        }
-
-        .error {
-            color: white;
-            text-align: center;
-            align: center;
-        }
-
-        .success {
-            color: white;
-            text-align:center;
-            align:center;
         }
     </style>
     <script>
@@ -112,7 +61,7 @@
 <body onload="startTime()" style="background-image: url('/static/images/background.jpg')">
 {% if login_role %}
     <div class="header">
-          <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo"
+          <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
           <div class="header-right">
             <a href="home">{{ header.home }}</a>
             {% if login_role == 'ADMIN' %}
@@ -128,7 +77,7 @@
     <br><br><br>
 
     {% if error %}
-        <div class="econtainer rrorcontainer">
+        <div class="container errorcontainer">
             <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
         </div><br><br>
     {% endif %}
@@ -139,7 +88,7 @@
     {% endif %}
 
     <div class="container">
-        <h1 align="center" style="color: black;">{{ manageCriminal.information }}</h1>
+        <h1 align="center">{{ manageCriminal.information }}</h1>
             <table class="table">
                 <thead class="thead-dark">
                     <tr class="black">
@@ -198,22 +147,22 @@
     -->
     <div class="container">
         <div class="row">
-            <div class="column"><h1 align="center" style="color: black;">{{ manageCriminal.livefeed }}</h1></div>
+            <div class="column"><h1 align="center">{{ manageCriminal.livefeed }}</h1></div>
             <div class="column"></div>
-            <div class="column"><h1 align="center" style="color: black;">{{ manageCriminal.lastknownlocation }}</h1></div>
+            <div class="column"><h1 align="center">{{ manageCriminal.lastknownlocation }}</h1></div>
         </div>
-        <hr style="border-color: black; background-color: black; color: black;">
+        <hr>
         <div class="row">
           <div class="column">
             <img src="{{ url_for('video_feed') }}" style="width:100%">
             <h3 id="running_time" style="color: black; text-align: center;"></h3>
-            <h3 style="color: black; text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
+            <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>
           <div class="column"></div>
           <div class="column">
             <img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:100%">
-            <h3 style="color: black; text-align: center;">{{ localtime }}</h3>
-            <h3 style="color: black; text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
+            <h3 style="text-align: center;">{{ localtime }}</h3>
+            <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>
         </div>
     </div>
@@ -239,8 +188,6 @@
         <h2>Footer</h2>
     </div>
 {% endif %}
-
-
 
 </body>
 

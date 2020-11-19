@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/style_v2.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <style>
      .required {
             color: red;
@@ -31,55 +31,8 @@
       margin: 0;
     }
 
-    /* Header/logo Title */
-    .header {
-      padding: 5px;
-      text-align: center;
-      background: #0275d8;
-      color: white;
-    }
-
-    /* Increase the font size of the heading */
-    .header h1 {
-      font-size: 30px;
-    }
 
     /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
-    .navbar {
-      overflow: hidden;
-      background-color: #333;
-      position: sticky;
-      position: -webkit-sticky;
-      top: 0;
-    }
-
-    /* Style the navigation bar links */
-    .navbar a {
-      float: left;
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-
-
-    /* Right-aligned link */
-    .navbar a.right {
-      float: right;
-    }
-
-    /* Change color on hover */
-    .navbar a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-
-    /* Active/current link */
-    .navbar a.active {
-      background-color: #666;
-      color: white;
-    }
 
     /* Column container */
     .row {
@@ -111,13 +64,6 @@
       background-color: #aaa;
       width: 100%;
       padding: 20px;
-    }
-
-    /* Footer */
-    .footer {
-      padding: 5px;
-      text-align: center;
-      background: #ddd;
     }
 
     /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
@@ -189,22 +135,20 @@
     </script>
 </head>
 
-<body>
+<body style="background-image: url('/static/images/background.jpg')">
 
 <div class="header">
-  <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 7%;">
-  <h2>{{ settings.title }}</h2>
-</div>
-
-<div class="navbar">
+  <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
+  <div class="header-right">
     <a href="home">{{ header.home }}</a>
     {% if login_role == 'ADMIN' %}
         <a href="manage">{{ header.manage }}</a>
     {% endif %}
     <a href="live_feed">{{ header.livefeed }}</a>
     <a href="contact">{{ header.contact }}</a>
-    <a href="logout" class="btn btn-danger" style="float:right;"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-    <a href="settings" class="active" style="float:right;">{{ header.settings }}</a>
+    <a href="settings" class="active">{{ header.settings }}</a>
+    <a href="logout" id = "logouttab" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+  </div>
 </div>
 
 
@@ -224,13 +168,13 @@
 -->
 
 {% if error %}
-    <div class="container" style="width:35%; background-color: red;">
-        <p class="error" style="color: white; text-align:center; align:center;"><strong>{{ messages.error }}</strong> {{ error }}</p>
+    <div class="container">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ error }}</p>
     </div><br><br>
 {% endif %}
 {% if success %}
-    <div class="container" style="width: 35%; background-color: green;">
-        <p class="success" style="color: white; text-align:center; align:center;"><strong> {{ success }}</strong></p>
+    <div class="container">
+        <p class="success"><strong> {{ success }}</strong></p>
     </div><br><br>
 {% endif %}
 
@@ -245,56 +189,56 @@
         <div class="form-group">
             <label class="contactlabel" for="username">{{ manageUser.username }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id = "username" value="{{ user[1] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{  manageUser.enterpassword }}" name="full_name" id="full_name" value = "{{ user[4] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="email">{{ manageUser.email }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{  manageUser.enteremail}}" name="email" id="email"  value = "{{ user[3] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_gender" placeholder="{{ manageUser.entergender }}" name="gender" id="gender0" value = "{{ user[5] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[6] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone}}" name="work_phone" id="work_phone" value = "{{ user[7] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value = "{{ user[8] }}" readonly>
             </div>
         </div>
         <div class="form-group">
             <label class="contactlabel" for="role">{{ manageUser.role }}</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
                 <input type="text" autocomplete="off" class="form-control user_role" placeholder="{{ manageUser.enterrole }}" name="role" id="role0" value = "{{ user[9] }}" readonly>
             </div>
         </div>
@@ -326,107 +270,129 @@
                         <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
                     </div>
                     <div class="modal-body black">
-                        <div class="form-group">
-                            <label class="contactlabel" for="id">{{ manageUser.id }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id" value="{{request.form.id}}" readonly>
+                        <div class="form-row">
+                             <div class="form-group col-md-12">
+                                <label class="contactlabel" for="id">{{ manageUser.id }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id" value="{{request.form.id}}" readonly>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="username">{{ manageUser.username }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id="username" value="{{request.form.username}}" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="username">{{ manageUser.username }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id="username" value="{{request.form.username}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="email">{{ manageUser.email }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="password">{{ manageUser.password }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="password">{{ manageUser.password }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="retype_password">{{ manageUser.retype_password }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{ manageUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{ manageUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="email">{{ manageUser.email }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group div_gender">
-                                <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                                <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
-                                    <option value="Male">{{ manageUser.male }}</option>
-                                    <option value="Female">{{ manageUser.female }}</option>
-                                    <option value="Other">{{ manageUser.other }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="role">{{ manageUser.role }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group div_role">
-                                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                {% if login_role == 'ADMIN' %}
-                                    <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
-                                        <option value="ADMIN">{{ manageUser.admin }}</option>
-                                        <option value="USER">{{ manageUser.user }}</option>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group div_gender">
+                                    <span class="input-group-addon primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                    <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
+                                        <option value="Male">{{ manageUser.male }}</option>
+                                        <option value="Female">{{ manageUser.female }}</option>
+                                        <option value="Other">{{ manageUser.other }}</option>
                                     </select>
-                                {% endif %}
-                                {% if login_role == 'USER' %}
-                                    <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}" disabled>
-                                        <option value="ADMIN">{{ manageUser.admin }}</option>
-                                        <option value="USER">{{ manageUser.user }}</option>
-                                    </select>
-                                {% endif %}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="contactlabel" for="avatar">{{ manageUser.avatar }}</label>
-                            <span class="required">*</span>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-                                <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="role">{{ manageUser.role }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group div_role">
+                                    <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                    {% if login_role == 'ADMIN' %}
+                                        <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
+                                            <option value="ADMIN">{{ manageUser.admin }}</option>
+                                            <option value="USER">{{ manageUser.user }}</option>
+                                        </select>
+                                    {% endif %}
+                                    {% if login_role == 'USER' %}
+                                        <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}" disabled>
+                                            <option value="ADMIN">{{ manageUser.admin }}</option>
+                                            <option value="USER">{{ manageUser.user }}</option>
+                                        </select>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="contactlabel" for="avatar">{{ manageUser.avatar }}</label>
+                                <span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                    <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                                </div>
                             </div>
                         </div>
                     </div>
