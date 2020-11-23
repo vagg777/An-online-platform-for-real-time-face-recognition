@@ -160,7 +160,7 @@ def login():
                 loggedin_user_email = user[0][2]
                 return render_template('home.html', header=header, login_role=login_role, messages=messages, home=home, loggedin_user=loggedin_user)
         else:
-            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials)
+            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_user=loggedin_user)
 
 
 
@@ -182,7 +182,7 @@ def signup():
         header = HeaderEN()
         home = HomeEN()
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages=messages, login_role=login_role)
+        return render_template('signup.html', signup=signup, messages=messages, login_role=login_role, loggedin_user=loggedin_user)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -197,7 +197,7 @@ def signup():
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
             if password != retype_password:
-                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, login_role=login_role, messages=messages, header=header)
+                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, login_role=login_role, messages=messages, header=header, loggedin_user=loggedin_user)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()
@@ -210,7 +210,7 @@ def signup():
             return render_template('home.html', success=messages.successsignup, signup=signup, login_role=login_role, loggedin_user=loggedin_user, messages=messages, header=header, home=home)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('signup.html', error=messages.sqlerror, signup=signup, login_role=login_role, messages=messages, header=header)
+            return render_template('signup.html', error=messages.sqlerror, signup=signup, login_role=login_role, messages=messages, header=header, loggedin_user=loggedin_user)
         finally:
             pass
 

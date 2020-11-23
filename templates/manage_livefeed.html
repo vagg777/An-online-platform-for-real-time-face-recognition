@@ -3,7 +3,7 @@
 
 <head>
     <title>Manage Live Feed</title>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
@@ -48,11 +48,11 @@
                 </li>
                 {% if login_role == 'ADMIN' %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="manage">{{ header.manage }}</a>
+                        <a class="nav-link" href="manage">{{ header.manage }}</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="live_feed">{{ header.livefeed }}</a>
+                    <a class="nav-link active" href="live_feed">{{ header.livefeed }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact">{{ header.contact }}</a>
@@ -220,9 +220,9 @@
 {% endif %}
 
 {% if login_role == '' %}
-    <div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
-    </div>
+    </nav>
 
     <div class="container errorcontainerfillpage">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
