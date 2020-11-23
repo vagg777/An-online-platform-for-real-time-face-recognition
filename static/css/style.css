@@ -138,6 +138,11 @@
 
 * {
     box-sizing: border-box;
+    font-size: 14px;
+}
+
+.nav-link {
+    font-size: 18px;
 }
 
 body {

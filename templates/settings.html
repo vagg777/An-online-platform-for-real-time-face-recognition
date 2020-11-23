@@ -7,79 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
-     .required {
-            color: red;
-            font-weight: bold;
-     }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    /* Style the body */
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-    }
-
-
-    /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
-
-    /* Column container */
-    .row {
-      display: -ms-flexbox; /* IE10 */
-      display: flex;
-      -ms-flex-wrap: wrap; /* IE10 */
-      flex-wrap: wrap;
-    }
-
-    /* Create two unequal columns that sits next to each other */
-    /* Sidebar/left column */
-    .side {
-      -ms-flex: 30%; /* IE10 */
-      flex: 30%;
-      background-color: #f1f1f1;
-      padding: 20px;
-    }
-
-    /* Main column */
-    .main {
-      -ms-flex: 70%; /* IE10 */
-      flex: 70%;
-      background-color: white;
-      padding: 20px;
-    }
-
-    /* Fake image, just for this example */
-    .fakeimg {
-      background-color: #aaa;
-      width: 100%;
-      padding: 20px;
-    }
-
-    /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
-    @media screen and (max-width: 700px) {
-      .row {
-        flex-direction: column;
-      }
-    }
-
-    /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-    @media screen and (max-width: 400px) {
-      .navbar a {
-        float: none;
-        width: 100%;
-      }
-    }
+        *{
+            font-size: 14px;
+        }
+        .nav-link {
+            font-size: 18px;
+        }
     </style>
     <script>
     $(document).ready(function() {
@@ -137,22 +77,41 @@
 
 <body style="background-image: url('/static/images/background.jpg')">
 
-<div class="header">
-  <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
-  <div class="header-right">
-    <a href="home">{{ header.home }}</a>
-    {% if login_role == 'ADMIN' %}
-        <a href="manage">{{ header.manage }}</a>
-    {% endif %}
-    <a href="live_feed">{{ header.livefeed }}</a>
-    <a href="contact">{{ header.contact }}</a>
-    <a href="settings" class="active">{{ header.settings }}</a>
-    <a href="logout" id = "logouttab" class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
-  </div>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav w-100">
+            <li class="nav-item">
+                <a class="nav-link" href="home">{{ header.home }}</a>
+            </li>
+            {% if login_role == 'ADMIN' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="manage">{{ header.manage }}</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="live_feed">{{ header.livefeed }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact">{{ header.contact }}</a>
+            </li>
+            <li class="nav-item dropdown ml-auto">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ header.welcome }} {{ loggedin_user }}</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="settings">{{ header.settings }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="logout" id="logouttab" class="btn btn-danger" style="width: 100%"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-
-<br><br><br>
+<br><br>
 
 <!--
 <div class="country-container container">
@@ -178,7 +137,7 @@
     </div><br><br>
 {% endif %}
 
-
+<!--
 <div class="row">
   <div class="side">
         <h2 style="text-align:center">{{ settings.myprofile }}</h2>
@@ -405,6 +364,7 @@
         </form>
     </div>
 </div>
+-->
 
 <div class="footer">
   <h2>Footer</h2>

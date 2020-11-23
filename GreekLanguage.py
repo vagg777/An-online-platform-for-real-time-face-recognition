@@ -2,10 +2,11 @@ class HeaderGR:
     home = "Κεντρική Σελίδα"
     manage = "Διαχείριση"
     livefeed = "Ζωντανή Μετάδοση"
-    contact = "Επικοινωνια"
+    contact = "Επικοινωνία"
     logout = "Εξοδος"
-    settings = "Ρυθμίσεις"
+    settings = "Οι Ρυθμίσεις μου"
     login = "Συνδεθείτε"
+    welcome = "Καλωσήρθες"
 
 class WelcomeGR:
     title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"
