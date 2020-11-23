@@ -3,18 +3,35 @@
 
 <head>
     <title>Manage Criminals</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+          *{
+            font-size: 14px;
+        }
+        .nav-link {
+            color: black !important;
+            font-size: 18px;
+        }
+        a.active {
+            color: white !important;
+            background-color: #131e3c;
+            border-radius: 100px 25px;
+        }
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1440px;
+            }
+        }
+    </style>
     <script>
     function validateDelete() {
         confirm("Are you sure?");
@@ -140,46 +157,52 @@
         <h1 align="center">{{ manageCriminal.manage }}</h1>
         <hr>
         <button id="manageInsertButton" class="btn btn-success" data-toggle="modal" data-target="#insertModal">{{ manage.insert }}</button>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr class="black">
-                    <th scope="col">{{ manageCriminal.id }}</th>
-                    <th scope="col">{{ manageCriminal.portrait }}</th>
-                    <th scope="col">{{ manageCriminal.fullname }}</th>
-                    <th scope="col">{{ manageCriminal.age }}</th>
-                    <th scope="col">{{ manageCriminal.gender }}</th>
-                    <th scope="col">{{ manageCriminal.weight }}</th>
-                    <th scope="col">{{ manageCriminal.height }}</th>
-                    <th scope="col">{{ manageCriminal.eyecolor }}</th>
-                    <th scope="col">{{ manageCriminal.biography }}</th>
-                    <th scope="col">{{ manageCriminal.lastlocation }}</th>
-                    <th scope="col">{{ manageCriminal.update }}</th>
-                    <th scope="col">{{ manageCriminal.delete }}</th>
-                </tr>
-            </thead>
-            <tbody class="black">
-                {% for row in result %}
-                    <tr>
-                        <th class="criminal_id" scope="row">{{row.0}}</th>
-                        <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
-                        <td class="criminal_full_name">{{row.1}}</td>
-                        <td class="criminal_age">{{row.2}}</td>
-                        <td class="criminal_gender" id="gender0">{{row.9}}</td>
-                        <td class="criminal_height">{{row.3}}</td>
-                        <td class="criminal_weight">{{row.4}}</td>
-                        <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
-                        <td class="criminal_bio">{{row.6}}</td>
-                        <td class="criminal_last_location">{{row.8}}</td>
-                        <td>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageCriminal.delete }}</button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <table class="table table-hover table-striped table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="black">
+                                <th scope="col">{{ manageCriminal.id }}</th>
+                                <th scope="col">{{ manageCriminal.portrait }}</th>
+                                <th scope="col">{{ manageCriminal.fullname }}</th>
+                                <th scope="col">{{ manageCriminal.age }}</th>
+                                <th scope="col">{{ manageCriminal.gender }}</th>
+                                <th scope="col">{{ manageCriminal.weight }}</th>
+                                <th scope="col">{{ manageCriminal.height }}</th>
+                                <th scope="col">{{ manageCriminal.eyecolor }}</th>
+                                <th scope="col">{{ manageCriminal.biography }}</th>
+                                <th scope="col">{{ manageCriminal.lastlocation }}</th>
+                                <th scope="col">{{ manageCriminal.update }}</th>
+                                <th scope="col">{{ manageCriminal.delete }}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="black">
+                            {% for row in result %}
+                                <tr>
+                                    <th class="criminal_id" scope="row">{{row.0}}</th>
+                                    <td class="criminal_portrait"><img src="{{row.7}}" style="width: 100px; height: 100px;"></td>
+                                    <td class="criminal_full_name">{{row.1}}</td>
+                                    <td class="criminal_age">{{row.2}}</td>
+                                    <td class="criminal_gender" id="gender0">{{row.9}}</td>
+                                    <td class="criminal_height">{{row.3}}</td>
+                                    <td class="criminal_weight">{{row.4}}</td>
+                                    <td class="criminal_eye_color" id="eyecolor0">{{row.5}}</td>
+                                    <td class="criminal_bio">{{row.6}}</td>
+                                    <td class="criminal_last_location">{{row.8}}</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageCriminal.update }}</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageCriminal.delete }}</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 

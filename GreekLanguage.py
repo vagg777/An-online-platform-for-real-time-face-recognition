@@ -200,7 +200,7 @@ class ManageCriminalGR:
     id = "Κλειδί"
     fullname = "Πλήρες Όνομα"
     biography = "Ποινικό Μητρώο"
-    update = "Ανανέωση"
+    update = "Επεξεργασία"
     delete = "Διαγραφή"
     enterfullname = "Ονοματεπώνυμο κακοποιού..."
     portrait = "Φωτογραφία"
@@ -239,7 +239,7 @@ class ManageCriminalGR:
     confirmDelete = "Είστε σίγουροι ότι επιθυμείτε να διαγράψετε αυτόν τον κακοποιό από τη βάση δεδομένων;"
 
 class ManageUserGR:
-    manage = "Επεξεργασία χρηστών"
+    manage = "Επεξεργασία Χρηστών"
     username = "Όνομα"
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
