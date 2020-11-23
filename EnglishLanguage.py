@@ -66,7 +66,7 @@ class HomeEN:
     settingstext = "Change the settings - see the "
 
 class ContactEN:
-    reportissue = "Report an issue..."
+    reportissue = "Contact us..."
     name = "Name"
     yourname = "Your name..."
     lastname = "Last name"

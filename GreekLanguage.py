@@ -33,7 +33,7 @@ class HomeGR:
     searchcriminals = "Αναζήτηση κακοποιών σε πραγματικό χρόνο - Δείτε στην καρτέλα "
     livefeed = "Ζωντανή Σύνδεση"
     selectfilters = "Επιλέξτε διαφορετικά φίλτρα ανά ζωντανή ροή, ανάλογα με τις τρέχουσες ανάγκες - Δείτε στην καρτέλα "
-    reportissue = "Αναφέρετε ένα πρόβλημα - Δείτε στην καρτέλα "
+    reportissue = "Επικοινωνήστε μαζί μας - Δείτε στην καρτέλα "
     contact = "Επικοινωνία"
     settings = "Ρυθμίσεις"
     settingstext = "Αλλάξτε τις ρυθμίσεις - Δείτε στη καρτέλα "
@@ -66,7 +66,7 @@ class MessagesGR:
     alreadysignedin = "Έχετε ήδη εγγραφεί στη πλατφόρμα!"
 
 class ContactGR:
-    reportissue = "Ανέφερε ένα πρόβλημα"
+    reportissue = "Επικοινωνήστε μαζί μας"
     name = "Όνομα"
     yourname = "Το όνομά σου..."
     lastname = "Επώνυμο"
@@ -188,7 +188,7 @@ class InsertUserGR:
     role = "Ρόλος"
     admin = "Διαχειριστής"
     user = "Χρήστης"
-    avatar = "Εικονίδιο"
+    avatar = "Φωτογραφία"
     enterimage = "Εισάγετε URL εικόνας"
     reset = "Εκκαθάριση Φόρμας"
     submit = "Εισαγωγή χρήστη"
@@ -240,7 +240,7 @@ class ManageCriminalGR:
 
 class ManageUserGR:
     manage = "Επεξεργασία χρηστών"
-    username = "Όνομα χρήστη"
+    username = "Όνομα"
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
     enterpassword = "Εισάγετε κωδικό"
@@ -264,7 +264,7 @@ class ManageUserGR:
     id = "Κλειδί"
     enterid = "Εισάγετε κλειδί"
     user = "Χρήστης"
-    avatar = "Εικονίδιο"
+    avatar = "Φωτογραφία"
     enterimage = "Εισάγετε URL εικόνας"
     cancel = "Ακύρωση"
     updateuser = "Επεξεργασία χρήστη"

@@ -3,18 +3,38 @@
 
 <head>
     <title>Manage Users</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+         *{
+            font-size: 14px;
+        }
+        .nav-link {
+            color: black !important;
+            font-size: 18px;
+        }
+        a.active {
+            color: white !important;
+            background-color: #131e3c;
+            border-radius: 100px 25px;
+        }
+        #manageUsersContainer {
+            border-radius: 90px 25px;
+        }
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1440px;
+            }
+        }
+    </style>
     <script>
     function validateDelete() {
         confirm("Are you sure?");
@@ -133,52 +153,58 @@
         </div><br><br>
     {% endif %}
 
-    <div class="container" id = "manageUsersContainer">
+    <div class="container" id="manageUsersContainer">
         <h1 align="center">{{ manageUser.manage }}</h1>
         <hr>
         <button id="manageInsertButton" class="btn btn-success" data-toggle="modal" data-target="#insertModal">{{ manage.insert }}</button>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr class="black">
-                    <th scope="col">{{ manageUser.id }}</th>
-                    <th scope="col">{{ manageUser.avatar }}</th>
-                    <th scope="col">{{ manageUser.username }}</th>
-                    <th scope="col">{{ manageUser.password }}</th>
-                    <th scope="col">{{ manageUser.email}}</th>
-                    <th scope="col">{{ manageUser.fullname }}</th>
-                    <th scope="col">{{ manageUser.gender }}</th>
-                    <th scope="col">{{ manageUser.biography }}</th>
-                    <th scope="col">{{ manageUser.work_phone }}</th>
-                    <th scope="col">{{ manageUser.mobile_phone }}</th>
-                    <th scope="col">{{ manageUser.role }}</th>
-                    <th scope="col">{{ manageUser.update }}</th>
-                    <th scope="col">{{ manageUser.delete }}</th>
-                </tr>
-            </thead>
-            <tbody class="black">
-                {% for row in result %}
-                    <tr>
-                        <th class="user_id" scope="row">{{row.0}}</th>
-                        <td class="user_avatar"><img src="{{row.10}}" style="width: 100px; height: 100px;"></td>
-                        <td class="user_username">{{row.1}}</td>
-                        <td class="user_password hidetext">{{row.2}}</td>
-                        <td class="user_email">{{row.3}}</td>
-                        <td class="user_full_name">{{row.4}}</td>
-                        <td class="user_gender" id="gender0">{{row.5}}</td>
-                        <td class="user_biography">{{row.6}}</td>
-                        <td class="user_work_phone">{{row.7}}</td>
-                        <td class="user_mobile_phone">{{row.8}}</td>
-                        <td class="user_role" id="role0">{{row.9}}</td>
-                        <td>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageUser.delete }}</button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <table class="table table-hover table-bordered table-striped table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="black">
+                                <th scope="col">{{ manageUser.id }}</th>
+                                <th scope="col">{{ manageUser.avatar }}</th>
+                                <th scope="col">{{ manageUser.username }}</th>
+                                <th scope="col" hidden>{{ manageUser.password }}</th>
+                                <th scope="col">{{ manageUser.email}}</th>
+                                <th scope="col">{{ manageUser.fullname }}</th>
+                                <th scope="col">{{ manageUser.gender }}</th>
+                                <th scope="col">{{ manageUser.biography }}</th>
+                                <th scope="col">{{ manageUser.work_phone }}</th>
+                                <th scope="col">{{ manageUser.mobile_phone }}</th>
+                                <th scope="col">{{ manageUser.role }}</th>
+                                <th scope="col">{{ manageUser.update }}</th>
+                                <th scope="col">{{ manageUser.delete }}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="black">
+                            {% for row in result %}
+                                <tr>
+                                    <th class="user_id" scope="row">{{row.0}}</th>
+                                    <td class="user_avatar"><img src="{{row.10}}" style="width: 100px; height: 100px;"></td>
+                                    <td class="user_username">{{row.1}}</td>
+                                    <td class="user_password hidetext" hidden>{{row.2}}</td>
+                                    <td class="user_email">{{row.3}}</td>
+                                    <td class="user_full_name">{{row.4}}</td>
+                                    <td class="user_gender" id="gender0">{{row.5}}</td>
+                                    <td class="user_biography">{{row.6}}</td>
+                                    <td class="user_work_phone">{{row.7}}</td>
+                                    <td class="user_mobile_phone">{{row.8}}</td>
+                                    <td class="user_role" id="role0">{{row.9}}</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">{{ manageUser.delete }}</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="deleteModal" role="dialog">

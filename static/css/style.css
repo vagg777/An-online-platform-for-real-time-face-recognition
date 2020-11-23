@@ -43,16 +43,22 @@
     border-radius: 2px;
 }
 
+button, .button, .btn {
+    border-radius: 125px 25px;
+}
+
 #submitButton {
     float: right;
-    background-color: rgb(40, 94, 142);
+    background-color: #131e3c;
     color:white;
 }
+
 #resetButton {
     margin-right: 10px;
     float: right;
     background-color: #d9534f;
 }
+
 #warningButton {
     background-color: #f0ad4e;
     float: right;
@@ -108,7 +114,7 @@
 .login-form .btn {
     font-size: 16px;
     font-weight: bold;
-    background: rgb(50, 118, 177);
+    background-color: #131e3c;
     border: none;
     margin-bottom: 20px;
 }
@@ -142,6 +148,7 @@
 }
 
 .nav-link {
+    color: black !important;
     font-size: 18px;
 }
 
@@ -151,48 +158,8 @@ body {
 }
 
 #manageUsersContainer {
-    width: 80%;
-}
-
-.header {
-    overflow: hidden;
-    background-color: #f1f1f1;
-    padding: 20px 10px;
-}
-
-.header a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
-}
-
-.header a.logo {
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.header a:hover {
-    background-color: rgb(66,139,202);
-    color: white;
-}
-
-.header a.active {
-    background-color: rgb(50, 118, 177);
-    color: white;
-}
-
-a#logouttab:hover {
-    background-color: rgb(235,93,93);
-    color: black;
-}
-
-.header-right {
-    float: right;
+    width: 100%;
+    border-radius: 90px 25px;
 }
 
 p {
@@ -204,7 +171,7 @@ hr {
 }
 
 #policeimage {
-    width: 3%;
+    width: 2%;
 }
 
 .contactlabel {
@@ -241,25 +208,28 @@ hr {
 }
 
 .container {
-    border-radius: 20px;
     background-color: #f2f2f2;
     padding: 20px;
+    border-radius: 125px 25px;
 }
 
 .errorcontainerfillpage {
     width: 35%;
     margin-top: 15%;
     background-color: red;
+    border-radius: 125px 25px;
 }
 
 .errorcontainer{
     width:35%;
     background-color: red;
+    border-radius: 125px 25px;
 }
 
 .successcontainer {
     width: 35%;
     background-color: green;
+    border-radius: 125px 25px;
 }
 
 .error {
@@ -277,29 +247,29 @@ hr {
 #errorcontainerlogin {
     width:100%;
     background-color: red;
-    border-radius: 15px;
+    border-radius: 125px 25px;
 }
 
 #successcontainerlogin {
     width: 100%;
     background-color: green;
-    border-radius: 15px;
+    border-radius: 125px 25px;
 }
 
 #welcomecontainer{
-    border-radius: 20px;
     background-color: #f2f2f2;
     padding: 20px;
     margin-top: 8%;
     color: black;
     text-align: center;
+    border-radius: 125px 25px;
 }
 
 #managelivefeedcontainer {
-    border-radius: 20px;
     background-color: #f2f2f2;
     padding: 20px;
     width: 70%;
+    border-radius: 125px 25px;
 }
 
 .footer {
@@ -390,6 +360,17 @@ hr {
     margin-top: 7%;
 }
 
+a.active {
+    color: white !important;
+    background-color: #131e3c;
+    border-radius: 100px 25px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1440px;
+    }
+}
 
 @media screen and (max-width: 500px) {
     .header a {

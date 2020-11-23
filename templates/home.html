@@ -18,7 +18,16 @@
             font-size: 14px;
         }
         .nav-link {
+            color: black !important;
             font-size: 18px;
+        }
+        a.active {
+            color: white !important;
+            background-color: #131e3c;
+            border-radius: 100px 25px;
+        }
+        .container {
+            border-radius: 125px 25px;
         }
     </style>
 </head>
@@ -32,8 +41,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav w-100">
-                <li class="nav-item active">
-                    <a class="nav-link" href="home">{{ header.home }}</a>
+                <li class="nav-item">
+                    <a class="nav-link active" href="home">{{ header.home }}</a>
                 </li>
                 {% if login_role == 'ADMIN' %}
                     <li class="nav-item">
