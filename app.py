@@ -146,7 +146,7 @@ def login():
         header = HeaderEN()
         home = HomeEN()
     if request.method == 'GET':
-        return render_template('login.html', login=login, login_role=login_role, messages=messages)
+        return render_template('login.html', login=login, login_role=login_role, loggedin_user=loggedin_user, messages=messages)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -160,7 +160,7 @@ def login():
                 loggedin_user_email = user[0][2]
                 return render_template('home.html', header=header, login_role=login_role, messages=messages, home=home, loggedin_user=loggedin_user)
         else:
-            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_user=loggedin_user)
+            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, login_role=login_role)
 
 
 
