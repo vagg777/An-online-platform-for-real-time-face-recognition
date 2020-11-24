@@ -65,12 +65,12 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
-{% if login_role == 'ADMIN' %}
+{% if loggedin_role == 'ADMIN' %}
     <div class="header">
           <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
           <div class="header-right">
             <a href="home">{{ header.home }}</a>
-            {% if login_role == 'ADMIN' %}
+            {% if loggedin_role == 'ADMIN' %}
                 <a href="manage" class="active">{{ header.manage }}</a>
             {% endif %}
             <a href="live_feed">{{ header.livefeed }}</a>
@@ -214,7 +214,7 @@
     </div>
 {% endif %}
 
-{% if login_role == 'USER' %}
+{% if loggedin_role == 'USER' %}
     <div class="header">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
     </div>
@@ -231,7 +231,7 @@
     </div>
 {% endif %}
 
-{% if login_role == '' %}
+{% if loggedin_role == '' %}
     <div class="header">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
     </div>

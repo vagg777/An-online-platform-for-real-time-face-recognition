@@ -22,13 +22,13 @@ detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
 global_full_name = ""
-login_role = ""
+loggedin_role = ""
 loggedin_user_email = ""
 
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         manageUser = ManageUserGR()
         header = HeaderGR()
@@ -49,9 +49,9 @@ def manage_users():
             if site_language == "Greek":
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser)
         else:
-            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -78,13 +78,13 @@ def manage_users():
                 if site_language == "Greek":
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, login_role=login_role, insertUser=insertUser)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser)
         finally:
             pass
 
@@ -93,7 +93,7 @@ def manage_users():
 @app.route('/insert_users', methods=['GET', 'POST'])
 def insert_users():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         manageUser = ManageUserGR()
         insertUser= InsertUserGR()
@@ -105,7 +105,7 @@ def insert_users():
         header = HeaderEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('insert_users.html', header=header, messages=messages, insertUser=insertUser, manageUser=manageUser, login_role=login_role)
+        return render_template('insert_users.html', header=header, messages=messages, insertUser=insertUser, manageUser=manageUser, loggedin_role=loggedin_role)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -129,10 +129,10 @@ def insert_users():
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', success=messages.successinseruser, result=result, header=header, insertUser=insertUser, manageUser=manageUser, login_role=login_role)
+            return render_template('manage_users.html', success=messages.successinseruser, result=result, header=header, insertUser=insertUser, manageUser=manageUser, loggedin_role=loggedin_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('insert_users.html', error=messages.sqlerror, header=header, insertUser=insertUser, manageUser=manageUser, messages=messages, login_role=login_role)
+            return render_template('insert_users.html', error=messages.sqlerror, header=header, insertUser=insertUser, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role)
         finally:
             pass
 
@@ -141,7 +141,7 @@ def insert_users():
 @app.route('/remove_users', methods=['GET', 'POST'])
 def remove_users():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
@@ -158,7 +158,7 @@ def remove_users():
             if site_language == "Greek":
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-        return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, login_role=login_role)
+        return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, loggedin_role=loggedin_role)
     if request.method == 'POST':
         try:
             user_id = str(request.form["row.0"])
@@ -179,7 +179,7 @@ def remove_users():
                     if site_language == "Greek":
                         if site_language == "Greek":
                             result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', success=message, result=result, header=header, manageUser=manageUser, login_role=login_role)
+                return render_template('manage_users.html', success=message, result=result, header=header, manageUser=manageUser, loggedin_role=loggedin_role)
             else:
                 message = messages.nouserleft + user_username + messages.nouserright
                 sql.close()
@@ -190,7 +190,7 @@ def remove_users():
                     if site_language == "Greek":
                         if site_language == "Greek":
                             result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', error=message, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
+                return render_template('manage_users.html', error=message, result=result, header=header, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
@@ -200,7 +200,7 @@ def remove_users():
             if result:
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, manageUser=manageUser, messages=messages, login_role=login_role)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role)
         finally:
             pass
 

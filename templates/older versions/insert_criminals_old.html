@@ -33,12 +33,12 @@
 
 <body style="background-image: url('/static/images/background.jpg')">
 
-{% if login_role == 'ADMIN' %}
+{% if loggedin_role == 'ADMIN' %}
     <div class="header">
           <img src="/static/images/greekpolice.png" alt="Police logo" style="width: 3%;">
           <div class="header-right">
             <a href="home">{{ header.home }}</a>
-            {% if login_role == 'ADMIN' %}
+            {% if loggedin_role == 'ADMIN' %}
                 <a href="manage" class="active">{{ header.manage }}</a>
             {% endif %}
             <a href="live_feed">{{ header.livefeed }}</a>
@@ -154,14 +154,14 @@
     </div>
 {% endif %}
 
-{% if login_role == 'USER' %}
+{% if loggedin_role == 'USER' %}
     <div class="errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
         <<button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome }}</button>
     </div><br><br>
 {% endif %}
 
-{% if login_role == '' %}
+{% if loggedin_role == '' %}
     <div class="errorcontainer" style="margin-top: 20%">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
         <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>

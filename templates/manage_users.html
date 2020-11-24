@@ -17,7 +17,7 @@
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
-{% if login_role == 'ADMIN' %}
+{% if loggedin_role == 'ADMIN' %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="home">{{ header.home }}</a>
                 </li>
-                {% if login_role == 'ADMIN' %}
+                {% if loggedin_role == 'ADMIN' %}
                     <li class="nav-item">
                         <a class="nav-link active" href="manage">{{ header.manage }}</a>
                     </li>
@@ -454,7 +454,7 @@
     </div>
 {% endif %}
 
-{% if login_role == 'USER' %}
+{% if loggedin_role == 'USER' %}
     <div class="header">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
     </div>
@@ -471,7 +471,7 @@
     </div>
 {% endif %}
 
-{% if login_role == '' %}
+{% if loggedin_role == '' %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
     </nav>

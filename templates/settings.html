@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="home">{{ header.home }}</a>
             </li>
-            {% if login_role == 'ADMIN' %}
+            {% if loggedin_role == 'ADMIN' %}
                 <li class="nav-item">
                     <a class="nav-link" href="manage">{{ header.manage }}</a>
                 </li>
@@ -272,13 +272,13 @@
                                 <span class="required">*</span>
                                 <div class="input-group div_role">
                                     <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                    {% if login_role == 'ADMIN' %}
+                                    {% if loggedin_role == 'ADMIN' %}
                                         <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
                                             <option value="ADMIN">{{ manageUser.admin }}</option>
                                             <option value="USER">{{ manageUser.user }}</option>
                                         </select>
                                     {% endif %}
-                                    {% if login_role == 'USER' %}
+                                    {% if loggedin_role == 'USER' %}
                                         <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}" disabled>
                                             <option value="ADMIN">{{ manageUser.admin }}</option>
                                             <option value="USER">{{ manageUser.user }}</option>

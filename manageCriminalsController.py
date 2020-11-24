@@ -23,13 +23,13 @@ detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
 global_full_name = ""
-login_role = ""
+loggedin_role = ""
 loggedin_user_email = ""
 
 @app.route('/manage_criminals', methods=['GET', 'POST'])
 def manage_criminals():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         manageCriminal = ManageCriminalGR()
         header = HeaderGR()
@@ -71,9 +71,9 @@ def manage_criminals():
                     result_list[counter] = tuple(criminal_list)
                     counter = counter + 1
                 result = tuple(result_list)
-            return render_template('templates/manage_criminals.html', result=result, header = header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
+            return render_template('templates/manage_criminals.html', result=result, header = header, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
         else:
-            return render_template('templates/manage_criminals.html', error=messages.norecordfound, header=header, messages = messages, manageCriminal=manageCriminal, login_role=login_role)
+            return render_template('templates/manage_criminals.html', error=messages.norecordfound, header=header, messages = messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
     elif request.method == 'POST':
         try:
             criminal_id = str(request.form["criminal_id"])
@@ -125,7 +125,7 @@ def manage_criminals():
                         result_list[counter] = tuple(criminal_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_criminals.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
+            return render_template('manage_criminals.html', success=messages.recordupdated, result=result, header=header, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -160,7 +160,7 @@ def manage_criminals():
                         result_list[counter] = tuple(criminal_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageCriminal=manageCriminal, login_role=login_role)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
         finally:
             pass
 
@@ -169,7 +169,7 @@ def manage_criminals():
 @app.route('/insert_criminals', methods=['GET', 'POST'])
 def insert_criminals():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         manageCriminal = ManageCriminalGR()
         insertCriminal = InsertCriminalsGR()
@@ -181,7 +181,7 @@ def insert_criminals():
         header = HeaderEN()
         messages = MessagesEN()
     if request.method == 'GET':
-        return render_template('insert_criminals.html', messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, login_role=login_role)
+        return render_template('insert_criminals.html', messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role)
     elif request.method == 'POST':
         try:
             criminal_full_name = str(request.form["fullname"])
@@ -233,10 +233,10 @@ def insert_criminals():
                         result_list[counter] = tuple(criminal_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, login_role = login_role)
+            return render_template('manage_criminals.html', success=messages.successinsertcriminal, result=result, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role = loggedin_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('insert_criminals.html', error=messages.sqlerror, messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, login_role=login_role)
+            return render_template('insert_criminals.html', error=messages.sqlerror, messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role)
         finally:
             pass
 
@@ -245,7 +245,7 @@ def insert_criminals():
 @app.route('/remove_criminals', methods=['GET', 'POST'])
 def remove_criminals():
     global site_language
-    global login_role
+    global loggedin_role
     if site_language == "Greek":
         header = HeaderGR()
         messages = MessagesGR()
@@ -299,7 +299,7 @@ def remove_criminals():
                             result_list[counter] = tuple(criminal_list)
                             counter = counter + 1
                         result = tuple(result_list)
-                return render_template('manage_criminals.html', success=message, result=result, header=header, manageCriminal=manageCriminal, login_role=login_role)
+                return render_template('manage_criminals.html', success=message, result=result, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
             else:
                 message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
                 sql.close()
@@ -335,7 +335,7 @@ def remove_criminals():
                             result_list[counter] = tuple(criminal_list)
                             counter = counter + 1
                         result = tuple(result_list)
-                return render_template('manage_criminals.html', error=message, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
+                return render_template('manage_criminals.html', error=message, result=result, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
@@ -371,6 +371,6 @@ def remove_criminals():
                         result_list[counter] = tuple(criminal_list)
                         counter = counter + 1
                     result = tuple(result_list)
-            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, manageCriminal=manageCriminal, messages=messages, login_role=login_role)
+            return render_template('manage_criminals.html', error=messages.sqlerror, result=result, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role)
         finally:
             pass
