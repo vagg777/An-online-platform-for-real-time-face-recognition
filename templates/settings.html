@@ -15,14 +15,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
-
+        .container{
+            border-radius: 125px 25px;
+        }
         /* ---------------------------------------------------
             SIDEBAR STYLE
         ----------------------------------------------------- */
         #content {
             padding: 20px;
-            min-height: 100vh;
-            transition: all 0.3s;
+            min-height: 30vh;
+            transition: all 1.0s;
         }
 
         .wrapper {
@@ -92,6 +94,56 @@
                 x.style.display = "none";
               }
         }
+        $(document).ready(function() {
+        $('#updateModal').on('show.bs.modal', function (e) {
+        var _button = $(e.relatedTarget);
+        var _row = _button.parents("div");
+        var _id = _row.find(".user_id").val();
+        var _username = _row.find(".user_username").val();
+        var _password = _row.find(".user_password").val();
+        var _email = _row.find(".user_email").val();
+        var _fullname = _row.find(".user_full_name").val();
+        var _gender = _row.find("#gender0").val();
+        if (_gender == "Άντρας") {_gender = "Male"}
+        if (_gender == "Γυναίκα") {_gender = "Female"}
+        if (_gender == "Άλλο") {_gender = "Other"}
+        var _biography = _row.find(".user_biography").val();
+        var _work_phone = _row.find(".user_work_phone").val();
+        var _mobile_phone = _row.find(".user_mobile_phone").val();
+        var _role = _row.find("#role0").val();
+        if (_role == "Διαχειριστής") {_role = "ADMIN"}
+        if (_role == "Χρήστης") {_role = "USER"}
+        var _avatar = _row.find('img').attr("src");
+        $(this).find(".user_id").val(_id);
+        $(this).find(".user_username").val(_username);
+        $(this).find(".user_password").val(_password);
+        $(this).find(".user_email").val(_email);
+        $(this).find(".user_full_name").val(_fullname);
+        $("#gender").val(_gender).change();
+        $(this).find(".user_biography").val(_biography);
+        $(this).find(".user_work_phone").val(_work_phone);
+        $(this).find(".user_mobile_phone").val(_mobile_phone);
+        $("#role").val(_role).change();
+        $(this).find(".user_avatar").val(_avatar);
+    });
+ });
+
+ if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, 'settings' );
+ }
+
+document.onkeydown = fkey;
+document.onkeypress = fkey
+document.onkeyup = fkey;
+var wasPressed = false;
+function fkey(e){
+   e = e || window.event;
+   if( wasPressed ) return;
+    if (e.keyCode == 116) {
+         window.location = 'settings';
+         wasPressed = true;
+    }
+ }
     </script>
 </head>
 
@@ -119,8 +171,7 @@
                 <a class="nav-link" href="contact">{{ header.contact }}</a>
             </li>
             <li class="nav-item dropdown ml-auto">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ header.welcome }} {{ loggedin_user }}</a>
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.welcome }} {{ loggedin_user }}</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="settings">{{ header.settings }}</a>
                     <div class="dropdown-divider"></div>
@@ -158,107 +209,141 @@
 {% endif %}
 
 
-<div class="wrapper">
-    <nav id="sidebar" style="margin-top: -42px;">
-        <div class="sidebar-header">
-            <h3>My Settings</h3>
-        </div>
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#" onclick="myFunction();">Profile Settings</a>
-            </li>
-            <li>
-                <a href="#">Appearance Settings</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container" id="profileSettingsDiv" style="color: black; display: none;">
-    <div id="content">
-        <h2 style="text-align:center">{{ settings.myprofile }}</h2>
-        <div style="text-align:center">
-            <img src="{{user[10]}}" style="width: 60%; height: auto; align: center;">
-        </div><hr>
-        <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0] }}">
-        <div class="form-group">
-            <label class="contactlabel" for="username">{{ manageUser.username }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id = "username" value="{{ user[1] }}" readonly>
+    <div class="wrapper">
+        <nav id="sidebar" style="margin-top: -42px;">
+            <div class="sidebar-header">
+                <h3>My Settings</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#" onclick="myFunction();">Profile Settings</a>
+                </li>
+                <li>
+                    <a href="#">Appearance Settings</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container" id="profileSettingsDiv" style="display: block;">
+        <div id="content">
+            <h2 style="text-align:center">{{ settings.myprofile }}</h2>
+            <div style="text-align:center">
+                <img src="{{user[0][10]}}" style="width: 10%; height: auto; align: center;">
+            </div><hr>
+            <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0][0] }}">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="username">{{ manageUser.username }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id = "username" value="{{ user[0][1] }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="password">{{ manageUser.password }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password" value="{{ user[0][2] }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{  manageUser.enterpassword }}" name="full_name" id="full_name" value = "{{ user[0][4] }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="email">{{ manageUser.email }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{  manageUser.enteremail}}" name="email" id="email"  value = "{{ user[0][3] }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_gender" placeholder="{{ manageUser.entergender }}" name="gender" id="gender0" value = "{{ user[0][5] }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="contactlabel" for="role">{{ manageUser.role }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                             <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_role" placeholder="{{ manageUser.enterrole }}" name="role" id="role0" value = "{{ user[0][9] }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                             <span class="input-group-addon input-group-text primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone}}" name="work_phone" id="work_phone" value = "{{ user[0][7] }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                              <span class="input-group-addon input-group-text primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value = "{{ user[0][8] }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                             <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[0][6] }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="text-align:center">
+                <button class="btn btn-danger btn-lg" onclick="document.getElementById('profileSettingsDiv').style.display = 'none'">{{ manageUser.close }}</button>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
             </div>
         </div>
-        <div class="form-group">
-            <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{  manageUser.enterpassword }}" name="full_name" id="full_name" value = "{{ user[4] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="email">{{ manageUser.email }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{  manageUser.enteremail}}" name="email" id="email"  value = "{{ user[3] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_gender" placeholder="{{ manageUser.entergender }}" name="gender" id="gender0" value = "{{ user[5] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[6] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone}}" name="work_phone" id="work_phone" value = "{{ user[7] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value = "{{ user[8] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="contactlabel" for="role">{{ manageUser.role }}</label>
-            <div class="input-group">
-                <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
-                <input type="text" autocomplete="off" class="form-control user_role" placeholder="{{ manageUser.enterrole }}" name="role" id="role0" value = "{{ user[9] }}" readonly>
-            </div>
-        </div>
-        <div class="form-group" style="text-align:center">
-            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
-        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-
-
-  <div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal fade" id="updateModal" role="dialog">
         <form action="" method="post">
             <div class="modal-dialog">
               <div class="modal-content">
-                    <div class="modal-header" style="background-color: #0275d8; color:white;">
-                        <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
-                        <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
+                    <div class="modal-header" id="settingsModalHeader">
+                        <h4 class="modal-title">{{ manageUser.updateMyProfile }}</h4>
+                        <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body black">
                         <div class="form-row">
                              <div class="form-group col-md-12">
                                 <label class="contactlabel" for="id">{{ manageUser.id }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id" value="{{request.form.id}}" readonly>
                                 </div>
                             </div>
@@ -267,16 +352,20 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="username">{{ manageUser.username }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id="username" value="{{request.form.username}}" required>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="email">{{ manageUser.email }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
                                 </div>
                             </div>
@@ -285,16 +374,20 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="password">{{ manageUser.password }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="retype_password">{{ manageUser.retype_password }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
                                 </div>
                             </div>
@@ -303,16 +396,20 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="full_name">{{ manageUser.fullname }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{ manageUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group div_gender">
-                                    <span class="input-group-addon primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3 div_gender">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                                    </div>
                                     <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
                                         <option value="Male">{{ manageUser.male }}</option>
                                         <option value="Female">{{ manageUser.female }}</option>
@@ -325,16 +422,20 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="work_phone">{{ manageUser.work_phone }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
                                 </div>
                             </div>
@@ -343,8 +444,10 @@
                             <div class="form-group col-md-12">
                                 <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
                                 </div>
                             </div>
@@ -353,8 +456,10 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="role">{{ manageUser.role }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group div_role">
-                                    <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3 div_role">
+                                    <div class="input-group-prepend">
+                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                    </div>
                                     {% if loggedin_role == 'ADMIN' %}
                                         <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
                                             <option value="ADMIN">{{ manageUser.admin }}</option>
@@ -372,8 +477,10 @@
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="avatar">{{ manageUser.avatar }}</label>
                                 <span class="required">*</span>
-                                <div class="input-group">
-                                    <span class="input-group-addon primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                                    </div>
                                     <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
                                 </div>
                             </div>
@@ -387,11 +494,11 @@
             </div>
         </form>
     </div>
-</div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+    <div class="footer">
+      <h2>Footer</h2>
+    </div>
 
 </body>
+
 </html>

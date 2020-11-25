@@ -43,6 +43,11 @@
     color: white;
 }
 
+#settingsModalHeader {
+    background-color: #131e3c;
+    color: white;
+}
+
 .form-control {
     min-height: 41px;
     background: #fff;
@@ -211,12 +216,13 @@ hr {
 }
 
 #loginSubmit{
-    background-color: rgb(50, 118, 177);
+    background-color: #131e3c;
 }
 
 #returnSubmit {
     background-color: #f0ad4e;
     margin:auto;
+    color: white;
 }
 
 .centererrorbutton {

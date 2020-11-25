@@ -278,6 +278,8 @@ class ManageUserEN:
     enterretype_password = "Re-type your Password"
     insertuser = "Insert User"
     confirmDelete = "Are you sure you want to delete this user from the database?"
+    updateMyProfile = "Update My Profile"
+    close = "Close"
 
 class ManageLivefeedEN:
     search = "Search"
