@@ -269,7 +269,7 @@ class ManageUserEN:
     id = "Id"
     enterid = "Enter Id"
     user = "User"
-    avatar = "Avatar"
+    avatar = "Image"
     enterimage = "Enter image URL"
     cancel = "Cancel"
     updateuser = "Update User"

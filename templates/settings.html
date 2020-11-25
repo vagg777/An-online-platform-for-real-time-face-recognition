@@ -225,10 +225,7 @@ function fkey(e){
         </nav>
         <div class="container" id="profileSettingsDiv" style="display: block;">
         <div id="content">
-            <h2 style="text-align:center">{{ settings.myprofile }}</h2>
-            <div style="text-align:center">
-                <img src="{{user[0][10]}}" style="width: 10%; height: auto; align: center;">
-            </div><hr>
+            <h2 style="text-align:center">{{ settings.myprofile }}</h2><hr>
             <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0][0] }}">
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -309,13 +306,22 @@ function fkey(e){
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label class="contactlabel" for="image">{{ manageUser.avatar }}</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        </div>
+                        <img src="{{user[0][10]}}" class="form-control" id="image" style="height: auto;">
+                    </div>
+                </div>
+                <div class="form-group col-md-9">
                     <label class="contactlabel" for="biography">{{ manageUser.biography }}</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                              <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[0][6] }}" readonly>
+                        <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[0][6] }}" style="height: 285px;" readonly >
                     </div>
                 </div>
             </div>
