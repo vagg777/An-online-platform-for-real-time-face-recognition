@@ -2,7 +2,7 @@ class HeaderGR:
     home = "Κεντρική Σελίδα"
     manage = "Διαχείριση"
     livefeed = "Ζωντανή Μετάδοση"
-    contact = "Επικοινωνία"
+    contact = "Επικοινωνήστε μαζί μας"
     logout = "Εξοδος"
     settings = "Οι Ρυθμίσεις μου"
     login = "Συνδεθείτε"

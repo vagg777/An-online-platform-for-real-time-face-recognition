@@ -61,7 +61,7 @@ class HomeEN:
     livefeed = "Live Feed"
     selectfilters = "Select different filters per livestream, depending on current needs - See the "
     reportissue = "Report an issue - see the "
-    contact = "Contact"
+    contact = "Contact Us"
     settings = "Settings"
     settingstext = "Change the settings - see the "
 

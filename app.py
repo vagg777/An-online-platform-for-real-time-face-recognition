@@ -20,7 +20,7 @@ from cameraController import *
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
-site_language = "Greek"
+site_language = "English"
 detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
@@ -296,18 +296,6 @@ def contact():
 
 @app.route('/manage_users', methods=['GET', 'POST'])
 def manage_users():
-    if site_language == "Greek":
-        manageUser = ManageUserGR()
-        header = HeaderGR()
-        messages = MessagesGR()
-        insertUser = InsertUserGR()
-        manage = ManageGR()
-    else:
-        manageUser = ManageUserEN()
-        header = HeaderEN()
-        messages = MessagesEN()
-        insertUser = InsertUserEN()
-        manage = ManageEN()
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users")
@@ -656,7 +644,7 @@ def settings():
             sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
             user = sql.fetchall()
             if user:
-                return render_template('settings.html', loggedin_userloggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
         finally:
             pass
 
@@ -682,7 +670,7 @@ def search_live_feed():
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
-        return render_template('manage_livefeed.html', loggedin_user, messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role)
+        return render_template('manage_livefeed.html', loggedin_user=loggedin_user, messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role)
     elif request.method == 'POST':
         global detection_time
         global average_detection_time
@@ -767,7 +755,6 @@ def video_feed():
     global site_language
     record_video()
     return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
 
 
 
