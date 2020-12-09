@@ -10,8 +10,6 @@ import datetime
 import urllib.request
 from scipy.spatial import distance      # pip install scipy
 import math
-from manageUsersController import *
-from manageCriminalsController import *
 from EnglishLanguage import *
 from GreekLanguage import *
 from cameraController import *
@@ -304,9 +302,9 @@ def manage_users():
             if site_language == "Greek":
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
         else:
-            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -325,7 +323,7 @@ def manage_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user)
+                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -339,13 +337,13 @@ def manage_users():
                 if site_language == "Greek":
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, manage=manage,  header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, manage=manage,  header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
         finally:
             pass
 
