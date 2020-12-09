@@ -143,11 +143,11 @@ const PhoneValidation = function validate(phone) {
     document.getElementById(phone).style.borderColor = '#ff0000';
     document.getElementById(phone).style.borderWidth = '3px';
     document.getElementById(phone + '_errors').style.color = '#ff0000';
-    document.getElementById(phone + '_errors').innerHTML = 'Work phone length can be 10-14 digits only!';
+    document.getElementById(phone + '_errors').innerHTML = 'Phone length can be 10-14 digits only!';
     if (userphone === '')
-        document.getElementById(phone + '_errors').innerHTML = 'Please enter a Work Phone!';
+        document.getElementById(phone + '_errors').innerHTML = 'Please enter a Phone number!';
     if(!(/^\d+$/.test(userphone))) {
-        document.getElementById(phone + '_errors').innerHTML = 'Work phone cannot contain letters!';
+        document.getElementById(phone + '_errors').innerHTML = 'Phone number cannot contain letters!';
     }
     returnedValue = false;
     } else {
@@ -155,13 +155,13 @@ const PhoneValidation = function validate(phone) {
           document.getElementById(phone).style.borderColor = '#ff0000';
           document.getElementById(phone).style.borderWidth = '3px';
           document.getElementById(phone + '_errors').style.color = '#ff0000';
-          document.getElementById(phone + '_errors').innerHTML = 'Work phone cannot contain letters!';
+          document.getElementById(phone + '_errors').innerHTML = 'Phone number cannot contain letters!';
           returnedValue = false;
       } else {
           document.getElementById(phone).style.borderColor  = '#008000';
           document.getElementById(phone).style.borderWidth = '3px';
           document.getElementById(phone + '_errors').style.color  = '#008000';
-          document.getElementById(phone + '_errors').innerHTML = 'Work phone number is valid!';
+          document.getElementById(phone + '_errors').innerHTML = 'Phone number is valid!';
       }
     }
 
@@ -184,7 +184,7 @@ const BiographyValidation = function validate(biography) {
       document.getElementById(biography).style.borderColor  = '#008000';
       document.getElementById(biography).style.borderWidth = '3px';
       document.getElementById(biography + '_errors').style.color  = '#008000';
-      document.getElementById(biography + '_errors').innerHTML = 'Biography is valid!';
+      document.getElementById(biography + '_errors').innerHTML = 'Biography length is valid!';
     }
 
   return returnedValue;
