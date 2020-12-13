@@ -6,7 +6,7 @@ const CriminalsValidation = function validate(criminal_full_name,criminal_portra
     const isGenderValid = DropdownValidation(criminal_gender);
     const isEyeColorValid = DropdownValidation(criminal_eye_color);
     const isAgeValid = DigitsValidation(criminal_age);
-    const isBiographyValid = BiographyValidation(biography);
+    const isBiographyValid = BiographyValidation(criminal_bio);
     if (isFullnameValid && isURLValid && isHeightValid && isWeightValid && isGenderValid && isEyeColorValid && isAgeValid && isBiographyValid)
         return true;
     else

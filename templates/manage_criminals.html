@@ -297,7 +297,7 @@
     </div>
 
     <div class="modal fade" id="insertModal" role="dialog">
-        <form action="insert_criminals" method="post">
+        <form action="insert_criminals" method="post" onsubmit="return CriminalsValidation('fullname','portrait','height','weight','gender','eye_color','age','bio')">
             <div class="modal-dialog">
               <div class="modal-content">
                     <div class="modal-header" id="insertModalHeader">
@@ -353,7 +353,7 @@
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </div>
                                     <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}" onchange="DropdownValidation('eye_color')">
-                                        <option value="Black" style="background-image: url('/static/images/background.jpg'); !important;">{{ insertCriminal.black }}</option>
+                                        <option value="Black">{{ insertCriminal.black }}</option>
                                         <option value="Brown">{{ insertCriminal.brown }}</option>
                                         <option value="Blue">{{ insertCriminal.blue }}</option>
                                         <option value="Green">{{ insertCriminal.green }}</option>
