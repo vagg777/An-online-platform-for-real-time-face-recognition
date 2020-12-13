@@ -291,6 +291,14 @@ hr {
     border-radius: 125px 25px;
 }
 
+.country-container {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    width: 10%;
+    text-align: center;
+    color: black;
+}
+
 .footer {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -300,40 +308,62 @@ hr {
     text-align: center;
 }
 
-.welcomefooter {
-    margin-top: 14%;
-    background-color: #f1f1f1;
-    padding: 5px;
-    color: black;
-    text-align: center;
-}
-
- .country-container {
-    border-radius: 20px;
-    background-color: #f2f2f2;
-    width: 10%;
-    text-align: center;
-    color: black;
-}
-
 .loginfooter {
-    margin-top: 7%;
+    overflow: hidden;
     background-color: #f1f1f1;
-    padding: 5px;
+    padding: 20px 10px;
     color: black;
+    margin-top: 10%;
+    text-align: center;
+}
+
+.welcomefooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 19%;
+    text-align: center;
+}
+
+.homefooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.managefooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 8%;
+    text-align: center;
+}
+
+.managelivefeedfooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.managecriminalsfooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 8%;
     text-align: center;
 }
 
 .errorloginfooter{
     margin-top: 19%;
-    background-color: #f1f1f1;
-    padding: 5px;
-    color: black;
-    text-align: center;
-}
-
-.managefooter {
-    margin-top: 6%;
     background-color: #f1f1f1;
     padding: 5px;
     color: black;
