@@ -86,8 +86,8 @@
                                 <th scope="col">{{ manageCriminal.fullname }}</th>
                                 <th scope="col">{{ manageCriminal.age }}</th>
                                 <th scope="col">{{ manageCriminal.gender }}</th>
-                                <th scope="col">{{ manageCriminal.weight }}</th>
                                 <th scope="col">{{ manageCriminal.height }}</th>
+                                <th scope="col">{{ manageCriminal.weight }}</th>
                                 <th scope="col">{{ manageCriminal.eyecolor }}</th>
                                 <th scope="col">{{ manageCriminal.biography }}</th>
                                 <th scope="col">{{ manageCriminal.lastlocation }}</th>
@@ -147,7 +147,7 @@
     </div>
 
     <div class="modal fade" id="updateModal" role="dialog">
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="return CriminalsValidation('criminal_full_name','criminal_portrait','criminal_height','criminal_weight','criminal_gender','criminal_eye_color','criminal_age','criminal_bio')">
             <div class="modal-dialog">
               <div class="modal-content">
                     <div class="modal-header" id="updateModalHeader">
@@ -175,8 +175,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control criminal_full_name" type="text" id="criminal_full_name" name="criminal_full_name" placeholder="{{ manageCriminal.enterfullname }}" required>
+                                    <input class="form-control criminal_full_name" type="text" id="criminal_full_name" name="criminal_full_name" placeholder="{{ manageCriminal.enterfullname }}" onkeyup="FullnameValidation('criminal_full_name')" required>
                                 </div>
+                                <div class="error-messages" id="criminal_full_name_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_portrait">{{ manageCriminal.portrait }}</label>
@@ -185,8 +186,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control criminal_portrait" type="text" id="criminal_portrait" name="criminal_portrait" placeholder="{{ manageCriminal.enterimage }}" required>
+                                    <input class="form-control criminal_portrait" type="text" id="criminal_portrait" name="criminal_portrait" placeholder="{{ manageCriminal.enterimage }}" onkeyup="URLValidation('criminal_portrait')" required>
                                 </div>
+                                <div class="error-messages" id="criminal_portrait_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -197,8 +199,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="{{ manageCriminal.enterheight }}" required>
+                                    <input class="form-control criminal_height" type="text" id="criminal_height" name="criminal_height" placeholder="{{ manageCriminal.enterheight }}" onkeyup="DigitsValidation('criminal_height')" required>
                                 </div>
+                                <div class="error-messages" id="criminal_height_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_weight">{{ manageCriminal.weight }}</label>
@@ -207,8 +210,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="{{ manageCriminal.enterweight }}" required>
+                                    <input class="form-control criminal_weight" type="text" id="criminal_weight" name="criminal_weight" placeholder="{{ manageCriminal.enterweight }}" onkeyup="DigitsValidation('criminal_weight')" required>
                                 </div>
+                                <div class="error-messages" id="criminal_weight_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -219,12 +223,13 @@
                                     <div class="input-group-prepend">
                                          <span class="input-group-addon input-group-text warning"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                                     </div>
-                                    <select required class="form-control criminal_gender" name="criminal_gender" id="criminal_gender" value="{{request.form.gender}}">
+                                    <select required class="form-control criminal_gender" name="criminal_gender" id="criminal_gender" value="{{request.form.gender}}" onchange="DropdownValidation('criminal_gender')">
                                         <option value="Male">{{ manageCriminal.male }}</option>
                                         <option value="Female">{{ manageCriminal.female }}</option>
                                         <option value="Other">{{ manageCriminal.other }}</option>
                                     </select>
                                 </div>
+                                <div class="error-messages" id="criminal_gender_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="criminal_eye_color">{{ manageCriminal.eyecolor}}</label>
@@ -233,7 +238,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </div>
-                                    <select required class="form-control criminal_eye_color" name="criminal_eye_color" id="criminal_eye_color">
+                                    <select required class="form-control criminal_eye_color" name="criminal_eye_color" id="criminal_eye_color" onchange="DropdownValidation('criminal_eye_color')">
                                         <option value="Black">{{ manageCriminal.black }}</option>
                                         <option value="Brown">{{ manageCriminal.brown }}</option>
                                         <option value="Blue">{{ manageCriminal.blue }}</option>
@@ -243,6 +248,7 @@
                                         <option value="Gray">{{ manageCriminal.gray }}</option>
                                     </select>
                                 </div>
+                                <div class="error-messages" id="criminal_eye_color_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -253,8 +259,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text warning"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" required>
+                                    <input class="form-control criminal_age" type="text" id="criminal_age" name="criminal_age" placeholder="{{ manageCriminal.enterage }}" onkeyup="DigitsValidation('criminal_age')" required>
                                 </div>
+                                <div class="error-messages" id="criminal_age_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                   <label class="contactlabel" for="criminal_last_location">{{ manageCriminal.lastlocation }}</label>
@@ -274,8 +281,9 @@
                                       <div class="input-group-prepend">
                                             <span class="input-group-addon input-group-text warning"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
                                       </div>
-                                     <textarea class="form-control criminal_bio" id="criminal_bio" name="criminal_bio" placeholder="{{ manageCriminal.entercrimerecord }}" style="height:200px" required></textarea>
+                                     <textarea class="form-control criminal_bio" id="criminal_bio" name="criminal_bio" placeholder="{{ manageCriminal.entercrimerecord }}" style="height:200px" onkeyup="BiographyValidation('criminal_bio')" required></textarea>
                                   </div>
+                                <div class="error-messages" id="criminal_bio_errors"></div>
                             </div>
                         </div>
                     </div>
@@ -305,8 +313,9 @@
                                     <div class="input-group-prepend">
                                          <span class="input-group-addon input-group-text success"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" required>
+                                    <input class="form-control" type="text" id="fullname" name="fullname" placeholder="{{ insertCriminal.enterfullname }}" value="{{request.form.fullname}}" onkeyup="FullnameValidation('fullname')" required>
                                 </div>
+                                 <div class="error-messages" id="fullname_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="portrait">{{ insertCriminal.portrait }}</label>
@@ -315,8 +324,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" required>
+                                    <input class="form-control" type="text" id="portrait" name="portrait" placeholder="{{ insertCriminal.enterimage }}" value="{{request.form.portrait}}" onkeyup="URLValidation('portrait')" required>
                                 </div>
+                                 <div class="error-messages" id="portrait_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -327,12 +337,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                                     </div>
-                                    <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
+                                    <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}" onchange="DropdownValidation('gender')">
                                         <option value="Male">{{ manageCriminal.male }}</option>
                                         <option value="Female">{{ manageCriminal.female }}</option>
                                         <option value="Other">{{ manageCriminal.other }}</option>
                                     </select>
                                 </div>
+                                 <div class="error-messages" id="gender_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="eye_color">{{ insertCriminal.eyecolor }}</label>
@@ -341,7 +352,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </div>
-                                    <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}">
+                                    <select required class="form-control" name="eye_color" id="eye_color" value="{{request.form.eye_color}}" onchange="DropdownValidation('eye_color')">
                                         <option value="Black" style="background-image: url('/static/images/background.jpg'); !important;">{{ insertCriminal.black }}</option>
                                         <option value="Brown">{{ insertCriminal.brown }}</option>
                                         <option value="Blue">{{ insertCriminal.blue }}</option>
@@ -351,6 +362,7 @@
                                         <option value="Gray">{{ insertCriminal.gray }}</option>
                                     </select>
                                 </div>
+                                 <div class="error-messages" id="eye_color_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -361,8 +373,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" required>
+                                    <input class="form-control" type="text" id="height" name="height" placeholder="{{ insertCriminal.enterheight}}" value="{{request.form.height}}" onkeyup="DigitsValidation('height')" required>
                                 </div>
+                                 <div class="error-messages" id="height_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="weight">{{ insertCriminal.weight }}</label>
@@ -371,8 +384,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" required>
+                                    <input class="form-control" type="text" id="weight" name="weight" placeholder="{{ insertCriminal.enterweight}}" value="{{request.form.weight}}" onkeyup="DigitsValidation('weight')" required>
                                 </div>
+                                 <div class="error-messages" id="weight_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -383,8 +397,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text success"><i class="fa fa-id-card" aria-hidden="true"></i></span>
                                     </div>
-                                    <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" required>
+                                    <input class="form-control" type="text" id="age" name="age" placeholder="{{ insertCriminal.enterage }}" value="{{request.form.age}}" onkeyup="DigitsValidation('age')" required>
                                 </div>
+                                <div class="error-messages" id="age_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                <label class="contactlabel" for="last_location">{{ insertCriminal.lastlocation }}</label>
@@ -404,8 +419,9 @@
                                       <div class="input-group-prepend">
                                            <span class="input-group-addon input-group-text success"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
                                       </div>
-                                      <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" required></textarea>
+                                      <textarea class="form-control" id="biography" name="biography" placeholder="{{ insertCriminal.entercrimerecord}}" value="{{request.form.biography}}" style="height:200px" onkeyup="BiographyValidation('biography')" required></textarea>
                                   </div>
+                                  <div class="error-messages" id="biography_errors"></div>
                             </div>
                         </div>
                     </div>
