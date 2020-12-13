@@ -57,9 +57,11 @@
     border-radius: 2px;
 }
 
+/*
 button, .button, .btn {
     border-radius: 125px 25px;
 }
+*/
 
 .btn-primary{
     background-color: #131e3c;
@@ -385,6 +387,11 @@ hr {
     left: 50%;
     -ms-transform: translate(-50%, -100%);
     transform: translate(-50%, -20%);
+}
+
+/* Keeps the navbar header bg-color when user presses the welcome user option in the header */
+#navbarDropdownMenuLink {
+    background-color: #f7f7f7;
 }
 
 #wrap {

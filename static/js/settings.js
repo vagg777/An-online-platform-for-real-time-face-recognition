@@ -1,13 +1,4 @@
-function myFunction() {
-              var x = document.getElementById("profileSettingsDiv");
-              if (x.style.display === "none") {
-                x.style.display = "block";
-              } else {
-                x.style.display = "none";
-              }
-        }
-
-        $(document).ready(function() {
+$(document).ready(function() {
         $('#updateModal').on('show.bs.modal', function (e) {
         var _button = $(e.relatedTarget);
         var _row = _button.parents("div");
@@ -49,6 +40,7 @@ document.onkeydown = fkey;
 document.onkeypress = fkey
 document.onkeyup = fkey;
 var wasPressed = false;
+
 function fkey(e){
    e = e || window.event;
    if( wasPressed ) return;
@@ -56,4 +48,12 @@ function fkey(e){
          window.location = 'settings';
          wasPressed = true;
     }
- }
+}
+function myFunction() {
+      var x = document.getElementById("profileSettingsDiv");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+}

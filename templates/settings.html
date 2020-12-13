@@ -10,83 +10,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script  language="JavaScript" type="text/javascript" src="/static/js/settings.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style>
-        .container{
-            border-radius: 125px 25px;
-        }
-        /* ---------------------------------------------------
-            SIDEBAR STYLE
-        ----------------------------------------------------- */
-        #content {
-            padding: 20px;
-            min-height: 30vh;
-            transition: all 1.0s;
-        }
-
-        .wrapper {
-            display: flex;
-            align-items: stretch;
-        }
-
-        #sidebar.active {
-            margin-left: -250px;
-        }
-
-        #sidebar .sidebar-header {
-            padding: 20px;
-            color: white;
-            background: #131e3c;
-            border: 2px white solid;
-        }
-
-        #sidebar ul.components {
-            padding: 20px 0;
-            border-bottom: white 1px solid;
-        }
-
-        #sidebar ul p {
-            color: #fff;
-            padding: 10px;
-        }
-
-        #sidebar ul li a {
-            padding: 10px;
-            font-size: 1.1em;
-            display: block;
-        }
-        #sidebar ul li a:hover {
-            color: #131e3c;
-            background: white;
-        }
-
-        #sidebar ul li.active > a, a[aria-expanded="true"] {
-            color: white;
-            background: #131e3c;
-        }
-
-
-        a[data-toggle="collapse"] {
-            position: relative;
-        }
-
-        #sidebar {
-            width: 250px;
-            position: relative;
-            top: 0;
-            left: 0;
-            height: 75vh;
-            z-index: 999;
-            background: #f7f7f7;
-            color: black;
-            transition: all 0.3s;
-        }
-    </style>
-    <script>
-    </script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/settings.js"></script>
+    {% if site_language == 'English' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersEN.js"></script>
+    {% endif %}
+    {% if site_language == 'Greek' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
+    {% endif %}
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -274,7 +207,7 @@
     </div>
 
     <div class="modal fade" id="updateModal" role="dialog">
-        <form action="" method="post">
+        <form action="" method="post" onsubmit="UsersValidation('username1','email1','password1','retype_password1','full_name1','gender1','work_phone1','mobile_phone1','biography1','role1','avatar1')">
             <div class="modal-dialog">
               <div class="modal-content">
                     <div class="modal-header" id="settingsModalHeader">
@@ -302,8 +235,9 @@
                                     <div class="input-group-prepend">
                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id="username" value="{{request.form.username}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_username" placeholder="{{ manageUser.enterusername }}" name="username" id="username1" value="{{request.form.username}}" onkeyup="UsernameValidation('username1')" required>
                                 </div>
+                                <div class="error-messages" id="username1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="email">{{ manageUser.email }}</label>
@@ -312,8 +246,9 @@
                                     <div class="input-group-prepend">
                                           <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_email" placeholder="{{ manageUser.enteremail }}" name="email" id="email1" value="{{request.form.email}}" onkeyup="EmailValidation('email1')" required>
                                 </div>
+                                <div class="error-messages" id="email1_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -324,8 +259,9 @@
                                     <div class="input-group-prepend">
                                             <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password1" value="{{request.form.password}}" onkeyup="PasswordValidation('password1')" required>
                                 </div>
+                                <div class="error-messages" id="password1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="retype_password">{{ manageUser.retype_password }}</label>
@@ -334,8 +270,9 @@
                                     <div class="input-group-prepend">
                                             <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                                    <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterretype_password }}" name="retype_password" id="retype_password1" value="{{request.form.retype_password}}" onkeyup="RetypePasswordValidation('retype_password1')" required>
                                 </div>
+                                <div class="error-messages" id="retype_password1_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -346,8 +283,9 @@
                                     <div class="input-group-prepend">
                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{ manageUser.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_full_name" placeholder="{{ manageUser.enterfullname }}" name="full_name" id="full_name1" value="{{request.form.full_name}}" onkeyup="FullnameValidation('full_name1')" required>
                                 </div>
+                                <div class="error-messages" id="full_name1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
@@ -356,12 +294,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                                     </div>
-                                    <select required class="form-control user_gender" name="gender" id="gender" value="{{request.form.gender}}">
+                                    <select required class="form-control user_gender" name="gender" id="gender1" value="{{request.form.gender}}" onchange="DropdownValidation('gender1')">
                                         <option value="Male">{{ manageUser.male }}</option>
                                         <option value="Female">{{ manageUser.female }}</option>
                                         <option value="Other">{{ manageUser.other }}</option>
                                     </select>
                                 </div>
+                                <div class="error-messages" id="gender1_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -372,8 +311,9 @@
                                     <div class="input-group-prepend">
                                          <span class="input-group-addon input-group-text primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_work_phone" placeholder="{{ manageUser.enterwork_phone }}" name="work_phone" id="work_phone1" value="{{request.form.work_phone}}" onkeyup="PhoneValidation('work_phone1')" required>
                                 </div>
+                                <div class="error-messages" id="work_phone1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="mobile_phone">{{ manageUser.mobile_phone }}</label>
@@ -382,8 +322,9 @@
                                     <div class="input-group-prepend">
                                           <span class="input-group-addon input-group-text primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_mobile_phone" placeholder="{{ manageUser.entermobile_phone }}" name="mobile_phone" id="mobile_phone1" value="{{request.form.mobile_phone}}" onkeyup="PhoneValidation('mobile_phone1')" required>
                                 </div>
+                                <div class="error-messages" id="mobile_phone1_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -394,8 +335,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{ manageUser.enterbiography }}" name="biography" id="biography1" value="{{request.form.biography}}" onkeyup="BiographyValidation('biography1')" required>
                                 </div>
+                                <div class="error-messages" id="biography1_errors"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -407,18 +349,19 @@
                                           <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
                                     </div>
                                     {% if loggedin_role == 'ADMIN' %}
-                                        <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}">
+                                        <select required class="form-control user_role" name="role" id="role1" value="{{request.form.role}}" onchange="DropdownValidation('role1')">
                                             <option value="ADMIN">{{ manageUser.admin }}</option>
                                             <option value="USER">{{ manageUser.user }}</option>
                                         </select>
                                     {% endif %}
                                     {% if loggedin_role == 'USER' %}
-                                        <select required class="form-control user_role" name="role" id="role" value="{{request.form.role}}" disabled>
+                                        <select required class="form-control user_role" name="role" id="role1" value="{{request.form.role}}" disabled>
                                             <option value="ADMIN">{{ manageUser.admin }}</option>
                                             <option value="USER">{{ manageUser.user }}</option>
                                         </select>
                                     {% endif %}
                                 </div>
+                                <div class="error-messages" id="role1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="avatar">{{ manageUser.avatar }}</label>
@@ -427,8 +370,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                                    <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar1" value="{{request.form.avatar}}" onkeyup="URLValidation('avatar1')" required>
                                 </div>
+                                <div class="error-messages" id="avatar1_errors"></div>
                             </div>
                         </div>
                     </div>
