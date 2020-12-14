@@ -134,7 +134,7 @@ class InsertCriminalsEN:
 
 class SignupEN:
     title = "Form Details"
-    signup = "Submit Form"
+    signup = "Register"
     username = "Username"
     enterusername = "Enter username"
     password = "Password"
@@ -161,8 +161,8 @@ class SignupEN:
     user = "User"
     avatar = "Profile Image"
     enterimage = "Enter image URL"
-    reset = "Reset form"
-    returnhome = "Return to the Home Page"
+    reset = "Reset"
+    returnhome = "Return to Home"
 
 class InsertUserEN:
     insert = "Insert new Users"

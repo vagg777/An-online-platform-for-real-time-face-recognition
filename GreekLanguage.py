@@ -88,7 +88,7 @@ class LoginGR:
 
 class SignupGR:
     title = "Στοιχεία Φόρμας"
-    signup = "Ολοκλήρωση Εγγραφής"
+    signup = "Εγγραφή"
     username = "Όνομα χρήστη"
     enterusername = "Εισάγετε όνομα χρήστη"
     password = "Κωδικός"
@@ -115,7 +115,7 @@ class SignupGR:
     user = "Χρήστης"
     avatar = "Εικόνα Προφίλ"
     enterimage = "Εισάγετε URL εικόνας"
-    reset = "Καθαρισμός Φόρμας"
+    reset = "Καθαρισμός"
     returnhome = "Επιστροφή στην Αρχική"
 
 class ManageGR:

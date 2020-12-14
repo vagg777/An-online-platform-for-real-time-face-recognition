@@ -231,26 +231,26 @@ hr {
 .container {
     background-color: #f2f2f2;
     padding: 20px;
-    border-radius: 125px 25px;
+    border-radius: 60px 60px;
 }
 
 .errorcontainerfillpage {
     width: 35%;
     margin-top: 15%;
     background-color: red;
-    border-radius: 125px 25px;
+    border-radius: 60px 60px;
 }
 
 .errorcontainer{
     width:35%;
     background-color: red;
-    border-radius: 125px 25px;
+    border-radius: 60px 60px;
 }
 
 .successcontainer {
     width: 35%;
     background-color: green;
-    border-radius: 125px 25px;
+    border-radius: 60px 60px;
 }
 
 .error {

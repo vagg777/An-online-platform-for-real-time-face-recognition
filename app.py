@@ -18,7 +18,7 @@ from cameraController import *
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
-site_language = "English"
+site_language = "Greek"
 detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
@@ -39,6 +39,7 @@ manageLivefeed = ""
 manage = ""
 settings = ""
 contact = ""
+signup = ""
 
 
 
@@ -63,8 +64,10 @@ def checkLanguage(site_language):
     global manage
     global settings
     global contact
+    global signup
     if site_language == "Greek":
         welcome = WelcomeGR()
+        signup = SignupGR()
         login = LoginGR()
         messages = MessagesGR()
         header = HeaderGR()
@@ -79,6 +82,7 @@ def checkLanguage(site_language):
         contact = ContactGR()
     else:
         welcome = WelcomeEN()
+        signup = SignupEN()
         login = LoginEN()
         messages = MessagesEN()
         header = HeaderEN()
