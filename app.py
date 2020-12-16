@@ -18,7 +18,7 @@ from cameraController import *
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
-site_language = "Greek"
+site_language = "English"
 detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
@@ -608,6 +608,8 @@ def settings():
         if user:
             if site_language == "Greek":
                 user = single_user_translate_to_Greek(manageUser, list(user[0]))
+            else:
+                user = user[0]
             return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings)
         else:
             pass #TODO: add some error control here
@@ -639,6 +641,8 @@ def settings():
             if user:
                 if site_language == "Greek":
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                else:
+                    user = user[0]
                 return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
@@ -646,6 +650,10 @@ def settings():
             sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
             user = sql.fetchall()
             if user:
+                if site_language == "Greek":
+                    user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                else:
+                    user = user[0]
                 return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
         finally:
             pass

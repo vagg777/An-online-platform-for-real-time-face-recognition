@@ -1,0 +1,537 @@
+body {
+    background-color: #3d3d3d;
+}
+
+input[type="text"] {
+    background-color: #8c8888;
+    border: 1px solid #8c8888;
+    color:white;
+}
+
+input[type="text"]:focus{
+    background-color: #8c8888;
+    color:white;
+}
+
+#subject {
+    background-color: #8c8888;
+    border: 1px solid #8c8888;
+    color:white;
+}
+
+#subject:focus {
+    background-color: #8c8888;
+    color:white;
+}
+
+::placeholder {
+  color: white !important;
+  opacity: 1; /* Firefox */
+}
+
+.navbar-light {
+    color: white !important;
+}
+
+.bg-light{
+    background-color: #6e736f !important;
+}
+
+.input-group-addon.primary {
+    color: white;
+    background-color: #131e3c;
+    border-color: rgb(40, 94, 142);
+}
+
+.input-group-addon.success {
+    color: white;
+    background-color: #28a745;
+    border-color: rgb(76, 174, 76);
+}
+
+.input-group-addon.warning {
+    color: white;
+    background-color: #ffc107;
+    border-color: rgb(238, 162, 54);
+}
+
+.input-group-addon.danger {
+    color: white;
+    background-color: #dc3545;
+    border-color: rgb(212, 63, 58);
+}
+
+#updateModalHeader {
+    background-color: #ffc107;
+    color: white;
+}
+
+#insertModalHeader {
+    background-color: #28a745;
+    color: white;
+}
+
+#deleteModalHeader {
+    background-color: #dc3545;
+    color: white;
+}
+
+#settingsModalHeader {
+    background-color: #131e3c;
+    color: white;
+}
+
+.form-control {
+    min-height: 41px;
+    background: #fff;
+    box-shadow: none !important;
+    border-color: #e3e3e3;
+}
+
+.form-control, .btn {
+    border-radius: 2px;
+}
+
+/*
+button, .button, .btn {
+    border-radius: 125px 25px;
+}
+*/
+
+.btn-primary{
+    background-color: #131e3c;
+    color:white;
+}
+
+#submitButton {
+    float: right;
+    background-color: #131e3c;
+    color:white;
+}
+
+#resetButton {
+    margin-right: 10px;
+    float: right;
+    background-color: #d9534f;
+}
+
+#warningButton {
+    background-color: #f0ad4e;
+    float: right;
+    margin-right: 10px;
+}
+
+.login-form {
+    width: 350px;
+    margin: 0 auto;
+    padding: 100px 0 30px;
+    margin-top: 3%;
+}
+
+.login-form form {
+    color: #7a7a7a;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    background: #ececec;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    position: relative;
+}
+
+.login-form h2 {
+    font-size: 22px;
+    margin: 35px 0 25px;
+}
+
+.login-form .avatar {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #ececec;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .avatar img {
+    width: 100%;
+}
+
+.login-form .btn {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #131e3c;
+    border: none;
+    margin-bottom: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.nav-link {
+    color: white !important;
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#manageUsersContainer {
+    width: 100%;
+}
+
+p {
+     text-align: justify;
+}
+
+hr {
+    border: 1px solid white;
+}
+
+#policeimage {
+    width: 2%;
+}
+
+.contactlabel {
+    color: white;
+}
+
+.required {
+    color: red;
+    font-weight: bold;
+}
+
+.black {
+    color: black;
+ }
+
+.hidetext {
+    -webkit-text-security: disc;
+}
+
+#loginSubmit{
+    background-color: #131e3c;
+}
+
+#returnSubmit {
+    background-color: #f0ad4e;
+    margin:auto;
+    color: white;
+}
+
+.centererrorbutton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #6e736f;
+    padding: 20px;
+    border-radius: 60px 60px;
+}
+
+.errorcontainerfillpage {
+    width: 35%;
+    margin-top: 15%;
+    background-color: red;
+    border-radius: 60px 60px;
+}
+
+.errorcontainer{
+    width:35%;
+    background-color: red;
+    border-radius: 60px 60px;
+}
+
+.successcontainer {
+    width: 35%;
+    background-color: green;
+    border-radius: 60px 60px;
+}
+
+.error {
+    color: white;
+    text-align: center;
+    align: center;
+}
+
+.success {
+    color: white;
+    text-align:center;
+    align:center;
+}
+
+#errorcontainerlogin {
+    width:100%;
+    background-color: red;
+    border-radius: 125px 25px;
+}
+
+#successcontainerlogin {
+    width: 100%;
+    background-color: green;
+    border-radius: 125px 25px;
+}
+
+#welcomecontainer{
+    background-color: #6e736f;
+    padding: 20px;
+    margin-top: 8%;
+    color: white;
+    text-align: center;
+    border-radius: 60px 60px;
+}
+
+#managelivefeedcontainer {
+    background-color: #6e736f;
+    padding: 20px;
+    width: 70%;
+    border-radius: 125px 25px;
+}
+
+.country-container {
+    border-radius: 20px;
+    background-color: #6e736f;
+    width: 10%;
+    text-align: center;
+    color: white;
+}
+
+.footer {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 4%;
+    text-align: center;
+}
+
+.settingsfooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 6%;
+    text-align: center;
+}
+
+.loginfooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 10%;
+    text-align: center;
+}
+
+.welcomefooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 19%;
+    text-align: center;
+}
+
+.homefooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.contactfooter {
+    overflow: hidden;
+     background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 6%;
+    text-align: center;
+}
+
+.managefooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 8%;
+    text-align: center;
+}
+
+.managelivefeedfooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.managecriminalsfooter {
+    overflow: hidden;
+    background-color: #6e736f;
+    padding: 20px 10px;
+    color: white;
+    margin-top: 8%;
+    text-align: center;
+}
+
+.errorloginfooter{
+    margin-top: 23%;
+    background-color: #6e736f;
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+#logouttab{
+    color: white;
+}
+
+#biography {
+    height: 200px;
+}
+
+#manageInsertButton {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -100%);
+    transform: translate(-50%, -20%);
+}
+
+/* Keeps the navbar header bg-color when user presses the welcome user option in the header */
+#navbarDropdownMenuLink {
+    background-color: #6e736f;
+}
+
+#navbarDropdownMenuLinkfix {
+    color: white !important;
+    background-color: #6e736f !important;
+    border-radius: 100px 25px;
+}
+
+#wrap {
+    padding: 5%;
+    text-align: center;
+    width: 100%;
+    color: black;
+    border-style: solid;
+    border-color: black;
+}
+
+#left, #right {
+     display: inline-block;
+     padding: 2%;
+     border-style: solid;
+     border-color: black;
+     color: black;
+     text-align: justify;
+}
+
+#deleteModal{
+    margin-top: 7%;
+}
+
+a.active {
+    color: white !important;
+    background-color: #3d3d3d;
+    border-radius: 100px 25px;
+}
+
+#content {
+    padding: 20px;
+    min-height: 30vh;
+    transition: all 1.0s;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    color: white;
+    background: #131e3c;
+    border: 2px white solid;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: white 1px solid;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #131e3c;
+    background: white;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: white;
+    background: #131e3c;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#sidebar {
+    width: 250px;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 75vh;
+    z-index: 999;
+    background: #f7f7f7;
+    color: black;
+    transition: all 0.3s;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1440px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header a {
+    float: none;
+    display: block;
+    text-align: left;
+    }
+
+    .header-right {
+    float: none;
+    }
+}

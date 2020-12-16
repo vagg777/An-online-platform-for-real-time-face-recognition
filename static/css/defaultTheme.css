@@ -1,3 +1,7 @@
+body {
+    background-image: url('/static/images/dark.jpg')
+}
+
 .input-group-addon.primary {
     color: white;
     background-color: #131e3c;
@@ -47,10 +51,6 @@
     background: #fff;
     box-shadow: none !important;
     border-color: #e3e3e3;
-}
-
-.form-control:focus {
-    border-color: #70c5c0;
 }
 
 .form-control, .btn {
@@ -283,6 +283,15 @@ hr {
     text-align: center;
 }
 
+.settingsfooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 6%;
+    text-align: center;
+}
+
 .loginfooter {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -307,6 +316,15 @@ hr {
     padding: 20px 10px;
     color: black;
     margin-top: 5%;
+    text-align: center;
+}
+
+.contactfooter {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    color: black;
+    margin-top: 6%;
     text-align: center;
 }
 
@@ -365,6 +383,12 @@ hr {
 /* Keeps the navbar header bg-color when user presses the welcome user option in the header */
 #navbarDropdownMenuLink {
     background-color: #f7f7f7;
+}
+
+#navbarDropdownMenuLinkfix {
+    color: white !important;
+    background-color: #131e3c;
+    border-radius: 100px 25px;
 }
 
 #wrap {

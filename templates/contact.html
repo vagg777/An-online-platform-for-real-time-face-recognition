@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+
 <head>
     <title>Contact us</title>
     <meta charset="UTF-8">
@@ -9,13 +9,16 @@
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/darkTheme.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+
+    </style>
 </head>
 
-<body style="background-image: url('/static/images/background.jpg')">
+<body>
 {% if loggedin_role %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
@@ -39,8 +42,8 @@
                     <a class="nav-link active" href="contact">{{ header.contact }}</a>
                 </li>
                 <li class="nav-item dropdown ml-auto">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.welcome }} {{ loggedin_user }}</a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkfix" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.welcome }} {{ loggedin_user }}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLinkfix">
                         <a class="dropdown-item" href="settings">{{ header.settings }}</a>
                         <div class="dropdown-divider"></div>
                         <a href="logout" id="logouttab" class="btn btn-danger" style="width: 100%"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
@@ -63,7 +66,7 @@
     {% endif %}
 
     <div class="container">
-        <h2 class = "contactlabel" align="center">{{ contact.reportissue }}</h2>
+        <h2 class="contactlabel" align="center">{{ contact.reportissue }}</h2>
         <hr>
         <form action="" method="post">
               <div class="form-group">

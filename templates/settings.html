@@ -9,17 +9,10 @@
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/defaultTheme.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script language="JavaScript" type="text/javascript" src="/static/js/settings.js"></script>
-    {% if site_language == 'English' %}
-        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersEN.js"></script>
-    {% endif %}
-    {% if site_language == 'Greek' %}
-        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
-    {% endif %}
 </head>
 
 <body style="background-image: url('/static/images/background.jpg')">
@@ -46,8 +39,8 @@
                 <a class="nav-link" href="contact">{{ header.contact }}</a>
             </li>
             <li class="nav-item dropdown ml-auto">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.welcome }} {{ loggedin_user }}</a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLinkfix" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.welcome }} {{ loggedin_user }}</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLinkfix">
                     <a class="dropdown-item" href="settings">{{ header.settings }}</a>
                     <div class="dropdown-divider"></div>
                     <a href="logout" id="logouttab" class="btn btn-danger" style="width: 100%"><span class="glyphicon glyphicon-log-out"></span> {{ header.logout }}</a>
@@ -99,7 +92,7 @@
         {% endif %}
         <div id="content">
             <h2 style="text-align:center">{{ settings.myprofile }}</h2><hr>
-            <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0][0] }}">
+            <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0] }}">
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label class="contactlabel" for="username">{{ manageUser.username }}</label>
@@ -140,7 +133,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="contactlabel" for="gender">{{ manageUser.gender }}</label>
+                    <label class="contactlabel" for="gender0">{{ manageUser.gender }}</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
@@ -149,7 +142,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="contactlabel" for="role">{{ manageUser.role }}</label>
+                    <label class="contactlabel" for="role0">{{ manageUser.role }}</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                              <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
@@ -185,7 +178,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                         </div>
-                        <img src="{{user[10]}}" class="form-control" id="image" style="height: auto;">
+                        <img src="{{ user[10] }}" class="form-control" id="image" style="height: auto;">
                     </div>
                 </div>
                 <div class="form-group col-md-9">
@@ -217,13 +210,13 @@
                     <div class="modal-body black">
                         <div class="form-row">
                              <div class="form-group col-md-12">
-                                <label class="contactlabel" for="id">{{ manageUser.id }}</label>
+                                <label class="contactlabel" for="id1">{{ manageUser.id }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     </div>
-                                    <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id" value="{{request.form.id}}" readonly>
+                                    <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id1" value="{{request.form.id}}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +250,7 @@
                                 <span class="required">*</span>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                            <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     </div>
                                     <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterpassword }}" name="password" id="password1" value="{{request.form.password}}" onkeyup="PasswordValidation('password1')" required>
                                 </div>
@@ -268,7 +261,7 @@
                                 <span class="required">*</span>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                            <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                       <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     </div>
                                     <input type="password" autocomplete="off" class="form-control user_password" placeholder="{{ manageUser.enterretype_password }}" name="retype_password" id="retype_password1" value="{{request.form.retype_password}}" onkeyup="RetypePasswordValidation('retype_password1')" required>
                                 </div>
@@ -342,7 +335,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="contactlabel" for="role">{{ manageUser.role }}</label>
+                                <label class="contactlabel" for="role1">{{ manageUser.role }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group mb-3 div_role">
                                     <div class="input-group-prepend">
@@ -364,7 +357,7 @@
                                 <div class="error-messages" id="role1_errors"></div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="contactlabel" for="avatar">{{ manageUser.avatar }}</label>
+                                <label class="contactlabel" for="avatar1">{{ manageUser.avatar }}</label>
                                 <span class="required">*</span>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -385,10 +378,17 @@
         </form>
     </div>
 
-    <div class="footer">
+    <div class="settingsfooter">
       <h2>Footer</h2>
     </div>
 
+    {% if site_language == 'English' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersEN.js"></script>
+    {% endif %}
+    {% if site_language == 'Greek' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
+    {% endif %}
+    <script language="JavaScript" type="text/javascript" src="/static/js/settings.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-const UsersValidation = function validate(username, email, password, retype_password, full_name, work_phone, mobile_phone, biography, gender, role, url){
+$(document).ready(function() {
+  const UsersValidation = function validate(username, email, password, retype_password, full_name, work_phone, mobile_phone, biography, gender, role, url){
     const isUsernameValid = UsernameValidation(username);
     const isEmailValid = EmailValidation(email);
     const isPasswordValid = PasswordValidation(password);
@@ -228,3 +229,5 @@ const URLValidation = function validate(url) {
 
   return returnedValue
 }
+
+});
