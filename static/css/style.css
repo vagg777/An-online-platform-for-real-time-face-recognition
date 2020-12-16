@@ -119,7 +119,7 @@ button, .button, .btn {
     height: 95px;
     border-radius: 50%;
     z-index: 9;
-    background: rgb(50, 118, 177);
+    background: #ececec;
     padding: 15px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
@@ -128,39 +128,12 @@ button, .button, .btn {
     width: 100%;
 }
 
-.login-form input[type="checkbox"] {
-    margin-top: 2px;
-}
-
 .login-form .btn {
     font-size: 16px;
     font-weight: bold;
     background-color: #131e3c;
     border: none;
     margin-bottom: 20px;
-}
-
-.login-form .btn:hover, .login-form .btn:focus {
-    background: #50b8b3;
-    outline: none !important;
-}
-
-.login-form a {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.login-form a:hover {
-    text-decoration: none;
-}
-
-.login-form form a {
-    color: #7a7a7a;
-    text-decoration: none;
-}
-
-.login-form form a:hover {
-    text-decoration: underline;
 }
 
 * {
@@ -283,7 +256,7 @@ hr {
     margin-top: 8%;
     color: black;
     text-align: center;
-    border-radius: 125px 25px;
+    border-radius: 60px 60px;
 }
 
 #managelivefeedcontainer {
