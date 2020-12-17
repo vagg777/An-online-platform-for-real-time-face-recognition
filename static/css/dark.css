@@ -1,3 +1,4 @@
+
 body {
     background-color: #3d3d3d;
 }
@@ -24,7 +25,7 @@ input[type="password"]:focus{
     color:white;
 }
 
-#role, option, #gender.form-control {
+#role, #criminal_id, #criminal_eye_color, #criminal_gender, #criminal_bio, option, #gender.form-control, #eye_color, #biography {
     background-color: #929493;
     border: 1px solid #929493;
     color: white;
@@ -38,6 +39,10 @@ select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px #929493 inset !important;
     -webkit-text-fill-color: white !important;
+}
+
+.modal-body, .modal-footer{
+    background-color: #3d3d3d;
 }
 
 #subject {
