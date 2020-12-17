@@ -189,6 +189,7 @@ def login():
     global loggedin_role
     global loggedin_user
     global loggedin_email
+    global site_theme
     if request.method == 'GET':
         return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages)
     if request.method == 'POST':
@@ -305,8 +306,7 @@ def manage_users():
         result = sql.fetchall()
         if result:
             if site_language == "Greek":
-                if site_language == "Greek":
-                    result = users_translate_to_Greek(manageUser, result)
+                result = users_translate_to_Greek(manageUser, result)
             return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
         else:
             return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
@@ -340,7 +340,6 @@ def manage_users():
             result = sql.fetchall()
             if result:
                 if site_language == "Greek":
-                    if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
             return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
         except MySQLdb.Error as error:
@@ -629,6 +628,14 @@ def settings():
             user_role = str(request.form["role"])
             user_avatar = str(request.form["avatar"])
             if user_password != user_retype_password:
+                sql = mydb.cursor()
+                sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
+                user = sql.fetchall()
+                if user:
+                    if site_language == "Greek":
+                        user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                    else:
+                        user = user[0]
                 return render_template('settings.html', loggedin_user=loggedin_user, error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
