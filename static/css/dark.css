@@ -24,6 +24,22 @@ input[type="password"]:focus{
     color:white;
 }
 
+#role, option, #gender.form-control {
+    background-color: #929493;
+    border: 1px solid #929493;
+    color: white;
+}
+
+select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus, select:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #929493 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #929493 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
 #subject {
     background-color: #929493;
     border: 1px solid #929493;
