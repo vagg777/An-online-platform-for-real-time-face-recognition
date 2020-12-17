@@ -172,14 +172,14 @@ def criminals_translate_to_Greek(manageCriminal, result_list):
 
 @app.route('/')
 def start():
-    return render_template('welcome.html', welcome=welcome)
+    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language)
 
 
 
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html', welcome=welcome)
+    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language)
 
 
 
@@ -191,7 +191,7 @@ def login():
     global loggedin_email
     global site_theme
     if request.method == 'GET':
-        return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages)
+        return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, site_theme=site_theme, site_language=site_language)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -203,9 +203,9 @@ def login():
                 loggedin_role = user[0][1]
                 loggedin_user = user[0][0]
                 loggedin_email = user[0][2]
-                return render_template('home.html', header=header, loggedin_role=loggedin_role, messages=messages, home=home, loggedin_user=loggedin_user)
+                return render_template('home.html', header=header, loggedin_role=loggedin_role, messages=messages, home=home, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         else:
-            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_role=loggedin_role)
+            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
 
 
 
@@ -213,7 +213,7 @@ def login():
 def signup():
     global loggedin_role
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+        return render_template('signup.html', signup=signup, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -228,7 +228,7 @@ def signup():
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
             if password != retype_password:
-                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, messages=messages, header=header, loggedin_user=loggedin_user)
+                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, messages=messages, header=header, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()
@@ -238,10 +238,10 @@ def signup():
             mydb.commit()
             sql.close()
             loggedin_role = role
-            return render_template('home.html', success=messages.successsignup, signup=signup, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, header=header, home=home)
+            return render_template('home.html', success=messages.successsignup, signup=signup, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, header=header, home=home, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('signup.html', error=messages.sqlerror, signup=signup, loggedin_role=loggedin_role, messages=messages, header=header, loggedin_user=loggedin_user)
+            return render_template('signup.html', error=messages.sqlerror, signup=signup, loggedin_role=loggedin_role, messages=messages, header=header, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -255,26 +255,26 @@ def logout():
     loggedin_role = ""
     loggedin_email = ""
     loggedin_user = ""
-    return render_template('welcome.html', header=header, welcome=welcome, loggedin_role=loggedin_role, loggedin_user=loggedin_user, loggedin_email=loggedin_email)
+    return render_template('welcome.html', header=header, welcome=welcome, loggedin_role=loggedin_role, loggedin_user=loggedin_user, loggedin_email=loggedin_email, site_theme=site_theme, site_language=site_language)
 
 
 
 @app.route('/home')
 def home():
-    return render_template('home.html', header=header, home=home, loggedin_role=loggedin_role, messages=messages, loggedin_user=loggedin_user)
+    return render_template('home.html', header=header, home=home, loggedin_role=loggedin_role, messages=messages, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
 
 
 
 @app.route('/manage')
 def manage():
-    return render_template('manage.html', header=header, manage=manage, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages)
+    return render_template('manage.html', header=header, manage=manage, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, site_theme=site_theme, site_language=site_language)
 
 
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'GET':
-        return render_template('contact.html', header=header, contact=contact, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+        return render_template('contact.html', header=header, contact=contact, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             firstname = request.form['firstname']
@@ -289,10 +289,10 @@ def contact():
             sql.execute("INSERT INTO contact (contact_id, first_name, last_name, email, subject) VALUES (%s,%s,%s,%s,%s)", (contact_id, firstname, lastname, email, subject))
             mydb.commit()
             sql.close()
-            return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('contact.html', success=messages.successcontactform, header=header, contact=contact, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('contact.html', error=messages.sqlerror, header=header, contact=contact, loggedin_role = loggedin_role, loggedin_user=loggedin_user)
+            return render_template('contact.html', error=messages.sqlerror, header=header, contact=contact, loggedin_role = loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -307,9 +307,9 @@ def manage_users():
         if result:
             if site_language == "Greek":
                 result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
+            return render_template('manage_users.html', result=result, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language, site_theme=site_theme)
         else:
-            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
+            return render_template('manage_users.html', error=messages.norecordfound, header=header, messages=messages, manageUser=manageUser, manage=manage, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -328,7 +328,7 @@ def manage_users():
                 sql = mydb.cursor()
                 sql.execute("SELECT * FROM users")
                 result = sql.fetchall()
-                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
+                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -341,13 +341,13 @@ def manage_users():
             if result:
                 if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
+            return render_template('manage_users.html', success=messages.recordupdated, manage=manage, result=result, header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
             sql.execute("SELECT * FROM users")
             result = sql.fetchall()
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, manage=manage,  header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_language=site_language)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, manage=manage,  header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -356,7 +356,7 @@ def manage_users():
 @app.route('/insert_users', methods=['GET', 'POST'])
 def insert_users():
     if request.method == 'GET':
-        return render_template('insert_users.html', header=header, messages=messages, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+        return render_template('insert_users.html', header=header, messages=messages, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])
@@ -377,7 +377,7 @@ def insert_users():
                 if result:
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', error=messages.passwordnomatch, result=result, header=header,insertUser=insertUser, manageUser=manageUser, manage=manage, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+                return render_template('manage_users.html', error=messages.passwordnomatch, result=result, header=header,insertUser=insertUser, manageUser=manageUser, manage=manage, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()
@@ -392,7 +392,7 @@ def insert_users():
             if result:
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', success=messages.successinseruser, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', success=messages.successinseruser, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -401,7 +401,7 @@ def insert_users():
             if result:
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, insertUser=insertUser, manageUser=manageUser, manage=manage, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, header=header, insertUser=insertUser, manageUser=manageUser, manage=manage, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -416,7 +416,7 @@ def remove_users():
         if result:
             if site_language == "Greek":
                 result = users_translate_to_Greek(manageUser, result)
-        return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, insertUser=insertUser, manage=manage, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+        return render_template('manage_users.html', result=result, header=header, manageUser=manageUser, insertUser=insertUser, manage=manage, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     if request.method == 'POST':
         try:
             user_id = str(request.form["delete_user_id"])
@@ -436,7 +436,7 @@ def remove_users():
                 if result:
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', success=message, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+                return render_template('manage_users.html', success=message, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
             else:
                 message = messages.nouserleft + user_username + messages.nouserright
                 sql.close()
@@ -446,7 +446,7 @@ def remove_users():
                 if result:
                     if site_language == "Greek":
                         result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', error=message, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+                return render_template('manage_users.html', error=message, result=result, header=header, insertUser=insertUser, manage=manage, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
@@ -456,7 +456,7 @@ def remove_users():
             if result:
                 if site_language == "Greek":
                     result = users_translate_to_Greek(manageUser, result)
-            return render_template('manage_users.html', error=messages.sqlerror, result=result, insertUser=insertUser, header=header,manage=manage, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_users.html', error=messages.sqlerror, result=result, insertUser=insertUser, header=header,manage=manage, manageUser=manageUser, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -471,9 +471,9 @@ def manage_criminals():
         if result:
             if site_language == "Greek":
                 result = criminals_translate_to_Greek(manageCriminal, list(result))
-            return render_template('manage_criminals.html', result=result, header=header, insertCriminal=insertCriminal, manage=manage, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_criminals.html', result=result, header=header, insertCriminal=insertCriminal, manage=manage, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         else:
-            return render_template('manage_criminals.html', error=messages.norecordfound, header=header, manage=manage, insertCriminal=insertCriminal, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_criminals.html', error=messages.norecordfound, header=header, manage=manage, insertCriminal=insertCriminal, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             criminal_id = str(request.form["criminal_id"])
@@ -499,7 +499,7 @@ def manage_criminals():
             if result:
                 if site_language == "Greek":
                     result = criminals_translate_to_Greek(manageCriminal, list(result))
-            return render_template('manage_criminals.html', manage=manage, success=messages.recordupdated, insertCriminal=insertCriminal, result=result, header=header, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_criminals.html', manage=manage, success=messages.recordupdated, insertCriminal=insertCriminal, result=result, header=header, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -508,7 +508,7 @@ def manage_criminals():
             if result:
                 if site_language == "Greek":
                     result = criminals_translate_to_Greek(manageCriminal, list(result))
-            return render_template('manage_criminals.html', error=messages.sqlerror, manage=manage, result=result, header=header, insertCriminal=insertCriminal, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user)
+            return render_template('manage_criminals.html', error=messages.sqlerror, manage=manage, result=result, header=header, insertCriminal=insertCriminal, messages=messages, manageCriminal=manageCriminal, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -517,7 +517,7 @@ def manage_criminals():
 @app.route('/insert_criminals', methods=['GET', 'POST'])
 def insert_criminals():
     if request.method == 'GET':
-        return render_template('insert_criminals.html', loggedin_user=loggedin_user, messages=messages, manage=manage, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role)
+        return render_template('insert_criminals.html', loggedin_user=loggedin_user, messages=messages, manage=manage, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             criminal_full_name = str(request.form["fullname"])
@@ -543,10 +543,10 @@ def insert_criminals():
             if result:
                 if site_language == "Greek":
                     result = criminals_translate_to_Greek(manageCriminal, list(result))
-            return render_template('manage_criminals.html', loggedin_user=loggedin_user, success=messages.successinsertcriminal, manage=manage, result=result, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role = loggedin_role)
+            return render_template('manage_criminals.html', loggedin_user=loggedin_user, success=messages.successinsertcriminal, manage=manage, result=result, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
-            return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=messages.sqlerror, manage=manage, messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role)
+            return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=messages.sqlerror, manage=manage, messages=messages, insertCriminal=insertCriminal, manageCriminal=manageCriminal, header=header, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -573,7 +573,7 @@ def remove_criminals():
                 if result:
                     if site_language == "Greek":
                         result = criminals_translate_to_Greek(manageCriminal, list(result))
-                return render_template('manage_criminals.html', loggedin_user=loggedin_user, success=message, insertCriminal=insertCriminal, manage=manage, result=result, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role)
+                return render_template('manage_criminals.html', loggedin_user=loggedin_user, success=message, insertCriminal=insertCriminal, manage=manage, result=result, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
             else:
                 message = messages.nocriminalleft + criminal_full_name + messages.nocriminalright
                 sql.close()
@@ -583,7 +583,7 @@ def remove_criminals():
                 if result:
                     if site_language == "Greek":
                         result = criminals_translate_to_Greek(manageCriminal, list(result))
-                return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=message, result=result, insertCriminal=insertCriminal, manage=manage, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role)
+                return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=message, result=result, insertCriminal=insertCriminal, manage=manage, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql.close()
@@ -593,7 +593,7 @@ def remove_criminals():
             if result:
                 if site_language == "Greek":
                     result = criminals_translate_to_Greek(manageCriminal, list(result))
-            return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=messages.sqlerror, result=result, insertCriminal=insertCriminal, manage=manage, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role)
+            return render_template('manage_criminals.html', loggedin_user=loggedin_user, error=messages.sqlerror, result=result, insertCriminal=insertCriminal, manage=manage, header=header, manageCriminal=manageCriminal, messages=messages, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -610,7 +610,7 @@ def settings():
                 user = single_user_translate_to_Greek(manageUser, list(user[0]))
             else:
                 user = user[0]
-            return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings)
+            return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
         else:
             pass #TODO: add some error control here
     elif request.method == 'POST':
@@ -636,7 +636,7 @@ def settings():
                         user = single_user_translate_to_Greek(manageUser, list(user[0]))
                     else:
                         user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header)
+                return render_template('settings.html', loggedin_user=loggedin_user, error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -651,7 +651,7 @@ def settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -662,7 +662,7 @@ def settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -675,9 +675,9 @@ def live_feed():
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
         if result:
-            return render_template('manage_livefeed.html', loggedin_user=loggedin_user, result=result, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role)
+            return render_template('manage_livefeed.html', loggedin_user=loggedin_user, result=result, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
         else:
-            return render_template('manage_livefeed.html', loggedin_user=loggedin_user, error=messages.norecordsfound, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role)
+            return render_template('manage_livefeed.html', loggedin_user=loggedin_user, error=messages.norecordsfound, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
 
 
 
@@ -688,7 +688,7 @@ def search_live_feed():
         sql = mydb.cursor()
         sql.execute("SELECT * FROM criminals")
         result = sql.fetchall()
-        return render_template('manage_livefeed.html', loggedin_user=loggedin_user, messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role)
+        return render_template('manage_livefeed.html', loggedin_user=loggedin_user, messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         global detection_time
         global average_detection_time
@@ -722,7 +722,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal = manageCriminal, loggedin_role = loggedin_role)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal = manageCriminal, loggedin_role = loggedin_role, site_theme=site_theme, site_language=site_language)
 
 
 

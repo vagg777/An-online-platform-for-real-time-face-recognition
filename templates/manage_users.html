@@ -85,7 +85,7 @@
                 <div class="panel-body">
                     <table class="table table-hover table-striped table-responsive">
                         <thead class="thead-dark">
-                            <tr class="black">
+                            <tr class="themeColor">
                                 <th scope="col">{{ manageUser.id }}</th>
                                 <th scope="col">{{ manageUser.avatar }}</th>
                                 <th scope="col">{{ manageUser.username }}</th>
@@ -101,7 +101,7 @@
                                 <th scope="col">{{ manageUser.delete }}</th>
                             </tr>
                         </thead>
-                        <tbody class="black">
+                        <tbody class="themeColor">
                             {% for row in result %}
                                 <tr>
                                     <th class="user_id" scope="row">{{row.0}}</th>
@@ -138,7 +138,7 @@
                           <h4 class="modal-title">{{ manageUser.delete }}</h4>
                           <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       </div>
-                      <div class="modal-body black">
+                      <div class="modal-body themeColor">
                           <p>{{ manageUser.confirmDelete }} </p>
                           <input class="form-control delete_user_id" type="hidden" id="delete_user_id" name="delete_user_id" placeholder="{{ manageUser.enteruser_id}}" value="{{ request.form.delete_user_id }}" readonly>
                           <input class="form-control delete_user_username" type="hidden" id="delete_user_username" name="delete_user_username" placeholder="{{ manageUser.enteruser_username }}" value="{{ request.form.delete_user_username}}" readonly>
@@ -160,7 +160,7 @@
                         <h4 class="modal-title">{{ manageUser.updateuser }}</h4>
                         <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <div class="modal-body black">
+                    <div class="modal-body themeColor">
                         <div class="form-row">
                              <div class="form-group col-md-12">
                                 <label class="contactlabel" for="id">{{ manageUser.id }}</label>
@@ -331,7 +331,7 @@
                         <h4 class="modal-title">{{ manageUser.insertuser }}</h4>
                         <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <div class="modal-body black">
+                    <div class="modal-body themeColor">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="contactlabel" for="username">{{ insertUser.username }}</label>
