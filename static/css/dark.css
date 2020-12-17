@@ -48,6 +48,35 @@ input[type="password"]:focus{
     background-color: #6e736f !important;
 }
 
+p, h1, h2, li {
+    color: white;
+}
+
+.UrlLinks:visited {
+    color: #3d3d3d;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.UrlLinks:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+div.dropdown-menu.dropdown-menu-right.show {
+   background-color: #6e736f;
+}
+
+a.dropdown-item {
+    color: white;
+}
+
+a.dropdown-item:hover {
+    background-color: #3d3d3d;
+    color: white;
+}
+
 .input-group-addon.primary {
     color: white;
     background-color: #131e3c;

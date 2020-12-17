@@ -18,6 +18,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -84,13 +87,13 @@
         <h2>{{ home.features }}</h2>
         <ul>
             {% if loggedin_role == 'ADMIN' %}
-                <li>{{ home.managecriminalsleft }}<u><a href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
-                <li>{{ home.manageusersleft }}<u><a href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
+                <li>{{ home.managecriminalsleft }}<u><a class="UrlLinks" href="manage"> {{ home.managecriminalsright }}</a></u> {{ home.tab }}</li>
+                <li>{{ home.manageusersleft }}<u><a class="UrlLinks" href="manage">{{ home.manageusersright }}</a></u> {{ home.tab }}</li>
             {% endif %}
-            <li>{{ home.searchcriminals }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
-            <li>{{ home.selectfilters }}<u><a href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
-            <li>{{ home.reportissue }}<u><a href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
-            <li>{{ home.settingstext }}<u><a href="settings">{{ home.settings }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.searchcriminals }}<u><a class="UrlLinks" href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.selectfilters }}<u><a class="UrlLinks" href="live_feed">{{ home.livefeed }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.reportissue }}<u><a class="UrlLinks" href="contact">{{ home.contact }}</a></u> {{ home.tab }}</li>
+            <li>{{ home.settingstext }}<u><a class="UrlLinks" href="settings">{{ home.settings }}</a></u> {{ home.tab }}</li>
         </ul>
     </div>
 
