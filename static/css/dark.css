@@ -486,16 +486,13 @@ hr {
     padding: 5%;
     text-align: center;
     width: 100%;
-    color: black;
-    border-style: solid;
-    border-color: black;
 }
 
 #left, #right {
      display: inline-block;
      padding: 2%;
      border-style: solid;
-     border-color: black;
+     border-color: white;
      color: black;
      text-align: justify;
 }
