@@ -19,6 +19,7 @@ app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
 site_language = "English"
+site_theme = "Dark"
 detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""

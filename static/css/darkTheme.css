@@ -1,26 +1,26 @@
-body {
+ body {
     background-color: #3d3d3d;
 }
 
 input[type="text"] {
-    background-color: #8c8888;
-    border: 1px solid #8c8888;
+    background-color: #929493;
+    border: 1px solid #929493;
     color:white;
 }
 
 input[type="text"]:focus{
-    background-color: #8c8888;
+    background-color: #929493;
     color:white;
 }
 
 #subject {
-    background-color: #8c8888;
-    border: 1px solid #8c8888;
+    background-color: #929493;
+    border: 1px solid #929493;
     color:white;
 }
 
 #subject:focus {
-    background-color: #8c8888;
+    background-color: #929493;
     color:white;
 }
 
@@ -356,7 +356,7 @@ hr {
 
 .contactfooter {
     overflow: hidden;
-     background-color: #6e736f;
+    background-color: #6e736f;
     padding: 20px 10px;
     color: white;
     margin-top: 6%;
