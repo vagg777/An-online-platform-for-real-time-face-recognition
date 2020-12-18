@@ -1,4 +1,4 @@
-        $(document).ready(function() {
+ $(document).ready(function() {
         $('#updateModal').on('show.bs.modal', function (e) {
         var _button = $(e.relatedTarget);
         var _row = _button.parents("div");
@@ -49,14 +49,39 @@ function fkey(e){
          wasPressed = true;
     }
 }
+
 function manageProfile() {
       var profileDiv = document.getElementById("profileSettingsDiv");
       var profileList = document.getElementById("profileSettingsLink");
+      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
+      var appearanceList = document.getElementById("appearanceSettingsLink");
       if (profileDiv.style.display === "none") {
         profileDiv.style.display = "block";
         profileList.classList.add('active')
+        if (appearanceDiv.style.display === "block") {
+            appearanceDiv.style.display = "none";
+            appearanceList.classList.remove('active')
+        }
       } else {
         profileDiv.style.display = "none";
         profileList.classList.remove('active')
+      }
+}
+
+function manageAppearance() {
+      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
+      var appearanceList = document.getElementById("appearanceSettingsLink");
+      var profileDiv = document.getElementById("profileSettingsDiv");
+      var profileList = document.getElementById("profileSettingsLink");
+      if (appearanceDiv.style.display === "none") {
+        appearanceDiv.style.display = "block";
+        appearanceList.classList.add('active')
+        if (profileDiv.style.display === "block") {
+            profileDiv.style.display = "none";
+            profileList.classList.remove('active')
+        }
+      } else {
+        appearanceDiv.style.display = "none";
+        appearanceList.classList.remove('active')
       }
 }
