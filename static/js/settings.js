@@ -1,4 +1,4 @@
-$(document).ready(function() {
+        $(document).ready(function() {
         $('#updateModal').on('show.bs.modal', function (e) {
         var _button = $(e.relatedTarget);
         var _row = _button.parents("div");
@@ -49,11 +49,14 @@ function fkey(e){
          wasPressed = true;
     }
 }
-function myFunction() {
-      var x = document.getElementById("profileSettingsDiv");
-      if (x.style.display === "none") {
-        x.style.display = "block";
+function manageProfile() {
+      var profileDiv = document.getElementById("profileSettingsDiv");
+      var profileList = document.getElementById("profileSettingsLink");
+      if (profileDiv.style.display === "none") {
+        profileDiv.style.display = "block";
+        profileList.classList.add('active')
       } else {
-        x.style.display = "none";
+        profileDiv.style.display = "none";
+        profileList.classList.remove('active')
       }
 }
