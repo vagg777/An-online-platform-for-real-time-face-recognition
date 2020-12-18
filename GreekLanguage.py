@@ -275,7 +275,8 @@ class ManageUserGR:
     enterretype_password = "Εισάγετε ξανά τον κωδικό σας"
     insertuser = "Εισαγωγή Χρήστη"
     confirmDelete = "Είστε σίγουροι ότι επιθυμείτε να διαγράψετε αυτόν τον χρήστη από τη βάση δεδομένων;"
-    updateMyProfile = "Ανανέωση του προφίλ μου"
+    updateMyProfile = "Ανανέωση του Προφίλ μου"
+    updateMyAppearance = "Ανανέωση της Εμφάνισης"
     close = "Κλείσιμο"
 
 class ManageLivefeedGR:

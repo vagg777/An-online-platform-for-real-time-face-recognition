@@ -279,6 +279,7 @@ class ManageUserEN:
     insertuser = "Insert User"
     confirmDelete = "Are you sure you want to delete this user from the database?"
     updateMyProfile = "Update My Profile"
+    updateMyAppearance = "Update Site Appearance"
     close = "Close"
 
 class ManageLivefeedEN:
@@ -295,3 +296,10 @@ class SettingsEN:
     title = "Livestream Police Surveillance Application"
     mysettings = "My Settings"
     myprofile = "My Profile"
+    lightTheme = "Light Theme"
+    darkTheme = "Dark Theme"
+    theme = "Theme"
+    fontsize = "Font Size"
+    language = "Language"
+    english = "English"
+    greek = "Greek"

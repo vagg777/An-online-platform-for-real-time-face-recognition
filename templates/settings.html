@@ -19,6 +19,95 @@
     {% if site_language == 'Greek' %}
         <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
     {% endif %}
+    <script>
+         $(document).ready(function() {
+        $('#updateModal').on('show.bs.modal', function (e) {
+        var _button = $(e.relatedTarget);
+        var _row = _button.parents("div");
+        var _id = _row.find(".user_id").val();
+        var _username = _row.find(".user_username").val();
+        var _password = _row.find(".user_password").val();
+        var _email = _row.find(".user_email").val();
+        var _fullname = _row.find(".user_full_name").val();
+        var _gender = _row.find("#gender0").val();
+        if (_gender == "Άντρας") {_gender = "Male"}
+        if (_gender == "Γυναίκα") {_gender = "Female"}
+        if (_gender == "Άλλο") {_gender = "Other"}
+        var _biography = _row.find(".user_biography").val();
+        var _work_phone = _row.find(".user_work_phone").val();
+        var _mobile_phone = _row.find(".user_mobile_phone").val();
+        var _role = _row.find("#role0").val();
+        if (_role == "Διαχειριστής") {_role = "ADMIN"}
+        if (_role == "Χρήστης") {_role = "USER"}
+        var _avatar = _row.find('img').attr("src");
+        $(this).find(".user_id").val(_id);
+        $(this).find(".user_username").val(_username);
+        $(this).find(".user_password").val(_password);
+        $(this).find(".user_email").val(_email);
+        $(this).find(".user_full_name").val(_fullname);
+        $("#gender").val(_gender).change();
+        $(this).find(".user_biography").val(_biography);
+        $(this).find(".user_work_phone").val(_work_phone);
+        $(this).find(".user_mobile_phone").val(_mobile_phone);
+        $("#role").val(_role).change();
+        $(this).find(".user_avatar").val(_avatar);
+    });
+ });
+
+ if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, 'settings' );
+ }
+
+document.onkeydown = fkey;
+document.onkeypress = fkey
+document.onkeyup = fkey;
+var wasPressed = false;
+
+function fkey(e){
+   e = e || window.event;
+   if( wasPressed ) return;
+    if (e.keyCode == 116) {
+         window.location = 'settings';
+         wasPressed = true;
+    }
+}
+
+function manageProfile() {
+      var profileDiv = document.getElementById("profileSettingsDiv");
+      var profileList = document.getElementById("profileSettingsLink");
+      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
+      var appearanceList = document.getElementById("appearanceSettingsLink");
+      if (profileDiv.style.display === "none") {
+        profileDiv.style.display = "block";
+        profileList.classList.add('active')
+        if (appearanceDiv.style.display === "block") {
+            appearanceDiv.style.display = "none";
+            appearanceList.classList.remove('active')
+        }
+      } else {
+        profileDiv.style.display = "none";
+        profileList.classList.remove('active')
+      }
+}
+
+function manageAppearance() {
+      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
+      var appearanceList = document.getElementById("appearanceSettingsLink");
+      var profileDiv = document.getElementById("profileSettingsDiv");
+      var profileList = document.getElementById("profileSettingsLink");
+      if (appearanceDiv.style.display === "none") {
+        appearanceDiv.style.display = "block";
+        appearanceList.classList.add('active')
+        if (profileDiv.style.display === "block") {
+            profileDiv.style.display = "none";
+            profileList.classList.remove('active')
+        }
+      } else {
+        appearanceDiv.style.display = "none";
+        appearanceList.classList.remove('active')
+      }
+}
+    </script>
     <style>
 
 body {
@@ -52,7 +141,7 @@ input[type="password"]:focus{
     color:white;
 }
 
-#role, #criminal_id, #criminal_eye_color, #criminal_gender, #criminal_bio, option, #gender.form-control, #eye_color, #biography {
+#role, #criminal_id, #criminal_eye_color, #criminal_gender, #criminal_bio, option, #gender.form-control, #eye_color, #biography, #theme, #fontsize, #language {
     background-color: #929493;
     border: 1px solid #929493;
     color: white;
@@ -830,7 +919,7 @@ a[data-toggle="collapse"] {
             <div id="content">
                 <div class="form-group" style="text-align:center">
                     <button class="btn btn-danger btn-lg" onclick="manageAppearance();">{{ manageUser.close }}</button>
-                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#updateModal">{{ manageUser.update }}</button>
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#appearanceModal">{{ manageUser.update }}</button>
                 </div>
             </div>
       </div>
@@ -992,6 +1081,72 @@ a[data-toggle="collapse"] {
                                     <input type="text" autocomplete="off" class="form-control user_avatar" placeholder="{{ manageUser.enterimage }}" name="avatar" id="avatar1" value="{{request.form.avatar}}" onkeyup="URLValidation('avatar1')" required>
                                 </div>
                                 <div class="error-messages" id="avatar1_errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageUser.cancel }}</button>
+                        <input type="submit" class="btn btn-primary" value="{{ manageUser.update }}">
+                    </div>
+              </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="appearanceModal" role="dialog">
+        <form action="menu_settings" method="post">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header" id="settingsModalHeader">
+                        <h4 class="modal-title">{{ manageUser.updateMyAppearance }}</h4>
+                        <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body black">
+                        <div class="form-row">
+                             <div class="form-group col-md-12">
+                                <label class="contactlabel" for="theme">{{ settings.theme }}</label>
+                                <div class="input-group mb-3 div_theme">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+                                    </div>
+                                    <select required class="form-control user_theme" name="theme" id="theme" value="{{request.form.theme}}">
+                                        <option value="Light">{{ settings.lightTheme }}</option>
+                                        <option value="Dark">{{ settings.darkTheme }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="contactlabel" for="language">{{ settings.language }}</label>
+                                <div class="input-group mb-3 div_language">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                    </div>
+                                    <select required class="form-control user_language" name="language" id="language" value="{{request.form.language}}">
+                                        <option value="English">{{ settings.english }}</option>
+                                        <option value="Greek">{{ settings.darkTheme }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="contactlabel" for="fontsize">{{ settings.fontsize }}</label>
+                                <div class="input-group mb-3 div_fontsize">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon input-group-text primary"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                    </div>
+                                    <select required class="form-control user_fontsize" name="fontsize" id="fontsize" value="{{request.form.fontsize}}">
+                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                        <option value="12">12</option>
+                                        <option value="14">14</option>
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

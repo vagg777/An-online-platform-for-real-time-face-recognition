@@ -667,6 +667,54 @@ def settings():
             pass
 
 
+@app.route('/menu_settings', methods=['GET', 'POST'])
+def menu_settings():
+    if request.method == 'GET':
+        sql = mydb.cursor()
+        sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
+        user = sql.fetchall()
+        if user:
+            if site_language == "Greek":
+                user = single_user_translate_to_Greek(manageUser, list(user[0]))
+            else:
+                user = user[0]
+            return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages,loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
+        else:
+            pass  # TODO: add some error control here
+    elif request.method == 'POST':
+        try:
+            user_theme = str(request.form["theme"])
+            user_language = str(request.form["language"])
+            user_fontsize = str(request.form["fontsize"])
+            # TODO: connect to db and update
+            sql = mydb.cursor()
+            query = ""
+            query_input = (user_theme, user_language, user_fontsize)
+            sql.execute(query, query_input)
+            mydb.commit()
+            sql.close()
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
+            user = sql.fetchall()
+            if user:
+                if site_language == "Greek":
+                    user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                else:
+                    user = user[0]
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges, site_theme=site_theme, site_language=site_language)
+        except MySQLdb.Error as error:
+            messages.sqlerror = str(error)
+            sql = mydb.cursor()
+            sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
+            user = sql.fetchall()
+            if user:
+                if site_language == "Greek":
+                    user = single_user_translate_to_Greek(manageUser, list(user[0]))
+                else:
+                    user = user[0]
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error=messages.sqlerror, site_theme=site_theme, site_language=site_language)
+        finally:
+            pass
 
 @app.route('/live_feed', methods=['GET', 'POST'])
 def live_feed():
