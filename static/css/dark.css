@@ -161,6 +161,7 @@ button, .button, .btn {
 
 .btn-primary{
     background-color: #131e3c;
+    border-color: #131e3c;
     color:white;
 }
 
