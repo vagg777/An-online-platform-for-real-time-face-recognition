@@ -201,14 +201,14 @@ def criminals_translate_to_Greek(manageCriminal, result_list):
 
 @app.route('/')
 def start():
-    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language)
+    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language, header=header)
 
 
 
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language)
+    return render_template('welcome.html', welcome=welcome, site_theme=site_theme, site_language=site_language,header=header)
 
 
 
@@ -222,7 +222,7 @@ def login():
     global site_language
     global site_fontsize
     if request.method == 'GET':
-        return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, site_theme=site_theme, site_language=site_language)
+        return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, site_theme=site_theme, site_language=site_language, header=header)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -240,7 +240,7 @@ def login():
                 checkUserSettings(site_theme, site_language, site_fontsize)
                 return render_template('home.html', header=header, loggedin_role=loggedin_role, messages=messages, home=home, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         else:
-            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
+            return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language, header=header)
 
 
 
@@ -248,7 +248,7 @@ def login():
 def signup():
     global loggedin_role
     if request.method == 'GET':
-        return render_template('signup.html', signup=signup, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
+        return render_template('signup.html', signup=signup, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language, header=header)
     elif request.method == 'POST':
         try:
             username = str(request.form["username"])

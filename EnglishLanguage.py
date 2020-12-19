@@ -7,6 +7,7 @@ class HeaderEN:
     settings = "Μy Settings"
     login = "Log in"
     welcome = "Welcome"
+    footer = "© Michos Evangelos - Msc Thesis - Building an online platform"
 
 class WelcomeEN:
     title = "Livestream Police Surveillance Application"

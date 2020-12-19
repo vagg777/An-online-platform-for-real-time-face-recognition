@@ -575,7 +575,6 @@ a.active {
 
 a[data-toggle="collapse"] {
     position: relative;
-    color: red;
 }
 
 #sidebar {
