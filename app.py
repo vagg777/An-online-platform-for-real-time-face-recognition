@@ -18,8 +18,9 @@ from cameraController import *
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
-site_language = "English"
-site_theme = "Dark"
+site_language = "Greek"
+site_theme = "Dark Theme"
+site_fontsize = 14
 detection_time = 0.0
 average_detection_time = 0.0
 video_filter = ""
@@ -115,6 +116,14 @@ def users_translate_to_Greek(manageUser, result):
             user_list[9] = manageUser.admin
         elif user_list[9] == "USER":
             user_list[9] = manageUser.user
+        if user_list[11] == "Dark Theme":
+            user_list[11] = settings.darkTheme
+        elif user_list[11] == "Light Theme":
+            user_list[11] = settings.lightTheme
+        if user_list[12] == "English":
+            user_list[12] = settings.english
+        elif user_list[12] == "Greek":
+            user_list[12] = settings.greek
         result_list[counter] = tuple(user_list)
         counter = counter + 1
     result = tuple(result_list)
@@ -133,6 +142,14 @@ def single_user_translate_to_Greek(manageUser, user_list):
         user_list[9] = manageUser.admin
     elif user_list[9] == "USER":
         user_list[9] = manageUser.user
+    if user_list[11] == "Dark Theme":
+        user_list[11] = settings.darkTheme
+    elif user_list[11] == "Light Theme":
+        user_list[11] = settings.lightTheme
+    if user_list[12] == "English":
+        user_list[12] = settings.english
+    elif user_list[12] == "Greek":
+        user_list[12] = settings.greek
     user = tuple(user_list)
     return user
 
@@ -669,6 +686,9 @@ def settings():
 
 @app.route('/menu_settings', methods=['GET', 'POST'])
 def menu_settings():
+    global site_language
+    global site_theme
+    global site_fontsize
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
@@ -683,17 +703,20 @@ def menu_settings():
             pass  # TODO: add some error control here
     elif request.method == 'POST':
         try:
+            user_id = str(request.form["id"])
             user_theme = str(request.form["theme"])
             user_language = str(request.form["language"])
             user_fontsize = str(request.form["fontsize"])
-            # TODO: connect to db and update
             sql = mydb.cursor()
-            query = ""
-            query_input = (user_theme, user_language, user_fontsize)
+            query = """UPDATE users SET theme=%s, language=%s, fontsize=%s WHERE user_id=%s"""
+            query_input = (user_theme, user_language, user_fontsize, user_id)
             sql.execute(query, query_input)
             mydb.commit()
             sql.close()
             sql = mydb.cursor()
+            site_theme = user_theme
+            site_language = user_language
+            site_fontsize = user_fontsize
             sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
             user = sql.fetchall()
             if user:

@@ -9,6 +9,12 @@
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% if site_theme == 'Light Theme' %}
+        <link rel="stylesheet" href="/static/css/light.css">
+    {% endif %}
+    {% if site_theme == 'Dark Theme' %}
+        <link rel="stylesheet" href="/static/css/dark.css">
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -19,703 +25,6 @@
     {% if site_language == 'Greek' %}
         <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
     {% endif %}
-    <script>
-         $(document).ready(function() {
-        $('#updateModal').on('show.bs.modal', function (e) {
-        var _button = $(e.relatedTarget);
-        var _row = _button.parents("div");
-        var _id = _row.find(".user_id").val();
-        var _username = _row.find(".user_username").val();
-        var _password = _row.find(".user_password").val();
-        var _email = _row.find(".user_email").val();
-        var _fullname = _row.find(".user_full_name").val();
-        var _gender = _row.find("#gender0").val();
-        if (_gender == "Άντρας") {_gender = "Male"}
-        if (_gender == "Γυναίκα") {_gender = "Female"}
-        if (_gender == "Άλλο") {_gender = "Other"}
-        var _biography = _row.find(".user_biography").val();
-        var _work_phone = _row.find(".user_work_phone").val();
-        var _mobile_phone = _row.find(".user_mobile_phone").val();
-        var _role = _row.find("#role0").val();
-        if (_role == "Διαχειριστής") {_role = "ADMIN"}
-        if (_role == "Χρήστης") {_role = "USER"}
-        var _avatar = _row.find('img').attr("src");
-        $(this).find(".user_id").val(_id);
-        $(this).find(".user_username").val(_username);
-        $(this).find(".user_password").val(_password);
-        $(this).find(".user_email").val(_email);
-        $(this).find(".user_full_name").val(_fullname);
-        $("#gender").val(_gender).change();
-        $(this).find(".user_biography").val(_biography);
-        $(this).find(".user_work_phone").val(_work_phone);
-        $(this).find(".user_mobile_phone").val(_mobile_phone);
-        $("#role").val(_role).change();
-        $(this).find(".user_avatar").val(_avatar);
-    });
- });
-
- if ( window.history.replaceState ) {
-    window.history.replaceState( null, null, 'settings' );
- }
-
-document.onkeydown = fkey;
-document.onkeypress = fkey
-document.onkeyup = fkey;
-var wasPressed = false;
-
-function fkey(e){
-   e = e || window.event;
-   if( wasPressed ) return;
-    if (e.keyCode == 116) {
-         window.location = 'settings';
-         wasPressed = true;
-    }
-}
-
-function manageProfile() {
-      var profileDiv = document.getElementById("profileSettingsDiv");
-      var profileList = document.getElementById("profileSettingsLink");
-      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
-      var appearanceList = document.getElementById("appearanceSettingsLink");
-      if (profileDiv.style.display === "none") {
-        profileDiv.style.display = "block";
-        profileList.classList.add('active')
-        if (appearanceDiv.style.display === "block") {
-            appearanceDiv.style.display = "none";
-            appearanceList.classList.remove('active')
-        }
-      } else {
-        profileDiv.style.display = "none";
-        profileList.classList.remove('active')
-      }
-}
-
-function manageAppearance() {
-      var appearanceDiv = document.getElementById("appearanceSettingsDiv");
-      var appearanceList = document.getElementById("appearanceSettingsLink");
-      var profileDiv = document.getElementById("profileSettingsDiv");
-      var profileList = document.getElementById("profileSettingsLink");
-      if (appearanceDiv.style.display === "none") {
-        appearanceDiv.style.display = "block";
-        appearanceList.classList.add('active')
-        if (profileDiv.style.display === "block") {
-            profileDiv.style.display = "none";
-            profileList.classList.remove('active')
-        }
-      } else {
-        appearanceDiv.style.display = "none";
-        appearanceList.classList.remove('active')
-      }
-}
-    </script>
-    <style>
-
-body {
-    background-color: #3d3d3d;
-}
-
-input[type="text"] {
-    background-color: #929493;
-    border: 1px solid #929493;
-    color:white;
-}
-
-input[type="text"]:focus{
-    background-color: #929493;
-    color:white;
-}
-
-.form-control.user_username, .form-control.user_password, .form-control.user_email, .form-control.user_gender, .form-control.user_role, .form-control.user_full_name, .form-control.user_mobile_phone, .form-control.user_work_phone{
-    background-color: #929493;
-    color:white;
-}
-
-input[type="password"] {
-    background-color: #929493;
-    border: 1px solid #929493;
-    color:white;
-}
-
-input[type="password"]:focus{
-    background-color: #929493;
-    color:white;
-}
-
-#role, #criminal_id, #criminal_eye_color, #criminal_gender, #criminal_bio, option, #gender.form-control, #eye_color, #biography, #theme, #fontsize, #language {
-    background-color: #929493;
-    border: 1px solid #929493;
-    color: white;
-}
-
-select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus, select:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #929493 inset !important;
-    -webkit-text-fill-color: white !important;
-}
-
-input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #929493 inset !important;
-    -webkit-text-fill-color: white !important;
-}
-
-.modal-body, .modal-footer{
-    background-color: #3d3d3d;
-}
-
-#subject {
-    background-color: #929493;
-    border: 1px solid #929493;
-    color:white;
-}
-
-#subject:focus {
-    background-color: #929493;
-    color:white;
-}
-
-::placeholder {
-  color: white !important;
-  opacity: 1; /* Firefox */
-}
-
-.navbar-light {
-    color: white !important;
-}
-
-.bg-light{
-    background-color: #6e736f !important;
-}
-
-p, h1, h2, li {
-    color: white;
-}
-
-.UrlLinks:visited {
-    color: #3d3d3d;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-.UrlLinks:hover {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-div.dropdown-menu.dropdown-menu-right.show {
-   background-color: #6e736f;
-}
-
-a.dropdown-item {
-    color: white;
-}
-
-a.dropdown-item:hover {
-    background-color: #3d3d3d;
-    color: white;
-}
-
-.input-group-addon.primary {
-    color: white;
-    background-color: #131e3c;
-    border-color: rgb(40, 94, 142);
-}
-
-.input-group-addon.success {
-    color: white;
-    background-color: #28a745;
-    border-color: rgb(76, 174, 76);
-}
-
-.input-group-addon.warning {
-    color: white;
-    background-color: #ffc107;
-    border-color: rgb(238, 162, 54);
-}
-
-.input-group-addon.danger {
-    color: white;
-    background-color: #dc3545;
-    border-color: rgb(212, 63, 58);
-}
-
-#updateModalHeader {
-    background-color: #ffc107;
-    color: white;
-}
-
-#insertModalHeader {
-    background-color: #28a745;
-    color: white;
-}
-
-#deleteModalHeader {
-    background-color: #dc3545;
-    color: white;
-}
-
-#settingsModalHeader {
-    background-color: #131e3c;
-    color: white;
-}
-
-.form-control {
-    min-height: 41px;
-    background: #fff;
-    box-shadow: none !important;
-    border-color: #e3e3e3;
-}
-
-.form-control, .btn {
-    border-radius: 2px;
-}
-
-/*
-button, .button, .btn {
-    border-radius: 125px 25px;
-}
-*/
-
-.btn-primary{
-    background-color: #131e3c;
-    border-color: #131e3c;
-    color:white;
-}
-
-#submitButton {
-    float: right;
-    background-color: #131e3c;
-    color:white;
-}
-
-#resetButton {
-    margin-right: 10px;
-    float: right;
-    background-color: #d9534f;
-}
-
-#warningButton {
-    background-color: #f0ad4e;
-    float: right;
-    margin-right: 10px;
-}
-
-.login-form {
-    width: 350px;
-    margin: 0 auto;
-    padding: 100px 0 30px;
-    margin-top: 3%;
-}
-
-.login-form form {
-    color: #7a7a7a;
-    border-radius: 2px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    background: #6e736f;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    position: relative;
-}
-
-.login-form h2 {
-    font-size: 22px;
-    margin: 35px 0 25px;
-}
-
-.login-form .avatar {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    top: -50px;
-    width: 95px;
-    height: 95px;
-    border-radius: 50%;
-    z-index: 9;
-    background: #6e736f;
-    padding: 15px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-}
-
-.login-form .avatar img {
-    width: 100%;
-}
-
-.login-form .btn {
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #131e3c;
-    border: none;
-    margin-bottom: 20px;
-}
-
-* {
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.nav-link {
-    color: white !important;
-    font-size: 18px;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-#manageUsersContainer {
-    width: 100%;
-}
-
-p {
-     text-align: justify;
-}
-
-hr {
-    border: 1px solid white;
-}
-
-#policeimage {
-    width: 2%;
-}
-
-.contactlabel {
-    color: white;
-}
-
-.required {
-    color: red;
-    font-weight: bold;
-}
-
-.themeColor {
-    color: white;
- }
-
-.hidetext {
-    -webkit-text-security: disc;
-}
-
-#loginSubmit{
-    background-color: #131e3c;
-}
-
-#returnSubmit {
-    background-color: #f0ad4e;
-    margin:auto;
-    color: white;
-}
-
-.centererrorbutton {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    background-color: #6e736f;
-    padding: 20px;
-    border-radius: 60px 60px;
-}
-
-.errorcontainerfillpage {
-    width: 35%;
-    margin-top: 15%;
-    background-color: red;
-    border-radius: 60px 60px;
-}
-
-.errorcontainer{
-    width:35%;
-    background-color: red;
-    border-radius: 60px 60px;
-}
-
-.successcontainer {
-    width: 35%;
-    background-color: green;
-    border-radius: 60px 60px;
-}
-
-.error {
-    color: white;
-    text-align: center;
-    align: center;
-}
-
-.success {
-    color: white;
-    text-align:center;
-    align:center;
-}
-
-#errorcontainerlogin {
-    width:100%;
-    background-color: red;
-    border-radius: 125px 25px;
-}
-
-#successcontainerlogin {
-    width: 100%;
-    background-color: green;
-    border-radius: 125px 25px;
-}
-
-#welcomecontainer{
-    background-color: #6e736f;
-    padding: 20px;
-    margin-top: 8%;
-    color: white;
-    text-align: center;
-    border-radius: 60px 60px;
-}
-
-#managelivefeedcontainer {
-    background-color: #6e736f;
-    padding: 20px;
-    width: 70%;
-    border-radius: 125px 25px;
-}
-
-.country-container {
-    border-radius: 20px;
-    background-color: #6e736f;
-    width: 10%;
-    text-align: center;
-    color: white;
-}
-
-.footer {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 4%;
-    text-align: center;
-}
-
-.settingsfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 6%;
-    text-align: center;
-}
-
-.loginfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 10%;
-    text-align: center;
-}
-
-.welcomefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 19%;
-    text-align: center;
-}
-
-.homefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 5%;
-    text-align: center;
-}
-
-.contactfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 6%;
-    text-align: center;
-}
-
-.managefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 8%;
-    text-align: center;
-}
-
-.managelivefeedfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 5%;
-    text-align: center;
-}
-
-.managecriminalsfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 8%;
-    text-align: center;
-}
-
-.errorloginfooter{
-    margin-top: 23%;
-    background-color: #6e736f;
-    padding: 5px;
-    color: white;
-    text-align: center;
-}
-
-#logouttab{
-    color: white;
-}
-
-#biography {
-    height: 200px;
-}
-
-#manageInsertButton {
-    margin: 0;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -100%);
-    transform: translate(-50%, -20%);
-}
-
-/* Keeps the navbar header bg-color when user presses the welcome user option in the header */
-#navbarDropdownMenuLink {
-    background-color: #6e736f;
-}
-
-#navbarDropdownMenuLinkfix {
-    color: white !important;
-    background-color: #6e736f !important;
-    border-radius: 100px 25px;
-}
-
-#wrap {
-    padding: 5%;
-    text-align: center;
-    width: 100%;
-}
-
-#left, #right {
-     display: inline-block;
-     padding: 2%;
-     border-style: solid;
-     border-color: white;
-     color: black;
-     text-align: justify;
-}
-
-#deleteModal{
-    margin-top: 7%;
-}
-
-a.active {
-    color: white !important;
-    background-color: #3d3d3d;
-    border-radius: 100px 25px;
-}
-
-#content {
-    padding: 20px;
-    min-height: 30vh;
-    transition: all 1.0s;
-}
-
-.wrapper {
-    display: flex;
-    align-items: stretch;
-}
-
-#sidebar.active {
-    margin-left: -250px;
-}
-
-/* Header section of the menu */
-#sidebar .sidebar-header {
-    padding: 20px;
-    color: white;
-    background: #3d3d3d;
-    border: 2px white solid;
-}
-
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: white 1px solid;
-}
-
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
-
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-    color: white;
-}
-
-/* sets background state for every hover in My Settings menu
-#sidebar ul li a:hover {
-    color: black;
-    background: #3d3d3d;
-}*/
-
-/* sets background state for every option selected in My Settings menu */
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: white;
-    background: #3d3d3d;
-}
-
-a[data-toggle="collapse"] {
-    position: relative;
-    color: red;
-}
-
-#sidebar {
-    width: 250px;
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 75vh;
-    z-index: 999;
-    background-color: #6e736f;
-    color: white;
-    transition: all 0.3s;
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1440px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .header a {
-    float: none;
-    display: block;
-    text-align: left;
-    }
-
-    .header-right {
-    float: none;
-    }
-}
-    </style>
 </head>
 
 <body>
@@ -777,10 +86,10 @@ a[data-toggle="collapse"] {
             </div>
             <ul class="list-unstyled components">
                 <li id="profileSettingsLink" class="active">
-                    <a href="#" onclick="manageProfile();">Profile Settings</a>
+                    <a href="#" onclick="manageProfile();">{{ settings.myprofile }}</a>
                 </li>
                 <li id="appearanceSettingsLink">
-                    <a href="#" onclick="manageAppearance();">Appearance Settings</a>
+                    <a href="#" onclick="manageAppearance();">{{ settings.mysettings }}</a>
                 </li>
             </ul>
         </nav>
@@ -917,10 +226,45 @@ a[data-toggle="collapse"] {
                 </div>
             {% endif %}
             <div id="content">
-                <div class="form-group" style="text-align:center">
+                 <h2 style="text-align:center">{{ settings.mysettings }}</h2><hr>
+                 <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0] }}">
+                 <div class="form-row">
+                     <div class="form-group col-md-12">
+                        <label class="contactlabel" for="theme">{{ settings.theme }}</label>
+                        <div class="input-group mb-3 div_theme">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" autocomplete="off" class="form-control user_theme" name="theme" id="theme0" value = "{{ user[11] }}" readonly>
+                        </div>
+                     </div>
+                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="contactlabel" for="language">{{ settings.language }}</label>
+                        <div class="input-group mb-3 div_language">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" autocomplete="off" class="form-control user_language" name="language" id="language0" value = "{{ user[12] }}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="contactlabel" for="fontsize">{{ settings.fontsize }}</label>
+                        <div class="input-group mb-3 div_fontsize">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-font" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" autocomplete="off" class="form-control user_fontsize" name="fontsize" id="fontsize0" value = "{{ user[13] }}" readonly>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group" style="text-align:center">
                     <button class="btn btn-danger btn-lg" onclick="manageAppearance();">{{ manageUser.close }}</button>
                     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#appearanceModal">{{ manageUser.update }}</button>
-                </div>
+                 </div>
             </div>
       </div>
     </div>
@@ -1086,7 +430,7 @@ a[data-toggle="collapse"] {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageUser.cancel }}</button>
-                        <input type="submit" class="btn btn-primary" value="{{ manageUser.update }}">
+                        <input type="submit" class="btn btn-primary" value="{{ settings.submit }}">
                     </div>
               </div>
             </div>
@@ -1102,6 +446,7 @@ a[data-toggle="collapse"] {
                         <button type="button" class="close btn-lg" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body black">
+                        <input type="text" autocomplete="off" class="form-control user_id" placeholder="{{ manageUser.enterid }}" name="id" id = "id2" value="{{request.form.id}}" hidden>
                         <div class="form-row">
                              <div class="form-group col-md-12">
                                 <label class="contactlabel" for="theme">{{ settings.theme }}</label>
@@ -1110,8 +455,8 @@ a[data-toggle="collapse"] {
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-desktop" aria-hidden="true"></i></span>
                                     </div>
                                     <select required class="form-control user_theme" name="theme" id="theme" value="{{request.form.theme}}">
-                                        <option value="Light">{{ settings.lightTheme }}</option>
-                                        <option value="Dark">{{ settings.darkTheme }}</option>
+                                        <option value="Light Theme">{{ settings.lightTheme }}</option>
+                                        <option value="Dark Theme">{{ settings.darkTheme }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1125,7 +470,7 @@ a[data-toggle="collapse"] {
                                     </div>
                                     <select required class="form-control user_language" name="language" id="language" value="{{request.form.language}}">
                                         <option value="English">{{ settings.english }}</option>
-                                        <option value="Greek">{{ settings.darkTheme }}</option>
+                                        <option value="Greek">{{ settings.greek }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1152,7 +497,7 @@ a[data-toggle="collapse"] {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ manageUser.cancel }}</button>
-                        <input type="submit" class="btn btn-primary" value="{{ manageUser.update }}">
+                        <input type="submit" class="btn btn-primary" value="{{ settings.submit }}">
                     </div>
               </div>
             </div>

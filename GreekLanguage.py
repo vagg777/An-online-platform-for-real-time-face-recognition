@@ -276,7 +276,7 @@ class ManageUserGR:
     insertuser = "Εισαγωγή Χρήστη"
     confirmDelete = "Είστε σίγουροι ότι επιθυμείτε να διαγράψετε αυτόν τον χρήστη από τη βάση δεδομένων;"
     updateMyProfile = "Ανανέωση του Προφίλ μου"
-    updateMyAppearance = "Ανανέωση της Εμφάνισης"
+    updateMyAppearance = "Ανανέωση των Ρυθμίσεών μου"
     close = "Κλείσιμο"
 
 class ManageLivefeedGR:
@@ -293,3 +293,11 @@ class SettingsGR:
     title = "Αστυνομική Πλατφόρμα Παρακολούθησης σε Πραγματικό Χρόνο"
     mysettings = "Οι ρυθμίσεις μου"
     myprofile = "Το προφίλ μου"
+    lightTheme = "Ανοιχτόχρωμο Θέμα"
+    darkTheme = "Σκουρόχρωμο Θέμα"
+    theme = "Θέμα Ιστοσελίδας"
+    fontsize = "Μέγεθος Γραμματοσειράς"
+    language = "Γλώσσα Ιστοσελίδας"
+    english = "Αγγλικά"
+    greek = "Ελληνικά"
+    submit = "Υποβολή Αλλαγών"

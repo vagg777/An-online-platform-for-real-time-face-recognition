@@ -278,8 +278,8 @@ class ManageUserEN:
     enterretype_password = "Re-type your Password"
     insertuser = "Insert User"
     confirmDelete = "Are you sure you want to delete this user from the database?"
-    updateMyProfile = "Update My Profile"
-    updateMyAppearance = "Update Site Appearance"
+    updateMyProfile = "Update my Profile"
+    updateMyAppearance = "Update my Settings"
     close = "Close"
 
 class ManageLivefeedEN:
@@ -303,3 +303,4 @@ class SettingsEN:
     language = "Language"
     english = "English"
     greek = "Greek"
+    submit = "Submit Changes"
