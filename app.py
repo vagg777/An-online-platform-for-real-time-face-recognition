@@ -52,7 +52,7 @@ def nothing(x):
 
 
 
-def checkLanguage(site_language):
+def checkUserSettings(theme, language, fontsize):
     global welcome
     global login
     global messages
@@ -67,6 +67,9 @@ def checkLanguage(site_language):
     global settings
     global contact
     global signup
+    global site_fontsize
+    global site_language
+    global site_theme
     if site_language == "Greek":
         welcome = WelcomeGR()
         signup = SignupGR()
@@ -97,7 +100,16 @@ def checkLanguage(site_language):
         manage = ManageEN()
         settings = SettingsEN()
         contact = ContactEN()
-
+    site_theme = theme
+    site_language = language
+    site_fontsize = fontsize
+    #sql = mydb.cursor()
+    #sql.execute("SELECT theme, language, fontsize FROM users WHERE email ='" + loggedin_email + "'")
+    #userSettings = sql.fetchall()
+    #if userSettings:
+        #site_theme = userSettings[0][0]
+        #site_language = userSettings[0][1]
+        #site_fontsize = userSettings[0][2]
 
 
 
@@ -207,19 +219,25 @@ def login():
     global loggedin_user
     global loggedin_email
     global site_theme
+    global site_language
+    global site_fontsize
     if request.method == 'GET':
         return render_template('login.html', login=login, loggedin_role=loggedin_role, loggedin_user=loggedin_user, messages=messages, site_theme=site_theme, site_language=site_language)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
         sql = mydb.cursor()
-        sql.execute("SELECT username, role, email FROM users WHERE email ='" + email + "' AND password = +'" + password + "'")
+        sql.execute("SELECT username, role, email, theme, language, fontsize FROM users WHERE email ='" + email + "' AND password = +'" + password + "'")
         user = sql.fetchall()
         if user:
             if len(user) is 1:
                 loggedin_role = user[0][1]
                 loggedin_user = user[0][0]
                 loggedin_email = user[0][2]
+                site_theme = user[0][3]
+                site_language = user[0][4]
+                site_fontsize = user[0][5]
+                checkUserSettings(site_theme, site_language, site_fontsize)
                 return render_template('home.html', header=header, loggedin_role=loggedin_role, messages=messages, home=home, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language)
         else:
             return render_template('login.html', login=login, messages=messages, error=messages.invalidcredentials, loggedin_role=loggedin_role, site_theme=site_theme, site_language=site_language)
@@ -618,6 +636,9 @@ def remove_criminals():
 
 @app.route('/settings', methods = ['GET', 'POST'])
 def settings():
+    global site_language
+    global site_theme
+    global site_fontsize
     if request.method == 'GET':
         sql = mydb.cursor()
         sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
@@ -629,7 +650,7 @@ def settings():
                 user = user[0]
             return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
         else:
-            pass #TODO: add some error control here
+            pass
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -653,7 +674,7 @@ def settings():
                         user = single_user_translate_to_Greek(manageUser, list(user[0]))
                     else:
                         user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header, site_theme=site_theme, site_language=site_language)
+                return render_template('settings.html', loggedin_user=loggedin_user, profileerror=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -668,7 +689,7 @@ def settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges, site_theme=site_theme, site_language=site_language)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, profilesuccess=messages.yourchanges, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -679,7 +700,7 @@ def settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error = messages.sqlerror, site_theme=site_theme, site_language=site_language)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, profileerror=messages.sqlerror, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -698,9 +719,9 @@ def menu_settings():
                 user = single_user_translate_to_Greek(manageUser, list(user[0]))
             else:
                 user = user[0]
-            return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages,loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
+            return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
         else:
-            pass  # TODO: add some error control here
+            pass
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])
@@ -717,6 +738,7 @@ def menu_settings():
             site_theme = user_theme
             site_language = user_language
             site_fontsize = user_fontsize
+            checkUserSettings(site_theme, site_language, site_fontsize)
             sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
             user = sql.fetchall()
             if user:
@@ -724,7 +746,7 @@ def menu_settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, success=messages.yourchanges, site_theme=site_theme, site_language=site_language)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, appearancesuccess=messages.yourchanges, site_theme=site_theme, site_language=site_language)
         except MySQLdb.Error as error:
             messages.sqlerror = str(error)
             sql = mydb.cursor()
@@ -735,7 +757,7 @@ def menu_settings():
                     user = single_user_translate_to_Greek(manageUser, list(user[0]))
                 else:
                     user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, error=messages.sqlerror, site_theme=site_theme, site_language=site_language)
+                return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, appearanceerror=messages.sqlerror, site_theme=site_theme, site_language=site_language)
         finally:
             pass
 
@@ -848,5 +870,5 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    checkLanguage(site_language)
+    checkUserSettings(site_theme, site_language, site_fontsize)
     app.run(debug=True)
