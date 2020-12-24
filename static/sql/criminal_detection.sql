@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2020 at 04:11 PM
+-- Generation Time: Dec 24, 2020 at 08:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -90,9 +90,9 @@ CREATE TABLE `users` (
   `mobile_phone` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
-  `theme` varchar(255) DEFAULT NULL,
-  `language` varchar(255) DEFAULT NULL,
-  `fontsize` int(11) DEFAULT NULL
+  `theme` varchar(255) DEFAULT 'Light Theme',
+  `language` varchar(255) DEFAULT 'English',
+  `fontsize` int(11) DEFAULT 14
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -100,11 +100,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `gender`, `biography`, `work_phone`, `mobile_phone`, `role`, `avatar`, `theme`, `language`, `fontsize`) VALUES
-(1, 'nikos25', 'nikos25', 'email@email1.com', 'Nikos Athanasiou', 'Male', 'This is my bio bla bla bla bla', '2610995924', '6999999998', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg', 'Light Theme', 'Greek', 18),
-(2, 'makisKar', 'makismakis', 'email@email2.com', 'Makis Karapialis', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg', NULL, NULL, NULL),
-(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'email@email3.com', 'Giannis Papathanasios', 'Male', '12312312312313123', '2610312111', '69999999991', 'USER', 'https://i.ibbsdasda.co/TbT8Q3r/meLd3mN.jpg', NULL, NULL, NULL),
-(4, 'MariaGiannak', 'MariaGiannak', 'email@email4.com', 'Maria Giannakopoulou', 'Female', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg', NULL, NULL, NULL),
-(5, 'asdasdas', '123', 'asdasda', 'asd', 'Male', 'asdasda', 'asdasd', 'eqwqew', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg', NULL, NULL, NULL);
+(1, 'nikos25', 'nikos25', 'email@email1.com', 'Nikos Athanasiou', 'Male', 'This is my bio bla bla bla bla', '2610995924', '6999999998', 'ADMIN', 'https://i.ibb.co/jv0cjvP/4EaxKrr.jpg', 'Dark Theme', 'Greek', 14),
+(2, 'makisKar', 'makismakis', 'email@email2.com', 'Makis Karapialis', 'Male', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/hBqnhFq/8ZOn5uw.jpg', 'Dark Theme', 'Greek', 14),
+(3, 'giannisPapathanasiou', 'giannisPapathanasiou', 'email@email3.com', 'Giannis Papathanasios', 'Male', '12312312312313123', '2610312111', '69999999991', 'USER', 'https://i.ibbsdasda.co/TbT8Q3r/meLd3mN.jpg', 'Dark Theme', 'English', 16),
+(4, 'MariaGiannak', 'MariaGiannak', 'email@email4.com', 'Maria Giannakopoulou', 'Female', 'This is my bio bla bla bla bla', '2610-995990', '6999999999', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg', 'Dark Theme', 'Greek', 12),
+(5, 'asdasdas', '123', 'asdasda', 'asd', 'Male', 'asdasda', 'asdasd', 'eqwqew', 'ADMIN', 'https://i.ibb.co/6DF0dTw/a60d685194a7fd984d08a595a0a99ae7.jpg', 'Dark Theme', 'Greek', 12);
 
 --
 -- Indexes for dumped tables

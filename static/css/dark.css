@@ -382,6 +382,14 @@ hr {
 .myfooter {
     background-color: #6e736f;
     color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 10px;
+    text-align: center;
 }
 
 #logouttab{
@@ -389,7 +397,7 @@ hr {
 }
 
 #biography {
-    height: 100px;
+    height: 70px;
 }
 
 #signupContainer {

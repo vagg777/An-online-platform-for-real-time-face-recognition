@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/gif" href="/static/images/greekpolice.png"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% if site_theme == 'Light Theme' %}
         <link rel="stylesheet" href="/static/css/light.css">
@@ -16,12 +15,15 @@
     {% if site_theme == 'Dark Theme' %}
         <link rel="stylesheet" href="/static/css/dark.css">
     {% endif %}
-    <link rel="stylesheet" href="/static/css/smallFonts.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% if site_fontsize == 12 %}
+        <link rel="stylesheet" href="/static/css/smallFonts.css">
+    {% endif %}
+    {% if site_fontsize == 16 %}
+        <link rel="stylesheet" href="/static/css/bigFonts.css">
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -52,17 +54,21 @@
                     <div class="form-group col-md-6">
                         <label class="contactlabel" for="username">{{ signup.username }}</label>
                         <span class="required">*</span>
-                        <div class="input-group">
-                            <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            </div>
                             <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="contactlabel" for="email">{{ signup.email }}</label>
                         <span class="required">*</span>
-                        <div class="input-group">
-                            <span class="input-group-addon primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                            <input type="text" id = "email" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" id="email" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
                         </div>
                     </div>
               </div>
@@ -70,16 +76,20 @@
                   <div class="form-group col-md-6">
                         <label class="contactlabel" for="password">{{ signup.password }}</label>
                         <span class="required">*</span>
-                        <div class="input-group">
-                            <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                            </div>
                             <input type="password" id="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
                         </div>
                   </div>
                   <div class="form-group col-md-6">
                         <label class="contactlabel" for="retype_password">{{ signup.retype_password }}</label>
                         <span class="required">*</span>
-                        <div class="input-group">
-                            <span class="input-group-addon primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                            </div>
                             <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
                         </div>
                   </div>
@@ -88,16 +98,20 @@
                 <div class="form-group col-md-6">
                     <label class="contactlabel" for="full_name">{{ signup.fullname }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        </div>
                         <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="contactlabel" for="gender">{{ signup.gender }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
+                        </div>
                         <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
                             <option value="Male">{{ signup.male }}</option>
                             <option value="Female">{{ signup.female }}</option>
@@ -110,16 +124,20 @@
                   <div class="form-group col-md-6">
                     <label class="contactlabel" for="work_phone">{{ signup.work_phone }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        </div>
                         <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="contactlabel" for="mobile_phone">{{ signup.mobile_phone }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                         <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
+                         </div>
                         <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
                     </div>
                 </div>
@@ -127,8 +145,10 @@
               <div class="form-group">
                     <label class="contactlabel" for="biography">{{ signup.biography }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                        </div>
                         <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
                     </div>
               </div>
@@ -136,8 +156,10 @@
                   <div class="form-group col-md-6">
                     <label class="contactlabel" for="role">{{ signup.role }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
+                        </div>
                         <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
                             <option value="ADMIN">{{ signup.admin }}</option>
                             <option value="USER">{{ signup.user }}</option>
@@ -147,16 +169,20 @@
                   <div class="form-group col-md-6">
                     <label class="contactlabel" for="avatar">{{ signup.avatar }}</label>
                     <span class="required">*</span>
-                    <div class="input-group">
-                        <span class="input-group-addon primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-addon input-group-text primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                        </div>
                         <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
                     </div>
                 </div>
               </div>
               <hr>
-              <input type="submit" id = "submitButton" class="btn" value="{{ signup.signup }}">
-              <input type="reset" id = "resetButton" class="btn btn-danger"value="{{ signup.reset }}">
-              <input type="button" id = "warningButton" class="btn btn-warning" value = "{{ signup.returnhome }}" onclick="window.location.href = 'welcome';">
+              <div class="form-group" style="text-align: center;">
+                    <input type="reset" class="btn btn-danger" value="{{ signup.reset }}">
+                    <input type="button" class="btn btn-warning" value = "{{ signup.returnhome }}" onclick="window.location.href = 'welcome';">
+                    <input type="submit" class="btn btn-primary" value="{{ signup.signup }}">
+              </div>
           </form>
     </div>
 {% else %}
