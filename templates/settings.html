@@ -135,7 +135,7 @@ function manageAppearance() {
 </head>
 
 <body>
-
+{% if loggedin_role %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -607,10 +607,24 @@ function manageAppearance() {
         </form>
     </div>
 
-    <div class="myfooter">
-      <h4>{{ header.footer }}</h4>
+{% endif %}
+
+{% if loggedin_role == '' %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
+    </nav>
+
+    <div class="container errorcontainerfillpage">
+        <p class="error"><strong>{{ messages.error }}</strong> {{ messages.notloggedin }}</p>
+        <div class="centererrorbutton">
+            <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
+        </div>
     </div>
 
-</body>
+{% endif %}
 
+    <div class="myfooter">
+        <h4>{{ header.footer }}</h4>
+    </div>
+</body>
 </html>

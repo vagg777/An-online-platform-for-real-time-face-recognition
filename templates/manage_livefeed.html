@@ -200,10 +200,6 @@
             </div>
         </div>
     </div>
-
-    <div class="myfooter">
-        <h4>{{ header.footer }}</h4>
-    </div>
 {% endif %}
 
 {% if loggedin_role == '' %}
@@ -217,15 +213,12 @@
             <button class="btn btn-primary" onclick="window.location.href = 'login';">{{ messages.login }}</button>
         </div>
     </div>
-
-    <div class="errorloginfooter">
-        <h4>{{ header.footer }}</h4>
-    </div>
 {% endif %}
 
-
+    <div class="myfooter">
+        <h4>{{ header.footer }}</h4>
+    </div>
 
 </body>
-
 </html>
 

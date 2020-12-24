@@ -159,9 +159,6 @@
               <input type="button" id = "warningButton" class="btn btn-warning" value = "{{ signup.returnhome }}" onclick="window.location.href = 'welcome';">
           </form>
     </div>
-    <div class="myfooter">
-        <h4>{{ header.footer }}</h4>
-    </div>
 {% else %}
     <div class="container errorcontainerfillpage">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.alreadysignedin }}</p>
@@ -169,11 +166,11 @@
             <button class="btn btn-primary" onclick="window.location.href = 'home';">{{ messages.returntohome}}</button>
         </div>
     </div>
-    <div class="errorloginfooter">
-       <h4>{{ header.footer }}</h4>
-    </div>
 {% endif %}
 
-</body>
+    <div class="myfooter">
+        <h4>{{ header.footer }}</h4>
+    </div>
 
+</body>
 </html>

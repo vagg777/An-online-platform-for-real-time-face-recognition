@@ -634,7 +634,7 @@ def remove_criminals():
 
 
 
-@app.route('/settings', methods = ['GET', 'POST'])
+@app.route('/settings', methods=['GET', 'POST'])
 def settings():
     global site_language
     global site_theme
@@ -650,7 +650,7 @@ def settings():
                 user = user[0]
             return render_template('settings.html', loggedin_user=loggedin_user, header=header, messages=messages, loggedin_role=loggedin_role, manageUser=manageUser, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
         else:
-            pass
+            return render_template('settings.html', header=header, messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, user=user, settings=settings, site_theme=site_theme, site_language=site_language)
     elif request.method == 'POST':
         try:
             user_id = str(request.form["id"])

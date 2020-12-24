@@ -429,9 +429,6 @@
         </form>
     </div>
 
-    <div class="myfooter">
-        <h4>{{ header.footer }}</h4>
-    </div>
 {% endif %}
 
 {% if loggedin_role == 'USER' %}
@@ -446,9 +443,6 @@
         </div>
     </div>
 
-    <div class="errorloginfooter">
-        <h4>{{ header.footer }}</h4>>
-    </div>
 {% endif %}
 
 {% if loggedin_role == '' %}
@@ -463,10 +457,11 @@
         </div>
     </div>
 
-    <div class="errorloginfooter">
+{% endif %}
+
+    <div class="myfooter">
         <h4>{{ header.footer }}</h4>
     </div>
-{% endif %}
-</body>
 
+</body>
 </html>
