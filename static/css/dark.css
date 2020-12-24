@@ -30,7 +30,7 @@ input[type="password"]:focus{
 }
 
 #appearanceSettingsDiv {
-    height: 50%;
+    height: 500px;
 }
 
 #role, #criminal_id, #criminal_eye_color, #criminal_gender, #criminal_bio, option, #gender.form-control, #eye_color, #biography, #theme, #fontsize, #language, #language0, #theme0, #fontsize0 {

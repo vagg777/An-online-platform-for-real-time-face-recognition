@@ -326,7 +326,7 @@ function manageAppearance() {
             </div>
         </div>
 
-        <div class="container" id="appearanceSettingsDiv" style="display: none; height: 450px;">
+        <div class="container" id="appearanceSettingsDiv" style="display: none;">
             {% if appearanceerror %}
                 <div class="container errorcontainer" style="height: 10%;">
                     <p class="error"><strong>Error:</strong> {{ appearanceerror }}</p>
@@ -629,7 +629,7 @@ function manageAppearance() {
 {% endif %}
 
     <div class="myfooter">
-        <h4>{{ header.footer }}</h4>
+        <h4>{{ site_fontsize }}</h4>
     </div>
 </body>
 </html>
