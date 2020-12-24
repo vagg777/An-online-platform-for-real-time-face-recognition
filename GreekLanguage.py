@@ -303,3 +303,6 @@ class SettingsGR:
     english = "Αγγλικά"
     greek = "Ελληνικά"
     submit = "Υποβολή Αλλαγών"
+    smallFont = "(Μικρό)"
+    mediumFont = "(Μεσαίο)"
+    bigFont = "(Μεγάλο)"

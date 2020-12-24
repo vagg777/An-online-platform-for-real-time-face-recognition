@@ -210,8 +210,8 @@ button, .button, .btn {
 }
 
 .login-form h2 {
-    font-size: 22px;
-    margin: 35px 0 25px;
+    font-size: 24px;
+    margin: 35px 0 15px;
 }
 
 .login-form .avatar {
@@ -234,7 +234,7 @@ button, .button, .btn {
 }
 
 .login-form .btn {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     background-color: #131e3c;
     border: none;
@@ -358,7 +358,7 @@ hr {
 #welcomecontainer{
     background-color: #6e736f;
     padding: 20px;
-    margin-top: 8%;
+    margin-top: 10%;
     color: white;
     text-align: center;
     border-radius: 60px 60px;
@@ -379,93 +379,9 @@ hr {
     color: white;
 }
 
-.footer {
-    overflow: hidden;
+.myfooter {
     background-color: #6e736f;
-    padding: 20px 10px;
     color: white;
-    margin-top: 4%;
-    text-align: center;
-}
-
-.settingsfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 6%;
-    text-align: center;
-}
-
-.loginfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 10%;
-    text-align: center;
-}
-
-.welcomefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 19%;
-    text-align: center;
-}
-
-.homefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 5%;
-    text-align: center;
-}
-
-.contactfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 6%;
-    text-align: center;
-}
-
-.managefooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 8%;
-    text-align: center;
-}
-
-.managelivefeedfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 5%;
-    text-align: center;
-}
-
-.managecriminalsfooter {
-    overflow: hidden;
-    background-color: #6e736f;
-    padding: 20px 10px;
-    color: white;
-    margin-top: 8%;
-    text-align: center;
-}
-
-.errorloginfooter{
-    margin-top: 23%;
-    background-color: #6e736f;
-    padding: 5px;
-    color: white;
-    text-align: center;
 }
 
 #logouttab{
@@ -473,7 +389,11 @@ hr {
 }
 
 #biography {
-    height: 200px;
+    height: 100px;
+}
+
+#signupContainer {
+    margin-top: -2%;
 }
 
 #manageInsertButton {

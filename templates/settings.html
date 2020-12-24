@@ -214,7 +214,7 @@ function manageAppearance() {
                 </div>
             {% endif %}
             <div id="content">
-                <h2 style="text-align:center">{{ settings.myprofile }}</h2><hr>
+                <h1 style="text-align:center">{{ settings.myprofile }}</h1><hr>
                 <input class="user_id" type="hidden" id="id" name="id" value="{{ user[0] }}">
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -301,7 +301,7 @@ function manageAppearance() {
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                             </div>
-                            <img src="{{ user[10] }}" class="form-control" id="image" style="height: auto;">
+                            <img src="{{ user[10] }}" class="form-control" id="image" style="height: 185px;">
                         </div>
                     </div>
                     <div class="form-group col-md-9">
@@ -310,7 +310,7 @@ function manageAppearance() {
                             <div class="input-group-prepend">
                                  <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[6] }}" style="height: 285px;" readonly >
+                            <input type="text" autocomplete="off" class="form-control user_biography" placeholder="{{manageUser.enterbiography}}" name="biography" id="biography" value = "{{ user[6] }}" style="height: 185px;" readonly>
                         </div>
                     </div>
                 </div>
@@ -321,7 +321,7 @@ function manageAppearance() {
             </div>
         </div>
 
-        <div class="container" id="appearanceSettingsDiv" style="display: none;">
+        <div class="container" id="appearanceSettingsDiv" style="display: none; height: 450px;">
             {% if appearanceerror %}
                 <div class="container errorcontainer" style="height: 10%;">
                     <p class="error"><strong>Error:</strong> {{ appearanceerror }}</p>
@@ -333,7 +333,7 @@ function manageAppearance() {
                 </div>
             {% endif %}
             <div id="content">
-                 <h2 style="text-align:center">{{ settings.mysettings }}</h2><hr>
+                 <h1 style="text-align:center">{{ settings.mysettings }}</h1><hr>
                  <input class="user_id" id="appearanceid" name="id" value="{{ user[0] }}" hidden>
                  <div class="form-row">
                      <div class="form-group col-md-12">
@@ -590,13 +590,9 @@ function manageAppearance() {
                                         <span class="input-group-addon input-group-text primary"><i class="fa fa-font" aria-hidden="true"></i></span>
                                     </div>
                                     <select required class="form-control user_fontsize" name="fontsize" id="fontsize" value="{{request.form.fontsize}}">
-                                        <option value="8">8</option>
-                                        <option value="10">10</option>
-                                        <option value="12">12</option>
-                                        <option value="14">14</option>
-                                        <option value="16">16</option>
-                                        <option value="18">18</option>
-                                        <option value="20">20</option>
+                                        <option value="12">12 {{ settings.smallFont }}</option>
+                                        <option value="14">14 {{ settings.mediumFont }}</option>
+                                        <option value="16">16 {{ settings.bigFont }}</option>
                                     </select>
                                 </div>
                             </div>

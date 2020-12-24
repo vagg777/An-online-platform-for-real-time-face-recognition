@@ -305,3 +305,6 @@ class SettingsEN:
     english = "English"
     greek = "Greek"
     submit = "Submit Changes"
+    smallFont = "(Small)"
+    mediumFont = "(Medium)"
+    bigFont = "(Large)"
