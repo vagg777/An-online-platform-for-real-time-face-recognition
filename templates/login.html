@@ -62,12 +62,12 @@
             </div><br>
             <div class="form-group">
                 <button type="submit" id="loginSubmit" class="btn btn-primary btn-lg btn-block" value="login">{{ login.login }}</button>
-                <input type="button" id="returnSubmit" class="btn btn-warning btn-lg btn-block" value = "{{ login.returnhome }}" onclick="window.location.href = 'welcome';">
+                <input type="button" id="returnSubmit" class="btn btn-warning btn-lg btn-block" value="{{ login.returnhome }}" onclick="window.location.href = 'welcome';">
             </div>
         </form>
     </div>
 
-    <div class="loginfooter">
+    <div class="myfooter">
         <h4>{{ header.footer }}</h4>
     </div>
 {% else %}
