@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.nav-link {
+    font-size: 20px
+}
+
+.login-form .btn {
+    font-size: 16px;
+}
+
+.login-form h2 {
+    font-size: 22px;
+}
+
+#appearanceSettingsDiv {
+    height: 550px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2.0rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+.container {
+    margin-top: -3%;
+}
+
+#profileSettingsDiv, #appearanceSettingsDiv {
+    margin-top: -2% !important;
+}
+
+#signupFooter {
+    margin-top: 2%;
+    bottom: auto;
+}
