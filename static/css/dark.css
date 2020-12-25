@@ -517,6 +517,11 @@ a[data-toggle="collapse"] {
     transition: all 0.3s;
 }
 
+#extendedFooter {
+    margin-top: 2%;
+    bottom: auto;
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1440px;

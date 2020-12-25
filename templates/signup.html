@@ -24,6 +24,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% if site_language == 'English' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersEN.js"></script>
+    {% endif %}
+    {% if site_language == 'Greek' %}
+        <script language="JavaScript" type="text/javascript" src="/static/js/validateUsersGR.js"></script>
+    {% endif %}
 </head>
 
 <body>
@@ -47,7 +53,7 @@
 {% if loggedin_role == "" %}
     <br><br><br>
     <div class="container" id="signupContainer">
-          <form action="signup" method="post" id="signupForm">
+          <form action="signup" method="post" id="signupForm" onsubmit="return UsersValidation('username','email','password','retype_password','full_name','work_phone','mobile_phone','biography','gender','role','avatar')">
               <h2 class="text-center">{{ signup.title }}</h2>
               <hr>
               <div class="form-row">
@@ -58,8 +64,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterusername }}" name="username" id = "username" value="{{request.form.username}}" required>
+                            <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterusername }}" name="username" id = "username" value="{{request.form.username}}" onkeyup="UsernameValidation('username')" required>
                         </div>
+                         <div class="error-messages" id="username_errors"></div>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="contactlabel" for="email">{{ signup.email }}</label>
@@ -68,8 +75,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                             </div>
-                            <input type="text" id="email" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" required>
+                            <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enteremail }}" name="email" id="email" value="{{request.form.email}}" onkeyup="EmailValidation('email')" required>
                         </div>
+                        <div class="error-messages" id="email_errors"></div>
                     </div>
               </div>
               <div class="form-row">
@@ -80,8 +88,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                             </div>
-                            <input type="password" id="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" value="{{request.form.password}}" required>
+                            <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterpassword }}" name="password" id="password" onkeyup="PasswordValidation('password')"  value="{{request.form.password}}" required>
                         </div>
+                        <div class="error-messages" id="password_errors"></div>
                   </div>
                   <div class="form-group col-md-6">
                         <label class="contactlabel" for="retype_password">{{ signup.retype_password }}</label>
@@ -90,8 +99,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                             </div>
-                            <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" value="{{request.form.retype_password}}" required>
+                            <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" onkeyup="RetypePasswordValidation('retype_password')"  value="{{request.form.retype_password}}" required>
                         </div>
+                        <div class="error-messages" id="retype_password_errors"></div>
                   </div>
               </div>
               <div class="form-row">
@@ -102,8 +112,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-user" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterfullname }}" name="full_name" id="full_name" value="{{request.form.full_name}}" required>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterfullname }}" name="full_name" id="full_name" onkeyup="FullnameValidation('full_name')"  value="{{request.form.full_name}}" required>
                     </div>
+                     <div class="error-messages" id="full_name_errors"></div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="contactlabel" for="gender">{{ signup.gender }}</label>
@@ -112,12 +123,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
                         </div>
-                        <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}">
+                        <select required class="form-control" name="gender" id="gender" value="{{request.form.gender}}" onchange="DropdownValidation('gender')">
                             <option value="Male">{{ signup.male }}</option>
                             <option value="Female">{{ signup.female }}</option>
                             <option value="Other">{{ signup.other }}</option>
                         </select>
                     </div>
+                     <div class="error-messages" id="gender_errors"></div>
                 </div>
               </div>
               <div class = "form-row">
@@ -128,8 +140,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-phone" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" required>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterwork_phone }}" name="work_phone" id="work_phone" value="{{request.form.work_phone}}" onkeyup="PhoneValidation('work_phone')"  required>
                     </div>
+                    <div class="error-messages" id="work_phone_errors"></div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="contactlabel" for="mobile_phone">{{ signup.mobile_phone }}</label>
@@ -138,8 +151,9 @@
                          <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></span>
                          </div>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" required>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.entermobile_phone }}" name="mobile_phone" id="mobile_phone" value="{{request.form.mobile_phone}}" onkeyup="PhoneValidation('mobile_phone')" required>
                     </div>
+                    <div class="error-messages" id="mobile_phone_errors"></div>
                 </div>
               </div>
               <div class="form-group">
@@ -149,8 +163,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-address-card" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" required>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterbiography }}" name="biography" id="biography" value="{{request.form.biography}}" onkeyup="BiographyValidation('biography')"  required>
                     </div>
+                    <div class="error-messages" id="biography_errors"></div>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-6">
@@ -160,11 +175,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-users" aria-hidden="true"></i></span>
                         </div>
-                        <select required class="form-control" name="role" id="role" value="{{request.form.role}}">
+                        <select required class="form-control" name="role" id="role" value="{{request.form.role}}" onchange="DropdownValidation('role')">
                             <option value="ADMIN">{{ signup.admin }}</option>
                             <option value="USER">{{ signup.user }}</option>
                         </select>
                     </div>
+                    <div class="error-messages" id="role_errors"></div>
                   </div>
                   <div class="form-group col-md-6">
                     <label class="contactlabel" for="avatar">{{ signup.avatar }}</label>
@@ -173,8 +189,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-addon input-group-text primary"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" required>
+                        <input type="text" autocomplete="off" class="form-control" placeholder="{{ signup.enterimage }}" name="avatar" id="avatar" value="{{request.form.avatar}}" onkeyup="URLValidation('avatar')" required>
                     </div>
+                    <div class="error-messages" id="avatar_errors"></div>
                 </div>
               </div>
               <hr>
@@ -194,7 +211,7 @@
     </div>
 {% endif %}
 
-    <div class="myfooter" id="signupFooter">
+    <div class="myfooter" id="extendedFooter">
         <h4>{{ header.footer }}</h4>
     </div>
 

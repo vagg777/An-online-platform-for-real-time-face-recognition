@@ -38,8 +38,3 @@ h4 {
 #profileSettingsDiv, #appearanceSettingsDiv {
     margin-top: -2% !important;
 }
-
-#signupFooter {
-    margin-top: 2%;
-    bottom: auto;
-}

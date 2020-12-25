@@ -18,17 +18,17 @@ const UsernameValidation = function validate(username) {
   var returnedValue = true;
   const loginUsername = document.getElementById(username).value;
   if (loginUsername.length <= 2) {
-    document.getElementById(username).style.borderColor = '#ff0000';
+    document.getElementById(username).style.borderColor = '#d9534f';
     document.getElementById(username).style.borderWidth = '3px';
-    document.getElementById(username + '_errors').style.color = '#ff0000';
+    document.getElementById(username + '_errors').style.color = '#d9534f';
     document.getElementById(username + '_errors').innerHTML = 'Το όνομα χρήστη παραείναι μικρό!';
     if (loginUsername === '')
         document.getElementById(username + '_errors').innerHTML = 'Παρακαλούμε εισάγετε όνομα χρήστη';
     returnedValue = false;
     } else {
-      document.getElementById(username).style.borderColor  = '#008000';
+      document.getElementById(username).style.borderColor  = '#5cb85c';
       document.getElementById(username).style.borderWidth = '3px';
-      document.getElementById(username + '_errors').style.color  = '#008000';
+      document.getElementById(username + '_errors').style.color  = '#5cb85c';
       document.getElementById(username + '_errors').innerHTML = 'Το όνομα χρήστη είναι έγκυρο';
     }
 
@@ -42,19 +42,19 @@ const EmailValidation = function validate(email) {
   const atpos = userEmail.indexOf("@");
   const dotpos = userEmail.lastIndexOf(".");
   if (atpos<1 || dotpos<atpos+2 || dotpos+2>=userEmail.length) {
-    document.getElementById(email).style.borderColor = '#ff0000';
+    document.getElementById(email).style.borderColor = '#d9534f';
     document.getElementById(email).style.borderWidth = '3px';
-    document.getElementById(email + '_errors').style.color = '#ff0000';
+    document.getElementById(email + '_errors').style.color = '#d9534f';
     document.getElementById(email + '_errors').innerHTML = 'Η διεύθυνση email δεν είναι έγκυρη!';
     returnedValue = false;
   } else {
-    document.getElementById(email).style.borderColor = '#008000';
+    document.getElementById(email).style.borderColor = '#5cb85c';
     document.getElementById(email).style.borderWidth = '3px';
-    document.getElementById(email + '_errors').style.color = '#008000';
+    document.getElementById(email + '_errors').style.color = '#5cb85c';
     document.getElementById(email + '_errors').innerHTML = 'Η διεύθυνση email είναι έγκυρη!';
   }
   if (userEmail === ''){
-    document.getElementById(email).style.borderColor = '#ff0000';
+    document.getElementById(email).style.borderColor = '#d9534f';
     document.getElementById(email).style.borderWidth = '3px';
     document.getElementById(email + '_errors').innerHTML = 'Παρακαλούμε εισάγετε μια διεύθυνση email';
     returnedValue = false;
@@ -67,16 +67,16 @@ const PasswordValidation = function validate(password) {
   var returnedValue = true;
   var userPassword = document.getElementById(password).value;
   if (userPassword.length <= 2) {
-    document.getElementById(password).style.borderColor = '#ff0000';
+    document.getElementById(password).style.borderColor = '#d9534f';
     document.getElementById(password).style.borderWidth = '3px';
-    document.getElementById(password + '_errors').style.color = '#ff0000';
+    document.getElementById(password + '_errors').style.color = '#d9534f';
     document.getElementById(password + '_errors').innerHTML = 'Ο κωδικός είναι πολύ μικρός!';
     if (userPassword === '')  document.getElementById(password + '_errors').innerHTML = 'Παρακαλούμε εισάγετε κωδικό!';
     returnedValue = false;
     } else {
-      document.getElementById(password).style.borderColor = '#008000';
+      document.getElementById(password).style.borderColor = '#5cb85c';
       document.getElementById(password).style.borderWidth = '3px';
-      document.getElementById(password + '_errors').style.color = '#008000';
+      document.getElementById(password + '_errors').style.color = '#5cb85c';
       document.getElementById(password + '_errors').innerHTML = 'Ο κωδικός είναι έγκυρος!';
     }
 
@@ -87,16 +87,16 @@ const RetypePasswordValidation = function validate(retype_password) {
   var returnedValue = true;
   var userRetypePassword = document.getElementById(retype_password).value;
   if (userRetypePassword.length <= 2) {
-    document.getElementById(retype_password).style.borderColor = '#ff0000';
+    document.getElementById(retype_password).style.borderColor = '#d9534f';
     document.getElementById(retype_password).style.borderWidth = '3px';
-    document.getElementById(retype_password + '_errors').style.color = '#ff0000';
+    document.getElementById(retype_password + '_errors').style.color = '#d9534f';
     document.getElementById(retype_password + '_errors').innerHTML = 'Ο κωδικός είναι πολύ μικρός!';
     if (userRetypePassword === '')  document.getElementById(retype_password + '_errors').innerHTML = 'Παρακαλούμε εισάγετε κωδικό!';
     returnedValue = false;
     } else {
-      document.getElementById(retype_password).style.borderColor = '#008000';
+      document.getElementById(retype_password).style.borderColor = '#5cb85c';
       document.getElementById(retype_password).style.borderWidth = '3px';
-      document.getElementById(retype_password + '_errors').style.color = '#008000';
+      document.getElementById(retype_password + '_errors').style.color = '#5cb85c';
       document.getElementById(retype_password + '_errors').innerHTML = 'Ο κωδικός είναι έγκυρος!';
     }
 
@@ -108,9 +108,9 @@ const FullnameValidation = function validate(fullname) {
   var returnedValue = true;
   const userFullname = document.getElementById(fullname).value;
   if (userFullname.length <= 2) {
-    document.getElementById(fullname).style.borderColor = '#ff0000';
+    document.getElementById(fullname).style.borderColor = '#d9534f';
     document.getElementById(fullname).style.borderWidth = '3px';
-    document.getElementById(fullname + '_errors').style.color = '#ff0000';
+    document.getElementById(fullname + '_errors').style.color = '#d9534f';
     document.getElementById(fullname + '_errors').innerHTML = 'Το πλήρες όνομα είναι πολύ μικρό!';
     if (userFullname === '')
         document.getElementById(fullname + '_errors').innerHTML = 'Παρακαλούμε εισάγετε το πλήρες όνομα!';
@@ -120,15 +120,15 @@ const FullnameValidation = function validate(fullname) {
     returnedValue = false;
     } else {
       if(/\d/.test(userFullname)) {
-          document.getElementById(fullname).style.borderColor = '#ff0000';
+          document.getElementById(fullname).style.borderColor = '#d9534f';
           document.getElementById(fullname).style.borderWidth = '3px';
-          document.getElementById(fullname + '_errors').style.color = '#ff0000';
+          document.getElementById(fullname + '_errors').style.color = '#d9534f';
           document.getElementById(fullname + '_errors').innerHTML = 'Το πλήρες όνομα δεν μπορεί να περιέχει αριθμούς!';
           returnedValue = false;
       } else {
-          document.getElementById(fullname).style.borderColor  = '#008000';
+          document.getElementById(fullname).style.borderColor  = '#5cb85c';
           document.getElementById(fullname).style.borderWidth = '3px';
-          document.getElementById(fullname + '_errors').style.color  = '#008000';
+          document.getElementById(fullname + '_errors').style.color  = '#5cb85c';
           document.getElementById(fullname + '_errors').innerHTML = 'Το πλήρες όνομα είναι έγκυρο!';
       }
     }
@@ -140,9 +140,9 @@ const PhoneValidation = function validate(phone) {
   var returnedValue = true;
   const userphone = document.getElementById(phone).value;
   if ( (userphone.length < 10) || (userphone.length > 14))  {
-    document.getElementById(phone).style.borderColor = '#ff0000';
+    document.getElementById(phone).style.borderColor = '#d9534f';
     document.getElementById(phone).style.borderWidth = '3px';
-    document.getElementById(phone + '_errors').style.color = '#ff0000';
+    document.getElementById(phone + '_errors').style.color = '#d9534f';
     document.getElementById(phone + '_errors').innerHTML = 'Το μήκος του τηλεφωνικού αριθμού μπορεί να είναι 10-14 ψηφία μόνο!';
     if (userphone === '')
         document.getElementById(phone + '_errors').innerHTML = 'Παρακαλούμε εισάγετε τον τηλεφωνικό αριθμό!';
@@ -152,15 +152,15 @@ const PhoneValidation = function validate(phone) {
     returnedValue = false;
     } else {
       if(!(/^\d+$/.test(userphone))) {
-          document.getElementById(phone).style.borderColor = '#ff0000';
+          document.getElementById(phone).style.borderColor = '#d9534f';
           document.getElementById(phone).style.borderWidth = '3px';
-          document.getElementById(phone + '_errors').style.color = '#ff0000';
+          document.getElementById(phone + '_errors').style.color = '#d9534f';
           document.getElementById(phone + '_errors').innerHTML = 'Ο τηλεφωνικός αριθμός δεν μπορεί να περιέχει γράμματα!';
           returnedValue = false;
       } else {
-          document.getElementById(phone).style.borderColor  = '#008000';
+          document.getElementById(phone).style.borderColor  = '#5cb85c';
           document.getElementById(phone).style.borderWidth = '3px';
-          document.getElementById(phone + '_errors').style.color  = '#008000';
+          document.getElementById(phone + '_errors').style.color  = '#5cb85c';
           document.getElementById(phone + '_errors').innerHTML = 'Ο τηλεφωνικός αριθμός είναι έγκυρος';
       }
     }
@@ -173,17 +173,17 @@ const BiographyValidation = function validate(biography) {
   var returnedValue = true;
   const userBio = document.getElementById(biography).value;
   if (userBio.length <= 2) {
-    document.getElementById(biography).style.borderColor = '#ff0000';
+    document.getElementById(biography).style.borderColor = '#d9534f';
     document.getElementById(biography).style.borderWidth = '3px';
-    document.getElementById(biography + '_errors').style.color = '#ff0000';
+    document.getElementById(biography + '_errors').style.color = '#d9534f';
     document.getElementById(biography+ '_errors').innerHTML = 'Το βιογραφικό είναι πολύ μικρό!';
     if (userBio === '')
         document.getElementById(biography + '_errors').innerHTML = 'Παρακαλούμε εισάγετε το βιογραφικό!';
     returnedValue = false;
     } else {
-      document.getElementById(biography).style.borderColor  = '#008000';
+      document.getElementById(biography).style.borderColor  = '#5cb85c';
       document.getElementById(biography).style.borderWidth = '3px';
-      document.getElementById(biography + '_errors').style.color  = '#008000';
+      document.getElementById(biography + '_errors').style.color  = '#5cb85c';
       document.getElementById(biography + '_errors').innerHTML = 'Το μήκος του βιογραφικού είναι έγκυρο!';
     }
 
@@ -194,15 +194,15 @@ const DropdownValidation = function validate(option) {
   var returnedValue = true;
   const selectedOption = document.getElementById(option).value;
   if (selectedOption === ''){
-    document.getElementById(option).style.borderColor = '#ff0000';
+    document.getElementById(option).style.borderColor = '#d9534f';
     document.getElementById(option).style.borderWidth = '3px';
-    document.getElementById(option + '_errors').style.color = '#ff0000';
+    document.getElementById(option + '_errors').style.color = '#d9534f';
     document.getElementById(option + '_errors').innerHTML = 'Παρακαλούμε επιλέξτε μια επιλογή!';
     returnedValue = false;
   } else {
-    document.getElementById(option).style.borderColor = '#008000';
+    document.getElementById(option).style.borderColor = '#5cb85c';
     document.getElementById(option).style.borderWidth = '3px';
-    document.getElementById(option + '_errors').style.color = '#008000';
+    document.getElementById(option + '_errors').style.color = '#5cb85c';
     document.getElementById(option + '_errors').innerHTML = 'Η επιλογή είναι έγκυρη!';
   }
 
@@ -214,15 +214,15 @@ const URLValidation = function validate(url) {
   var returnedValue = true;
   const imageUrl = document.getElementById(url).value;
   if (!regexp.test(imageUrl)){
-    document.getElementById(url).style.borderColor = '#ff0000';
+    document.getElementById(url).style.borderColor = '#d9534f';
     document.getElementById(url).style.borderWidth = '3px';
-    document.getElementById(url + '_errors').style.color = '#ff0000';
+    document.getElementById(url + '_errors').style.color = '#d9534f';
     document.getElementById(url + '_errors').innerHTML = 'Παρακαλούμε εισάγετε έγκυρο σύνδεσμο';
     returnedValue = false;
   } else {
-    document.getElementById(url).style.borderColor = '#008000';
+    document.getElementById(url).style.borderColor = '#5cb85c';
     document.getElementById(url).style.borderWidth = '3px';
-    document.getElementById(url + '_errors').style.color = '#008000';
+    document.getElementById(url + '_errors').style.color = '#5cb85c';
     document.getElementById(url + '_errors').innerHTML = 'Ο σύνδεσμος είναι έγκυρος';
   }
 
