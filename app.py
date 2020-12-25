@@ -262,8 +262,6 @@ def signup():
             mobile_phone = str(request.form["mobile_phone"])
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
-            if password != retype_password:
-                return render_template('signup.html', error=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, messages=messages, header=header, loggedin_user=loggedin_user, site_theme=site_theme, site_language=site_language, site_fontsize = site_fontsize)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()
@@ -359,11 +357,6 @@ def manage_users():
             user_mobile_phone = str(request.form["mobile_phone"])
             user_role = str(request.form["role"])
             user_avatar = str(request.form["avatar"])
-            if user_password != user_retype_password:
-                sql = mydb.cursor()
-                sql.execute("SELECT * FROM users")
-                result = sql.fetchall()
-                return render_template('manage_users.html', error=messages.passwordnomatch, manage=manage, result=result, header=header,messages=messages, manageUser=manageUser, loggedin_role=loggedin_role, insertUser=insertUser, loggedin_user=loggedin_user, site_theme=site_theme, site_fontsize = site_fontsize, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)
@@ -405,14 +398,6 @@ def insert_users():
             mobile_phone = str(request.form["mobile_phone"])
             role = str(request.form["role"])
             avatar = str(request.form["avatar"])
-            if password != retype_password:
-                sql = mydb.cursor()
-                sql.execute("SELECT * FROM users")
-                result = sql.fetchall()
-                if result:
-                    if site_language == "Greek":
-                        result = users_translate_to_Greek(manageUser, result)
-                return render_template('manage_users.html', error=messages.passwordnomatch, result=result, header=header,insertUser=insertUser, manageUser=manageUser, manage=manage, messages=messages, loggedin_role=loggedin_role, loggedin_user=loggedin_user, site_theme=site_theme, site_fontsize = site_fontsize, site_language=site_language)
             sql = mydb.cursor()
             sql.execute("SELECT MAX(user_id) FROM users;")
             id = sql.fetchone()
@@ -665,16 +650,6 @@ def settings():
             user_mobile_phone = str(request.form["mobile_phone"])
             user_role = str(request.form["role"])
             user_avatar = str(request.form["avatar"])
-            if user_password != user_retype_password:
-                sql = mydb.cursor()
-                sql.execute("SELECT * FROM users WHERE email ='" + loggedin_email + "'")
-                user = sql.fetchall()
-                if user:
-                    if site_language == "Greek":
-                        user = single_user_translate_to_Greek(manageUser, list(user[0]))
-                    else:
-                        user = user[0]
-                return render_template('settings.html', loggedin_user=loggedin_user, profileerror=messages.passwordnomatch, signup=signup, loggedin_role=loggedin_role, manageUser=manageUser, user=user, messages=messages, header=header, site_theme=site_theme, site_language=site_language)
             sql = mydb.cursor()
             query = """UPDATE users SET username=%s, password=%s, email=%s, full_name=%s, gender=%s, biography=%s, work_phone=%s, mobile_phone=%s, role=%s, avatar=%s WHERE user_id=%s"""
             query_input = (user_username, user_password, user_email, user_fullname, user_gender, user_biography, user_work_phone, user_mobile_phone, user_role, user_avatar, user_id)

@@ -83,9 +83,10 @@ const PasswordValidation = function validate(password) {
   return returnedValue;
 }
 
-const RetypePasswordValidation = function validate(retype_password) {
+const RetypePasswordValidation = function validate(retype_password, password) {
   var returnedValue = true;
   var userRetypePassword = document.getElementById(retype_password).value;
+  var userPassword = document.getElementById(password).value;
   if (userRetypePassword.length <= 2) {
     document.getElementById(retype_password).style.borderColor = '#d9534f';
     document.getElementById(retype_password).style.borderWidth = '3px';
@@ -94,11 +95,27 @@ const RetypePasswordValidation = function validate(retype_password) {
     if (userRetypePassword === '')  document.getElementById(retype_password + '_errors').innerHTML = 'Παρακαλούμε εισάγετε κωδικό!';
     returnedValue = false;
     } else {
-      document.getElementById(retype_password).style.borderColor = '#5cb85c';
-      document.getElementById(retype_password).style.borderWidth = '3px';
-      document.getElementById(retype_password + '_errors').style.color = '#5cb85c';
-      document.getElementById(retype_password + '_errors').innerHTML = 'Ο κωδικός είναι έγκυρος!';
+      if (userRetypePassword === userPassword) {
+        document.getElementById(retype_password).style.borderColor = '#5cb85c';
+        document.getElementById(retype_password).style.borderWidth = '3px';
+        document.getElementById(retype_password + '_errors').style.color = '#5cb85c';
+        document.getElementById(retype_password + '_errors').innerHTML = 'Οι κωδικοί συνάδουν και είναι έγκυροι!';
+        document.getElementById(password).style.borderColor = '#5cb85c';
+        document.getElementById(password).style.borderWidth = '3px';
+        document.getElementById(password + '_errors').style.color = '#5cb85c';
+        document.getElementById(password + '_errors').innerHTML = 'Οι κωδικοί συνάδουν και είναι έγκυροι!';
+      } else {
+        document.getElementById(retype_password).style.borderColor = '#d9534f';
+        document.getElementById(retype_password).style.borderWidth = '3px';
+        document.getElementById(retype_password + '_errors').style.color = '#d9534f';
+        document.getElementById(retype_password + '_errors').innerHTML = 'Οι κωδικοί δεν είναι ίδιοι μεταξύ τους!';
+        document.getElementById(password).style.borderColor = '#d9534f';
+        document.getElementById(password).style.borderWidth = '3px';
+        document.getElementById(password + '_errors').style.color = '#d9534f';
+        document.getElementById(password + '_errors').innerHTML = 'Οι κωδικοί δεν είναι ίδιοι μεταξύ τους!';
+        returnedValue = false;
     }
+  }
 
   return returnedValue;
 }

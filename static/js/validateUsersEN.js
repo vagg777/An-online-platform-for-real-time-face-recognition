@@ -1,4 +1,4 @@
-const UsersValidation = function validate(username, email, password, retype_password, full_name, work_phone, mobile_phone, biography, gender, role, url){
+    const UsersValidation = function validate(username, email, password, retype_password, full_name, work_phone, mobile_phone, biography, gender, role, url){
     const isUsernameValid = UsernameValidation(username);
     const isEmailValid = EmailValidation(email);
     const isPasswordValid = PasswordValidation(password);
@@ -83,9 +83,10 @@ const PasswordValidation = function validate(password) {
   return returnedValue;
 }
 
-const RetypePasswordValidation = function validate(retype_password) {
+const RetypePasswordValidation = function validate(retype_password, password) {
   var returnedValue = true;
   var userRetypePassword = document.getElementById(retype_password).value;
+  var userPassword = document.getElementById(password).value;
   if (userRetypePassword.length <= 2) {
     document.getElementById(retype_password).style.borderColor = '#d9534f';
     document.getElementById(retype_password).style.borderWidth = '3px';
@@ -94,11 +95,27 @@ const RetypePasswordValidation = function validate(retype_password) {
     if (userRetypePassword === '')  document.getElementById(retype_password + '_errors').innerHTML = 'Please enter a password!';
     returnedValue = false;
     } else {
-      document.getElementById(retype_password).style.borderColor = '#5cb85c';
-      document.getElementById(retype_password).style.borderWidth = '3px';
-      document.getElementById(retype_password + '_errors').style.color = '#5cb85c';
-      document.getElementById(retype_password + '_errors').innerHTML = 'Password is valid!';
+      if (userRetypePassword === userPassword) {
+        document.getElementById(retype_password).style.borderColor = '#5cb85c';
+        document.getElementById(retype_password).style.borderWidth = '3px';
+        document.getElementById(retype_password + '_errors').style.color = '#5cb85c';
+        document.getElementById(retype_password + '_errors').innerHTML = 'Passwords match and are valid!';
+        document.getElementById(password).style.borderColor = '#5cb85c';
+        document.getElementById(password).style.borderWidth = '3px';
+        document.getElementById(password + '_errors').style.color = '#5cb85c';
+        document.getElementById(password + '_errors').innerHTML = 'Passwords match and are valid!';
+      } else {
+        document.getElementById(retype_password).style.borderColor = '#d9534f';
+        document.getElementById(retype_password).style.borderWidth = '3px';
+        document.getElementById(retype_password + '_errors').style.color = '#d9534f';
+        document.getElementById(retype_password + '_errors').innerHTML = 'Passwords do not match!';
+        document.getElementById(password).style.borderColor = '#d9534f';
+        document.getElementById(password).style.borderWidth = '3px';
+        document.getElementById(password + '_errors').style.color = '#d9534f';
+        document.getElementById(password + '_errors').innerHTML = 'Passwords do not match!';
+        returnedValue = false;
     }
+  }
 
   return returnedValue;
 }
@@ -228,4 +245,3 @@ const URLValidation = function validate(url) {
 
   return returnedValue
 }
-

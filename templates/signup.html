@@ -99,7 +99,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-addon input-group-text primary"><i class="fa fa-lock" aria-hidden="true"></i></span>
                             </div>
-                            <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" onkeyup="RetypePasswordValidation('retype_password')"  value="{{request.form.retype_password}}" required>
+                            <input type="password" autocomplete="off" class="form-control" placeholder="{{ signup.enterretype_password }}" name="retype_password" id="retype_password" onkeyup="RetypePasswordValidation('retype_password', 'password')"  value="{{request.form.retype_password}}" required>
                         </div>
                         <div class="error-messages" id="retype_password_errors"></div>
                   </div>
