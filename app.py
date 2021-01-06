@@ -12,7 +12,7 @@ from scipy.spatial import distance      # pip install scipy
 import math
 from EnglishLanguage import *
 from GreekLanguage import *
-from cameraController import *
+from camera import *
 
 
 app = Flask(__name__)
@@ -732,6 +732,9 @@ def menu_settings():
         finally:
             pass
 
+
+
+
 @app.route('/live_feed', methods=['GET', 'POST'])
 def live_feed():
     if request.method == 'GET':
@@ -742,7 +745,6 @@ def live_feed():
             return render_template('manage_livefeed.html', loggedin_user=loggedin_user, result=result, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_fontsize = site_fontsize, site_language=site_language)
         else:
             return render_template('manage_livefeed.html', loggedin_user=loggedin_user, error=messages.norecordsfound, header=header, messages=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_fontsize = site_fontsize, site_language=site_language)
-
 
 
 
@@ -768,7 +770,7 @@ def search_live_feed():
         criminal_full_name = criminal_full_name.replace(" ", "_")
         global_full_name = criminal_full_name
         criminal_folder_path = "/Screenshots/" + criminal_full_name + "/detected.jpg"
-        path1 = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Screenshots'
+        path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
         path = os.path.join(path1, global_full_name, "Camera Feed 1")
         if not os.path.exists(criminal_folder_path):
             localtime = "Face not yet detected"
@@ -809,11 +811,11 @@ def gen(camera):
 
 
 def record_video():
-    path1 = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Videos'
+    path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos'
     path = os.path.join(path1, global_full_name, "Camera Feed 1/")
     if not os.path.exists(path):
         os.makedirs(path)
-    FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Videos\output1.avi'
+    FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\cMsc-Thesis-Website\static\Videos\output1.avi'
     if os.path.isfile(FILE_OUTPUT):  # Checks and deletes the output file
         os.remove(FILE_OUTPUT)
     capture = cv2.VideoCapture(0)  # Capturing video from webcam:

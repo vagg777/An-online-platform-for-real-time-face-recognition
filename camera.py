@@ -4,7 +4,7 @@ import cv2
 from flask import *
 import MySQLdb
 from time import gmtime, strftime
-from cameraController import *
+from camera import *
 import numpy as np
 import time
 from EnglishLanguage import *
@@ -108,7 +108,7 @@ class VideoCamera(object):
         redish = apply_color_overlay(image, intensity=0.5, red=230, blue=10)
         circle_blur = apply_circle_blur(image)
         face_rects = face_cascade.detectMultiScale(gray, 1.3, 5)
-        path1 = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Screenshots'
+        path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
         path = os.path.join(path1, global_full_name, 'Camera Feed 1')
         if not os.path.exists(path):
             os.makedirs(path)
@@ -155,7 +155,7 @@ class VideoCamera(object):
             ret, jpeg = cv2.imencode('.jpg', redish)
         if video_filter == "blur":
             ret, jpeg = cv2.imencode('.jpg', circle_blur)
-        path2 = r'C:\Users\Vaggelis\PycharmProjects\criminal-detection\static\Screenshots'
+        path2 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
         path3 = os.path.join(path2, global_full_name)
         if not os.path.exists(path3):
             os.makedirs(path3)
