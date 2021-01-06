@@ -759,6 +759,7 @@ def search_live_feed():
         global detection_time
         global average_detection_time
         global camera_feed_1_location
+        global video_filter
         detection_time = round(detection_time, 4)
         average_detection_time = round(average_detection_time, 4)
         print("Detection time: " + str(detection_time) + " seconds")
@@ -796,6 +797,7 @@ def gen(camera):
     while True:
         global average_detection_time
         global detection_time
+        global video_filter
         frame, detection_time, average_detection_time = camera.get_frame(video_filter, global_full_name)
         # Denoising phase
         odd_symmetric_pair = [0, 1, 0, 1]
@@ -837,7 +839,7 @@ def record_video():
 @app.route('/video_feed')
 def video_feed():
     global site_language
-    record_video()
+    #record_video()
     return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
