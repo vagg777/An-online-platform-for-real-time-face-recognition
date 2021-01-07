@@ -14,11 +14,15 @@ face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface
 ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
+avg_time = 0.00
+sum_time = 0
+iterations = 0
+total = 0
 
 def live_statistics(frame, pos, video_width, video_height, milliseconds):
     font_face = cv2.FONT_HERSHEY_SIMPLEX
     scale = 0.5
-    text_color = (0, 0, 255)  # BGR text color = White
+    text_color = (0, 0, 255)  # BGR
     text1 = "Time: " + strftime("%d/%m/%Y %H:%M:%S", gmtime())
     cv2.putText(frame, text1, pos, font_face, scale, text_color, 1, cv2.LINE_AA)
     text2 = "Video Quality: " + str(video_width) + "x" + str(video_height) + " px"
@@ -83,14 +87,10 @@ def apply_circle_blur(image, intensity=0.5):
     image = cv2.cvtColor(blended, cv2.COLOR_BGRA2BGR)
     return image
 
-avg_time = 0.00
-sum_time = 0
-iterations = 0
-total = 0
 
 class VideoCamera(object):
     def __init__(self):
-        self.video = cv2.VideoCapture(0)
+        self.video = cv2.VideoCapture(1)
 
     def __del__(self):
         self.video.release()
