@@ -90,7 +90,7 @@ def apply_circle_blur(image, intensity=0.5):
 
 class VideoCamera(object):
     def __init__(self):
-        self.video = cv2.VideoCapture(1)
+        self.video = cv2.VideoCapture(0)
 
     def __del__(self):
         self.video.release()
@@ -156,6 +156,7 @@ class VideoCamera(object):
             ret, jpeg = cv2.imencode('.jpg', circle_blur)
         comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
         databaseImagePath = os.path.join(criminalPath, 'database_image.jpg')
+        #TODO: Force same dimension in comparison and database!!!!
         img_bgr = cv2.imread(comparisonImagePath)
         img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
         template = cv2.imread(databaseImagePath, 0)
