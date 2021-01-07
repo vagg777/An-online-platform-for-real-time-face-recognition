@@ -96,7 +96,6 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self, video_filter, global_full_name):
-
         global iterations
         iterations = iterations + 1
         t0 = time.time()
@@ -108,40 +107,40 @@ class VideoCamera(object):
         redish = apply_color_overlay(image, intensity=0.5, red=230, blue=10)
         circle_blur = apply_circle_blur(image)
         face_rects = face_cascade.detectMultiScale(gray, 1.3, 5)
-        path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
-        path = os.path.join(path1, global_full_name, 'Camera Feed 1')
-        if not os.path.exists(path):
-            os.makedirs(path)
-        path2 = os.path.join(path1, global_full_name)
-        if not os.path.exists(path2):
-            os.makedirs(path2)
+        screenshotsPath = os.path.abspath("static/Screenshots")
+        cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
+        if not os.path.exists(cameraFeedPath):
+            os.makedirs(cameraFeedPath)
+        criminalPath = os.path.join(screenshotsPath, global_full_name)
+        if not os.path.exists(criminalPath):
+            os.makedirs(criminalPath)
         for (x, y, w, h) in face_rects:
             timestr = time.strftime("%d-%m-%Y, %H-%M-%S")
             if video_filter == "no":
-                cv2.imwrite(os.path.join(path, timestr + '.jpg'), image)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), image)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '.jpg'), image)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), image)
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if video_filter == "gray":
-                cv2.imwrite(os.path.join(path, timestr + '(GRAY).jpg'), gray)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), gray)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(GRAY).jpg'), gray)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), gray)
                 cv2.rectangle(gray, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if video_filter == "invert":
-                cv2.imwrite(os.path.join(path, timestr + '(INVERT).jpg'), invert)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), invert)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(INVERT).jpg'), invert)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), invert)
                 cv2.rectangle(invert, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if video_filter == "sepia":
-                cv2.imwrite(os.path.join(path, timestr + '(SEPIA).jpg'), sepia)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), sepia)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(SEPIA).jpg'), sepia)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), sepia)
                 cv2.rectangle(sepia, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if video_filter == "redish":
-                cv2.imwrite(os.path.join(path, timestr + '(REDISH).jpg'), redish)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), redish)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(REDISH).jpg'), redish)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), redish)
                 cv2.rectangle(redish, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if video_filter == "blur":
-                cv2.imwrite(os.path.join(path, timestr + '(BLUR).jpg'), circle_blur)
-                cv2.imwrite(os.path.join(path2, 'comparison.jpg'), circle_blur)
+                cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(BLUR).jpg'), circle_blur)
+                cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), circle_blur)
                 cv2.rectangle(circle_blur, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.imwrite(os.path.join(path2, 'last-updated.jpg'), image)
+            cv2.imwrite(os.path.join(criminalPath, 'last-updated.jpg'), image)
             break
         if video_filter == "no":
             ret, jpeg = cv2.imencode('.jpg', image)
@@ -155,15 +154,11 @@ class VideoCamera(object):
             ret, jpeg = cv2.imencode('.jpg', redish)
         if video_filter == "blur":
             ret, jpeg = cv2.imencode('.jpg', circle_blur)
-        path2 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
-        path3 = os.path.join(path2, global_full_name)
-        if not os.path.exists(path3):
-            os.makedirs(path3)
-        path4 = os.path.join(path3, 'comparison.jpg')
-        path5 = os.path.join(path3, 'database_image.jpg')
-        img_bgr = cv2.imread(path4)
+        comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
+        databaseImagePath = os.path.join(criminalPath, 'database_image.jpg')
+        img_bgr = cv2.imread(comparisonImagePath)
         img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-        template = cv2.imread(path5, 0)
+        template = cv2.imread(databaseImagePath, 0)
         w, h = template.shape[::-1]
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
         threshold = 0.5
@@ -180,7 +175,7 @@ class VideoCamera(object):
             total = t1 - t0
             sum_time = sum_time + total
             avg_time = sum_time/iterations
-            cv2.imwrite(os.path.join(path3, 'detected.jpg'), img_bgr)
+            cv2.imwrite(os.path.join(criminalPath, 'detected.jpg'), img_bgr)
             sql = mydb.cursor()
             query = """UPDATE criminals SET last_location= %s WHERE full_name = %s"""
             global_full_name = global_full_name.replace("_", " ")

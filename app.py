@@ -771,14 +771,14 @@ def search_live_feed():
         criminal_full_name = criminal_full_name.replace(" ", "_")
         global_full_name = criminal_full_name
         criminal_folder_path = "/Screenshots/" + criminal_full_name + "/detected.jpg"
-        path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Screenshots'
-        path = os.path.join(path1, global_full_name, "Camera Feed 1")
+        screenshotsPath = os.path.abspath("static/Screenshots")
+        cameraFeedPath = os.path.join(screenshotsPath, global_full_name, "Camera Feed 1")
         if not os.path.exists(criminal_folder_path):
             localtime = "Face not yet detected"
-        if not os.path.exists(path):
-            os.makedirs(path)
+        if not os.path.exists(cameraFeedPath):
+            os.makedirs(cameraFeedPath)
         else:
-            modification_time = os.path.getmtime(path)
+            modification_time = os.path.getmtime(cameraFeedPath)
             localtime = datetime.datetime.fromtimestamp(modification_time)
         urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
         sql = mydb.cursor()
@@ -800,14 +800,14 @@ def gen(camera):
         global video_filter
         frame, detection_time, average_detection_time = camera.get_frame(video_filter, global_full_name)
         # Denoising phase
-        odd_symmetric_pair = [0, 1, 0, 1]
-        even_symmetric_pair = [0, 0, 1, 1]
-        real_part = 0
-        imagin_part = 0
-        real_part = np.convolve(real_part, even_symmetric_pair, mode="full")  # Equation 1 in paper
-        imagin_part = np.convolve(imagin_part, odd_symmetric_pair, mode="full")  # Equation 1 in paper
-        amplitude = distance.euclidean(real_part, imagin_part)  # Equation 2 in paper
-        phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
+        #odd_symmetric_pair = [0, 1, 0, 1]
+        #even_symmetric_pair = [0, 0, 1, 1]
+        #real_part = 0
+        #imagin_part = 0
+        #real_part = np.convolve(real_part, even_symmetric_pair, mode="full")  # Equation 1 in paper
+        #imagin_part = np.convolve(imagin_part, odd_symmetric_pair, mode="full")  # Equation 1 in paper
+        #amplitude = distance.euclidean(real_part, imagin_part)  # Equation 2 in paper
+        #phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
