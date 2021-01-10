@@ -4,7 +4,6 @@ import cv2
 from flask import *
 import MySQLdb
 from time import gmtime, strftime
-from camera import *
 import numpy as np
 import time
 from EnglishLanguage import *
@@ -89,8 +88,8 @@ def apply_circle_blur(image, intensity=0.5):
 
 
 class VideoCamera(object):
-    def __init__(self, port):
-        self.video = cv2.VideoCapture(port)
+    def __init__(self, source):
+        self.video = cv2.VideoCapture(source)
 
     def __del__(self):
         self.video.release()

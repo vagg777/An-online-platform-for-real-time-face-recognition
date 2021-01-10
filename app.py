@@ -13,6 +13,9 @@ import math
 from EnglishLanguage import *
 from GreekLanguage import *
 from camera import *
+import pafy # + pip install --upgrade youtube_dl
+import ffmpeg
+
 
 
 app = Flask(__name__)
@@ -784,7 +787,6 @@ def search_live_feed():
             sep = '.'
             localtime = str(localtime)
             localtime = localtime.split(sep, 1)[0]
-            print(localtime)
         urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
@@ -827,18 +829,23 @@ def record_video():
     FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos\output1.avi'
     if os.path.isfile(FILE_OUTPUT):  # Checks and deletes the output file
         os.remove(FILE_OUTPUT)
-    capture = cv2.VideoCapture(1)
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    videoWriter = cv2.VideoWriter(FILE_OUTPUT, fourcc, 20.0, (640, 480))
+    #url = "http://192.168.1.122:4747/video"
+    #videoPafy = pafy.new(url)
+    #best = videoPafy.getbest(preftype="webm")
+    # capture = cv2.VideoCapture(1)
+    capture = cv2.VideoCapture('http://192.168.1.122:4747/video')
+    capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'H265'))
+    #fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    #videoWriter = cv2.VideoWriter(FILE_OUTPUT, fourcc, 20.0, (640, 480))
     while (True):
         ret, frame2 = capture.read()
         if ret:
             cv2.imshow('video', frame2)
-            videoWriter.write(frame2)
+            #videoWriter.write(frame2)
         if cv2.waitKey(1) == 27:
             break
     capture.release()
-    videoWriter.release()
+    #videoWriter.release()
     cv2.destroyAllWindows()
 
 
@@ -847,7 +854,7 @@ def record_video():
 def video_feed():
     global site_language
     #record_video()
-    return Response(gen(VideoCamera(1)), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(VideoCamera("http://192.168.1.122:4747/video")), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
