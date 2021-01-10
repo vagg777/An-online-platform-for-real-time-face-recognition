@@ -25,7 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script language="JavaScript" type="text/javascript" src="/static/js/searchLiveFeed.js"></script>
-    <link rel="stylesheet" href="/static/css/smallFonts.css">
     <style>
         .column {
           float: left;
@@ -78,7 +77,7 @@
         </div>
     </nav>
 
-    <br><br><br>
+    <br>
 
     {% if error %}
         <div class="container errorcontainer">
@@ -91,8 +90,8 @@
         </div><br><br>
     {% endif %}
 
-    <div class="container">
-        <h1 align="center">{{ manageCriminal.information }}</h1>
+    <div class="container" style="width: 50%;">
+        <h2 align="center">{{ manageCriminal.information }}</h2>
              <div class="row">
                 <div class="col-md-12">
                     <div class="panel-body">
@@ -155,22 +154,22 @@
         <button class="btn btn-lg btn-warning" onClick="window.location.reload();">Refresh Page Content</button>
     </div><br>
     -->
-    <div class="container">
+    <div class="container" style="width: 50%;">
         <div class="row">
-            <div class="column"><h1 align="center">{{ manageCriminal.livefeed }}</h1></div>
+            <div class="column"><h2 align="center">{{ manageCriminal.livefeed }}</h2></div>
             <div class="column"></div>
-            <div class="column"><h1 align="center">{{ manageCriminal.lastknownlocation }}</h1></div>
+            <div class="column"><h2 align="center">{{ manageCriminal.lastknownlocation }}</h2></div>
         </div>
         <hr>
         <div class="row">
           <div class="column">
-            <img src="{{ url_for('video_feed') }}" style="width:100%">
-            <h3 id="running_time" style="color: black; text-align: center;"></h3>
+            <img src="{{ url_for('video_feed') }}" style="width:300px; height:300px;">
+            <h3 id="running_time" style="text-align: center;"></h3>
             <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>
           <div class="column"></div>
           <div class="column">
-            <img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:100%">
+            <img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:300px; height:300px;">
             <h3 style="text-align: center;">{{ localtime }}</h3>
             <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>
@@ -191,7 +190,7 @@
     </div>
 {% endif %}
 
-    <div class="myfooter">
+    <div class="myfooter" id="extendedFooter">
         <h4>{{ header.footer }}</h4>
     </div>
 

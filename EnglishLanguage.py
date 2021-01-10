@@ -237,7 +237,7 @@ class ManageCriminalEN:
     lastknownlocation = "Last known location"
     livefeed = "Live Feed"
     location = "Location: "
-    information = "Criminal's Information:"
+    information = "Criminal's Information"
     insert = "Insert"
     insertCriminal = "Insert Criminal"
     confirmDelete = "Are you sure you want to delete this criminal from the database?"

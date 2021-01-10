@@ -10,7 +10,7 @@ import time
 from EnglishLanguage import *
 from GreekLanguage import *
 
-face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_alt2.xml")
+face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
 ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
@@ -89,8 +89,8 @@ def apply_circle_blur(image, intensity=0.5):
 
 
 class VideoCamera(object):
-    def __init__(self):
-        self.video = cv2.VideoCapture(0)
+    def __init__(self, port):
+        self.video = cv2.VideoCapture(port)
 
     def __del__(self):
         self.video.release()

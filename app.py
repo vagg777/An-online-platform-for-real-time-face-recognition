@@ -781,6 +781,10 @@ def search_live_feed():
         else:
             modification_time = os.path.getmtime(cameraFeedPath)
             localtime = datetime.datetime.fromtimestamp(modification_time)
+            sep = '.'
+            localtime = str(localtime)
+            localtime = localtime.split(sep, 1)[0]
+            print(localtime)
         urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
@@ -815,14 +819,15 @@ def gen(camera):
 
 
 def record_video():
+    global global_full_name
     path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos'
     path = os.path.join(path1, global_full_name, "Camera Feed 1/")
     if not os.path.exists(path):
         os.makedirs(path)
-    FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\cMsc-Thesis-Website\static\Videos\output1.avi'
+    FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos\output1.avi'
     if os.path.isfile(FILE_OUTPUT):  # Checks and deletes the output file
         os.remove(FILE_OUTPUT)
-    capture = cv2.VideoCapture(0)  # Capturing video from webcam:
+    capture = cv2.VideoCapture(1)
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     videoWriter = cv2.VideoWriter(FILE_OUTPUT, fourcc, 20.0, (640, 480))
     while (True):
@@ -842,7 +847,7 @@ def record_video():
 def video_feed():
     global site_language
     #record_video()
-    return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(VideoCamera(1)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
