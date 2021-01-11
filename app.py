@@ -820,7 +820,7 @@ def gen(camera):
 
 
 
-def record_video():
+def record_video(source):
     global global_full_name
     path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos'
     path = os.path.join(path1, global_full_name, "Camera Feed 1/")
@@ -833,8 +833,8 @@ def record_video():
     #videoPafy = pafy.new(url)
     #best = videoPafy.getbest(preftype="webm")
     # capture = cv2.VideoCapture(1)
-    capture = cv2.VideoCapture('http://192.168.1.122:4747/video')
-    capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'H265'))
+    capture = cv2.VideoCapture(source)
+    capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'H264'))
     #fourcc = cv2.VideoWriter_fourcc(*'XVID')
     #videoWriter = cv2.VideoWriter(FILE_OUTPUT, fourcc, 20.0, (640, 480))
     while (True):
@@ -850,12 +850,17 @@ def record_video():
 
 
 
-@app.route('/video_feed')
-def video_feed():
+@app.route('/video_feed1')
+def video_feed1():
+    global site_language
+    #record_video("http://192.168.1.111:4747/video")
+    return Response(gen(VideoCamera("http://192.168.1.111:4747/video?640x480")), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video_feed2')
+def video_feed2():
     global site_language
     #record_video()
-    return Response(gen(VideoCamera("http://192.168.1.122:4747/video")), mimetype='multipart/x-mixed-replace; boundary=frame')
-
+    return Response(gen(VideoCamera("http://192.168.1.111:4747/video")), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':

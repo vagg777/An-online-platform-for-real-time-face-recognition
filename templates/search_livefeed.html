@@ -154,7 +154,7 @@
         <button class="btn btn-lg btn-warning" onClick="window.location.reload();">Refresh Page Content</button>
     </div><br>
     -->
-    <div class="container" style="width: 50%;">
+    <div class="container">
         <div class="row">
             <div class="column"><h2 align="center">{{ manageCriminal.livefeed }}</h2></div>
             <div class="column"></div>
@@ -163,13 +163,14 @@
         <hr>
         <div class="row">
           <div class="column">
-            <img src="{{ url_for('video_feed') }}" style="width:300px; height:300px;">
+            <img src="{{ url_for('video_feed1') }}">
             <h3 id="running_time" style="text-align: center;"></h3>
             <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>
           <div class="column"></div>
           <div class="column">
-            <img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:300px; height:300px;">
+            <!--<img src="{{ url_for('static', filename=criminal_folder_path) }}" style="width:300px; height:300px;">-->
+           <img src="{{ url_for('video_feed1') }}">
             <h3 style="text-align: center;">{{ localtime }}</h3>
             <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
           </div>

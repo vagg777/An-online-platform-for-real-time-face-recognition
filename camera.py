@@ -10,13 +10,14 @@ from EnglishLanguage import *
 from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
-ds_factor = 0.6
+ds_factor = 0.3
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "RU6 Lab"
 avg_time = 0.00
 sum_time = 0
 iterations = 0
 total = 0
+dimensions = (640,480) #livestream quality
 
 def live_statistics(frame, pos, video_width, video_height, milliseconds):
     font_face = cv2.FONT_HERSHEY_SIMPLEX
@@ -99,7 +100,7 @@ class VideoCamera(object):
         iterations = iterations + 1
         t0 = time.time()
         success, image = self.video.read()
-        image = cv2.resize(image, None, fx=ds_factor, fy=ds_factor, interpolation=cv2.INTER_AREA)
+        image = cv2.resize(image, dimensions, fx=ds_factor, fy=ds_factor, interpolation=cv2.INTER_AREA)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         invert = apply_invert(image)
         sepia = apply_sepia(image)
@@ -175,6 +176,9 @@ class VideoCamera(object):
             total = t1 - t0
             sum_time = sum_time + total
             avg_time = sum_time/iterations
+            # delete first
+            if os.path.exists(os.path.join(criminalPath, 'detected.jpg')):
+                os.remove(os.path.join(criminalPath, 'detected.jpg'))
             cv2.imwrite(os.path.join(criminalPath, 'detected.jpg'), img_bgr)
             sql = mydb.cursor()
             query = """UPDATE criminals SET last_location= %s WHERE full_name = %s"""
