@@ -17,10 +17,12 @@ import pafy # + pip install --upgrade youtube_dl
 import ffmpeg
 
 
-
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-camera_feed_1_location = "RU6 Lab"
+camera_feed_1_URL = "http://192.168.1.111:4747/video"
+camera_feed_2_URL = "http://192.168.1.122:4747/video"
+camera_feed_1_location = "Floor 0 - Camera 1"
+camera_feed_2_location = "Floor 0 - Camera 2"
 site_language = "Greek"
 site_theme = "Dark Theme"
 site_fontsize = 14
@@ -796,17 +798,15 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
 
 def gen(camera):
     while True:
-        global average_detection_time
-        global detection_time
         global video_filter
         global global_full_name
-        frame, detection_time, average_detection_time = camera.get_frame(video_filter, global_full_name)
+        frame = camera.get_frame(video_filter, global_full_name)
         # Denoising phase
         #odd_symmetric_pair = [0, 1, 0, 1]
         #even_symmetric_pair = [0, 0, 1, 1]
@@ -850,17 +850,17 @@ def record_video(source):
 
 
 
-@app.route('/video_feed1')
-def video_feed1():
+@app.route('/video_feed_1')
+def video_feed_1():
     global site_language
     #record_video("http://192.168.1.111:4747/video")
-    return Response(gen(VideoCamera("http://192.168.1.111:4747/video?640x480")), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/video_feed2')
-def video_feed2():
+@app.route('/video_feed_2')
+def video_feed_2():
     global site_language
     #record_video()
-    return Response(gen(VideoCamera("http://192.168.1.111:4747/video")), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(VideoCamera(camera_feed_2_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':

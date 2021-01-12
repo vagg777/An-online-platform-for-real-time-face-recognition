@@ -10,30 +10,13 @@ from EnglishLanguage import *
 from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
-ds_factor = 0.3
+ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-camera_feed_1_location = "RU6 Lab"
-avg_time = 0.00
-sum_time = 0
+camera_feed_1_location = "Floor 0 - Camera 1"
+camera_feed_2_location = "Floor 0 - Camera 2"
 iterations = 0
 total = 0
-dimensions = (640,480) #livestream quality
-
-def live_statistics(frame, pos, video_width, video_height, milliseconds):
-    font_face = cv2.FONT_HERSHEY_SIMPLEX
-    scale = 0.5
-    text_color = (0, 0, 255)  # BGR
-    text1 = "Time: " + strftime("%d/%m/%Y %H:%M:%S", gmtime())
-    cv2.putText(frame, text1, pos, font_face, scale, text_color, 1, cv2.LINE_AA)
-    text2 = "Video Quality: " + str(video_width) + "x" + str(video_height) + " px"
-    cv2.putText(frame, text2, (20, 40), font_face, scale, text_color, 1, cv2.LINE_AA)
-    text3 = "Milliseconds active: " + str(milliseconds) + "msecs"
-    cv2.putText(frame, text3, (20, 60), font_face, scale, text_color, 1, cv2.LINE_AA)
-    text4 = "Live"
-    cv2.rectangle(frame, (575, 0), (630, 20), (0, 0, 255), 0)
-    cv2.circle(frame, (620, 10), 7, (0, 0, 255), -1)
-    cv2.putText(frame, text4, (580, 14), font_face, scale, (0, 0, 255), 1, cv2.LINE_AA)
-
+dimensions = (640, 480) #Livestream Input Quality
 
 # Image Filters
 def apply_invert(image):
@@ -98,7 +81,6 @@ class VideoCamera(object):
     def get_frame(self, video_filter, global_full_name):
         global iterations
         iterations = iterations + 1
-        t0 = time.time()
         success, image = self.video.read()
         image = cv2.resize(image, dimensions, fx=ds_factor, fy=ds_factor, interpolation=cv2.INTER_AREA)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -170,12 +152,7 @@ class VideoCamera(object):
             detected = "true"
         if detected == "true":
             t1 = time.time()
-            global avg_time
-            global sum_time
             global total
-            total = t1 - t0
-            sum_time = sum_time + total
-            avg_time = sum_time/iterations
             # delete first
             if os.path.exists(os.path.join(criminalPath, 'detected.jpg')):
                 os.remove(os.path.join(criminalPath, 'detected.jpg'))
@@ -187,4 +164,4 @@ class VideoCamera(object):
             sql.execute(query, query_input)
             mydb.commit()
             sql.close()
-        return jpeg.tobytes(), total, avg_time
+        return jpeg.tobytes()
