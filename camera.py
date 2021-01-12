@@ -14,9 +14,11 @@ ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
+last_known_location = ""
 iterations = 0
 total = 0
 dimensions = (640, 480) #Livestream Input Quality
+sourceURL = ""
 
 # Image Filters
 def apply_invert(image):
@@ -73,6 +75,8 @@ def apply_circle_blur(image, intensity=0.5):
 
 class VideoCamera(object):
     def __init__(self, source):
+        global sourceURL
+        sourceURL = source
         self.video = cv2.VideoCapture(source)
 
     def __del__(self):
@@ -142,7 +146,6 @@ class VideoCamera(object):
         img_bgr = cv2.imread(comparisonImagePath)
         img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
         template = cv2.imread(databaseImagePath, 0)
-        w, h = template.shape[::-1]
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
         threshold = 0.5
         loc = np.where(res >= threshold)
@@ -151,8 +154,6 @@ class VideoCamera(object):
             #cv2.rectangle(img_bgr, pt, (pt[0] + w, pt[1] + h), (0, 255, 255), 2)
             detected = "true"
         if detected == "true":
-            t1 = time.time()
-            global total
             # delete first
             if os.path.exists(os.path.join(criminalPath, 'detected.jpg')):
                 os.remove(os.path.join(criminalPath, 'detected.jpg'))
@@ -160,8 +161,15 @@ class VideoCamera(object):
             sql = mydb.cursor()
             query = """UPDATE criminals SET last_location= %s WHERE full_name = %s"""
             global_full_name = global_full_name.replace("_", " ")
-            query_input = (camera_feed_1_location, global_full_name)
+            global sourceURL
+            global last_known_location
+            if sourceURL == "http://192.168.1.111:4747/video":
+                query_input = (camera_feed_1_location, global_full_name)
+                last_known_location = camera_feed_1_location
+            if sourceURL == "http://192.168.1.122:4747/video":
+                query_input = (camera_feed_2_location, global_full_name)
+                last_known_location = camera_feed_2_location
             sql.execute(query, query_input)
             mydb.commit()
             sql.close()
-        return jpeg.tobytes()
+        return jpeg.tobytes(), last_known_location

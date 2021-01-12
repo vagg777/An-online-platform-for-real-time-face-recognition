@@ -228,7 +228,7 @@ class ManageCriminalGR:
     enterlastlocation = "Τελευταία γνωστή θέση κακοποιού..."
     cancel = "Ακύρωση"
     updatecriminal = "Ανανέωση Κακοποιού"
-    lastknownlocation = "Πιο πρόσφατη αναγνώριση"
+    lastknownlocation = "Πιο πρόσφατη αναγνώριση:"
     livefeed = "Ζωντανή Σύνδεση"
     location = "Θέση: "
     information = "Στοιχεία κακοποιού"

@@ -26,8 +26,7 @@ camera_feed_2_location = "Floor 0 - Camera 2"
 site_language = "Greek"
 site_theme = "Dark Theme"
 site_fontsize = 14
-detection_time = 0.0
-average_detection_time = 0.0
+last_known_location = ""
 video_filter = ""
 global_full_name = ""
 loggedin_role = ""
@@ -761,15 +760,9 @@ def search_live_feed():
         result = sql.fetchall()
         return render_template('manage_livefeed.html', loggedin_user=loggedin_user, messages=messages, result=result, header=header, message=messages, manageCriminal=manageCriminal, manageLivefeed=manageLivefeed, loggedin_role=loggedin_role, site_theme=site_theme, site_fontsize = site_fontsize, site_language=site_language)
     elif request.method == 'POST':
-        global detection_time
-        global average_detection_time
-        global camera_feed_1_location
         global video_filter
         global global_full_name
-        detection_time = round(detection_time, 4)
-        average_detection_time = round(average_detection_time, 4)
-        print("Detection time: " + str(detection_time) + " seconds")
-        print("Average Detection time: " + str(average_detection_time) + " seconds")
+        global last_known_location
         criminal_id = str(request.form["row.0"])
         criminal_full_name = str(request.form["row.1"])
         criminal_portrait_URL = str(request.form["row.7"])
@@ -798,7 +791,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
 
@@ -806,7 +799,8 @@ def gen(camera):
     while True:
         global video_filter
         global global_full_name
-        frame = camera.get_frame(video_filter, global_full_name)
+        global last_known_location
+        frame, last_known_location = camera.get_frame(video_filter, global_full_name)
         # Denoising phase
         #odd_symmetric_pair = [0, 1, 0, 1]
         #even_symmetric_pair = [0, 0, 1, 1]
@@ -855,6 +849,9 @@ def video_feed_1():
     global site_language
     #record_video("http://192.168.1.111:4747/video")
     return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
 
 @app.route('/video_feed_2')
 def video_feed_2():

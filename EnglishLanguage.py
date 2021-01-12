@@ -234,7 +234,7 @@ class ManageCriminalEN:
     other = "Other"
     cancel = "Cancel"
     updatecriminal = "Update Criminal"
-    lastknownlocation = "Last known location"
+    lastknownlocation = "Last known location:"
     livefeed = "Live Feed"
     location = "Location: "
     information = "Criminal's Information"
