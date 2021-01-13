@@ -35,7 +35,7 @@
 </head>
 
 
-<body onload="startTime()">
+<body>
 {% if loggedin_role %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
@@ -84,10 +84,10 @@
         </div><br><br>
     {% endif %}
 
-    <div class="container" style="width: 50%;">
-        <h2 align="center">{{ manageCriminal.information }}</h2>
+    <div class="container" style="width: 100%;">
+        <h2 align="center">{{ manageCriminal.information }}</h2><hr>
              <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="panel-body">
                        <table class="table table-hover table-striped table-responsive">
                             <thead class="thead-dark">
@@ -140,6 +140,21 @@
                             </tbody>
                        </table>
                     </div>
+                 </div>
+                 <div class="col-md-6">
+                      <img class="videoFeedCamera" src="{{ url_for('static', filename=detected_image) }}">
+                      <h3 align="center">{{ manageCriminal.lastknownlocation }} {{ last_known_location }}</h3>
+                 </div>
+             </div>
+             <h2 align="center" style="text-align: center;">{{ manageCriminal.livefeed }}</h2><hr>
+             <div class="row">
+                <div class="col-md-6">
+                    <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
+                    <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
+                </div>
+                <div class="col-md-6">
+                    <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
+                    <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_2_location }}</h3>
                 </div>
              </div>
     </div><br>
@@ -148,25 +163,6 @@
         <button class="btn btn-lg btn-warning" onClick="window.location.reload();">Refresh Page Content</button>
     </div><br>
     -->
-    <div class="container" style="width: 150%;">
-        <h2 align="center" style="text-align: center;">{{ manageCriminal.livefeed }}</h2>
-        <hr>
-        <div class="row">
-            <div class="col-md-6">
-                <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
-                <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
-            </div>
-            <div class="col-md-6">
-                <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
-                <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_2_location }}</h3>
-            </div>
-            <div class="col-md-4">
-                 <img class="videoFeedCamera" src="{{ url_for('static', filename=detected_image) }}">
-                 <h3 align="center">{{ manageCriminal.lastknownlocation }} {{ last_known_location }}</h3>
-            </div>
-          </div>
-        </div>
-    </div>
 {% endif %}
 
 {% if loggedin_role == '' %}

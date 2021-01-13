@@ -784,12 +784,16 @@ def search_live_feed():
         mydb.commit()
         result = sql.fetchall()
         sql.close()
-        faceRecognition(camera_feed_1_URL, video_filter, global_full_name)
+        #faceRecognition(camera_feed_1_URL, video_filter, global_full_name)
         if result:
             return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
+if __name__ == '__main__':
+    checkUserSettings(site_theme, site_language, site_fontsize)
+    app.run(debug=True)
 
+'''
 def gen(camera):
     while True:
         global video_filter
@@ -807,8 +811,6 @@ def gen(camera):
         #phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-
-'''
 def record_video(source):
     global global_full_name
     videosPath = os.path.abspath("static/Videos")
@@ -837,25 +839,14 @@ def record_video(source):
     capture.release()
     videoWriter.release()
     cv2.destroyAllWindows()
-'''
-
 
 @app.route('/video_feed_1')
 def video_feed_1():
     global site_language
-    #faceRecognition(camera_feed_1_URL)
     return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-
 
 @app.route('/video_feed_2')
 def video_feed_2():
     global site_language
-    #faceRecognition(camera_feed_2_URL)
     return Response(gen(VideoCamera(camera_feed_2_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-if __name__ == '__main__':
-    checkUserSettings(site_theme, site_language, site_fontsize)
-    app.run(debug=True)
+'''
