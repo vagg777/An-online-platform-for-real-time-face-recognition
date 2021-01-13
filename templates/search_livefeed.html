@@ -25,6 +25,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script language="JavaScript" type="text/javascript" src="/static/js/searchLiveFeed.js"></script>
+    <style>
+        .videoFeedCamera {
+            width: 650px;
+            height: 490px;
+            border: 5px solid black;
+        }
+    </style>
 </head>
 
 
@@ -141,23 +148,20 @@
         <button class="btn btn-lg btn-warning" onClick="window.location.reload();">Refresh Page Content</button>
     </div><br>
     -->
-    <div class="container">
+    <div class="container" style="width: 150%;">
         <h2 align="center" style="text-align: center;">{{ manageCriminal.livefeed }}</h2>
         <hr>
         <div class="row">
-            <div class="col-md-4" >
-                <img class="videoFeedCamera" src="{{ url_for('video_feed_1') }}">
-                <h3 id="running_time" style="text-align: center;"></h3>
+            <div class="col-md-6">
+                <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
                 <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
             </div>
-            <div class="col-md-4">
-                <img class="videoFeedCamera" src="{{ url_for('video_feed_1') }}">
-                <h3 id="running_time" style="text-align: center;"></h3>
+            <div class="col-md-6">
+                <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
                 <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_2_location }}</h3>
             </div>
             <div class="col-md-4">
-                 <img class="videoFeedCamera" src="{{ url_for('static', filename=criminal_folder_path) }}">
-                 <h3 style="text-align: center;">{{ localtime }}</h3>
+                 <img class="videoFeedCamera" src="{{ url_for('static', filename=detected_image) }}">
                  <h3 align="center">{{ manageCriminal.lastknownlocation }} {{ last_known_location }}</h3>
             </div>
           </div>

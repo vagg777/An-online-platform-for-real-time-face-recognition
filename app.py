@@ -13,13 +13,13 @@ import math
 from EnglishLanguage import *
 from GreekLanguage import *
 from camera import *
-import pafy # + pip install --upgrade youtube_dl
+from faceRecognition import *
 import ffmpeg
 
 
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-camera_feed_1_URL = "http://192.168.1.122:4747/video"   # Android Xiami Redmi Note 7
+camera_feed_1_URL = "http://192.168.1.122:4747/video"   # Android Xiaomi Redmi Note 7
 camera_feed_2_URL = "http://192.168.1.111:4747/video"   # Android Tablet Huawei Mediapad T3
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
@@ -107,14 +107,6 @@ def checkUserSettings(theme, language, fontsize):
     site_theme = theme
     site_language = language
     site_fontsize = fontsize
-    #sql = mydb.cursor()
-    #sql.execute("SELECT theme, language, fontsize FROM users WHERE email ='" + loggedin_email + "'")
-    #userSettings = sql.fetchall()
-    #if userSettings:
-        #site_theme = userSettings[0][0]
-        #site_language = userSettings[0][1]
-        #site_fontsize = userSettings[0][2]
-
 
 
 def users_translate_to_Greek(manageUser, result):
@@ -752,6 +744,7 @@ def live_feed():
 
 
 
+
 @app.route('/search_livefeed', methods=['GET', 'POST'])
 def search_live_feed():
     if request.method == 'GET':
@@ -769,10 +762,11 @@ def search_live_feed():
         video_filter = str(request.form["filter"])
         criminal_full_name = criminal_full_name.replace(" ", "_")
         global_full_name = criminal_full_name
-        criminal_folder_path = "/Screenshots/" + criminal_full_name + "/detected.jpg"
+        detected_image = "/Screenshots/" + criminal_full_name + "/last-updated.jpg"
         screenshotsPath = os.path.abspath("static/Screenshots")
+        #TODO: Check which camera should come here!!!!!!!!!
         cameraFeedPath = os.path.join(screenshotsPath, global_full_name, "Camera Feed 1")
-        if not os.path.exists(criminal_folder_path):
+        if not os.path.exists(detected_image):
             localtime = "Face not yet detected"
         if not os.path.exists(cameraFeedPath):
             os.makedirs(cameraFeedPath)
@@ -790,8 +784,9 @@ def search_live_feed():
         mydb.commit()
         result = sql.fetchall()
         sql.close()
+        faceRecognition(camera_feed_1_URL, video_filter, global_full_name)
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, criminal_folder_path=criminal_folder_path, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
 
@@ -820,7 +815,7 @@ def record_video(source):
     saveRecordingPath = os.path.join(videosPath, global_full_name, camera_feed_1_location, "\\")
     if not os.path.exists(saveRecordingPath):
         os.makedirs(saveRecordingPath)
-    FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos\output1.avi'
+    FILE_OUTPUT = r'PATH_HERE'
     recordingFile = os.path.join(saveRecordingPath, 'output.avi')
     if os.path.isfile(FILE_OUTPUT):  # Checks and deletes the output file
         os.remove(FILE_OUTPUT)
@@ -848,6 +843,7 @@ def record_video(source):
 @app.route('/video_feed_1')
 def video_feed_1():
     global site_language
+    #faceRecognition(camera_feed_1_URL)
     return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -856,6 +852,7 @@ def video_feed_1():
 @app.route('/video_feed_2')
 def video_feed_2():
     global site_language
+    #faceRecognition(camera_feed_2_URL)
     return Response(gen(VideoCamera(camera_feed_2_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
