@@ -19,8 +19,8 @@ import ffmpeg
 
 app = Flask(__name__)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-camera_feed_1_URL = "http://192.168.1.111:4747/video"
-camera_feed_2_URL = "http://192.168.1.122:4747/video"
+camera_feed_1_URL = "http://192.168.1.122:4747/video"   # Android Xiami Redmi Note 7
+camera_feed_2_URL = "http://192.168.1.111:4747/video"   # Android Tablet Huawei Mediapad T3
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
 site_language = "Greek"
@@ -813,41 +813,41 @@ def gen(camera):
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-
+'''
 def record_video(source):
     global global_full_name
-    path1 = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos'
-    path = os.path.join(path1, global_full_name, "Camera Feed 1/")
-    if not os.path.exists(path):
-        os.makedirs(path)
+    videosPath = os.path.abspath("static/Videos")
+    saveRecordingPath = os.path.join(videosPath, global_full_name, camera_feed_1_location, "\\")
+    if not os.path.exists(saveRecordingPath):
+        os.makedirs(saveRecordingPath)
     FILE_OUTPUT = r'C:\Users\Vaggelis\PycharmProjects\Msc-Thesis-Website\static\Videos\output1.avi'
+    recordingFile = os.path.join(saveRecordingPath, 'output.avi')
     if os.path.isfile(FILE_OUTPUT):  # Checks and deletes the output file
         os.remove(FILE_OUTPUT)
     #url = "http://192.168.1.122:4747/video"
     #videoPafy = pafy.new(url)
     #best = videoPafy.getbest(preftype="webm")
-    # capture = cv2.VideoCapture(1)
+    #capture = cv2.VideoCapture(1)
     capture = cv2.VideoCapture(source)
     capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'H264'))
-    #fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    #videoWriter = cv2.VideoWriter(FILE_OUTPUT, fourcc, 20.0, (640, 480))
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    videoWriter = cv2.VideoWriter(recordingFile, fourcc, 20.0, (640, 480))
     while (True):
         ret, frame2 = capture.read()
         if ret:
-            cv2.imshow('video', frame2)
-            #videoWriter.write(frame2)
+            #cv2.imshow('video', frame2)
+            videoWriter.write(frame2)
         if cv2.waitKey(1) == 27:
             break
     capture.release()
-    #videoWriter.release()
+    videoWriter.release()
     cv2.destroyAllWindows()
-
+'''
 
 
 @app.route('/video_feed_1')
 def video_feed_1():
     global site_language
-    #record_video("http://192.168.1.111:4747/video")
     return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -856,7 +856,6 @@ def video_feed_1():
 @app.route('/video_feed_2')
 def video_feed_2():
     global site_language
-    #record_video()
     return Response(gen(VideoCamera(camera_feed_2_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 

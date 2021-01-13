@@ -163,10 +163,10 @@ class VideoCamera(object):
             global_full_name = global_full_name.replace("_", " ")
             global sourceURL
             global last_known_location
-            if sourceURL == "http://192.168.1.111:4747/video":
+            if sourceURL == "http://192.168.1.122:4747/video":
                 query_input = (camera_feed_1_location, global_full_name)
                 last_known_location = camera_feed_1_location
-            if sourceURL == "http://192.168.1.122:4747/video":
+            if sourceURL == "http://192.168.1.111:4747/video":
                 query_input = (camera_feed_2_location, global_full_name)
                 last_known_location = camera_feed_2_location
             sql.execute(query, query_input)
