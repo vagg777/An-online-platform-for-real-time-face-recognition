@@ -87,7 +87,7 @@ class VideoCamera(object):
         sepia = apply_sepia(image)
         redish = apply_color_overlay(image, intensity=0.5, red=230, blue=10)
         circle_blur = apply_circle_blur(image)
-        face_rects = face_cascade.detectMultiScale(gray,scaleFactor=3.0,minNeighbors=3,minSize=(30, 30))
+        face_rects = face_cascade.detectMultiScale(gray,scaleFactor=1.4,minNeighbors=4,minSize=(30, 30))
         screenshotsPath = os.path.abspath("static/Screenshots")
         cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
         if not os.path.exists(cameraFeedPath):

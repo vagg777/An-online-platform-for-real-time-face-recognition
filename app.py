@@ -32,7 +32,7 @@ site_theme = "Dark Theme"
 site_fontsize = 14
 last_known_location = ""
 video_filter = "no"
-global_full_name = "Baggelis Michos"
+global_full_name = "Baggelis_Michos"
 loggedin_role = ""
 loggedin_email = ""
 loggedin_user = ""
@@ -811,12 +811,14 @@ def gen(camera):
 
 
 
-@app.route('/video_feed')
-def video_feed():
+@app.route('/video_feed_1')
+def video_feed_1():
     global site_language
     return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
+@app.route('/streaming')
+def streaming():
+    return render_template('streaming.html')
 
 def main():
     if __name__ == '__main__':
