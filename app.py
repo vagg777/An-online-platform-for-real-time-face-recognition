@@ -15,9 +15,13 @@ from GreekLanguage import *
 from camera import *
 from faceRecognition import *
 import ffmpeg
+import logging
+import threading
+import time
 
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG,format='(%(threadName)-9s) %(message)s',)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_URL = "http://192.168.1.122:4747/video"   # Android Xiaomi Redmi Note 7
 camera_feed_2_URL = "http://192.168.1.111:4747/video"   # Android Tablet Huawei Mediapad T3
@@ -27,8 +31,8 @@ site_language = "Greek"
 site_theme = "Dark Theme"
 site_fontsize = 14
 last_known_location = ""
-video_filter = ""
-global_full_name = ""
+video_filter = "no"
+global_full_name = "Baggelis Michos"
 loggedin_role = ""
 loggedin_email = ""
 loggedin_user = ""
@@ -784,14 +788,20 @@ def search_live_feed():
         mydb.commit()
         result = sql.fetchall()
         sql.close()
-        #faceRecognition(camera_feed_1_URL, video_filter, global_full_name)
         if result:
             return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
-if __name__ == '__main__':
-    checkUserSettings(site_theme, site_language, site_fontsize)
-    app.run(debug=True)
+def main():
+    if __name__ == '__main__':
+        checkUserSettings(site_theme, site_language, site_fontsize)
+        app.run(debug=True)
+
+side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
+side_thread.setDaemon(True)
+side_thread.start()
+main()
+
 
 '''
 def gen(camera):

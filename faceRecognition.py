@@ -76,7 +76,10 @@ def apply_circle_blur(image, intensity=0.5):
 def faceRecognition(sourceURL, video_filter, global_full_name):
     video_capture = cv2.VideoCapture(sourceURL)
     if video_capture is None or not video_capture.isOpened():
-        print("Alert ! Camera disconnected")  # TODO: Show the alert message in the webpage
+        if sourceURL == "http://192.168.1.111:4747/video":
+            print("Alert ! Camera 1 disconnected")  # TODO: Show the alert message in the webpage
+        if sourceURL == "http://192.168.1.122:4747/video":
+            print("Alert ! Camera 2 disconnected")  # TODO: Show the alert message in the webpage
     else:
         while True:
             ret, frame = video_capture.read()
@@ -124,7 +127,11 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                     cv2.rectangle(circle_blur, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cv2.imwrite(os.path.join(criminalPath, 'last-updated.jpg'), frame)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.imshow('Video', frame)
+            if sourceURL == "http://192.168.1.122:4747/video":
+                cv2.imshow(camera_feed_1_location, frame)
+            if sourceURL == "http://192.168.1.111:4747/video":
+                cv2.imshow(camera_feed_2_location, frame)
+            '''
             comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
             databaseImagePath = os.path.join(criminalPath, 'database_image.jpg')
             # TODO: Force same dimension in comparison and database!!!!
@@ -155,6 +162,7 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 sql.execute(query, query_input)
                 mydb.commit()
                 sql.close()
+                '''
             if cv2.waitKey(1) & 0xFF == ord('q') or 0xFF == ord('Q'):
                 break
     video_capture.release()
