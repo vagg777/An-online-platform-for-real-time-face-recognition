@@ -789,21 +789,9 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize = site_fontsize, site_theme=site_theme, site_language=site_language)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize=site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
-def main():
-    if __name__ == '__main__':
-        checkUserSettings(site_theme, site_language, site_fontsize)
-        app.run(debug=True)
-
-side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
-side_thread.setDaemon(True)
-side_thread.start()
-main()
-
-
-'''
 def gen(camera):
     while True:
         global video_filter
@@ -821,6 +809,28 @@ def gen(camera):
         #phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+
+
+@app.route('/video_feed')
+def video_feed():
+    global site_language
+    return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
+def main():
+    if __name__ == '__main__':
+        checkUserSettings(site_theme, site_language, site_fontsize)
+        app.run(debug=True)
+
+#side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
+#side_thread.setDaemon(True)
+#side_thread.start()
+main()
+
+
+
+'''
 def record_video(source):
     global global_full_name
     videosPath = os.path.abspath("static/Videos")
@@ -850,10 +860,7 @@ def record_video(source):
     videoWriter.release()
     cv2.destroyAllWindows()
 
-@app.route('/video_feed_1')
-def video_feed_1():
-    global site_language
-    return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/video_feed_2')
 def video_feed_2():

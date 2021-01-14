@@ -10,13 +10,10 @@ from EnglishLanguage import *
 from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
-ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
 last_known_location = ""
-iterations = 0
-total = 0
 dimensions = (640, 480) #Livestream Input Quality
 sourceURL = ""
 
@@ -83,16 +80,14 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self, video_filter, global_full_name):
-        global iterations
-        iterations = iterations + 1
         success, image = self.video.read()
-        image = cv2.resize(image, dimensions, fx=ds_factor, fy=ds_factor, interpolation=cv2.INTER_AREA)
+        #image = cv2.resize(image, dimensions, interpolation=cv2.INTER_AREA)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         invert = apply_invert(image)
         sepia = apply_sepia(image)
         redish = apply_color_overlay(image, intensity=0.5, red=230, blue=10)
         circle_blur = apply_circle_blur(image)
-        face_rects = face_cascade.detectMultiScale(gray, 1.3, 5)
+        face_rects = face_cascade.detectMultiScale(gray,scaleFactor=3.0,minNeighbors=3,minSize=(30, 30))
         screenshotsPath = os.path.abspath("static/Screenshots")
         cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
         if not os.path.exists(cameraFeedPath):
