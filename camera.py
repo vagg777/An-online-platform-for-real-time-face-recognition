@@ -87,7 +87,7 @@ class VideoCamera(object):
         sepia = apply_sepia(image)
         redish = apply_color_overlay(image, intensity=0.5, red=230, blue=10)
         circle_blur = apply_circle_blur(image)
-        face_rects = face_cascade.detectMultiScale(gray,scaleFactor=1.4,minNeighbors=4,minSize=(30, 30))
+        face_rects = face_cascade.detectMultiScale(gray,scaleFactor=2.5,minNeighbors=4,minSize=(30, 30))
         screenshotsPath = os.path.abspath("static/Screenshots")
         cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
         if not os.path.exists(cameraFeedPath):
@@ -158,10 +158,10 @@ class VideoCamera(object):
             global_full_name = global_full_name.replace("_", " ")
             global sourceURL
             global last_known_location
-            if sourceURL == "http://192.168.1.122:4747/video":
+            if sourceURL == "http://192.168.1.122:8080/video":
                 query_input = (camera_feed_1_location, global_full_name)
                 last_known_location = camera_feed_1_location
-            if sourceURL == "http://192.168.1.111:4747/video":
+            if sourceURL == "http://192.168.1.111:8080/video":
                 query_input = (camera_feed_2_location, global_full_name)
                 last_known_location = camera_feed_2_location
             sql.execute(query, query_input)

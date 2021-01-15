@@ -23,8 +23,8 @@ import time
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG,format='(%(threadName)-9s) %(message)s',)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
-camera_feed_1_URL = "http://192.168.1.122:4747/video"   # Android Xiaomi Redmi Note 7
-camera_feed_2_URL = "http://192.168.1.111:4747/video"   # Android Tablet Huawei Mediapad T3
+camera_feed_1_URL = "http://192.168.1.122:8080/video"   # Android Xiaomi Redmi Note 7
+camera_feed_2_URL = "http://192.168.1.111:8080/video"   # Android Tablet Huawei Mediapad T3
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
 site_language = "Greek"
@@ -792,44 +792,17 @@ def search_live_feed():
             return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize=site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
-def gen(camera):
-    while True:
-        global video_filter
-        global global_full_name
-        global last_known_location
-        frame, last_known_location = camera.get_frame(video_filter, global_full_name)
-        # Denoising phase
-        #odd_symmetric_pair = [0, 1, 0, 1]
-        #even_symmetric_pair = [0, 0, 1, 1]
-        #real_part = 0
-        #imagin_part = 0
-        #real_part = np.convolve(real_part, even_symmetric_pair, mode="full")  # Equation 1 in paper
-        #imagin_part = np.convolve(imagin_part, odd_symmetric_pair, mode="full")  # Equation 1 in paper
-        #amplitude = distance.euclidean(real_part, imagin_part)  # Equation 2 in paper
-        #phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
-
-
-@app.route('/video_feed_1')
-def video_feed_1():
-    global site_language
-    return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/streaming')
-def streaming():
-    return render_template('streaming.html')
-
 def main():
     if __name__ == '__main__':
         checkUserSettings(site_theme, site_language, site_fontsize)
         app.run(debug=True)
 
-#side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
-#side_thread.setDaemon(True)
-#side_thread.start()
-main()
 
+
+side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
+#side_thread.setDaemon(True)
+side_thread.start()
+main()
 
 
 '''
@@ -862,7 +835,31 @@ def record_video(source):
     videoWriter.release()
     cv2.destroyAllWindows()
 
+def gen(camera):
+    while True:
+        global video_filter
+        global global_full_name
+        global last_known_location
+        frame, last_known_location = camera.get_frame(video_filter, global_full_name)
+        # Denoising phase
+        #odd_symmetric_pair = [0, 1, 0, 1]
+        #even_symmetric_pair = [0, 0, 1, 1]
+        #real_part = 0
+        #imagin_part = 0
+        #real_part = np.convolve(real_part, even_symmetric_pair, mode="full")  # Equation 1 in paper
+        #imagin_part = np.convolve(imagin_part, odd_symmetric_pair, mode="full")  # Equation 1 in paper
+        #amplitude = distance.euclidean(real_part, imagin_part)  # Equation 2 in paper
+        #phase = math.atan(imagin_part[0] / real_part[0])  # Equation 3 in paper
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+@app.route('/streaming')
+def streaming():
+    return render_template('streaming.html')
+    
+@app.route('/video_feed_1')
+def video_feed_1():
+    global site_language
+    return Response(gen(VideoCamera(camera_feed_1_URL)), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/video_feed_2')
 def video_feed_2():

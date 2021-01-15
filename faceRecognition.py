@@ -10,7 +10,6 @@ from EnglishLanguage import *
 from GreekLanguage import *
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
-ds_factor = 0.6
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
@@ -76,29 +75,31 @@ def apply_circle_blur(image, intensity=0.5):
 def faceRecognition(sourceURL, video_filter, global_full_name):
     video_capture = cv2.VideoCapture(sourceURL)
     if video_capture is None or not video_capture.isOpened():
-        if sourceURL == "http://192.168.1.111:4747/video":
+        if sourceURL == "http://192.168.1.111:8080/video":
             print("Alert ! Camera 1 disconnected")  # TODO: Show the alert message in the webpage
-        if sourceURL == "http://192.168.1.122:4747/video":
+        if sourceURL == "http://192.168.1.122:8080/video":
             print("Alert ! Camera 2 disconnected")  # TODO: Show the alert message in the webpage
     else:
+        if sourceURL == "http://192.168.1.111:8080/video":
+            print("Connected to Camera 1...Received Feed")  # TODO: Show the alert message in the webpage
+        if sourceURL == "http://192.168.1.122:8080/video":
+            print("Connected to Camera 2...Received Feed")  # TODO: Show the alert message in the webpage
+        screenshotsPath = os.path.abspath("static/Screenshots")
+        cameraFeedPath = ""
+        if sourceURL == "http://192.168.1.122:8080/video":
+            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
+        if sourceURL == "http://192.168.1.111:8080/video":
+            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 2')
+        if not os.path.exists(cameraFeedPath):
+            os.makedirs(cameraFeedPath)
+        criminalPath = os.path.join(screenshotsPath, global_full_name)
+        if not os.path.exists(criminalPath):
+            os.makedirs(criminalPath)
         while True:
             ret, frame = video_capture.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            invert = apply_invert(frame)
-            sepia = apply_sepia(frame)
-            redish = apply_color_overlay(frame, intensity=0.5, red=230, blue=10)
-            circle_blur = apply_circle_blur(frame)
-            screenshotsPath = os.path.abspath("static/Screenshots")
-            if sourceURL == "http://192.168.1.122:4747/video":
-                cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
-            if sourceURL == "http://192.168.1.111:4747/video":
-                cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 2')
-            if not os.path.exists(cameraFeedPath):
-                os.makedirs(cameraFeedPath)
-            criminalPath = os.path.join(screenshotsPath, global_full_name)
-            if not os.path.exists(criminalPath):
-                os.makedirs(criminalPath)
-            faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+            #frame = cv2.resize(frame, interpolation=cv2.INTER_AREA)
+            faces = face_cascade.detectMultiScale(gray, 2.5, 4)
             for (x, y, w, h) in faces:
                 timestr = time.strftime("%d-%m-%Y, %H-%M-%S")
                 if video_filter == "no":
@@ -110,26 +111,30 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), gray)
                     cv2.rectangle(gray, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 if video_filter == "invert":
+                    invert = apply_invert(frame)
                     cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(INVERT).jpg'), invert)
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), invert)
                     cv2.rectangle(invert, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 if video_filter == "sepia":
+                    sepia = apply_sepia(frame)
                     cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(SEPIA).jpg'), sepia)
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), sepia)
                     cv2.rectangle(sepia, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 if video_filter == "redish":
+                    redish = apply_color_overlay(frame, intensity=0.5, red=230, blue=10)
                     cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(REDISH).jpg'), redish)
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), redish)
                     cv2.rectangle(redish, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 if video_filter == "blur":
+                    circle_blur = apply_circle_blur(frame)
                     cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(BLUR).jpg'), circle_blur)
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), circle_blur)
                     cv2.rectangle(circle_blur, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cv2.imwrite(os.path.join(criminalPath, 'last-updated.jpg'), frame)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            if sourceURL == "http://192.168.1.122:4747/video":
-                cv2.imshow(camera_feed_1_location, frame)
-            if sourceURL == "http://192.168.1.111:4747/video":
+            if sourceURL == "http://192.168.1.122:8080/video":
+                cv2.imshow("faceRecognition.py", frame)
+            if sourceURL == "http://192.168.1.111:8080/video":
                 cv2.imshow(camera_feed_2_location, frame)
             '''
             comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
@@ -153,10 +158,10 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 query = """UPDATE criminals SET last_location= %s WHERE full_name = %s"""
                 global_full_name = global_full_name.replace("_", " ")
                 global last_known_location
-                if sourceURL == "http://192.168.1.122:4747/video":
+                if sourceURL == "http://192.168.1.122:8080/video":
                     query_input = (camera_feed_1_location, global_full_name)
                     last_known_location = camera_feed_1_location
-                if sourceURL == "http://192.168.1.111:4747/video":
+                if sourceURL == "http://192.168.1.111:8080/video":
                     query_input = (camera_feed_2_location, global_full_name)
                     last_known_location = camera_feed_2_location
                 sql.execute(query, query_input)
