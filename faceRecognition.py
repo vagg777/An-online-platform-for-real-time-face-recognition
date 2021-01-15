@@ -8,6 +8,7 @@ import numpy as np
 import time
 from EnglishLanguage import *
 from GreekLanguage import *
+import ctypes
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
@@ -75,15 +76,15 @@ def apply_circle_blur(image, intensity=0.5):
 def faceRecognition(sourceURL, video_filter, global_full_name):
     video_capture = cv2.VideoCapture(sourceURL)
     if video_capture is None or not video_capture.isOpened():
-        if sourceURL == "http://192.168.1.111:8080/video":
-            print("Alert ! Camera 1 disconnected")  # TODO: Show the alert message in the webpage
         if sourceURL == "http://192.168.1.122:8080/video":
-            print("Alert ! Camera 2 disconnected")  # TODO: Show the alert message in the webpage
+            print("Alert - Camera 1 disconnected!!!")  # TODO: Show the alert message in the webpage
+        if sourceURL == "http://192.168.1.111:8080/video":
+            print("Alert - Camera 2 disconnected!!!")  # TODO: Show the alert message in the webpage
     else:
-        if sourceURL == "http://192.168.1.111:8080/video":
-            print("Connected to Camera 1...Received Feed")  # TODO: Show the alert message in the webpage
         if sourceURL == "http://192.168.1.122:8080/video":
-            print("Connected to Camera 2...Received Feed")  # TODO: Show the alert message in the webpage
+            print("Connected to Camera 1...\nReceiving Feed...")
+        if sourceURL == "http://192.168.1.111:8080/video":
+            print("Connected to Camera 2...\nReceiving Feed...")
         screenshotsPath = os.path.abspath("static/Screenshots")
         cameraFeedPath = ""
         if sourceURL == "http://192.168.1.122:8080/video":
@@ -133,9 +134,13 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 cv2.imwrite(os.path.join(criminalPath, 'last-updated.jpg'), frame)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if sourceURL == "http://192.168.1.122:8080/video":
-                cv2.imshow("faceRecognition.py", frame)
+                cv2.imshow(camera_feed_1_location, frame)
+                camera_handle = ctypes.windll.user32.FindWindowW(None, camera_feed_1_location)
+                ctypes.windll.user32.ShowWindow(camera_handle, 6)
             if sourceURL == "http://192.168.1.111:8080/video":
                 cv2.imshow(camera_feed_2_location, frame)
+                camera_handle = ctypes.windll.user32.FindWindowW(None, camera_feed_2_location)
+                ctypes.windll.user32.ShowWindow(camera_handle, 6)
             '''
             comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
             databaseImagePath = os.path.join(criminalPath, 'database_image.jpg')

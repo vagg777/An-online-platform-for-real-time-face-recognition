@@ -20,6 +20,7 @@ import threading
 import time
 
 
+
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG,format='(%(threadName)-9s) %(message)s',)
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
@@ -799,11 +800,10 @@ def main():
 
 
 
-side_thread = threading.Thread(name='daemon',target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
-#side_thread.setDaemon(True)
+side_thread = threading.Thread(name='daemon', target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
+side_thread.setDaemon(True)
 side_thread.start()
 main()
-
 
 '''
 def record_video(source):
