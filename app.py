@@ -770,17 +770,12 @@ def search_live_feed():
         detected_image = "/Screenshots/" + criminal_full_name + "/last-updated.jpg"
         screenshotsPath = os.path.abspath("static/Screenshots")
         #TODO: Check which camera should come here!!!!!!!!!
-        cameraFeedPath = os.path.join(screenshotsPath, global_full_name, "Camera Feed 1")
-        if not os.path.exists(detected_image):
-            localtime = "Face not yet detected"
-        if not os.path.exists(cameraFeedPath):
-            os.makedirs(cameraFeedPath)
-        else:
-            modification_time = os.path.getmtime(cameraFeedPath)
-            localtime = datetime.datetime.fromtimestamp(modification_time)
-            sep = '.'
-            localtime = str(localtime)
-            localtime = localtime.split(sep, 1)[0]
+        cameraFeedPath1 = os.path.join(screenshotsPath, global_full_name, camera_feed_1_location)
+        cameraFeedPath2 = os.path.join(screenshotsPath, global_full_name, camera_feed_2_location)
+        if not os.path.exists(cameraFeedPath1):
+            os.makedirs(cameraFeedPath1)
+        if not os.path.exists(cameraFeedPath2):
+            os.makedirs(cameraFeedPath2)
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
         query_input = criminal_id
@@ -789,7 +784,7 @@ def search_live_feed():
         result = sql.fetchall()
         sql.close()
         if result:
-            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize=site_fontsize, site_theme=site_theme, site_language=site_language)
+            return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize=site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
 def updateDatabaseImages():

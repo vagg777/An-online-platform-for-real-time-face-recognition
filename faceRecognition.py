@@ -89,9 +89,9 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
         screenshotsPath = os.path.abspath("static/Screenshots")
         cameraFeedPath = ""
         if sourceURL == "http://192.168.1.122:8080/video":
-            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 1')
+            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, camera_feed_1_location)
         if sourceURL == "http://192.168.1.111:8080/video":
-            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, 'Camera Feed 2')
+            cameraFeedPath = os.path.join(screenshotsPath, global_full_name, camera_feed_2_location)
         if not os.path.exists(cameraFeedPath):
             os.makedirs(cameraFeedPath)
         criminalPath = os.path.join(screenshotsPath, global_full_name)
