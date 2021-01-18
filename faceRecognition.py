@@ -9,6 +9,7 @@ import time
 from EnglishLanguage import *
 from GreekLanguage import *
 import ctypes
+from PIL import Image
 
 face_cascade = cv2.CascadeClassifier("static/haarcascade/haarcascade_frontalface_default.xml")
 mydb = MySQLdb.connect(db="criminal_detection", host="localhost", user="root", passwd="", charset='utf8')
@@ -141,9 +142,11 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 cv2.imshow(camera_feed_2_location, frame)
                 camera_handle = ctypes.windll.user32.FindWindowW(None, camera_feed_2_location)
                 ctypes.windll.user32.ShowWindow(camera_handle, 6)
-            '''
             comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
-            databaseImagePath = os.path.join(criminalPath, 'database_image.jpg')
+            width = video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
+            height = video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
+            databaseImagePath = os.path.join(criminalPath, 'database_image_resized.jpg')
+            #databaseImagePath = cv2.resize(databaseImagePath, width, height, interpolation=cv2.INTER_AREA)
             # TODO: Force same dimension in comparison and database!!!!
             img_bgr = cv2.imread(comparisonImagePath)
             img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
@@ -172,7 +175,6 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 sql.execute(query, query_input)
                 mydb.commit()
                 sql.close()
-                '''
             if cv2.waitKey(1) & 0xFF == ord('q') or 0xFF == ord('Q'):
                 break
     video_capture.release()

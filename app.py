@@ -18,6 +18,7 @@ import ffmpeg
 import logging
 import threading
 import time
+from PIL import Image
 
 
 
@@ -763,7 +764,6 @@ def search_live_feed():
         global last_known_location
         criminal_id = str(request.form["row.0"])
         criminal_full_name = str(request.form["row.1"])
-        criminal_portrait_URL = str(request.form["row.7"])
         video_filter = str(request.form["filter"])
         criminal_full_name = criminal_full_name.replace(" ", "_")
         global_full_name = criminal_full_name
@@ -781,7 +781,6 @@ def search_live_feed():
             sep = '.'
             localtime = str(localtime)
             localtime = localtime.split(sep, 1)[0]
-        urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
         query_input = criminal_id
@@ -793,13 +792,32 @@ def search_live_feed():
             return render_template('search_livefeed.html', loggedin_user=loggedin_user, result=result, detected_image=detected_image, messages=messages, localtime=localtime, camera_feed_1_location=camera_feed_1_location, camera_feed_2_location=camera_feed_2_location, camera_feed_1_URL=camera_feed_1_URL, camera_feed_2_URL=camera_feed_2_URL, last_known_location=last_known_location, header=header, manageCriminal=manageCriminal, loggedin_role=loggedin_role, site_fontsize=site_fontsize, site_theme=site_theme, site_language=site_language)
 
 
+def updateDatabaseImages():
+    criminal_portrait_URL = ""
+    sql = mydb.cursor()
+    query = """SELECT * FROM criminals """
+    sql.execute(query)
+    mydb.commit()
+    result = sql.fetchall()
+    sql.close()
+    if result:
+        for criminalFound in result:
+            criminal_portrait_URL = criminalFound[7]
+            criminal_full_name = criminalFound[1]
+            criminal_full_name = criminal_full_name.replace(" ", "_")
+            urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image.jpg")
+            urllib.request.urlretrieve(criminal_portrait_URL, "static/Screenshots/" + criminal_full_name + "/database_image_resized.jpg")
+            detectionResizedImage = Image.open("static/Screenshots/" + criminal_full_name + "/database_image_resized.jpg")
+            detectionResizedImage = detectionResizedImage.convert('RGB')
+            detectionResizedImage = detectionResizedImage.resize((640, 480), Image.ANTIALIAS)
+            detectionResizedImage.save("static/Screenshots/" + criminal_full_name + "/database_image_resized.jpg")
+
 def main():
     if __name__ == '__main__':
-        checkUserSettings(site_theme, site_language, site_fontsize)
         app.run(debug=True)
 
-
-
+checkUserSettings(site_theme, site_language, site_fontsize)
+updateDatabaseImages()
 side_thread = threading.Thread(name='daemon', target=faceRecognition, args=(camera_feed_1_URL, video_filter, global_full_name))
 side_thread.setDaemon(True)
 side_thread.start()
