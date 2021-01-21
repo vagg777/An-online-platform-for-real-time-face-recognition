@@ -78,9 +78,9 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
     video_capture = cv2.VideoCapture(sourceURL)
     if video_capture is None or not video_capture.isOpened():
         if sourceURL == "http://192.168.1.122:8080/video":
-            print("Alert - Camera 1 disconnected!!!")  # TODO: Show the alert message in the webpage
+            print("Alert - Camera 1 disconnected!!!")
         if sourceURL == "http://192.168.1.111:8080/video":
-            print("Alert - Camera 2 disconnected!!!")  # TODO: Show the alert message in the webpage
+            print("Alert - Camera 2 disconnected!!!")
     else:
         if sourceURL == "http://192.168.1.122:8080/video":
             print("Connected to Camera 1...\nReceiving Feed...")
@@ -132,7 +132,10 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                     cv2.imwrite(os.path.join(cameraFeedPath, timestr + '(BLUR).jpg'), circle_blur)
                     cv2.imwrite(os.path.join(criminalPath, 'comparison.jpg'), circle_blur)
                     cv2.rectangle(circle_blur, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                cv2.imwrite(os.path.join(criminalPath, 'last-updated.jpg'), frame)
+                if sourceURL == "http://192.168.1.122:8080/video":
+                    cv2.imwrite(os.path.join(criminalPath, 'Camera1-last-updated.jpg'), frame)
+                if sourceURL == "http://192.168.1.111:8080/video":
+                    cv2.imwrite(os.path.join(criminalPath, 'Camera2-last-updated.jpg'), frame)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if sourceURL == "http://192.168.1.122:8080/video":
                 cv2.imshow(camera_feed_1_location, frame)
@@ -143,11 +146,7 @@ def faceRecognition(sourceURL, video_filter, global_full_name):
                 camera_handle = ctypes.windll.user32.FindWindowW(None, camera_feed_2_location)
                 ctypes.windll.user32.ShowWindow(camera_handle, 6)
             comparisonImagePath = os.path.join(criminalPath, 'comparison.jpg')
-            width = video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
-            height = video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
             databaseImagePath = os.path.join(criminalPath, 'database_image_resized.jpg')
-            #databaseImagePath = cv2.resize(databaseImagePath, width, height, interpolation=cv2.INTER_AREA)
-            # TODO: Force same dimension in comparison and database!!!!
             img_bgr = cv2.imread(comparisonImagePath)
             img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
             template = cv2.imread(databaseImagePath, 0)

@@ -142,18 +142,18 @@
                     </div>
                  </div>
                  <div class="col-md-6">
-                      <img class="videoFeedCamera" src="{{ url_for('static', filename=detected_image) }}">
+                      <img class="videoFeedCamera" src="{{ detected_image }}">
                       <h3 align="center">{{ manageCriminal.lastknownlocation }} {{ last_known_location }}</h3>
                  </div>
              </div>
              <h2 align="center" style="text-align: center;">{{ manageCriminal.livefeed }}</h2><hr>
              <div class="row">
                 <div class="col-md-6">
-                     <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
+                     <iframe class="videoFeedCamera" src="{{ camera_feed_2_URL }}"></iframe>
                      <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_1_location }}</h3>
                 </div>
                 <div class="col-md-6">
-                     <iframe class="videoFeedCamera" src="{{ camera_feed_1_URL }}"></iframe>
+                     <iframe class="videoFeedCamera" src="{{ camera_feed_2_URL }}"></iframe>
                      <h3 style="text-align: center;">{{ manageCriminal.location }} {{ camera_feed_2_location }}</h3>
                 </div>
              </div>
