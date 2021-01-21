@@ -767,17 +767,12 @@ def search_live_feed():
         video_filter = str(request.form["filter"])
         criminal_full_name = criminal_full_name.replace(" ", "_")
         global_full_name = criminal_full_name
-        # TODO: Check from which camera, the last updated.jpg image was found
         screenshotsPath = os.path.abspath("static/Screenshots")
         detected_image = ""
-        #detected_image1 = screenshotsPath + "//" + criminal_full_name + "//Camera1-last-updated.jpg"
-        #detected_image2 = screenshotsPath + "//" + criminal_full_name + "//Camera2-last-updated.jpg"
         detected_image1 = "static/Screenshots/" + criminal_full_name + "/Camera1-last-updated.jpg"
         detected_image2 = "static/Screenshots/" + criminal_full_name + "/Camera2-last-updated.jpg"
         detected_image1_mod_time = os.path.getmtime(detected_image1)
         detected_image2_mod_time = os.path.getmtime(detected_image2)
-        print(detected_image1_mod_time)
-        print(detected_image2_mod_time)
         if (detected_image1_mod_time < detected_image2_mod_time):
             detected_image = detected_image2
             last_known_location = camera_feed_2_location
@@ -785,13 +780,19 @@ def search_live_feed():
             detected_image = detected_image1
             last_known_location = camera_feed_1_location
         detected_image = detected_image.replace("/static/static", "/")
-        print(detected_image)
         cameraFeedPath1 = os.path.join(screenshotsPath, global_full_name, camera_feed_1_location)
         cameraFeedPath2 = os.path.join(screenshotsPath, global_full_name, camera_feed_2_location)
         if not os.path.exists(cameraFeedPath1):
             os.makedirs(cameraFeedPath1)
         if not os.path.exists(cameraFeedPath2):
             os.makedirs(cameraFeedPath2)
+        sql = mydb.cursor()
+        query = """UPDATE criminals SET last_location= %s WHERE full_name = %s"""
+        global_full_name = global_full_name.replace("_", " ")
+        query_input = (last_known_location, global_full_name)
+        sql.execute(query, query_input)
+        mydb.commit()
+        sql.close()
         sql = mydb.cursor()
         query = """SELECT * FROM criminals WHERE criminal_id=%s"""
         query_input = criminal_id
