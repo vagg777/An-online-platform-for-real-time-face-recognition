@@ -14,7 +14,6 @@ from EnglishLanguage import *
 from GreekLanguage import *
 from camera import *
 from faceRecognition import *
-import ffmpeg
 import logging
 import threading
 import time
@@ -29,8 +28,8 @@ camera_feed_1_URL = "http://192.168.1.122:8080/video"   # Android Xiaomi Redmi N
 camera_feed_2_URL = "http://192.168.1.111:8080/video"   # Android Tablet Huawei Mediapad T3
 camera_feed_1_location = "Floor 0 - Camera 1"
 camera_feed_2_location = "Floor 0 - Camera 2"
-site_language = "Greek"
-site_theme = "Dark Theme"
+site_language = "English"
+site_theme = "Light Theme"
 site_fontsize = 14
 last_known_location = ""
 video_filter = "no"
@@ -825,7 +824,7 @@ def updateDatabaseImages():
 
 def main():
     if __name__ == '__main__':
-        app.run(debug=True)
+        app.run(debug=True, port=5000)
 
 checkUserSettings(site_theme, site_language, site_fontsize)
 updateDatabaseImages()

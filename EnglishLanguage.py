@@ -165,6 +165,7 @@ class SignupEN:
     enterimage = "Enter image URL"
     reset = "Reset"
     returnhome = "Return to Home"
+    returnlogin = "Login to your account"
 
 class InsertUserEN:
     insert = "Insert new Users"
