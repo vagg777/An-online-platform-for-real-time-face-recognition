@@ -92,7 +92,7 @@ class ManageEN:
     panel = "Management Panel"
     insert = "Insert"
     editcriminals = "Edit Criminals"
-    editinfo = "Click the button will allow you to:"
+    editinfo = "Pressing the button will allow you to:"
     insertcriminals = "Insert new Criminals"
     updatecriminals = "Update existing Criminals"
     removecriminals = "Remove unwanted Criminals"

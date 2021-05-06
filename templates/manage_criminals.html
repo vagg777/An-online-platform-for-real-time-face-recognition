@@ -467,9 +467,9 @@
 {% endif %}
 
 {% if loggedin_role == 'USER' %}
-    <div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img id="policeimage" src="/static/images/greekpolice.png" alt="Police logo">
-    </div>
+    </nav>
 
     <div class="container errorcontainerfillpage">
         <p class="error"><strong>{{ messages.error }}</strong> {{ messages.norightsadmin }}</p>
