@@ -44,91 +44,93 @@ The database of the platform consists of 3 different tables, the `users` table, 
 
 ![enter image description here](https://i.ibb.co/YW1ttbx/1.png)
 
+Image 2: The Database Schema
+
 ## 5. The online platform
 
 ![enter image description here](https://i.ibb.co/m5xSXyX/2.png)
 
-Image 2: The welcoming page
+Image 3: The welcoming page
 
 ![enter image description here](https://i.ibb.co/vJxPJys/3.png)
 
-Image 3: The Login page
+Image 4: The Login page
 
 ![enter image description here](https://i.ibb.co/4SJ525K/4.png)
 
-Image 4: The Signup page
+Image 5: The Signup page
 
 ![enter image description here](https://i.ibb.co/s3HMnXV/5.png)
 
-Image 5: The Home page
+Image 6: The Home page
 
 ![enter image description here](https://i.ibb.co/Js5nqHj/6.png)
 
-Image 6: The Management page
+Image 7: The Management page
 
 ![enter image description here](https://i.ibb.co/ZVdxywZ/7.png)
 
-Image 7: The Management page for the criminals (same idea for users)
+Image 8: The Management page for the criminals (same idea for users)
 
 ![enter image description here](https://i.ibb.co/R4BjbHQ/8.png )
 
-Image 8: Inserting a new criminal (same idea for users)
+Image 9: Inserting a new criminal (same idea for users)
 
 ![enter image description here](https://i.ibb.co/pfm8gtm/9.png)
 
-Image 9: Updating an existing user (same idea for criminals)
+Image 10: Updating an existing user (same idea for criminals)
 
 ![enter image description here](https://i.ibb.co/W5J53Tn/10.png)
 
-Image 10: Deleting an existing user (same idea for criminals)
+Image 11: Deleting an existing user (same idea for criminals)
 
 ![enter image description here](https://i.ibb.co/DKG1Vkp/11.png)
 
-Image 11: Report an issue to the system administrators
+Image 12: Report an issue to the system administrators
 
 ![enter image description here](https://i.ibb.co/W3zVv0C/12.png)
 
-Image 12: Selecting a criminal to search in live feed and the video filter
+Image 13: Selecting a criminal to search in live feed and the video filter
 
 ![enter image description here](https://i.ibb.co/bLX2YLw/13.png)
 
-Image 13: The livestream page, including the last known location and all live feeds
+Image 14: The livestream page, including the last known location and all live feeds
 
 ![enter image description here](https://i.ibb.co/4JbN3Lg/14.png)
 
-Image 14: Error Handling
+Image 15: Error Handling
 
 ![enter image description here](https://i.ibb.co/F8Lssp0/15.png)
 
-Image 15: Error Handling
+Image 16: Error Handling
 
 ![enter image description here](https://i.ibb.co/ChPx27b/16.png)
 
-Image 16: My Profile section
+Image 17: My Profile section
 
 ![enter image description here](https://i.ibb.co/X46zC01/17.png)
 
-Image 17: My Settings section
+Image 18: My Settings section
 
 ![enter image description here](https://i.ibb.co/KsDpLQS/19.png)
 
-Image 18: Changing the settings to Dark theme, 12 font size and Greek Language
+Image 19: Changing the settings to Dark theme, 12 font size and Greek Language
 
 ![enter image description here](https://i.ibb.co/w48KVrn/18.png)
 
-Image 19: Changing the settings to Dark theme, 12 font size and Greek Language
+Image 20: Changing the settings to Dark theme, 12 font size and Greek Language
 
 ![enter image description here](https://i.ibb.co/Xsjb3g9/20.png)
 
-Image 20: Mobile responsiveness 
+Image 21: Mobile responsiveness 
 
 ![enter image description here](https://i.ibb.co/f9Ssz1F/Capture.png)
 
-Image 21: The 6 different face recognition filters
+Image 22: The 6 different face recognition filters
 
 ![enter image description here](https://i.ibb.co/BLYgFmY/Picture13.png)
 
-Image 22: Screenshots are saved inside a folder with the criminal's name, the datetime and the filter type are appended in the filename
+Image 23: Screenshots are saved inside a folder with the criminal's name, the datetime and the filter type are appended in the filename
 
 # 6. Deploying the platform
 
