@@ -1,6 +1,4 @@
-# Msc Thesis Website
-This is the official Msc Thesis website of Michos Evangelos, postgraduate student at the Human-Computer Interaction (HCI). All rights reserved.
-HCI Masters Website: https://hcimaster.upatras.gr/
+# An online platform for real time face recognition
 
 ## 1. Introduction
 Undoubtedly, face recognition does have a very large variety of services and applications, beginning from human identification and surveillance and coming as far as e marketing and advertising for customers. The ability to efficiently recognize individuals through a combination of their facial characteristics (e g their eyes) is certainly an important phenomenon. So, the goal of recognizing peers through their faces is something already apparent on our everyday lives.
